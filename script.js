@@ -203,7 +203,7 @@ function buyPipe(a) {
 		else {}
 	}
 	else{
-		gENI("TLH").display = block;
+		gENI("TLH").display = "block";
 	}
 }
 function placePipe(a) {
