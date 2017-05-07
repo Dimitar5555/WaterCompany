@@ -11,7 +11,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -46,7 +48,7 @@
 		</script>
 	</head>
 	<body style="padding: 5px; margin: 5px;"onload="chechSaveFile(); gEBI('fgg').click();">
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Supply Company</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span>
 		<div style="float: right; margin-bottom: 5px; width: 150px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span></pre>
@@ -72,7 +74,7 @@
 		<ul class="nav nav-tabs">
 			<li><a data-toggle="pill" href="#tabs-1" id="fgg">City</a></li>
 			<li><a data-toggle="pill" href="#tabs-2">Upgrades</a></li>
-			<li><a data-toggle="pill" href="#tabs-3">Pipe Factory</a></li>
+			<li><a data-toggle="pill" href="#tabs-3">Pipes</a></li>
 			<li><a data-toggle="pill" href="#tabs-4">Pumping Station</a></li>
 			<li><a data-toggle="pill" href="#tabs-5">Water treatment</a></li>
 			<li><a data-toggle="pill" href="#tabs-6">Options</a></li>
@@ -82,7 +84,7 @@
 		<br />
 		<div id="tabs-1" class="tab-pane"><p>You operate in <span class="city"></span>. The city has <span id="houses"></span> houses and you are suplying <span id="sup"></span> of them with water for <span id="pricem3"></span> per 1m<sup>3</sup>.</p></div>
 		<div id="tabs-2" class="tab-pane">
-			<p>Increase price of water by 10% - $<span id="IncPP"></span> <button class="btn btn-primary" onclick="IncWaterPrice();">Increase</button><br />
+			<p>Increase price of water by 10% - $<span id="IncPP"></span> <button class="btn btn-primary" onclick="IncWaterPrice();">Increace</button><br />
 				$<span id="priceBefore"></span> -> $<span id="priceAfter"></span>
 			</p>
 			<p style="float: left;">Decrease cost of buying and placing pipes by 5% - $<span id="dcbpp"></span> <button class="btn btn-primary" onclick="DecPPP();">Decrease</button><br />
@@ -113,7 +115,7 @@
 							<button class="btn btn-primary" onclick="chPiO(100000000);">100m</button>
 						</div>
 					</td>
-					<td rowspan="2">Synchronize 
+					<td rowspan="2">Synchronise 
 					<label class="switch">
 						<input id="f" type="checkbox" onclick="if(document.getElementById('f').checked){sync=1} else{sync=0}">
 						<div class="slider"></div>
