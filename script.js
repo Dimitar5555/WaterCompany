@@ -57,13 +57,13 @@ function chechSaveFile() {
 		PP = a[11];
 		PO = a[12];
 		
-		money        = a[13];
-		priceIncP    = a[14];
-		priceDecPPP  = a[15];
-		pricePPM     = a[16];
-		pricePPP     = a[17];
-		hour         = Number(a[18]);
-		day          = Number(a[19]);
+		money = a[13];
+		priceIncP = a[14];
+		priceDecPPP = a[15];
+		pricePPM = a[16];
+		pricePPP = a[17];
+		hour = Number(a[18]);
+		day = Number(a[19]);
 		gEBI("wtod").innetHTML = a[20];
 		gEBI("wtom").innetHTML = a[21];
 		once();
@@ -79,7 +79,7 @@ function chechSaveFile() {
 		houses = 10000;
 		HPP = 2;
 		WPH = 1;
-		price = 0.10;
+		price = 0.50;
 		PP = 1;
 		PO = 1;
 		money = 10;
