@@ -188,13 +188,13 @@ window.setInterval(function(){
 	gEBI("houses").innerHTML = abbrNum(houses,2);
 },10000);
 function buyPipe(a) {
-	if(money>= a*1000) {
+	if(money>= a*pricePPM) {
 		var a=a;
 		var b=PP;
 		var c=PO;
 		if(houses >= (b+c+a)*2){
 			PO = c + a;
-			money = money - a*1000;
+			money = money - a*pricePPM;
 			gEBI("PM").innerHTML = PO;
 			gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
 		}
@@ -202,14 +202,14 @@ function buyPipe(a) {
 	else {}
 }
 function placePipe(a) {
-	if(money>=a*100 && PO >= a) {
+	if(money>=a*pricePPP && PO >= a) {
 		var a=a;
 		var b=PP;
 		var c=PO;
 		if(houses >= (b+c-a)*2){	
 			PP = PP + a;
 			PO = PO - a;
-			money = money - a*100;
+			money = money - a*pricePPP;
 			gEBI("PM").innerHTML = PO;
 			gEBI("PP").innerHTML = PP;
 			gEBI("sup").innerHTML = HPP*PP;
