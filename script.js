@@ -238,7 +238,7 @@ function placePipe(a) {
 			gEBI("NW").innerHTML = abbrNum(UW.toFixed(2),2);
 			addWater = extraWA * HPP * PP;
 		}
-			gEBI("income").innerHTML=abbrNum((add*2).toFixed(2),2);
+			gEBI("income").innerHTML=abbrNum(add.toFixed(2),2);
 	}
 }
 
@@ -464,7 +464,7 @@ function once() {
 //other
 	gEBI("sup").innerHTML = HPP*PP;
 	document.getElementsByClassName("city").item(0).innerHTML = selectedCity;
-	document.getElementsByTagName("title").item(0).innerHTML = "Water Supply Company - " + selectedCity;
+	document.getElementsByTagName("title").item(0).innerHTML = "Water Company - " + selectedCity;
 	gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);
 	gEBI("PPP").innerHTML = abbrNum(pricePPP.toFixed(2),2);
 	gEBI("PM").innerHTML = PO;
