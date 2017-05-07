@@ -188,18 +188,23 @@ window.setInterval(function(){
 	gEBI("houses").innerHTML = abbrNum(houses,2);
 },10000);
 function buyPipe(a) {
-	if(money>= a*pricePPM) {
-		var a=a;
-		var b=PP;
-		var c=PO;
-		if(houses >= (b+c+a)*2){
-			PO = c + a;
-			money = money - a*pricePPM;
-			gEBI("PM").innerHTML = PO;
-			gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
+	if(houses>= ((HPP*PP)+(HPP*PO))){
+		if(money>= a*pricePPM) {
+			var a=a;
+			var b=PP;
+			var c=PO;
+			if(houses >= (b+c+a)*2){
+				PO = c + a;
+				money = money - a*pricePPM;
+				gEBI("PM").innerHTML = PO;
+				gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
+			}
 		}
+		else {}
 	}
-	else {}
+	else{
+		gENI("TLH").display = block;
+	}
 }
 function placePipe(a) {
 	if(money>=a*pricePPP && PO >= a) {
@@ -309,9 +314,9 @@ function IncWaterPrice() {
 }
 function DecPPP() {
 	if(0 <= (money - priceDecPPP)){
-		priceDecPPP = (priceDecPPP/100)*150;
 		gEBI("dcbpp").innerHTML = abbrNum(priceDecPPP.toFixed(2),2);
 		money = money - priceDecPPP;
+		priceDecPPP = (priceDecPPP/100)*150;
 		pricePPM = (pricePPM/100)*95;
 		pricePPP = (pricePPP/100)*95;
 		gEBI("PPM").innerHTML = (abbrNum(pricePPM,2)).toFixed(2);
