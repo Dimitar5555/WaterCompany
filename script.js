@@ -93,7 +93,7 @@ function chechSaveFile() {
 HardReset = 0; 
 function save() {
 	var todayE = gEBI("wtod").innerHTML;
-	var tomE = fdg;
+	var tomE = "fdg";
 	var local = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, selectedCity, houses, HPP, WPH, price, PP, PO, money, priceIncP, priceDecPPP, pricePPM, pricePPP, hour, day, todayE, tomE, incRateHouses, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd];
 	localStorage.setItem("a", JSON.stringify(local));
 	
