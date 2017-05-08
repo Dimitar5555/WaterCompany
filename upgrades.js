@@ -14,24 +14,6 @@ function IncWaterPrice() {
 		gEBI("NEM").style.display = "block";
 	}
 }
-function DecPPP() {
-	if(0 <= (money - priceDecPPP)){
-		money = money - priceDecPPP;
-		priceDecPPP = (priceDecPPP/100)*150;
-		pricePPM = (pricePPM/100)*95;
-		gEBI("dcbpp").innerHTML = abbrNum((priceDecPPP.toFixed(2)),2);
-		gEBI("PPM").innerHTML = abbrNum((pricePPM.toFixed(2)),2);
-		
-		gEBI("ppb").innerHTML = pricePPP.toFixed(2);
-		gEBI("ppa").innerHTML = ((pricePPP/100)*95).toFixed(2);
-		chPiP(1);
-		chPiO(1);
-		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
-	}
-	else{
-		gEBI("NEM").style.display = "block";
-	}
-}
 function DecPP() {
 	if(0<= (money-priceDecPP)){
 		money = money - priceDecPP;
@@ -55,7 +37,8 @@ function DecBP() {
 		gEBI("bpb").innerHTML = abbrNum(pricePPM.toFixed(2),2);
 		gEBI("bpa").innerHTML = abbrNum(((pricePPM/100)*95).toFixed(2),2);
 		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
-		gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2)
+		gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);
+		gEBI("dcbpp").innerHTML = abbrNum(priceDecBP.toFixed(2),2);
 	}
 	else{
 		gEBI("NEM").style.display = "block";
