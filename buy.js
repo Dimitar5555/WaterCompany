@@ -14,7 +14,7 @@ function buyPipe(a) {
 		else {gEBI("NEM").style.display = "block";}
 	}
 	else{
-		gEBI("TLH").display = block;
+		gEBI("TLH").display = "block";
 	}
 }
 function placePipe(a) {
@@ -36,10 +36,11 @@ function placePipe(a) {
 			UW = HPP * WPH * PP;
 			gEBI("NW").innerHTML = abbrNum(UW.toFixed(2),2);
 			addWater = extraWA * HPP * PP;
+			gEBI("extraW").innerHTML = abbrNum((extraWA * HPP * PP).toFixed(2),2);
 		}
 			gEBI("income").innerHTML=abbrNum(add.toFixed(2),2);
 	}
-	else{gEBI("NEM").style.display = "block";}
+	else {gEBI("NEM").style.display = "block";}
 }
 function buyPump(a,b) {
 	switch(a) {

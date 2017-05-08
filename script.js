@@ -48,12 +48,12 @@ function chechSaveFile() {
 		hour = Number(a[18]);
 		day = Number(a[19]);
 		gEBI("wtod").innetHTML = a[20];
-		gEBI("wtom").innetHTML = a[21];
 		incRateHouses = a[22];
 		priceIncWaterU = a[23];
 		priceIncRateHouses = a[24];
 		priceDecBP = a[25];
 		priceDecPP = a[26];
+		priceIncWaterProd = a[27];
 		once();
 	}
 	else {
@@ -65,9 +65,9 @@ function chechSaveFile() {
 		treatPrice = [1000, 5000, 10000, 100000];
 		selectedCity = prompt("In which city do you want to start your company?");
 		houses = 1000;
-		HPP = 4;
-		WPH = 2;
-		price = 0.40;
+		HPP = 2;
+		WPH = 3;
+		price = 0.30;
 		PP = 1;
 		PO = 1;
 		money = 30;
@@ -78,13 +78,14 @@ function chechSaveFile() {
 		hour = 0;
 		day = 0;
 		var todayE = gEBI("wtod").innerHTML;
-		var tomE = gEBI("wtom").innerHTML;
+		var tomE = "bud";
 		incRateHouses = 105;
 		priceIncWaterU = 10000000;
 		priceIncRateHouses = 100;
 		priceDecBP = 10000;
 		priceDecPP = 10000;
-		var local = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, selectedCity, houses, HPP, WPH, price, PP, PO, money, priceIncP, priceDecPPP, pricePPM, pricePPP, hour, day, todayE, tomE, incRateHouses, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP];
+		priceIncWaterProd = 100000;
+		var local = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, selectedCity, houses, HPP, WPH, price, PP, PO, money, priceIncP, priceDecPPP, pricePPM, pricePPP, hour, day, todayE, tomE, incRateHouses, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd];
 		localStorage.setItem("a", JSON.stringify(local));
 		once();
 	}
@@ -92,47 +93,58 @@ function chechSaveFile() {
 HardReset = 0; 
 function save() {
 	var todayE = gEBI("wtod").innerHTML;
-	var tomE = gEBI("wtom").innerHTML;
-	var local = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, selectedCity, houses, HPP, WPH, price, PP, PO, money, priceIncP, priceDecPPP, pricePPM, pricePPP, hour, day, todayE, tomE, incRateHouses, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP];
+	var tomE = fdg;
+	var local = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, selectedCity, houses, HPP, WPH, price, PP, PO, money, priceIncP, priceDecPPP, pricePPM, pricePPP, hour, day, todayE, tomE, incRateHouses, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd];
 	localStorage.setItem("a", JSON.stringify(local));
 	
 }
 window.setInterval(function() {save()}, 30000);
 function weather() {
-	var w=Math.random()*5;
-	var v=Math.round(w);
-	switch (v) {
+	var w = Math.floor(Math.random()*5);
+	switch (w) {
 		case 0:
 			var weathera = "Sunny";
-			var extraWA = "0";
 			break;
 		case 1:
 			var weathera = "Sunny with clouds";
-			var extraWA = "0";
 			break;
 		case 2:
 			var weathera = "Cloudy without rain";
-			var extraWA = "0";
 			break;
 		case 4:
 			var weathera = "Cloudy with light rain";
-			var extraWA = "0.25";
 			break;
 		case 5:
 			var weathera = "Thunderstorm";
-			var extraWA = "0.5";
+			break;
+		default:
+			var weathera = "Sunny with clouds";
 			break;
 	}
-	return [weathera, extraWA];
+	switch (weathera){
+		case "Sunny":
+			var extraWA = 0.25;
+			break;
+		case "Sunny with clouds":
+			var extraWA = 0.125;
+			break;
+		case "Cloudy without rain":
+			var extraWA = 0.125;
+			break;
+		case "Cloudy with light rain":
+			var extraWA = 0.5;
+			break;
+		case "Thunderstorm":
+			var extraWA = 0.75;
+			break;
+	}
+	var t = [weathera, extraWA];
+	return t;
 }
 function changeweat() {
-	var todayE = gEBI("wtod");
-	var tomE = gEBI("wtom");
-	todayE.innerHTML = tomE.innerHTML;
-	var x = weather();
-	tomE.innerHTML = x[0];
-	extraWA = x[1];
-	var addWater = extraWA * HPP * PP;
+	var a = weather();
+	gEBI("wtod").innerHTML = a[0];
+	extraWA = a[1];
 	gEBI("extraW").innerHTML = abbrNum((extraWA * HPP * PP).toFixed(2),2);
 }
 
@@ -157,27 +169,29 @@ window.setInterval(function(){
 	TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
 	gEBI("trt").innerHTML = abbrNum(TW.toFixed(2),2);
 	gEBI("prd").innerHTML = abbrNum(PW.toFixed(2),2);
+	var b = extraWA * HPP * PP;
+	gEBI("extraW").innerHTML = abbrNum(b.toFixed(2),2);
 		if(UW > PW){
 			var SW = PW;
-			if(PW>TW){
+			if(PW>(TW+b)){
 				var fine = PW - TW;
 			}
-			else if(TW=>PW){
+			else if(TW+b>=PW){
 				var fine = 0;
 			}
 		}
 		else if(UW <= PW){
 			var SW = UW;
-			if(TW<=UW){
-				var fine = UW - TW;
+			if(TW<=(UW+b)){
+				var fine = (UW+b) - TW;
 			}
-			else if(TW>UW){
+			else if(TW>(UW+b)){
 				var fine = 0;
 			}
 		}
 		
 	
-	add = SW * price - (fine/100)*10;
+	add = SW * price - (fine/100)*1000;
 	money = money  + add;
 	gEBI("income").innerHTML = abbrNum(add.toFixed(2),2);
 	gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
@@ -240,20 +254,19 @@ function once() {
 	gEBI("MpumpProd").innerHTML = abbrNum(pumpProd[1].toFixed(0),2) + " m<sup>3</sup>";
 	gEBI("BpumpProd").innerHTML = abbrNum(pumpProd[2].toFixed(0),2) + " m<sup>3</sup>";
 	gEBI("VBpumpProd").innerHTML = abbrNum(pumpProd[3].toFixed(0),2) + " m<sup>3</sup>";
+	//...
 	chP(1);
 	chTr(1);
 	chPiO(1);
 	chPiP(1);
-	
 	//abbrnum
 	gEBI("priceBefore").innerHTML = abbrNum(price.toFixed(2),2);
-	gEBI("priceAfter").innerHTML = abbrNum(((price/100)*110).toFixed(2),2);
+	gEBI("priceAfter").innerHTML = abbrNum(((price/100)*105).toFixed(2),2);
 	gEBI("houses").innerHTML = abbrNum(houses,2);
 	gEBI("pricem3").innerHTML =  "$" + abbrNum((price.toFixed(2)),2);
 	gEBI("bpb").innerHTML = pricePPM.toFixed(2);
-	gEBI("bpa").innerHTML = ((pricePPM/100)*95).toFixed(2);
+	gEBI("bpa").innerHTML = ((pricePPM/100)*99).toFixed(2);
 	gEBI("IncPP").innerHTML = abbrNum(priceIncP.toFixed(2),2);
-	start();
 	PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
 	TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
 	UW = HPP * WPH * PP;
@@ -273,14 +286,26 @@ function once() {
 	gEBI("NW").innerHTML = UW;
 		gEBI("waterUB").innerHTML = WPH.toFixed(2);
 		gEBI("priceIncWater").innerHTML = abbrNum(priceIncWaterU,2);
-		gEBI("waterUA").innerHTML = ((WPH/100)*110).toFixed(2);
+		gEBI("waterUA").innerHTML = ((WPH/100)*102.5).toFixed(2);
 		
 		gEBI("priceIncRateHouses").innerHTML = abbrNum((priceIncRateHouses.toFixed(2)),2);
 		gEBI("rateHB").innerHTML = incRateHouses;
-		gEBI("rateHA").innerHTML = incRateHouses + 2.5;
+		gEBI("rateHA").innerHTML = incRateHouses + 0.5;
 		gEBI("priceDecPlP").innerHTML = abbrNum(priceDecPP.toFixed(2),2);
 		gEBI("ppb").innerHTML = abbrNum(pricePPP.toFixed(2));
-		gEBI("ppa").innerHTML = abbrNum(((pricePPP/100)*95).toFixed(2));
+		gEBI("ppa").innerHTML = abbrNum(((pricePPP/100)*99).toFixed(2));
 		gEBI("dcbpp").innerHTML = abbrNum(priceDecBP.toFixed(2),2);
+		
+		gEBI("priceIncWaterProd").innerHTML = abbrNum(priceIncWaterProd.toFixed(2),2);
+		gEBI("pumpProdB1").innerHTML = abbrNum(pumpProd[0].toFixed(2),2);
+		gEBI("pumpProdB2").innerHTML = abbrNum(pumpProd[1].toFixed(2),2);
+		gEBI("pumpProdB3").innerHTML = abbrNum(pumpProd[2].toFixed(2),2);
+		gEBI("pumpProdB4").innerHTML = abbrNum(pumpProd[3].toFixed(2),2);
+		gEBI("pumpProdA1").innerHTML = abbrNum((pumpProd[0]*1.1).toFixed(2),2);
+		gEBI("pumpProdA2").innerHTML = abbrNum((pumpProd[1]*1.1).toFixed(2),2);
+		gEBI("pumpProdA3").innerHTML = abbrNum((pumpProd[2]*1.1).toFixed(2),2);
+		gEBI("pumpProdA4").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
+		changeweat();
+	start();
 	}
 		
