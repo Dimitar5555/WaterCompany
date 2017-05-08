@@ -119,7 +119,7 @@ function weather() {
 			var extraWA = "0.25";
 			break;
 		case 5:
-			var weathera = "Tunderstorm";
+			var weathera = "Thunderstorm";
 			var extraWA = "0.5";
 			break;
 	}
@@ -268,7 +268,6 @@ function once() {
 	gEBI("PPH").innerHTML = HPP;
 	gEBI("WPH").innerHTML = WPH.toFixed(2);
 	gEBI("date").innerHTML = day;
-	gEBI("dcbpp").innerHTML = abbrNum((priceDecPPP.toFixed(2)),2);
 	gEBI("prd").innerHTML = PW;
 	gEBI("trt").innerHTML = TW;
 	gEBI("NW").innerHTML = UW;
@@ -279,8 +278,9 @@ function once() {
 		gEBI("priceIncRateHouses").innerHTML = abbrNum((priceIncRateHouses.toFixed(2)),2);
 		gEBI("rateHB").innerHTML = incRateHouses;
 		gEBI("rateHA").innerHTML = incRateHouses + 2.5;
-		gEBI("priceDecPlP").innerHTML = abbrNum(priceDecPPP.toFixed(2),2);
+		gEBI("priceDecPlP").innerHTML = abbrNum(priceDecPP.toFixed(2),2);
 		gEBI("ppb").innerHTML = abbrNum(pricePPP.toFixed(2));
 		gEBI("ppa").innerHTML = abbrNum(((pricePPP/100)*95).toFixed(2));
+		gEBI("dcbpp").innerHTML = abbrNum(priceDecBP.toFixed(2),2);
 	}
 		
