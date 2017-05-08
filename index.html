@@ -7,7 +7,10 @@
 		<meta name="keywords" content="games,game,water,managment,idle,money,incremental">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="robots" content="all">
-		<script async src="script.js"></script>
+		<script src="script.js"></script>
+		<script src="buy.js"></script>
+		<script src="upgrades.js"></script>
+		<script src="change.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -57,6 +60,7 @@
 		<div style="float: left; padding: 2px; margin: 2px;">
 			Money: $<span id="money"></span><br />
 			Income per tick(500ms): $<span id="income"></span>
+			Fines: $<span id="fines" style="font-color: red;"></span>
 		</div>
 		<div style="float: left; padding: 2px; margin: 2px; margin-left: 50px;">
 		Water Produced: <span id="prd"></span> m<sup>3</sup>
@@ -84,14 +88,37 @@
 		<br />
 		<div id="tabs-1" class="tab-pane"><p>You operate in <span class="city"></span>. The city has <span id="houses"></span> houses and you are supplying <span id="sup"></span> of them with water for <span id="pricem3"></span> per 1m<sup>3</sup>.</p></div>
 		<div id="tabs-2" class="tab-pane">
-			<p>Increase price of water by 10% - $<span id="IncPP"></span> <button class="btn btn-primary" onclick="IncWaterPrice();">Increase</button><br />
-				$<span id="priceBefore"></span> -> $<span id="priceAfter"></span>
-			</p>
-			<p style="float: left;">Decrease cost of buying and placing pipes by 5% - $<span id="dcbpp"></span> <button class="btn btn-primary" onclick="DecPPP();">Decrease</button><br />
-			For buying: $<span id="bpb"></span> -> $<span id="bpa"></span><br />
-			For placing: $<span id="ppb"></span> -> $<span id="ppa"></span>
-			</p>
 			More upgrades coming soon.
+			<table class="table">
+				<tr>
+					<td>Increase price of water by 10% - $<span id="IncPP"></span><br />
+					$<span id="priceBefore"></span> -> $<span id="priceAfter"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncWaterPrice();">Increase</button></td>
+					<td>Decrease cost of buying pipes by 5% - $<span id="dcbpp"></span><br />
+					$<span id="bpb"></span> -> $<span id="bpa"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="DecBP();">Decrease</button></td>
+				</tr>
+				<tr>
+					<td>
+						Increase water needed per house by 10% - $<span id="priceIncWater"></span><br />
+						<span id="waterUB"></span> -> <span id="waterUA"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncWaterNeeded();">Increase</button></td>
+					<td>
+						Decrease cost of placing pipes by 5% - $<span id="priceDecPlP"></span><br />
+						$<span id="ppb"></span> -> $<span id="ppa"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="DecPP()">Decrease</button></td>
+				</tr>
+				<tr>
+					<td>Increase rate of building new houses - $<span id="priceIncRateHouses"></span><br />
+						<span id="rateHB"></span> -> <span id="rateHA"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncRateHouses()">Increase</button></td>
+				</tr>
+			</table>
 		</div>
 		
 		
@@ -153,7 +180,7 @@
 		</div>
 		<div id="tabs-4" class="tab-pane">
 			<p>
-				<p>Pumps are important. Without them you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
+				<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
 					Buy
 				<div class="btn-group">
 					<button class="btn btn-primary" onclick="chP(1);">1</button>
@@ -163,6 +190,9 @@
 					<button class="btn btn-primary" onclick="chP(100);">100</button>
 					<button class="btn btn-primary" onclick="chP(1000);">1k</button>
 					<button class="btn btn-primary" onclick="chP(10000);">10k</button>
+					<button class="btn btn-primary" onclick="chP(100000);">100k</button>
+					<button class="btn btn-primary" onclick="chP(1000000);">1m</button>
+					<button class="btn btn-primary" onclick="chP(10000000);">10m</button>
 				</div>
 				<br />
 			<table class="table table-bordered table-stripped">
@@ -225,6 +255,9 @@
 					<button class="btn btn-primary" onclick="chTr(100);">100</button>
 					<button class="btn btn-primary" onclick="chTr(1000);">1k</button>
 					<button class="btn btn-primary" onclick="chTr(10000);">10k</button>
+					<button class="btn btn-primary" onclick="chTr(100000);">100k</button>
+					<button class="btn btn-primary" onclick="chTr(1000000);">1m</button>
+					<button class="btn btn-primary" onclick="chTr(10000000);">10m</button>
 				</div>
 				<br />
 			<table class="table table-bordered table-stripped">
@@ -290,6 +323,11 @@
 		<div style="margin-bottom: 5px; padding-top: 30px;">Today:<span id="wtod"></span><br />
 		Tomorow:<span id="wtom"></span></div>
 		
+	</div>
+	<div id="alerts">
+		<br />
+		<div id="TLH" class="alert alert-danger" style="display: none;" onclick="gEBI('TLH').style.display = 'none';">There are too little houses in the city to buy more pipes</div>
+		<div id="NEM" class="alert alert-danger" style="display: none;" onclick="gEBI('NEM').style.display = 'none';">Not enough money</div>
 	</div>
 	</body>
 </html>
