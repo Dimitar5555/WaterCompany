@@ -119,7 +119,7 @@ function weather() {
 			var extraWA = "0.25";
 			break;
 		case 5:
-			var weathera = "Tunderstorm";
+			var weathera = "Thunderstorm";
 			var extraWA = "0.5";
 			break;
 	}
