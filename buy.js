@@ -40,7 +40,7 @@ function placePipe(a) {
 		}
 			gEBI("income").innerHTML=abbrNum(add.toFixed(2),2);
 	}
-	else {gEBI("NEM").style.display = "block";}
+	else {NEMshow();}
 }
 function buyPump(a,b) {
 	switch(a) {
@@ -74,7 +74,7 @@ function buyPump(a,b) {
 		gEBI("BpumpTotProd").innerHTML = abbrNum((pumpProd[2]*pumps[2]).toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("VBpumpTotProd").innerHTML = abbrNum((pumpProd[3]*pumps[3]).toFixed(0),2) + " m<sup>3</sup>";
 	}
-	else{gEBI("NEM").style.display = "block";}
+	else{NEMshow();}
 }
 function buyTreatmentPlant(a,b) {
 	switch(a) {
@@ -108,5 +108,5 @@ function buyTreatmentPlant(a,b) {
 		TW = Number(treatPla[0]) * Number(treatProd[0]) + Number(treatPla[1]) * Number(treatProd[1]) + Number(treatPla[2]) * Number(treatProd[2]) + Number(treatPla[3]) * Number(treatProd[3]);
 		gEBI("trt").innerHTML = abbrNum(TW.toFixed(2),2);
 	}
-	else{gEBI("NEM").style.display = "block";}
+	else{NEMshow();}
 }
