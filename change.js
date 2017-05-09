@@ -55,3 +55,19 @@ function chPiPPiO(b) {
 	PiO = b;
 	gEBI("paap").innerHTML = abbrNum((pricePPM * b).toFixed(2),2);
 }
+function chPS(b) {
+	var x = document.getElementsByClassName("numPS");
+	x[0].innerHTML = abbrNum(b,2);
+	x[1].innerHTML = abbrNum(b,2);
+	x[2].innerHTML = abbrNum(b,2);
+	x[3].innerHTML = abbrNum(b,2);
+	PuS = b;
+}
+function chTrS(b) {
+	var x = document.getElementsByClassName("numTrS");
+	x[0].innerHTML = abbrNum(b,2);
+	x[1].innerHTML = abbrNum(b,2);
+	x[2].innerHTML = abbrNum(b,2);
+	x[3].innerHTML = abbrNum(b,2);
+	TrPS = b;
+}

@@ -65,8 +65,8 @@ function IncRateHouses() {
 		incRateHouses = incRateHouses + 0.1;
 		priceIncRateHouses = priceIncRateHouses*10;
 		gEBI("priceIncRateHouses").innerHTML = abbrNum((priceIncRateHouses.toFixed(2)),2);
-		gEBI("rateHB").innerHTML = incRateHouses;
-		gEBI("rateHA").innerHTML = incRateHouses + 0.1;
+		gEBI("rateHB").innerHTML = (incRateHouses).toFixed(2);
+		gEBI("rateHA").innerHTML = (incRateHouses + 0.1).toFixed(2);
 		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
 	}
 	else{
@@ -87,9 +87,35 @@ function IncWaterProd() {
 		gEBI("pumpProdB2").innerHTML = abbrNum(pumpProd[1].toFixed(2),2);
 		gEBI("pumpProdB3").innerHTML = abbrNum(pumpProd[2].toFixed(2),2);
 		gEBI("pumpProdB4").innerHTML = abbrNum(pumpProd[3].toFixed(2),2);
-		gEBI("pumpProdA1").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
-		gEBI("pumpProdA2").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
-		gEBI("pumpProdA3").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
+		gEBI("pumpProdA1").innerHTML = abbrNum((pumpProd[0]*1.1).toFixed(2),2);
+		gEBI("pumpProdA2").innerHTML = abbrNum((pumpProd[1]*1.1).toFixed(2),2);
+		gEBI("pumpProdA3").innerHTML = abbrNum((pumpProd[2]*1.1).toFixed(2),2);
 		gEBI("pumpProdA4").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
+	}
+	else{
+		gEBI("NEM").style.display = "block";
+	}
+}
+function IncTreatProd() {
+	if(0<=(money-priceIncTreatProd)){
+		pumpProd[0] = treatProd[0]*1.1;
+		pumpProd[1] = treatProd[1]*1.1;
+		pumpProd[2] = treatProd[2]*1.1;
+		pumpProd[3] = treatProd[3]*1.1;
+		money = money - priceIncTreatProd;
+		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
+		priceIncTreatProd = priceIncTreatProd * 1.5;
+		gEBI("priceIncTreatProd").innerHTML = abbrNum(priceIncTreatProd.toFixed(2),2);
+		gEBI("treatProdB1").innerHTML = abbrNum(treatProd[0].toFixed(2),2);
+		gEBI("treatProdB2").innerHTML = abbrNum(treatProd[1].toFixed(2),2);
+		gEBI("treatProdB3").innerHTML = abbrNum(treatProd[2].toFixed(2),2);
+		gEBI("treatProdB4").innerHTML = abbrNum(treatProd[3].toFixed(2),2);
+		gEBI("treatProdA1").innerHTML = abbrNum((treatProd[0]*1.1).toFixed(2),2);
+		gEBI("treatProdA2").innerHTML = abbrNum((treatProd[1]*1.1).toFixed(2),2);
+		gEBI("treatProdA3").innerHTML = abbrNum((treatProd[2]*1.1).toFixed(2),2);
+		gEBI("treatProdA4").innerHTML = abbrNum((treatProd[3]*1.1).toFixed(2),2);
+	}
+	else{
+		gEBI("NEM").style.display = "block";
 	}
 }
