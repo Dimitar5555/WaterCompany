@@ -107,6 +107,10 @@ function buyTreatmentPlant(a,b) {
 		gEBI("VBTpumpProd").innerHTML = abbrNum(treatProd[3].toFixed(0),2) + " m<sup>3</sup>";
 		TW = Number(treatPla[0]) * Number(treatProd[0]) + Number(treatPla[1]) * Number(treatProd[1]) + Number(treatPla[2]) * Number(treatProd[2]) + Number(treatPla[3]) * Number(treatProd[3]);
 		gEBI("trt").innerHTML = abbrNum(TW.toFixed(2),2);
+		gEBI("STpumpTotProd").innerHTML = abbrNum(treatProd[0].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("MTpumpTotProd").innerHTML = abbrNum(treatProd[1].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("BTpumpTotProd").innerHTML = abbrNum(treatProd[2].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("VBTpumpTotProd").innerHTML = abbrNum(treatProd[3].toFixed(0),2) + " m<sup>3</sup>";
 	}
 	else{NEMshow();}
 }
