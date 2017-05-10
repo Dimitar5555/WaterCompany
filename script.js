@@ -73,7 +73,7 @@ function chechSaveFile() {
 		price = 0.30;
 		PP = 1;
 		PO = 1;
-		money = 30;
+		money = 30000000000000000000000000000000000000;
 		priceIncP = 100;
 		priceDecPPP = 10000;
 		pricePPM = 1000;
@@ -83,7 +83,7 @@ function chechSaveFile() {
 		var todayE = gEBI("wtod").innerHTML;
 		var tomE = "bud";
 		incRateHouses = 105;
-		priceIncWaterU = 10000000;
+		priceIncWaterU = 1000000;
 		priceIncRateHouses = 100;
 		priceDecBP = 10000;
 		priceDecPP = 10000;
