@@ -85,10 +85,10 @@ function IncWaterProd() {
 }
 function IncTreatProd() {
 	if(0<=(money-priceIncTreatProd)){
-		pumpProd[0] = treatProd[0]*1.1;
-		pumpProd[1] = treatProd[1]*1.1;
-		pumpProd[2] = treatProd[2]*1.1;
-		pumpProd[3] = treatProd[3]*1.1;
+		treatProd[0] = treatProd[0]*1.1;
+		treatProd[1] = treatProd[1]*1.1;
+		treatProd[2] = treatProd[2]*1.1;
+		treatProd[3] = treatProd[3]*1.1;
 		money = money - priceIncTreatProd;
 		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
 		priceIncTreatProd = priceIncTreatProd * 1.5;
