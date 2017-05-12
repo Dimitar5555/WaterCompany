@@ -69,10 +69,10 @@ function chechSaveFile() {
 		selectedCity = prompt("In which city do you want to start your company?");
 		houses = 1000;
 		HPP = 2;
-		WPH = 3;
+		WPH = 5;
 		price = 0.30;
-		PP = 1;
-		PO = 1;
+		PP = 3;
+		PO = 3;
 		money = 30;
 		priceIncP = 100;
 		priceDecPPP = 10000;
