@@ -71,8 +71,8 @@ function chechSaveFile() {
 		HPP = 2;
 		WPH = 5;
 		price = 0.30;
-		PP = 3;
-		PO = 3;
+		PP = 5;
+		PO = 5;
 		money = 30;
 		priceIncP = 100;
 		priceDecPPP = 10000;
