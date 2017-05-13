@@ -5,7 +5,7 @@ function IncWaterPrice() {
 		priceIncP = (priceIncP/100)*150;
 		gEBI("IncPP").innerHTML = abbrNum(priceIncP.toFixed(2),2);
 		gEBI("priceBefore").innerHTML = price.toFixed(2);
-		gEBI("priceAfter").innerHTML = ((price/100)*110).toFixed(2);
+		gEBI("priceAfter").innerHTML = ((price/100)*105).toFixed(2);
 		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
 		gEBI("income").innerHTML = abbrNum(add.toFixed(2),2);
 		gEBI("pricem3").innerHTML =  "$" + abbrNum((price.toFixed(2)),2);
