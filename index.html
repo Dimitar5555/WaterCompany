@@ -32,7 +32,7 @@
 		</script>
 	</head>
 	<body style="padding: 5px; margin: 5px;"onload="chechSaveFile(); gEBI('fgg').click();">
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.2 Beta</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span></pre>
@@ -62,6 +62,7 @@
 			<li><a data-toggle="pill" href="#tabs-4">Pumping Station</a></li>
 			<li><a data-toggle="pill" href="#tabs-5">Water treatment</a></li>
 			<li class="pull-right"><a data-toggle="pill" href="#tabs-6">Options</a></li>
+			<li><a data-toggle="pill" href="#tabs-7">Change log</a></li>
 		</ul>
 		
 	</div>
@@ -295,7 +296,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Buy</td>
+						<td>Sell</td>
 						<td class="btn-group">
 							<button class="btn btn-primary" onclick="chTrS(1);">1</button>
 							<button class="btn btn-primary" onclick="chTrS(5);">5</button>
@@ -369,6 +370,19 @@
 			<button class="btn btn-primary" onclick="save()">Save</button>
 		<p>The game is autosaved every 30 seconds.</p>
 		<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.a = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+		</div>
+		<div id="tabs-7" class="tab-pane">
+			<h4>Version 0.2 Beta</h4>
+			<ul>
+				<li>Added change log</li>
+				<li>Added sell function for treatment plants and pumps</li>
+				<li>Fixed typos</li>
+				<li>Fixed bugs</li>
+				<li>Default value for city</li>
+				<li>Semi natural increase in houses over time</li>
+				<li>Upgrades for treatment plants and pumps</li>
+				<li>Sync option for pipes</li>
+			</ul>
 		</div>
 	</div>
 	

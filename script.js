@@ -67,6 +67,7 @@ function chechSaveFile() {
 		treatProd = [100, 1000, 10000, 100000];
 		treatPrice = [1000, 5000, 10000, 100000];
 		selectedCity = prompt("In which city do you want to start your company?");
+		if(!selectedCity){selectedCity = "London";}
 		houses = 1000;
 		HPP = 2;
 		WPH = 5;
