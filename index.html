@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>5</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Online game for managing city water network">
+		<meta name="keywords" content="games, game, water, managment, idle, money, incremental">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="robots" content="all">
+		<script>HardReset = 0;</script>
+		
+		<script src="js/main.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/change.js"></script>
+		<script src="js/once.js"></script>
+		<script src="js/buy.js"></script>
+		<script src="js/upgrades.js"></script>
+		<script src="js/sell.js"></script>
+		<script src="js/bank.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/showErrors.js"></script>
+		
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/alertify.core.css"/>
+		<link rel="stylesheet" href="css/alertify.bootstrap.css"/>
+		
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-97511038-1', 'auto');
+			ga('send', 'pageview');
+
+		</script>
+	</head>
+	<body style="padding: 5px; margin: 5px;" onload="chechSaveFile(); gEBI('fgg').click();">
+	<div>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3 Beta</span>
+		<div style="float: right; margin-bottom: 5px; width: 180px;">
+			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
+<span id="time" style="font-size: 50px;"></span>
+Year: <span id="year"></span></pre>
+		</div>
+	</div>
+		<table class="table" style="width: 700px;">
+			<tr>
+				<td colspan="4">Money</td>
+				<td colspan="1">$<span id="money"></span> <span id="income"></span></td>
+			</tr>
+			<tr>
+				<th  colspan="5">Water</th>
+			</tr>
+			<tr>
+				<td>Water Produced</td>
+				<td>Water Treated</td>
+				<td>Water Used</td>
+				<td>Extra water</td>
+				<td>Stored water/max</td>
+			</tr>
+			<tr>
+				<td><span id="prd"></span> m<sup>3</sup></td>
+				<td><span id="trt"></span> m<sup>3</sup></td>
+				<td><span id="NW"></span> m<sup>3</sup></td>
+				<td><span id="extraW"></span> m<sup>3</sup></td>
+				<td><span id="stW"></span> m<sup>3</sup>/<span id="capacitystW"></span> m<sup>3</sup> <span id="stWInc"></span></td>
+			</tr>
+		</table>
+		<br/>
+	<div>
+		<ul class="nav nav-tabs">
+			<li><a data-toggle="pill" href="#tabs-1" id="fgg">City</a></li>
+			<li><a data-toggle="pill" href="#tabs-2">Upgrades</a></li>
+			<li><a data-toggle="pill" href="#tabs-3">Pipes</a></li>
+			<li><a data-toggle="pill" href="#tabs-4">Pumping Station</a></li>
+			<li><a data-toggle="pill" href="#tabs-5">Water treatment</a></li>
+			<li><a data-toggle="pill" href="#tabs-10">Water storage</a></li>
+			<li><a data-toggle="pill" href="#tabs-6">Bank</a></li>
+			<li class="pull-right"><a data-toggle="pill" href="#tabs-7">Options</a></li>
+			<li class="pull-right"><a data-toggle="pill" href="#tabs-11">Change log</a></li>
+			<li><a data-toggle="pill" href="#tabs-8">FAQ</a></li>
+			<li><a data-toggle="pill" href="#tabs-9">Finances</a></li>
+		</ul>
+		
+	</div>
+	<div class="tab-content">
+		<br />
+		<div id="tabs-1" class="tab-pane"><p>You operate in <span class="city"></span>. The city has <span id="houses"></span> houses and you are supplying <span id="sup"></span> of them with water for <span id="pricem3"></span> per 1m<sup>3</sup>.</p></div>
+		<div id="tabs-2" class="tab-pane">
+			More upgrades coming soon.
+			<table class="table">
+				<tr>
+					<td>Decrease cost of buying pipes by 1% - $<span id="dcbpp"></span><br />
+					$<span id="bpb"></span> -> $<span id="bpa"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="DecBP();">Decrease</button></td>
+					<td>
+						Decrease cost of placing pipes by 1% - $<span id="priceDecPlP"></span><br />
+						$<span id="ppb"></span> -> $<span id="ppa"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="DecPP()">Decrease</button></td>
+				</tr>
+				<tr>
+					<td>Increase price of water by 5% - $<span id="IncPP"></span><br />
+					$<span id="priceBefore"></span> -> $<span id="priceAfter"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncWaterPrice();">Increase</button></td>
+					<td>
+						Increase water needed per house by 2.5% - $<span id="priceIncWater"></span><br />
+						<span id="waterUB"></span> -> <span id="waterUA"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncWaterNeeded();">Increase</button></td>
+				</tr>
+				<tr>
+					<td>Increase water production from pumps by 10% - $<span id="priceIncWaterProd"></span><br />
+						Small pump:    <span id="pumpProdB1"></span>-><span id="pumpProdA1"></span><br />
+						Medium pump:   <span id="pumpProdB2"></span>-><span id="pumpProdA2"></span><br />
+						Big pump:      <span id="pumpProdB3"></span>-><span id="pumpProdA3"></span><br />
+						Very big pump: <span id="pumpProdB4"></span>-><span id="pumpProdA4"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncWaterProd()">Increase</button></td>
+					<td>Increase treatment plant production by 10% - $<span id="priceIncTreatProd"></span><br />
+						Small treatment plant:    <span id="treatProdB1"></span>-><span id="treatProdA1"></span><br />
+						Medium treatment plant:   <span id="treatProdB2"></span>-><span id="treatProdA2"></span><br />
+						Big treatment plant:      <span id="treatProdB3"></span>-><span id="treatProdA3"></span><br />
+						Very big treatment plant: <span id="treatProdB4"></span>-><span id="treatProdA4"></span>
+					</td>
+					<td><button class="btn btn-primary" onclick="IncTreatProd()">Increase</button></td>
+				</tr>
+				<tr>
+					<td>Increase rate of building of new houses by 0.1% - $<span id="priceIncRateHouses"></span><br />
+					<span id="rateHB"></span> -> <span id="rateHA"></span></td>
+					<td><button class="btn btn-primary" onclick="IncRateHouses()">Increase</button></td>
+					<td>Increase interest rate by 0.5% - $<span id="priceIncInt"></span><br />
+					<span id="intNow"></span>%-><span id="intAft"></span>%</td>
+					<td><button class="btn btn-primary" onclick="incInr();">Increase</button></td>
+				</tr>
+			</table>
+		</div>
+		
+		
+		<div id="tabs-3" class="tab-pane">
+			<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main(and only) source of money. Each pipe supplies <span id="PPH"></span> houses at a time. Each house requres <span id="WPH"></span> m<sup>3</sup> water</p>
+			<table>
+				<tr>
+					<td>Buy</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-primary" onclick="chPiO(1);">1</button>
+							<button class="btn btn-primary" onclick="chPiO(5);">5</button>
+							<button class="btn btn-primary" onclick="chPiO(10);">10</button>
+							<button class="btn btn-primary" onclick="chPiO(25);">25</button>
+							<button class="btn btn-primary" onclick="chPiO(100);">100</button>
+							<button class="btn btn-primary" onclick="chPiO(1000);">1k</button>
+							<button class="btn btn-primary" onclick="chPiO(10000);">10k</button>
+							<button class="btn btn-primary" onclick="chPiO(100000);">100k</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000);">1m</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000);">10m</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000);">100m</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000000);">1b</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000000);">10b</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000000);">100b</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000000000);">1t</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000000000);">10t</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000000000);">100t</button>
+						</div>
+					</td>
+					<td rowspan="2">Synchronise 
+					<label class="switch">
+						<input id="f" type="checkbox" onclick="if(document.getElementById('f').checked){sync=1} else{sync=0}">
+						<div class="slider"></div>
+					</label>
+					</td>
+				</tr>
+				<tr id="hide">
+					<td>Place</td>
+					<td>
+						<div class="btn-group">
+							<button class="btn btn-primary" onclick="chPiP(1);">1</button>
+							<button class="btn btn-primary" onclick="chPiP(5);">5</button>
+							<button class="btn btn-primary" onclick="chPiP(10);">10</button>
+							<button class="btn btn-primary" onclick="chPiP(25);">25</button>
+							<button class="btn btn-primary" onclick="chPiP(100);">100</button>
+							<button class="btn btn-primary" onclick="chPiP(1000);">1k</button>
+							<button class="btn btn-primary" onclick="chPiP(10000);">10k</button>
+							<button class="btn btn-primary" onclick="chPiP(100000);">100k</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000);">1m</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000);">10m</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000);">100m</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000000);">1b</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000000);">10b</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000000);">100b</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000000000);">1t</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000000000);">10t</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000000000);">100t</button>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br />
+			Pipes you have: <span id="PM"></span><br />
+			Cost for buying one pipe: $<span id="PPM"></span><br />
+			Cost for placing one pipe: $<span id="PPP"></span><br />
+			Placed pipes: <span id="PP"></span>
+			<br />
+			<br />
+			<button class="btn btn-primary" class="numPiO" onclick="buyPipe(PiO);">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
+			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button>
+		</div>
+		<div id="tabs-4" class="tab-pane">
+				<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
+				<table>
+					<tr>
+						<td>Buy</td>
+						<td class="btn-group">
+							<button class="btn btn-primary" onclick="chP(1);">1</button>
+							<button class="btn btn-primary" onclick="chP(5);">5</button>
+							<button class="btn btn-primary" onclick="chP(10);">10</button>
+							<button class="btn btn-primary" onclick="chP(25);">25</button>
+							<button class="btn btn-primary" onclick="chP(100);">100</button>
+							<button class="btn btn-primary" onclick="chP(1000);">1k</button>
+							<button class="btn btn-primary" onclick="chP(10000);">10k</button>
+							<button class="btn btn-primary" onclick="chP(100000);">100k</button>
+							<button class="btn btn-primary" onclick="chP(1000000);">1m</button>
+							<button class="btn btn-primary" onclick="chP(10000000);">10m</button>
+							<button class="btn btn-primary" onclick="chP(100000000);">100m</button>
+							<button class="btn btn-primary" onclick="chP(1000000000);">1b</button>
+						</td>
+					</tr>
+					<tr>
+						<td>Sell</td>
+						<td class="btn-group">
+							<button class="btn btn-danger" onclick="chPS(1);">1</button>
+							<button class="btn btn-danger" onclick="chPS(5);">5</button>
+							<button class="btn btn-danger" onclick="chPS(10);">10</button>
+							<button class="btn btn-danger" onclick="chPS(25);">25</button>
+							<button class="btn btn-danger" onclick="chPS(100);">100</button>
+							<button class="btn btn-danger" onclick="chPS(1000);">1k</button>
+							<button class="btn btn-danger" onclick="chPS(10000);">10k</button>
+							<button class="btn btn-danger" onclick="chPS(100000);">100k</button>
+							<button class="btn btn-danger" onclick="chPS(1000000);">1m</button>
+							<button class="btn btn-danger" onclick="chPS(10000000);">10m</button>
+							<button class="btn btn-danger" onclick="chPS(100000000);">100m</button>
+							<button class="btn btn-danger" onclick="chPS(1000000000);">1b</button>
+						</td>
+					</tr>
+				</table>
+				<br />
+			<table class="table table-bordered table-stripped">
+				<tr>
+					<th>Pump</th>
+					<th>Price</th>
+					<th>Total</th>
+					<th></th>
+					<th>Owned</th>
+					<th>Water pumped</th>
+					<th>Total pumped water</th>
+					<th>Operating cost</th>
+					<th>Total operating cost</th>
+				</tr>
+				<tr>
+					<td>Small pump</td>
+					<td>$<span id="SpumpPrice"></span></td>
+					<td>$<span  id="pr0"></span></td>
+					<td><button class="btn btn-primary" onclick="buyPump(0,PuB)">Buy <span class="numP"></span></button>
+					<button class="btn btn-danger" onclick="sellPump(0,PuS)">Sell <span class="numPS"></span></button></td>
+					<td id="Spump"></td>
+					<td id="SpumpProd"></td>
+					<td id="SpumpTotProd"></td>
+					<td id="SpumpOpC"></td>
+					<td id="SpumpTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Medium pump</td>
+					<td>$<span id="MpumpPrice"></span></td>
+					<td>$<span  id="pr1"></span></td>
+					<td><button class="btn btn-primary" onclick="buyPump(1,PuB)">Buy <span class="numP"></span></button>
+					<button class="btn btn-danger" onclick="sellPump(1,PuS)">Sell <span class="numPS"></span></button></td>
+					<td id="Mpump"></td>
+					<td id="MpumpProd"></td>
+					<td id="MpumpTotProd"></td>
+					<td id="MpumpOpC"></td>
+					<td id="MpumpTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Big pump</td>
+					<td>$<span id="BpumpPrice"></span></td>
+					<td>$<span  id="pr2"></span></td>
+					<td><button class="btn btn-primary" onclick="buyPump(2,PuB)">Buy <span class="numP"></span></button>
+					<button class="btn btn-danger" onclick="sellPump(2,PuS)">Sell <span class="numPS"></span></button></td>
+					<td id="Bpump"></td>
+					<td id="BpumpProd"></td>
+					<td id="BpumpTotProd"></td>
+					<td id="BpumpOpC"></td>
+					<td id="BpumpTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Very big pump</td>
+					<td>$<span id="VBpumpPrice"></span></td>
+					<td>$<span  id="pr3"></span></td>
+					<td><button class="btn btn-primary" onclick="buyPump(3,PuB)">Buy <span class="numP"></span></button>
+					<button class="btn btn-danger" onclick="sellPump(3,PuS)">Sell <span class="numPS"></span></button></td>
+					<td id="VBpump"></td>
+					<td id="VBpumpProd"></td>
+					<td id="VBpumpTotProd"></td>
+					<td id="VBpumpOpC"></td>
+					<td id="VBpumpTotOpC"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-5" class="tab-pane">
+			<p>
+				<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m<sup>3</sup> you dispose in river you need to pay $100.</p>
+				<table>	
+					<tr>
+						<td>Buy</td>
+						<td class="btn-group">
+							<button class="btn btn-primary" onclick="chTr(1);">1</button>
+							<button class="btn btn-primary" onclick="chTr(5);">5</button>
+							<button class="btn btn-primary" onclick="chTr(10);">10</button>
+							<button class="btn btn-primary" onclick="chTr(25);">25</button>
+							<button class="btn btn-primary" onclick="chTr(100);">100</button>
+							<button class="btn btn-primary" onclick="chTr(1000);">1k</button>
+							<button class="btn btn-primary" onclick="chTr(10000);">10k</button>
+							<button class="btn btn-primary" onclick="chTr(100000);">100k</button>
+							<button class="btn btn-primary" onclick="chTr(1000000);">1m</button>
+							<button class="btn btn-primary" onclick="chTr(10000000);">10m</button>
+							<button class="btn btn-primary" onclick="chTr(100000000);">100m</button>
+							<button class="btn btn-primary" onclick="chTr(1000000000);">1b</button>
+						</td>
+					</tr>
+					<tr>
+						<td>Sell</td>
+						<td class="btn-group">
+							<button class="btn btn-danger" onclick="chTrS(1);">1</button>
+							<button class="btn btn-danger" onclick="chTrS(5);">5</button>
+							<button class="btn btn-danger" onclick="chTrS(10);">10</button>
+							<button class="btn btn-danger" onclick="chTrS(25);">25</button>
+							<button class="btn btn-danger" onclick="chTrS(100);">100</button>
+							<button class="btn btn-danger" onclick="chTrS(1000);">1k</button>
+							<button class="btn btn-danger" onclick="chTrS(10000);">10k</button>
+							<button class="btn btn-danger" onclick="chTrS(100000);">100k</button>
+							<button class="btn btn-danger" onclick="chTrS(1000000);">1m</button>
+							<button class="btn btn-danger" onclick="chTrS(10000000);">10m</button>
+							<button class="btn btn-danger" onclick="chTrS(100000000);">100m</button>
+							<button class="btn btn-danger" onclick="chTrS(1000000000);">1b</button>
+						</td>
+					</tr>
+				</table>
+				<br />
+			<table class="table table-bordered table-stripped">
+				<tr>
+					<th>Treatment plant</th>
+					<th>Price</th>
+					<th>Total</th>
+					<th></th>
+					<th>Owned</th>
+					<th>Water treated</th>
+					<th>Total treated water</th>
+					<th>Operating cost</th>
+					<th>Total operating cost</th>
+				</tr>
+				<tr>
+					<td>Small treatment plant</td>
+					<td>$<span id="STpumpPrice"></span></td>
+					<td>$<span  id="tr0"></span></td>
+					<td><button class="btn btn-primary" onclick="buyTreatmentPlant(0,TreatPlB)">Buy <span class="numTr"></span></button>
+					<button class="btn btn-danger" onclick="sellTrP(0,TrPS)">Sell <span class="numTrS"></span></button></td>
+					<td id="STpump"></td>
+					<td id="STpumpProd"></td>
+					<td id="STpumpTotProd"></td>
+					<td id="STpumpOpCost"></td>
+					<td id="STpumpTotOpCost"></td>
+				</tr>
+				<tr>
+					<td>Medium treatment plant</td>
+					<td>$<span id="MTpumpPrice"></span></td>
+					<td>$<span  id="tr1"></span></td>
+					<td><button class="btn btn-primary" onclick="buyTreatmentPlant(1,TreatPlB)">Buy <span class="numTr"></span></button>
+					<button class="btn btn-danger" onclick="sellTrP(1,TrPS)">Sell <span class="numTrS"></span></button></td>
+					<td id="MTpump"></td>
+					<td id="MTpumpProd"></td>
+					<td id="MTpumpTotProd"></td>
+					<td id="MTpumpOpCost"></td>
+					<td id="MTpumpTotOpCost"></td>
+				</tr>
+				<tr>
+					<td>Big treatment plant</td>
+					<td>$<span id="BTpumpPrice"></span></td>
+					<td>$<span  id="tr2"></span></td>
+					<td><button class="btn btn-primary" onclick="buyTreatmentPlant(2,TreatPlB)">Buy <span class="numTr"></span></button>
+					<button class="btn btn-danger" onclick="sellTrP(2,TrPS)">Sell <span class="numTrS"></span></button></td>
+					<td id="BTpump"></td>
+					<td id="BTpumpProd"></td>
+					<td id="BTpumpTotProd"></td>
+					<td id="BTpumpOpCost"></td>
+					<td id="BTpumpTotOpCost"></td>
+				</tr>
+				<tr>
+					<td>Very big treatment plant</td>
+					<td>$<span id="VBTpumpPrice"></span></td>
+					<td>$<span  id="tr3"></span></td>
+					<td><button class="btn btn-primary" onclick="buyTreatmentPlant(3,TreatPlB)">Buy <span class="numTr"></span></button>
+					<button class="btn btn-danger" onclick="sellTrP(3,TrPS)">Sell <span class="numTrS"></span></button></td>
+					<td id="VBTpump"></td>
+					<td id="VBTpumpProd"></td>
+					<td id="VBTpumpTotProd"></td>
+					<td id="VBTpumpOpCost"></td>
+					<td id="VBTpumpTotOpCost"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-6" class="tab-pane">
+			<p>In the bank you can manage your money. You can invest in bank account and get a fixed interest every day or if you need money you can take out a loan.</p>
+			<table class="table" style="width: 250px;">
+				<tr>
+					<td>Current balance</td>
+					<td>$<span id="curBalance"></span></td>
+					<td>Interest</td>
+					<td><span id="interestRate"></span>%</td>
+				</tr>
+				<tr>
+					<td>Invest</td>
+					<td><input id="inv" type="number" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="invest(parseInt(gEBI('inv').value)); gEBI('inv').value = 0;">Invest</button></td>
+					<td><button class="btn btn-primary" onclick="investMAX();">Invest max</button></td>
+				</tr>
+				<tr>
+					<td>Withdraw</td>
+					<td><input id="wd" type="number" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="withdraw(parseInt(gEBI('wd').value)); gEBI('wd').value = 0;">Withdraw</button></td>
+					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
+				</tr>
+			</table>
+			
+			<table class="table" style="width: 50px;">
+				<tr>
+					<td>Current loan</td>
+					<td>$<span id="curLoan"></span></td>
+					<td>Loan interest</td>
+					<td><span id="lInt"></span>%</td>
+					<td>Current tax for loan</td>
+					<td>$<span id="curTaxL"></span></td>
+				</tr>
+				<tr>
+					<td>Get loan</td>
+					<td><input id="gl" type="number" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="getLoan(parseInt(gEBI('gl').value));">Get</button></td>
+					<td>Return loan</td>
+					<td><input id="rl" type="number" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="returnLoan(parseInt(gEBI('rl').value));">Return</button>
+					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
+					<button class="btn btn-primary" onclick="returnLoan(money-(loan/100));">Return max loan-loan tax</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-8" class="tab-pane">
+			<h4>I've found a bug. What should I do?</h4>
+			<p>You should report it in <a href="https://www.reddit.com/r/incremental_games/comments/69qzqu/water_company/" target="_blank">this reddit post</a> or you can open a new issue in github on <a href="https://github.com/Dimitar5555/WaterCompany/issues" target="_blank">this</a> address.</p>
+			<hr />
+			<h4>I've got a suggestion/feature for the game. Where can I share my idea?</h4>
+			<p>You can <a href="https://www.reddit.com/message/compose/?to=Dimitar155" target="_blank">send me a message</a> on reddit with your suggestion/feature.</p>
+			<hr />
+			<h4>Why do I need treatment plant and what will happen if I don't have?</h4>
+			<p>The treatment plant cleans the water from sawage. If you let not treated water to the river, you will pay a fine of $1000 for every 10000m<sup>3</sup> not treated water.</p>
+			<hr />
+			<h4>What will happen if I can't supply enough water?</h4>
+			<p>Simply people will pay fo the water you supplied. If you supply 10m<sup>3</sup>, but they need 20m<sup>3</sup>, people will pay for 10m<sup>3</sup> only.</p>
+			<hr />
+			<h4>How does the bank loan system work?</h4>
+			<p>On the next day on 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by 1%.</p>
+			<hr />
+			<h4>I want ot get x money via loan but I can't. Why?</h4>
+			<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
+			<hr />
+			<h4>How does the bank account work?</h4>
+			<p>You can infinity money in it. Every day at 00:00 you get interest for your money in the account.</p>
+			<hr />
+			<h4>How are operating costs defined?</h4>
+			<p>Everything has a operating cost(exept pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
+		</div>
+		<div id="tabs-7" class="tab-pane">
+			<button class="btn btn-primary" onclick="save()">Save</button>
+		<p>The game is autosaved every 30 seconds.</p>
+		<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+		</div>
+		<div id="tabs-9" class="tab-pane">
+			<table class="table">
+				<tr>
+					<th colspan="2">Revenues</th>
+				</tr>
+				<tr>
+					<td>From selling water</td>
+					<td>$<span id="fWater"></span></td>
+				</tr>
+				<tr>
+					<td>From interest(in bank account)</td>
+					<td>$<span id="fIntInc"></span></td>
+				</tr>
+				<tr>
+					<th colspan="2">Expenditures</th>
+				</tr>
+				<tr>
+					<td>Operating costs</td>
+					<td>$<span id="fopC"></span></td>
+				</tr>
+				<tr>
+					<td>Loans</td>
+					<td>$<span id="fLoanTax"></span></td>
+				</tr>
+				<tr>
+					<td>Fines</td>
+					<td>$<span id="fFines"></span></td>
+				</tr>
+				<tr>
+					<td>Profit</td>
+					<td>$<span id="fProfit"></span></td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-10" class="tab-pane">
+			<p>Water storage is used to store water like water towers. Whene there is too much water, it is stored if possible. When there is a shortage of water, the water from the tower is used.</p>
+			<table>	
+				<tr>
+					<td>Buy</td>
+					<td class="btn-group">
+						<button class="btn btn-primary" onclick="chBS(1);">1</button>
+						<button class="btn btn-primary" onclick="chBS(5);">5</button>
+						<button class="btn btn-primary" onclick="chBS(10);">10</button>
+						<button class="btn btn-primary" onclick="chBS(25);">25</button>
+						<button class="btn btn-primary" onclick="chBS(100);">100</button>
+						<button class="btn btn-primary" onclick="chBS(1000);">1k</button>
+						<button class="btn btn-primary" onclick="chBS(10000);">10k</button>
+						<button class="btn btn-primary" onclick="chBS(100000);">100k</button>
+						<button class="btn btn-primary" onclick="chBS(1000000);">1m</button>
+						<button class="btn btn-primary" onclick="chBS(10000000);">10m</button>
+						<button class="btn btn-primary" onclick="chBS(100000000);">100m</button>
+						<button class="btn btn-primary" onclick="chBS(1000000000);">1b</button>
+					</td>
+				</tr>
+				<tr>
+					<td>Sell</td>
+					<td class="btn-group">
+						<button class="btn btn-danger" onclick="chSS(1);">1</button>
+						<button class="btn btn-danger" onclick="chSS(5);">5</button>
+						<button class="btn btn-danger" onclick="chSS(10);">10</button>
+						<button class="btn btn-danger" onclick="chSS(25);">25</button>
+						<button class="btn btn-danger" onclick="chSS(100);">100</button>
+						<button class="btn btn-danger" onclick="chSS(1000);">1k</button>
+						<button class="btn btn-danger" onclick="chSS(10000);">10k</button>
+						<button class="btn btn-danger" onclick="chSS(100000);">100k</button>
+						<button class="btn btn-danger" onclick="chSS(1000000);">1m</button>
+						<button class="btn btn-danger" onclick="chSS(10000000);">10m</button>
+						<button class="btn btn-danger" onclick="chSS(100000000);">100m</button>
+						<button class="btn btn-danger" onclick="chSS(1000000000);">1b</button>
+					</td>
+				</tr>
+			</table>
+		
+			<table class="table table-bordered table-stripped">
+				<tr>
+					<th>Storage type</th>
+					<th>Price</th>
+					<th>Total</th>
+					<th></th>
+					<th>Owned</th>
+					<th>Water max stored</th>
+					<th>Total max stored water</th>
+					<th>Operating cost</th>
+					<th>Total operating cost</th>
+				</tr>
+				<tr>
+					<td>Small storage</td>
+					<td>$<span id="SSPrice"></span></td>
+					<td>$<span  id="ss0"></span></td>
+					<td><button class="btn btn-primary" onclick="buyReserv(0,sBS);">Buy <span class="numBS"></span></button>
+					<button class="btn btn-danger" onclick="sellSt(0, sBS)">Sell <span class="numSS"></span></button></td>
+					<td id="SS"></td>
+					<td id="SSProd"></td>
+					<td id="SSTotProd"></td>
+					<td id="SSOpC"></td>
+					<td id="SSTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Medium storage</td>
+					<td>$<span id="MSPrice"></span></td>
+					<td>$<span  id="ss1"></span></td>
+					<td><button class="btn btn-primary" onclick="buyReserv(1,sBS);">Buy <span class="numBS"></span></button>
+					<button class="btn btn-danger" onclick="sellSt(1, sBS)">Sell <span class="numSS"></span></button></td>
+					<td id="MS"></td>
+					<td id="MSProd"></td>
+					<td id="MSTotProd"></td>
+					<td id="MSOpC"></td>
+					<td id="MSTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Big storage</td>
+					<td>$<span id="BSPrice"></span></td>
+					<td>$<span  id="ss2"></span></td>
+					<td><button class="btn btn-primary" onclick="buyReserv(2,sBS);">Buy <span class="numBS"></span></button>
+					<button class="btn btn-danger" onclick="sellSt(2, sBS)">Sell <span class="numSS"></span></button></td>
+					<td id="BS"></td>
+					<td id="BSProd"></td>
+					<td id="BSTotProd"></td>
+					<td id="BSOpC"></td>
+					<td id="BSTotOpC"></td>
+				</tr>
+				<tr>
+					<td>Very big storage</td>
+					<td>$<span id="VBSPrice"></span></td>
+					<td>$<span  id="ss3"></span></td>
+					<td><button class="btn btn-primary" onclick="buyReserv(3,sBS);">Buy <span class="numBS"></span></button>
+					<button class="btn btn-danger" onclick="sellSt(3, sBS)">Sell <span class="numSS"></span></button></td>
+					<td id="VBS"></td>
+					<td id="VBSProd"></td>
+					<td id="VBSTotProd"></td>
+					<td id="VBSOpC"></td>
+					<td id="VBSTotOpC"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3 Beta: The Money River</h4>
+			<ul>
+				<li>Added bank
+					<ul>
+						<li>Loan system with up to $100k loan</li>
+						<li>Interest rate and bank balance</li>
+						<li>Upgrade to increase the interest rate</li>
+					</ul>
+				</li>
+				<li>Added water storage</li>
+				<li>Added operating costs to buildings</li>
+				<li>Added FAQ section</li>
+				<li>Balance
+					<ul>
+						<li>Decreased rate of building new houses</li>
+						<li>Changed prices for buying buildings</li>
+						<li>Lowered effects and/or price for some upgrades</li>
+					</ul>
+				</li>
+				<li>Added year counter</li>
+				<li>Changed save system</li>
+				<li>Lowered the size of the javascript files</li>
+				<li>Changed notification system</li>
+				<li>Bugfixes</li>
+			</ul>
+			<hr />
+			<h4>Version 0.2 Beta</h4>
+			<ul>
+				<li>Added change log</li>
+				<li>Added sell function for treatment plants and pumps</li>
+				<li>Fixed typos</li>
+				<li>Fixed bugs</li>
+				<li>Added default value for city</li>
+				<li>Semi natural increase in houses over time</li>
+				<li>Upgrades for treatment plants and pumps</li>
+				<li>Sync option for pipes</li>
+			</ul>
+		</div>
+	</div>
+	<div id="log_events"></div>
+	<div id="weather" style="font-size: 20px; max-height: 350px; background-color: #c7c9cc; margin-top: 100px;">
+		<span>Weather</span><br />
+		<div style="margin-bottom: 5px; padding-top: 30px;">Today:<span id="wtod"></span></div>
+		
+	</div>
+	<script> if(document.getElementById('f').checked){sync=1} else{sync=0}</script>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="js/alertify.min.js"></script>
+	</body>
+</html>
