@@ -30,9 +30,9 @@ function retLoanAuto() {
 	if(0 <= money - (loan/100)){
 		loan = loan - (loan/100);
 		money = money - (loan/100);
-		gEBI("curLoan").innerHTML =  s(loan);
-		gEBI("money").innerHTML =    s(money);
-		gEBI("curTaxL").innerHTML =  s(loan/100);
+		gEBI("curLoan").innerHTML = s(loan);
+		gEBI("money").innerHTML = s(money);
+		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
 		Success("Your bank tax for the loan has been paid.");
 	}
