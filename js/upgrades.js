@@ -5,9 +5,8 @@ function IncWaterPrice() {
 		priceIncP = (priceIncP/100)*150;
 		gEBI("IncPP").innerHTML = abbrNum(priceIncP.toFixed(2),2);
 		gEBI("priceBefore").innerHTML = price.toFixed(2);
-		gEBI("priceAfter").innerHTML = ((price/100)*105).toFixed(2);
+		gEBI("priceAfter").innerHTML = ((price/100)*110).toFixed(2);
 		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
-		gEBI("income").innerHTML = abbrNum(add.toFixed(2),2);
 		gEBI("pricem3").innerHTML =  "$" + abbrNum((price.toFixed(2)),2);
 	}
 	else{NEMshow();}
@@ -80,10 +79,10 @@ function IncWaterProd() {
 		gEBI("pumpProdA2").innerHTML = abbrNum((pumpProd[1]*1.1).toFixed(2),2);
 		gEBI("pumpProdA3").innerHTML = abbrNum((pumpProd[2]*1.1).toFixed(2),2);
 		gEBI("pumpProdA4").innerHTML = abbrNum((pumpProd[3]*1.1).toFixed(2),2);
-	gEBI("SpumpProd").innerHTML = abbrNum(pumpProd[0].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("MpumpProd").innerHTML = abbrNum(pumpProd[1].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("BpumpProd").innerHTML = abbrNum(pumpProd[2].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("VBpumpProd").innerHTML = abbrNum(pumpProd[3].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("SpumpProd").innerHTML = abbrNum(pumpProd[0].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("MpumpProd").innerHTML = abbrNum(pumpProd[1].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("BpumpProd").innerHTML = abbrNum(pumpProd[2].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("VBpumpProd").innerHTML = abbrNum(pumpProd[3].toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("SpumpTotProd").innerHTML = abbrNum((pumpProd[0]*pumps[0]).toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("MpumpTotProd").innerHTML = abbrNum((pumpProd[1]*pumps[1]).toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("BpumpTotProd").innerHTML = abbrNum((pumpProd[2]*pumps[2]).toFixed(0),2) + " m<sup>3</sup>";
@@ -109,14 +108,27 @@ function IncTreatProd() {
 		gEBI("treatProdA2").innerHTML = abbrNum((treatProd[1]*1.1).toFixed(2),2);
 		gEBI("treatProdA3").innerHTML = abbrNum((treatProd[2]*1.1).toFixed(2),2);
 		gEBI("treatProdA4").innerHTML = abbrNum((treatProd[3]*1.1).toFixed(2),2);
-	gEBI("STpumpProd").innerHTML = abbrNum(treatProd[0].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("MTpumpProd").innerHTML = abbrNum(treatProd[1].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("BTpumpProd").innerHTML = abbrNum(treatProd[2].toFixed(0),2) + " m<sup>3</sup>";
-	gEBI("VBTpumpProd").innerHTML = abbrNum(treatProd[3].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("STpumpProd").innerHTML = abbrNum(treatProd[0].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("MTpumpProd").innerHTML = abbrNum(treatProd[1].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("BTpumpProd").innerHTML = abbrNum(treatProd[2].toFixed(0),2) + " m<sup>3</sup>";
+		gEBI("VBTpumpProd").innerHTML = abbrNum(treatProd[3].toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("STpumpTotProd").innerHTML = abbrNum(treatProd[0].toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("MTpumpTotProd").innerHTML = abbrNum(treatProd[1].toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("BTpumpTotProd").innerHTML = abbrNum(treatProd[2].toFixed(0),2) + " m<sup>3</sup>";
 		gEBI("VBTpumpTotProd").innerHTML = abbrNum(treatProd[3].toFixed(0),2) + " m<sup>3</sup>";
+	}
+	else{NEMshow();}
+}
+function incInr() {
+	if(0<=(money-priceIncInt)) {
+		money = money - priceIncInt;
+		gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
+		interest = interest + 0.5;
+		priceIncInt = (priceIncInt/100)*125;
+		gEBI("interestRate").innerHTML = abbrNum(interest.toFixed(2),2);
+		gEBI("intNow").innerHTML = abbrNum(interest.toFixed(2),2);
+		gEBI("intAft").innerHTML = abbrNum((interest+0.5).toFixed(2),2);
+		gEBI("priceIncInt").innerHTML = abbrNum(priceIncInt.toFixed(2),2);
 	}
 	else{NEMshow();}
 }
