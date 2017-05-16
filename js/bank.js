@@ -42,7 +42,7 @@ function retLoanAuto() {
 		gEBI("curLoan").innerHTML = s(loan);
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
-		Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + "to $" + s(loan));
+		Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + " to $" + s(loan));
 	}
 }
 
