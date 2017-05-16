@@ -34,6 +34,7 @@ function retLoanAuto() {
 		gEBI("money").innerHTML =    s(money);
 		gEBI("curTaxL").innerHTML =  s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
+		Success("Your bank tax for the loan has been paid.");
 	}
 	else{
 		var oldLoan = loan;
@@ -41,7 +42,7 @@ function retLoanAuto() {
 		gEBI("curLoan").innerHTML = s(loan);
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
-		Error("Not enough money to pay your loan tax! Your loan was increased from $" + oldLoan + "to $" + loan)
+		Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + "to $" + s(loan));
 	}
 }
 

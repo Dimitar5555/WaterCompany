@@ -8,3 +8,6 @@ function YWGMBshow() {
 	gEBI("YWGMB").style.display = "block";
 	setTimeout(function(){gEBI("YWGMB").style.display = "none";}, 2500);
 }
+function Success(a) {
+	alertify.success(a);
+}
