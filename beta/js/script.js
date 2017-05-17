@@ -122,6 +122,7 @@ function chechSaveFile() {
 			gEBI("date").innerHTML = day;
 			gEBI("year").innerHTML = year;
 		}
+		Success("While you were away, you got $" + s(add*times));
 	}
 	
 	else {
