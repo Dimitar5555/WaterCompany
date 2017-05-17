@@ -51,6 +51,8 @@ function chechSaveFile() {
 		
 		
 		var time = localStorage.offTime;
+		var oldBalance = curBalance;
+		var oldLoan = loan;
 		once();
 		var times = Math.floor((Date.now()-time)/500);
 		for(i=0;i<times;i++){
@@ -106,23 +108,45 @@ function chechSaveFile() {
 			gEBI("fopC").innerHTML = s(opC*48);
 			gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
 			gEBI("fProfit").innerHTML = s((add + (curBalance/100)*(100+interest) - curBalance)*48);
-			updatePipes();
 			if(hour>=24){
 				hour=hour-24;
 				day=day+1;
 				changeweat();
 				retLoanAuto();
-				autoIncBal();
-				incHouses();
+			if(loan==0){}
+			else if(0 <= money - (loan/100)){
+				loan = loan - (loan/100);
+				money = money - (loan/100);
+			}
+			else{
+				loan = (loan/100)*(loanInterest+100);
+			}
+			curBalance = (curBalance/100)*(100+interest);
+			gEBI("curBalance").innerHTML = s(curBalance);
+			gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
 			}
 			if(day>=365){
 				year = year + 1;
 				day = day - 365;
 			}
-			gEBI("date").innerHTML = day;
-			gEBI("year").innerHTML = year;
 		}
 		Success("While you were away, you got $" + s(add*times));
+		if(oldLoan>loan){
+			Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + " to $" + s(loan));
+		}
+		else{}
+		if(curBalance>oldBalance){
+			Success("While you were awai, your bank balance has been increased by $" + s(curBalance-oldBalance));
+		}
+		else{}
+		updatePipes();
+		gEBI("curLoan").innerHTML = s(loan);
+		gEBI("money").innerHTML = s(money);
+		gEBI("curTaxL").innerHTML = s(loan/100);
+		gEBI("fLoanTax").innerHTML = s(loan/100);
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+		gEBI("date").innerHTML = day;
+		gEBI("year").innerHTML = year;
 	}
 	
 	else {
