@@ -26,3 +26,14 @@ function gEBI(a) {
 	var b = document.getElementById(a);
 	return b;
 }
+function updatePipes() {
+	gEBI("bmp").innerHTML = abbrNum((Math.floor(money/pricePPM)),2);
+	var a = Math.floor(money/(pricePPP+pricePPM));
+	gEBI("bppM").innerHTML = abbrNum(a,2);
+	if(Math.floor(money/pricePPP)<=PO){
+		gEBI("pmp").innerHTML = abbrNum((Math.floor(money/pricePPP)),2);
+	}
+	else{
+		gEBI("pmp").innerHTML = abbrNum(PO,2);
+	}
+}

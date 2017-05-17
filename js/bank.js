@@ -5,6 +5,7 @@ function invest(a) {
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
 		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+		updatePipes();
 	}
 	else{NEMshow();}
 }
@@ -15,10 +16,11 @@ function withdraw(a) {
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
 		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+		updatePipes();
 	}
-	else{
-		otherError("Not enough bank balance");
-	}
+		else{
+			otherError("Not enough bank balance");
+		}
 }
 
 function autoIncBal() {
@@ -40,10 +42,11 @@ function retLoanAuto() {
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
 		Success("Your bank tax for the loan has been paid.");
+		updatePipes();
 	}
 	else{
 		var oldLoan = loan;
-		loan = loan*(loanInterest+1);
+		loan = (loan/100)*(loanInterest+100);
 		gEBI("curLoan").innerHTML = s(loan);
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
@@ -59,8 +62,8 @@ function getLoan(a) {
 		gEBI("money").innerHTML = s(money);
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
-		
-	}
+		updatePipes();Num(PO,2);
+		}
 	else{
 		money = money + (100000 - loan);
 		loan = 100000;
@@ -68,7 +71,7 @@ function getLoan(a) {
 		gEBI("money").innerHTML = s(money);
 		gEBI("curTaxL").innerHTML = s(loan/100);
 		gEBI("fLoanTax").innerHTML = s(loan/100);
-		
+		updatePipes();
 	}
 }
 function returnLoan(a){
@@ -80,6 +83,7 @@ function returnLoan(a){
 			gEBI("money").innerHTML = s(money);
 			gEBI("curTaxL").innerHTML = s(loan/100);
 			gEBI("fLoanTax").innerHTML = s(loan/100);
+			updatePipes();
 		}
 		else{
 			NEMshow();
@@ -95,6 +99,8 @@ function investMAX() {
 		money = 0;
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+		updatePipes();
 	}
 }
 function withdrawMAX() {
@@ -103,5 +109,7 @@ function withdrawMAX() {
 		curBalance = 0;
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+		updatePipes();
 	}
 }

@@ -1,5 +1,5 @@
 function chechSaveFile() {
-	if(localStorage.upgradesPrices && localStorage.pumptreat && localStorage.prices && localStorage.other) {
+	if(localStorage.upgradesPrices && localStorage.pumptreat && localStorage.prices && localStorage.other){
 		var pumptreat = JSON.parse(localStorage.pumptreat);
 		pumps = [pumptreat[0][0], pumptreat[0][1], pumptreat[0][2], pumptreat[0][3]];
 		pumpProd = [pumptreat[1][0], pumptreat[1][1], pumptreat[1][2], pumptreat[1][3]];
@@ -47,11 +47,83 @@ function chechSaveFile() {
 		priceIncWaterProd = upgradesPrices[6];
 		priceIncTreatProd = upgradesPrices[7];
 		priceIncInt = upgradesPrices[8];
+		fast = 500;
 		
 		
-		
+		var time = localStorage.offTime;
 		once();
+		var times = Math.floor((Date.now()-time)/500);
+		for(i=0;i<times;i++){
+			UW = HPP * WPH * PP;
+			PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
+			TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
+			gEBI("trt").innerHTML = s(TW);
+			gEBI("prd").innerHTML = s(PW);
+			b = extraWA * HPP * PP;
+			gEBI("extraW").innerHTML = s(b);
+				
+			MSW = stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3];
+			stWB = stW;
+			stW = stW + PW;
+		
+			if(stW-UW>=0){
+				SW = UW;
+				stW = stW - UW;
+				if(UW>TW){
+					var fine = UW - TW;
+				}
+				else{
+					var fine = 0;
+				}
+			}
+			else{
+				SW = stW;
+				stW = 0;
+				if(SW>TW){
+					var fine = SW - TW;
+				}
+				else{
+					var fine = 0;
+				}
+			}
+	
+			var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
+			add = SW * price - (fine/10000)*1000 - opC;
+			money = money + add;
+			if(allBank==1){
+				investMAX();
+				gEBI("warnAll").style.display = "block";
+			}
+			else{
+				gEBI("warnAll").style.display = "none";
+			}
+			gEBI("money").innerHTML = s(money);
+			hour = hour + 1;
+			gEBI("time").innerHTML = hour + ":00";
+			gEBI("NW").innerHTML = s(UW);
+			gEBI("stW").innerHTML = s(stW);
+			gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
+			gEBI("fopC").innerHTML = s(opC*48);
+			gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
+			gEBI("fProfit").innerHTML = s((add + (curBalance/100)*(100+interest) - curBalance)*48);
+			updatePipes();
+			if(hour>=24){
+				hour=hour-24;
+				day=day+1;
+				changeweat();
+				retLoanAuto();
+				autoIncBal();
+				incHouses();
+			}
+			if(day>=365){
+				year = year + 1;
+				day = day - 365;
+			}
+			gEBI("date").innerHTML = day;
+			gEBI("year").innerHTML = year;
+		}
 	}
+	
 	else {
 		pumps = [1, 0, 0, 0];
 		pumpProd = [100, 500, 5000, 10000];
@@ -81,10 +153,10 @@ function chechSaveFile() {
 		priceDecPP = 10000;
 		priceIncWaterProd = 100000;
 		priceIncTreatProd = 100000;
-		pumpCost = [0.5 ,5 ,25 ,100];
-		treatCost = [1 ,10 ,50 ,200];
+		pumpCost = [0.5 ,5 ,25 ,50];
+		treatCost = [1 ,10 ,50 ,100];
 		curBalance = 0;
-		interest = 1;
+		interest = 0.5;
 		priceIncInt = 10000;
 		stW = 0;
 		stWCost = [1, 10, 50, 100];
@@ -92,9 +164,12 @@ function chechSaveFile() {
 		stWProd =  [100000, 1000000, 5000000, 10000000];
 		stWC = [1, 0, 0 , 0];
 		loan = 0;
-		loanInterest = 0.1;
+		loanInterest = 11;
 		year = 0;
+		fast = 500;
 		selectedCity = prompt("Where do you want to start you company?");
+		var time = Date.now();
+		localStorage.setItem("offTime", time);
 		
 		var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt];
 		var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
@@ -104,12 +179,15 @@ function chechSaveFile() {
 		localStorage.setItem("pumptreat", JSON.stringify(pumptreat));
 		localStorage.setItem("prices", JSON.stringify(prices));
 		localStorage.setItem("other", JSON.stringify(other));
-		once();
+		once(s);
 	}
 }
+
 HardReset = 0; 
 function save() {
 	var todayE = gEBI("wtod").innerHTML;
+	var time = Date.now();
+	localStorage.setItem("offTime", time);
 	var tomE = "fdg";
 	var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt];
 	var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
@@ -219,7 +297,6 @@ window.setInterval(function(){
 			var fine = 0;
 		}
 	}
-
 	
 	var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
 	add = SW * price - (fine/10000)*1000 - opC;
@@ -246,15 +323,23 @@ window.setInterval(function(){
 	if(stW>MSW){
 		stW = MSW;
 	}
+	if(allBank==1){
+		investMAX();
+		gEBI("warnAll").style.display = "block";
+	}
+	else{
+		gEBI("warnAll").style.display = "none";
+	}
 	gEBI("money").innerHTML = s(money);
 	hour = hour + 1;
 	gEBI("time").innerHTML = hour + ":00";
 	gEBI("NW").innerHTML = s(UW);
 	gEBI("stW").innerHTML = s(stW);
-	gEBI("fWater").innerHTML = s(add + (fine/10000)*1000 + opC);
-	gEBI("fopC").innerHTML = s(opC);
-	gEBI("fFines").innerHTML = s((fine/10000)*1000);
-	gEBI("fProfit").innerHTML = s(add + curBalance - (curBalance/100)*(100+interest));
+	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
+	gEBI("fopC").innerHTML = s(opC*48);
+	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
+	gEBI("fProfit").innerHTML = s((add + curBalance - (curBalance/100)*(100+interest))*48);
+	updatePipes();
 	if(hour>=24){
 		hour=hour-24;
 		day=day+1;
@@ -270,7 +355,7 @@ window.setInterval(function(){
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
 	}
-, 500)};
+, fast)};
 function incHouses(){
 	houses = Math.floor((houses/100)*incRateHouses);
 	gEBI("houses").innerHTML = s(houses);

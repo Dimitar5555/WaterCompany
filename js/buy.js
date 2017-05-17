@@ -9,12 +9,13 @@ function buyPipe(a) {
 				money = money - a*pricePPM;
 				gEBI("PM").innerHTML = PO;
 				gEBI("money").innerHTML = s(money);
+				updatePipes();
 			}
 		}
 		else {NEMshow();}
 	}
 	else{
-		gEBI("TLH").display = "block";
+		;
 	}
 }
 function placePipe(a) {
@@ -43,15 +44,16 @@ function placePipe(a) {
 				gEBI("prd").innerHTML = s(PW);
 				gEBI("trt").innerHTML = s(TW);
 				UW = HPP * WPH * PP;
-				gEBI("NW").innerHTML = s(UW.toFixed);
+				gEBI("NW").innerHTML = s(UW);
 				addWater = s(extraWA * HPP * PP);
 				gEBI("extraW").innerHTML = s(extraWA * HPP * PP);
+				updatePipes();
 			}
-			else{Notifier.error("", "Not enough houses");}
+			else{Error("Not enough houses");}
 		}
-		else{Notifier.error("", "Not enough buyed pipes");}
+		else{Error("Not enough owned pipes");}
 	}
-	else {Notifier.error("", "Not enough money");}
+	else {Error("Not enough money");}
 }
 function buyPump(a,b) {
 	var Wprice = pumpPrice[a];
