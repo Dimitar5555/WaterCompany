@@ -338,7 +338,7 @@ window.setInterval(function(){
 	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
 	gEBI("fopC").innerHTML = s(opC*48);
 	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
-	gEBI("fProfit").innerHTML = s((add + curBalance - (curBalance/100)*(100+interest))*48);
+	gEBI("fProfit").innerHTML = s((add + (curBalance/100)*(100+interest)-curBalance)*48);
 	updatePipes();
 	if(hour>=24){
 		hour=hour-24;
