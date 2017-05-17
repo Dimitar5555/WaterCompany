@@ -27,7 +27,8 @@ function autoIncBal() {
 	gEBI("curBalance").innerHTML = s(curBalance);
 }
 function retLoanAuto() {
-	if(0 <= money - (loan/100)){
+	if(loan==0){}
+	else if(0 <= money - (loan/100)){
 		loan = loan - (loan/100);
 		money = money - (loan/100);
 		gEBI("curLoan").innerHTML = s(loan);
