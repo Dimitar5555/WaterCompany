@@ -4,7 +4,7 @@ function invest(a) {
 		money = money - a;
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
-		gEBI("fIntInc").innerHTML = s(curBlanace-(curBalance/100)*(100+interest));
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
 	}
 	else{NEMshow();}
 }
@@ -14,7 +14,7 @@ function withdraw(a) {
 		money = money + a;
 		gEBI("curBalance").innerHTML = s(curBalance);
 		gEBI("money").innerHTML = s(money);
-		gEBI("fIntInc").innerHTML = s(curBlanace-(curBalance/100)*(100+interest));
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
 	}
 	else{
 		otherError("Not enough bank balance");
