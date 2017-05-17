@@ -7,7 +7,7 @@
 		<meta name="keywords" content="games, game, water, managment, idle, money, incremental">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="robots" content="all">
-		<script>HardReset = 0;</script>
+		<script>HardReset = 0; allBank = 0;</script>
 		
 		<script src="js/main.js"></script>
 		<script src="js/script.js"></script>
@@ -38,7 +38,7 @@
 	</head>
 	<body style="padding: 5px; margin: 5px;" onload="chechSaveFile(); gEBI('fgg').click();">
 	<div>
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3 Beta</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.1 Beta</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
@@ -47,8 +47,9 @@ Year: <span id="year"></span></pre>
 	</div>
 		<table class="table" style="width: 700px;">
 			<tr>
-				<td colspan="4">Money</td>
+				<td colspan="3">Money</td>
 				<td colspan="1">$<span id="money"></span> <span id="income"></span></td>
+				<td id="warnAll">All of the profits are transfered to the bank account</td>
 			</tr>
 			<tr>
 				<th  colspan="5">Water</th>
@@ -82,6 +83,7 @@ Year: <span id="year"></span></pre>
 			<li class="pull-right"><a data-toggle="pill" href="#tabs-11">Change log</a></li>
 			<li><a data-toggle="pill" href="#tabs-8">FAQ</a></li>
 			<li><a data-toggle="pill" href="#tabs-9">Finances</a></li>
+			<li class="pull-right"><a data-toggle="pill" href="#tabs-12">About</a></li>
 		</ul>
 		
 	</div>
@@ -165,9 +167,10 @@ Year: <span id="year"></span></pre>
 							<button class="btn btn-primary" onclick="chPiO(1000000000000);">1t</button>
 							<button class="btn btn-primary" onclick="chPiO(10000000000000);">10t</button>
 							<button class="btn btn-primary" onclick="chPiO(100000000000000);">100t</button>
+							
 						</div>
 					</td>
-					<td rowspan="2">Synchronise 
+					<td rowspan="2">Synchronise
 					<label class="switch">
 						<input id="f" type="checkbox" onclick="if(document.getElementById('f').checked){sync=1} else{sync=0}">
 						<div class="slider"></div>
@@ -207,7 +210,10 @@ Year: <span id="year"></span></pre>
 			<br />
 			<br />
 			<button class="btn btn-primary" class="numPiO" onclick="buyPipe(PiO);">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
-			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button>
+			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
+			<button class="btn btn-primary" onclick="buyPipe(Math.floor(money/pricePPM));">Buy <span id="bmp"></span></button>
+			<button class="btn btn-primary" onclick="if(Math.floor(money/pricePPP)<=PO){placePipe(Math.floor(money/pricePPP))} else{placePipe(PO);}">Place <span id="pmp"></span></button>
+			<button class="btn btn-primary" onclick="var temp = Math.floor(money/(pricePPP+pricePPM)); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
 		</div>
 		<div id="tabs-4" class="tab-pane">
 				<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
@@ -420,6 +426,19 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="curBalance"></span></td>
 					<td>Interest</td>
 					<td><span id="interestRate"></span>%</td>
+					<td rowspan="3">Invest everything in the bank
+					<label class="switch">
+						<input id="a" type="checkbox" onclick="
+	if(allBank=='1'){
+		allBank = 0;
+		gEBI('warnAll').style.display = 'none';
+	}
+	else{
+		allBank = 1;
+		gEBI('warnAll').style.display = 'block';
+	}">
+						<div class="slider"></div>
+					</label>
 				</tr>
 				<tr>
 					<td>Invest</td>
@@ -470,7 +489,7 @@ Year: <span id="year"></span></pre>
 			<p>Simply people will pay fo the water you supplied. If you supply 10m<sup>3</sup>, but they need 20m<sup>3</sup>, people will pay for 10m<sup>3</sup> only.</p>
 			<hr />
 			<h4>How does the bank loan system work?</h4>
-			<p>On the next day on 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by 1%.</p>
+			<p>On the next day on 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by the percentage of the loan interest.</p>
 			<hr />
 			<h4>I want ot get x money via loan but I can't. Why?</h4>
 			<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
@@ -489,7 +508,7 @@ Year: <span id="year"></span></pre>
 		<div id="tabs-9" class="tab-pane">
 			<table class="table">
 				<tr>
-					<th colspan="2">Revenues</th>
+					<th colspan="2">Revenues daily</th>
 				</tr>
 				<tr>
 					<td>From selling water</td>
@@ -500,7 +519,7 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="fIntInc"></span></td>
 				</tr>
 				<tr>
-					<th colspan="2">Expenditures</th>
+					<th colspan="2">Expenditures daily</th>
 				</tr>
 				<tr>
 					<td>Operating costs</td>
@@ -622,6 +641,12 @@ Year: <span id="year"></span></pre>
 			</table>
 		</div>
 		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3.1 Beta</h4>
+			<ul>
+				<li>Bugfixes</li>
+				<li>Game balance</li>
+			</ul>
+			<hr />
 			<h4>Version 0.3 Beta: The Money River</h4>
 			<ul>
 				<li>Added bank
@@ -659,6 +684,16 @@ Year: <span id="year"></span></pre>
 				<li>Upgrades for treatment plants and pumps</li>
 				<li>Sync option for pipes</li>
 			</ul>
+		</div>
+		<div id="tabs-12" class="tab-pane">
+			<img style="float: right;" src="bulgaria-made.png" />
+			<p>This game is made using the folowing libraries:
+			<ul>
+				<li><a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a> by <a href="https://github.com/twbs" target="_blank">twbs</a></li>
+				<li><a href="https://github.com/jquery/jquery" target="_blank">jquery</a> by <a href="https://github.com/jquery/" target="_blank">jquery</a></li>
+				<li><a href="https://github.com/fabien-d/alertify.js" target="_blank">Alertify</a> by <a href="https://github.com/fabien-d">fabien-d</a></li>
+			</ul>
+			</p>
 		</div>
 	</div>
 	<div id="log_events"></div>
