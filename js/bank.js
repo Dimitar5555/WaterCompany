@@ -22,9 +22,13 @@ function withdraw(a) {
 }
 
 function autoIncBal() {
-	gEBI("fIntInc").innerHTML = s(curBalance-(curBalance/100)*(100+interest));
+	var oldBalance = curBalance;
 	curBalance = (curBalance/100)*(100+interest);
 	gEBI("curBalance").innerHTML = s(curBalance);
+	gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
+	if(curBalance-oldBalance>0){
+		Success("Your bank balance has been increased by $" + s(curBalance - oldBalance));
+	}
 }
 function retLoanAuto() {
 	if(loan==0){}
