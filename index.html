@@ -7,9 +7,10 @@
 		<meta name="keywords" content="games, game, water, managment, idle, money, incremental">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="robots" content="all">
-		<script>HardReset = 0; allBank = 0;</script>
 		
+		<script>HardReset = 0; allBank = 0;</script>
 		<script src="js/main.js"></script>
+		<script src="js/refresh.js"></script>
 		<script src="js/script.js"></script>
 		<script src="js/change.js"></script>
 		<script src="js/once.js"></script>
@@ -42,7 +43,8 @@
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
-Year: <span id="year"></span></pre>
+Year: <span id="year"></span>
+Month: <span id="month"></span></pre>
 		</div>
 	</div>
 		<table class="table" style="width: 700px;">
@@ -94,12 +96,12 @@ Year: <span id="year"></span></pre>
 			More upgrades coming soon.
 			<table class="table">
 				<tr>
-					<td>Decrease cost of buying pipes by 1% - $<span id="dcbpp"></span><br />
+					<td>Decrease cost of buying pipes by 2.5% - $<span id="dcbpp"></span><br />
 					$<span id="bpb"></span> -> $<span id="bpa"></span>
 					</td>
 					<td><button class="btn btn-primary" onclick="DecBP();">Decrease</button></td>
 					<td>
-						Decrease cost of placing pipes by 1% - $<span id="priceDecPlP"></span><br />
+						Decrease cost of placing pipes by 2.5% - $<span id="priceDecPlP"></span><br />
 						$<span id="ppb"></span> -> $<span id="ppa"></span>
 					</td>
 					<td><button class="btn btn-primary" onclick="DecPP()">Decrease</button></td>
@@ -132,10 +134,10 @@ Year: <span id="year"></span></pre>
 					<td><button class="btn btn-primary" onclick="IncTreatProd()">Increase</button></td>
 				</tr>
 				<tr>
-					<td>Increase rate of building of new houses by 0.1% - $<span id="priceIncRateHouses"></span><br />
+					<td>Increase rate of building of new houses by 0.25% - $<span id="priceIncRateHouses"></span><br />
 					<span id="rateHB"></span> -> <span id="rateHA"></span></td>
 					<td><button class="btn btn-primary" onclick="IncRateHouses()">Increase</button></td>
-					<td>Increase interest rate by 0.5% - $<span id="priceIncInt"></span><br />
+					<td>Increase interest rate by 0.25% - $<span id="priceIncInt"></span><br />
 					<span id="intNow"></span>%-><span id="intAft"></span>%</td>
 					<td><button class="btn btn-primary" onclick="incInr();">Increase</button></td>
 				</tr>
@@ -211,9 +213,9 @@ Year: <span id="year"></span></pre>
 			<br />
 			<button class="btn btn-primary" class="numPiO" onclick="buyPipe(PiO);">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
 			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
-			<button class="btn btn-primary" onclick="buyPipe(Math.floor(money/pricePPM));">Buy <span id="bmp"></span></button>
-			<button class="btn btn-primary" onclick="if(Math.floor(money/pricePPP)<=PO){placePipe(Math.floor(money/pricePPP))} else{placePipe(PO);}">Place <span id="pmp"></span></button>
-			<button class="btn btn-primary" onclick="var temp = Math.floor(money/(pricePPP+pricePPM)); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
+			<button class="btn btn-primary" onclick="buyPipe(parseInt(gEBI('bmp').innerHTML));">Buy <span id="bmp"></span></button>
+			<button class="btn btn-primary" onclick="placePipe(parseInt(gEBI('pmp').innerHTML))">Place <span id="pmp"></span></button>
+			<button class="btn btn-primary" onclick="var temp = parseInt(gEBI('bppM').innerHTML); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
 		</div>
 		<div id="tabs-4" class="tab-pane">
 				<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
@@ -429,27 +431,27 @@ Year: <span id="year"></span></pre>
 					<td rowspan="3">Invest everything in the bank
 					<label class="switch">
 						<input id="a" type="checkbox" onclick="
-	if(allBank=='1'){
-		allBank = 0;
-		gEBI('warnAll').style.display = 'none';
-	}
-	else{
+	if(gEBI('a').checked){
 		allBank = 1;
 		gEBI('warnAll').style.display = 'block';
+	}
+	else{
+		allBank = 2;
+		gEBI('warnAll').style.display = 'none';
 	}">
 						<div class="slider"></div>
 					</label>
 				</tr>
 				<tr>
 					<td>Invest</td>
-					<td><input id="inv" type="number" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="invest(parseInt(gEBI('inv').value)); gEBI('inv').value = 0;">Invest</button></td>
+					<td><input id="inv" type="text" /></td>
+					<td><button class="btn btn-primary" onclick="invest(unabbrNum(gEBI('inv').value)); gEBI('inv').value = 0;">Invest</button></td>
 					<td><button class="btn btn-primary" onclick="investMAX();">Invest max</button></td>
 				</tr>
 				<tr>
 					<td>Withdraw</td>
-					<td><input id="wd" type="number" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="withdraw(parseInt(gEBI('wd').value)); gEBI('wd').value = 0;">Withdraw</button></td>
+					<td><input id="wd" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="withdraw(unabbrNum(gEBI('wd').value)); gEBI('wd').value = 0;">Withdraw</button></td>
 					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
 				</tr>
 			</table>
@@ -465,11 +467,11 @@ Year: <span id="year"></span></pre>
 				</tr>
 				<tr>
 					<td>Get loan</td>
-					<td><input id="gl" type="number" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="getLoan(parseInt(gEBI('gl').value));">Get</button></td>
+					<td><input id="gl" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="getLoan(unabbrNum(gEBI('gl').value));">Get</button></td>
 					<td>Return loan</td>
-					<td><input id="rl" type="number" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="returnLoan(parseInt(gEBI('rl').value));">Return</button>
+					<td><input id="rl" min="0" /></td>
+					<td><button class="btn btn-primary" onclick="returnLoan(unabbrNum(gEBI('rl').value));">Return</button>
 					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
 					</td>
 				</tr>
@@ -595,7 +597,7 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="SSPrice"></span></td>
 					<td>$<span  id="ss0"></span></td>
 					<td><button class="btn btn-primary" onclick="buyReserv(0,sBS);">Buy <span class="numBS"></span></button>
-					<button class="btn btn-danger" onclick="sellSt(0, sBS)">Sell <span class="numSS"></span></button></td>
+					<button class="btn btn-danger" onclick="sellSt(0, sSS)">Sell <span class="numSS"></span></button></td>
 					<td id="SS"></td>
 					<td id="SSProd"></td>
 					<td id="SSTotProd"></td>
@@ -607,7 +609,7 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="MSPrice"></span></td>
 					<td>$<span  id="ss1"></span></td>
 					<td><button class="btn btn-primary" onclick="buyReserv(1,sBS);">Buy <span class="numBS"></span></button>
-					<button class="btn btn-danger" onclick="sellSt(1, sBS)">Sell <span class="numSS"></span></button></td>
+					<button class="btn btn-danger" onclick="sellSt(1, sSS)">Sell <span class="numSS"></span></button></td>
 					<td id="MS"></td>
 					<td id="MSProd"></td>
 					<td id="MSTotProd"></td>
@@ -619,7 +621,7 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="BSPrice"></span></td>
 					<td>$<span  id="ss2"></span></td>
 					<td><button class="btn btn-primary" onclick="buyReserv(2,sBS);">Buy <span class="numBS"></span></button>
-					<button class="btn btn-danger" onclick="sellSt(2, sBS)">Sell <span class="numSS"></span></button></td>
+					<button class="btn btn-danger" onclick="sellSt(2, sSS)">Sell <span class="numSS"></span></button></td>
 					<td id="BS"></td>
 					<td id="BSProd"></td>
 					<td id="BSTotProd"></td>
@@ -631,7 +633,7 @@ Year: <span id="year"></span></pre>
 					<td>$<span id="VBSPrice"></span></td>
 					<td>$<span  id="ss3"></span></td>
 					<td><button class="btn btn-primary" onclick="buyReserv(3,sBS);">Buy <span class="numBS"></span></button>
-					<button class="btn btn-danger" onclick="sellSt(3, sBS)">Sell <span class="numSS"></span></button></td>
+					<button class="btn btn-danger" onclick="sellSt(3, sSS)">Sell <span class="numSS"></span></button></td>
 					<td id="VBS"></td>
 					<td id="VBSProd"></td>
 					<td id="VBSTotProd"></td>
@@ -644,7 +646,16 @@ Year: <span id="year"></span></pre>
 			<h4>Version 0.3.1 Beta</h4>
 			<ul>
 				<li>Bugfixes</li>
-				<li>Game balance</li>
+				<li>Game balance<ul>
+					<li>Bank now gives 1/31 of the interest rate per day</li>
+					<li>Increased operating costs</li>
+					<li>Increased effect of some upgrades</li>
+				</ul></li>
+				<li>Better number shortening system</li>
+				<li>Code optimisation</li>
+				<li>Added month</li>
+				<li>Buttons for buying and placing max pipes</li>
+				<li>Sell button are now red</li>
 			</ul>
 			<hr />
 			<h4>Version 0.3 Beta: The Money River</h4>
@@ -697,12 +708,12 @@ Year: <span id="year"></span></pre>
 		</div>
 	</div>
 	<div id="log_events"></div>
-	<div id="weather" style="font-size: 20px; max-height: 350px; background-color: #c7c9cc; margin-top: 100px;">
+	<div id="weather" style="font-size: 20px; max-height: 350px; margin-top: 100px;" class="bg-primary">
 		<span>Weather</span><br />
 		<div style="margin-bottom: 5px; padding-top: 30px;">Today:<span id="wtod"></span></div>
 		
 	</div>
-	<script> if(document.getElementById('f').checked){sync=1} else{sync=0}</script>
+	<script>if(document.getElementById('f').checked){sync=1} else{sync=0} if(gEBI('a').checked){allBank = 1;gEBI('warnAll').style.display = 'block';}else{allBank = 0;gEBI('warnAll').style.display = 'none';}</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="js/alertify.min.js"></script>
 	</body>
