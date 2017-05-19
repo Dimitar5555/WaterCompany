@@ -51,7 +51,6 @@ function chechSaveFile() {
 		fast = 500;
 		
 		
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could brake your game!");
 		
 		formatNumber = localStorage.number;
 		var time = localStorage.offTime;
