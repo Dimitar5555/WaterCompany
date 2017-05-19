@@ -93,5 +93,5 @@ function chSS(b) {
 	x[1].innerHTML = abbrNum(b,2);
 	x[2].innerHTML = abbrNum(b,2);
 	x[3].innerHTML = abbrNum(b,2);
-	sBS = b;
+	sSS = b;
 }

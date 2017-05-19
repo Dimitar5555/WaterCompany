@@ -11,3 +11,9 @@ function YWGMBshow() {
 function Success(a) {
 	alertify.success(a);
 }
+function Alert(a) {
+	alertify.alert(a);
+}
+function Log(a, b, c) {
+	alertify.log(a, b, c);
+}
