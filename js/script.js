@@ -156,7 +156,7 @@ function chechSaveFile() {
 	}
 	
 	else {
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could brake your game!");
+		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could break your game!");
 		pumps = [1, 0, 0, 0];
 		pumpProd = [100, 500, 5000, 10000];
 		pumpPrice = [1500, 4750, 10000, 25000];
