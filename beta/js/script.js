@@ -30,18 +30,12 @@ function chechSaveFile() {
 		interest = other[12];
 		stW = other[13];
 		year = other[14];
-		month = other[15];
 		
 		var prices = JSON.parse(localStorage.prices);
 		pricePPM = prices[0];
 		pricePPP = prices[1];
 		loan = prices[2];
 		loanInterest = prices[3];
-		priceDecPumpOpCost = prices[4];
-		priceDecTrOpCost = prices[5];
-		priceDecSOpCost = prices[6];
-		priceIncMaxL = prices[7];
-		maxLoan = prices[8];
 		
 		var upgradesPrices = JSON.parse(localStorage.upgradesPrices);
 		priceIncP = upgradesPrices[0];
@@ -55,55 +49,65 @@ function chechSaveFile() {
 		priceIncInt = upgradesPrices[8];
 		fast = 500;
 		
-		Alert("WARNING! This is a experimetal version of the game. Some features may not work properly and it could brake your game!");
 		
 		var time = localStorage.offTime;
 		var oldBalance = curBalance;
 		var oldLoan = loan;
 		once();
-		
-		
-		var times = Math.floor(((Date.now()-time)/500/10));
-		if(Date.now()-time>24*60*60*60*1000){
-			times = 24*60*60*60*1000;
-		}
-		else if(Date.now()-time<1000*180){
-			times = 0;
-		}
-		UW = HPP * WPH * PP;
-		PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
-		TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
-		b = extraWA * HPP * PP;
-		gEBI("extraW").innerHTML = s(b);
-		MSW = stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3];
-		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-			
+		var times = Math.floor((Date.now()-time)/500);
 		for(i=0;i<times;i++){
+			UW = HPP * WPH * PP;
+			PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
+			TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
+			gEBI("trt").innerHTML = s(TW);
+			gEBI("prd").innerHTML = s(PW);
+			b = extraWA * HPP * PP;
+			gEBI("extraW").innerHTML = s(b);
+				
+			MSW = stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3];
 			stWB = stW;
 			stW = stW + PW;
+		
 			if(stW-UW>=0){
 				SW = UW;
 				stW = stW - UW;
 				if(UW>TW){
-					fine = UW - TW;
+					var fine = UW - TW;
 				}
 				else{
-					fine = 0;
+					var fine = 0;
 				}
 			}
 			else{
 				SW = stW;
 				stW = 0;
 				if(SW>TW){
-					fine = SW - TW;
+					var fine = SW - TW;
 				}
 				else{
-					fine = 0;
+					var fine = 0;
 				}
 			}
+	
+			var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
 			add = SW * price - (fine/10000)*1000 - opC;
 			money = money + add;
+			if(allBank==1){
+				investMAX();
+				gEBI("warnAll").style.display = "block";
+			}
+			else{
+				gEBI("warnAll").style.display = "none";
+			}
+			gEBI("money").innerHTML = s(money);
 			hour = hour + 1;
+			gEBI("time").innerHTML = hour + ":00";
+			gEBI("NW").innerHTML = s(UW);
+			gEBI("stW").innerHTML = s(stW);
+			gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
+			gEBI("fopC").innerHTML = s(opC*48);
+			gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
+			gEBI("fProfit").innerHTML = s((add + (curBalance/100)*(100+interest) - curBalance)*48);
 			if(hour>=24){
 				hour=hour-24;
 				day=day+1;
@@ -117,46 +121,35 @@ function chechSaveFile() {
 			else{
 				loan = (loan/100)*(loanInterest+100);
 			}
-			autoIncBal();
+			curBalance = (curBalance/100)*(100+interest);
+			gEBI("curBalance").innerHTML = s(curBalance);
+			gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
 			}
 			if(day>=365){
 				year = year + 1;
 				day = day - 365;
 			}
 		}
-		gEBI("time").innerHTML = hour + ":00";
-		gEBI("NW").innerHTML = s(UW);
-		gEBI("stW").innerHTML = s(stW);
-		gEBI("money").innerHTML = s(money);
-		gEBI("trt").innerHTML = s(TW);
-		gEBI("prd").innerHTML = s(PW);
-		gEBI("curBalance").innerHTML = s(curBalance);
-		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
-		if(add*times<0){
-			Error("While you were away, you lost $" + s((-1)*add*times));
-		}
-		else {
-			Success("While you were away, you gained $" + s(add*times));
-		}
+		Success("While you were away, you got $" + s(add*times));
 		if(oldLoan>loan){
 			Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + " to $" + s(loan));
 		}
-		else if(oldLoan<loan) {
-			Success("While you were away, your loan taxes have been payed. Your loan has decreased by $" + s(oldLoan-loan));
+		else{}
+		if(curBalance>oldBalance){
+			Success("While you were awai, your bank balance has been increased by $" + s(curBalance-oldBalance));
 		}
 		else{}
 		updatePipes();
 		gEBI("curLoan").innerHTML = s(loan);
 		gEBI("money").innerHTML = s(money);
 		gEBI("curTaxL").innerHTML = s(loan/100);
-		refFin();
+		gEBI("fLoanTax").innerHTML = s(loan/100);
+		gEBI("fIntInc").innerHTML = s((curBalance/100)*(100+interest)-curBalance);
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
-		gEBI("month").innerHTML = month;
 	}
 	
 	else {
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could brake your game!");
 		pumps = [1, 0, 0, 0];
 		pumpProd = [100, 500, 5000, 10000];
 		pumpPrice = [1500, 4750, 10000, 25000];
@@ -166,10 +159,10 @@ function chechSaveFile() {
 		houses = 1000;
 		HPP = 2;
 		WPH = 3;
-		price = 0.3;
-		PP = 10;
+		price = 0.30;
+		PP = 4;
 		PO = 0;
-		money = 0;
+		money = 30;
 		priceIncP = 100;
 		priceDecPPP = 10000;
 		pricePPM = 1000;
@@ -185,43 +178,46 @@ function chechSaveFile() {
 		priceDecPP = 10000;
 		priceIncWaterProd = 100000;
 		priceIncTreatProd = 100000;
-		pumpCost = [5 ,20 ,180 ,400];
-		treatCost = [10 ,40 ,360 ,800];
+		pumpCost = [0.5 ,5 ,25 ,50];
+		treatCost = [1 ,10 ,50 ,100];
 		curBalance = 0;
 		interest = 0.5;
 		priceIncInt = 10000;
 		stW = 0;
-		stWCost = [5, 45, 200, 380];
+		stWCost = [1, 10, 50, 100];
 		stWPrice = [10000, 100000, 500000, 1000000];
-		stWProd =  [1000, 10000, 50000, 100000];
-		stWC = [0, 0, 0 , 0];
+		stWProd =  [100000, 1000000, 5000000, 10000000];
+		stWC = [1, 0, 0 , 0];
 		loan = 0;
 		loanInterest = 11;
 		year = 0;
 		fast = 500;
-		month = 0;
-		priceDecPumpOpCost = 10000;
-		priceDecTrOpCost = 10000;
-		priceDecSOpCost = 10000;
-		priceIncMaxL = 200000;
-		maxLoan = 50000;
 		selectedCity = prompt("Where do you want to start you company?");
 		var time = Date.now();
 		localStorage.setItem("offTime", time);
 		
-		save();
-		once();
+		var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt];
+		var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
+		var prices = [pricePPM, pricePPP, loan, loanInterest];
+		var other = [selectedCity, houses, HPP, WPH, price, PP, PO, money, hour, day, incRateHouses, curBalance, interest, stW, year];
+		localStorage.setItem("upgradesPrices", JSON.stringify(upgradesPrices));
+		localStorage.setItem("pumptreat", JSON.stringify(pumptreat));
+		localStorage.setItem("prices", JSON.stringify(prices));
+		localStorage.setItem("other", JSON.stringify(other));
+		once(s);
 	}
 }
 
 HardReset = 0; 
 function save() {
+	var todayE = gEBI("wtod").innerHTML;
 	var time = Date.now();
 	localStorage.setItem("offTime", time);
+	var tomE = "fdg";
 	var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt];
 	var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
-	var prices = [pricePPM, pricePPP, loan, loanInterest, priceDecPumpOpCost, priceDecTrOpCost, priceDecSOpCost, priceIncMaxL, maxLoan];
-	var other = [selectedCity, houses, HPP, WPH, price, PP, PO, money, hour, day, incRateHouses, curBalance, interest, stW, year, month];
+	var prices = [pricePPM, pricePPP, loan, loanInterest];
+	var other = [selectedCity, houses, HPP, WPH, price, PP, PO, money, hour, day, incRateHouses, curBalance, interest, stW, year];
 	localStorage.setItem("upgradesPrices", JSON.stringify(upgradesPrices));
 	localStorage.setItem("pumptreat", JSON.stringify(pumptreat));
 	localStorage.setItem("prices", JSON.stringify(prices));
@@ -253,19 +249,19 @@ function weather() {
 	}
 	switch (weathera){
 		case "Sunny":
-			var extraWA = 0.125;
-			break;
-		case "Sunny with clouds":
 			var extraWA = 0.25;
 			break;
+		case "Sunny with clouds":
+			var extraWA = 0.125;
+			break;
 		case "Cloudy without rain":
-			var extraWA = 0.5;
+			var extraWA = 0.125;
 			break;
 		case "Cloudy with light rain":
-			var extraWA = 0.75;
+			var extraWA = 0.5;
 			break;
 		case "Thunderstorm":
-			var extraWA = 2.75;
+			var extraWA = 0.75;
 			break;
 	}
 	var t = [weathera, extraWA];
@@ -297,7 +293,8 @@ window.setInterval(function(){
 	UW = HPP * WPH * PP;
 	PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
 	TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
-	updateStatsUpper();
+	gEBI("trt").innerHTML = s(TW);
+	gEBI("prd").innerHTML = s(PW);
 	var b = extraWA * HPP * PP;
 	gEBI("extraW").innerHTML = s(b);
 		
@@ -309,20 +306,20 @@ window.setInterval(function(){
 		SW = UW;
 		stW = stW - UW;
 		if(UW>TW){
-			fine = UW - TW;
+			var fine = UW - TW;
 		}
 		else{
-			fine = 0;
+			var fine = 0;
 		}
 	}
 	else{
 		SW = stW;
 		stW = 0;
 		if(SW>TW){
-			fine = SW - TW;
+			var fine = SW - TW;
 		}
 		else{
-			fine = 0;
+			var fine = 0;
 		}
 	}
 	
@@ -332,10 +329,8 @@ window.setInterval(function(){
 	if(add>0){
 		gEBI("income").innerHTML = "+" + "$<span style='color: green;'>" + s(add) + "</span>";
 	} 
-	else if(add<0){
-		add = add* (-1);
+	else if(add<0){ 
 		gEBI("income").innerHTML = "-" + "$<span style='color: red;'>" + s(add) + "</span>";
-		add = add*(-1);
 	}
 	else if(add==0){
 		gEBI("income").innerHTML = "+" + "$" + s(add);
@@ -353,55 +348,42 @@ window.setInterval(function(){
 	if(stW>MSW){
 		stW = MSW;
 	}
-	hour = hour + 1;
-	gEBI("time").innerHTML = hour + ":00";
-	updateStatsUpper();
-	refFin();
-	updatePipes();
-	if(hour>=24){
-		incHouses();
-		hour=hour-24;
-		day=day+1;
-		changeweat();
-		updatePipes();
-		retLoanAuto();
-		autoIncBal();
-		if(buyMax>0){
-			var temp = parseInt(gEBI('bppM').innerHTML);
-			buyPipe(temp);
-			placePipe(temp);
-		}
-	}
-	if(bankpercent>0){
-		if(bankpercentOn>0){
-			if(add>0){
-				invest((add/100)*bankpercent);
-			}
-		}
+	if(allBank==1){
+		investMAX();
+		gEBI("warnAll").style.display = "block";
 	}
 	else{
 		gEBI("warnAll").style.display = "none";
 	}
-	if(day>=32){
-		month = month + 1;
-		day = day - 31;
+	gEBI("money").innerHTML = s(money);
+	hour = hour + 1;
+	gEBI("time").innerHTML = hour + ":00";
+	gEBI("NW").innerHTML = s(UW);
+	gEBI("stW").innerHTML = s(stW);
+	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
+	gEBI("fopC").innerHTML = s(opC*48);
+	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
+	gEBI("fProfit").innerHTML = s((add + (curBalance/100)*(100+interest)-curBalance)*48);
+	updatePipes();
+	if(hour>=24){
+		hour=hour-24;
+		day=day+1;
+		changeweat();
+		retLoanAuto();
+		autoIncBal();
+		incHouses();
 	}
-	if(month>=13){
+	if(day>=365){
 		year = year + 1;
-		month = month - 12;
+		day = day - 365;
 	}
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
-		gEBI("month").innerHTML = month;
 	}
 , fast)};
 function incHouses(){
-	oldhouses = houses;
 	houses = Math.floor((houses/100)*incRateHouses);
 	gEBI("houses").innerHTML = s(houses);
-	if(oldhouses<houses){
-		Success("New " + abbrNum(houses-oldhouses,0) + " houses have been build");
-	}
 }
 
 /*
