@@ -55,7 +55,7 @@ function retLoanAuto() {
 }
 
 function getLoan(a) {
-	if(loan+a<=100000){//100 000 to a changeble value
+	if(loan+a<=maxLoan){
 		loan = loan + a;
 		money = money + a;
 		gEBI("curLoan").innerHTML = s(loan);
@@ -65,8 +65,8 @@ function getLoan(a) {
 		updatePipes();
 		}
 	else{
-		money = money + (100000 - loan);
-		loan = 100000;
+		money = money + (maxLoan - loan);
+		loan = maxLoan;
 		gEBI("curLoan").innerHTML = s(loan);
 		gEBI("money").innerHTML = s(money);
 		gEBI("curTaxL").innerHTML = s(loan/100);

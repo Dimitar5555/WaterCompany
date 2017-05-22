@@ -103,3 +103,46 @@ function incInr() {
 	}
 	else{NEMshow();}
 }
+function decPumpOpCost() {
+	if(money>=priceDecPumpOpCost){
+		priceDecPumpOpCost = priceDecPumpOpCost*1.5;
+		pumpCost[0] = pumpCost[0]*0.9;
+		pumpCost[1] = pumpCost[1]*0.9;
+		pumpCost[2] = pumpCost[2]*0.9;
+		pumpCost[3] = pumpCost[3]*0.9;
+		refPumps();
+		refFin();
+		refUpgrades();
+	}
+}
+function decTrOpCost() {
+	if(money>=priceDecTrOpCost){
+		priceDecTrOpCost = priceDecTrOpCost*1.5;
+		treatCost[0] = treatCost[0]*0.9;
+		treatCost[1] = treatCost[1]*0.9;
+		treatCost[2] = treatCost[2]*0.9;
+		treatCost[3] = treatCost[3]*0.9;
+		refTreatment();
+		refFin();
+		refUpgrades();
+	}
+}
+function decSOpCost() {
+	if(money>=priceDecSOpCost){
+		priceDecSOpCost = priceDecSOpCost*1.5;
+		stWCost[0] = stWCost[0]*0.9;
+		stWCost[1] = stWCost[1]*0.9;
+		stWCost[2] = stWCost[2]*0.9;
+		stWCost[3] = stWCost[3]*0.9;
+		refReserv();
+		refFin();
+		refUpgrades();
+	}
+}
+function incMaxLoan() {
+	if(money>=priceIncMaxL){
+		maxLoan = maxLoan*2;
+		priceIncMaxL = priceIncMaxL*2;
+		refUpgrades();
+	}
+}

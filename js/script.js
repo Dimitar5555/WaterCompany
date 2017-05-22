@@ -37,6 +37,11 @@ function chechSaveFile() {
 		pricePPP = prices[1];
 		loan = prices[2];
 		loanInterest = prices[3];
+		priceDecPumpOpCost = prices[4];
+		priceDecTrOpCost = prices[5];
+		priceDecSOpCost = prices[6];
+		priceIncMaxL = prices[7];
+		maxLoan = prices[8];
 		
 		var upgradesPrices = JSON.parse(localStorage.upgradesPrices);
 		priceIncP = upgradesPrices[0];
@@ -50,9 +55,8 @@ function chechSaveFile() {
 		priceIncInt = upgradesPrices[8];
 		fast = 500;
 		
+		Alert("WARNING! This is a experimetal version of the game. Some features may not work properly and it could brake your game!");
 		
-		
-		formatNumber = localStorage.number;
 		var time = localStorage.offTime;
 		var oldBalance = curBalance;
 		var oldLoan = loan;
@@ -60,6 +64,12 @@ function chechSaveFile() {
 		
 		
 		var times = Math.floor(((Date.now()-time)/500/10));
+		if(Date.now()-time>24*60*60*60*1000){
+			times = 24*60*60*60*1000;
+		}
+		else if(Date.now()-time<1000*180){
+			times = 0;
+		}
 		UW = HPP * WPH * PP;
 		PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
 		TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
@@ -93,18 +103,7 @@ function chechSaveFile() {
 			}
 			add = SW * price - (fine/10000)*1000 - opC;
 			money = money + add;
-			if(allBank==1){
-				investMAX();
-				gEBI("warnAll").style.display = "block";
-			}
-			else{
-				gEBI("warnAll").style.display = "none";
-			}
-			gEBI("money").innerHTML = s(money);
 			hour = hour + 1;
-			gEBI("time").innerHTML = hour + ":00";
-			gEBI("NW").innerHTML = s(UW);
-			gEBI("stW").innerHTML = s(stW);
 			if(hour>=24){
 				hour=hour-24;
 				day=day+1;
@@ -125,6 +124,10 @@ function chechSaveFile() {
 				day = day - 365;
 			}
 		}
+		gEBI("time").innerHTML = hour + ":00";
+		gEBI("NW").innerHTML = s(UW);
+		gEBI("stW").innerHTML = s(stW);
+		gEBI("money").innerHTML = s(money);
 		gEBI("trt").innerHTML = s(TW);
 		gEBI("prd").innerHTML = s(PW);
 		gEBI("curBalance").innerHTML = s(curBalance);
@@ -141,9 +144,6 @@ function chechSaveFile() {
 		else if(oldLoan<loan) {
 			Success("While you were away, your loan taxes have been payed. Your loan has decreased by $" + s(oldLoan-loan));
 		}
-		if(curBalance>oldBalance){
-			Log("While you were away, your earned $" + s(curBalance-oldBalance) + " from bank account interest", "success", 0);
-		}
 		else{}
 		updatePipes();
 		gEBI("curLoan").innerHTML = s(loan);
@@ -156,7 +156,7 @@ function chechSaveFile() {
 	}
 	
 	else {
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could break your game!");
+		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could brake your game!");
 		pumps = [1, 0, 0, 0];
 		pumpProd = [100, 500, 5000, 10000];
 		pumpPrice = [1500, 4750, 10000, 25000];
@@ -166,10 +166,10 @@ function chechSaveFile() {
 		houses = 1000;
 		HPP = 2;
 		WPH = 3;
-		price = 0.30;
+		price = 0.3;
 		PP = 10;
 		PO = 0;
-		money = 30;
+		money = 0;
 		priceIncP = 100;
 		priceDecPPP = 10000;
 		pricePPM = 1000;
@@ -200,10 +200,14 @@ function chechSaveFile() {
 		year = 0;
 		fast = 500;
 		month = 0;
+		priceDecPumpOpCost = 10000;
+		priceDecTrOpCost = 10000;
+		priceDecSOpCost = 10000;
+		priceIncMaxL = 200000;
+		maxLoan = 50000;
 		selectedCity = prompt("Where do you want to start you company?");
 		var time = Date.now();
 		localStorage.setItem("offTime", time);
-		formatNumber = "standard";
 		
 		save();
 		once();
@@ -214,10 +218,9 @@ HardReset = 0;
 function save() {
 	var time = Date.now();
 	localStorage.setItem("offTime", time);
-	if(!formatNumber){formatNumber = "standard";}
 	var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt];
 	var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
-	var prices = [pricePPM, pricePPP, loan, loanInterest];
+	var prices = [pricePPM, pricePPP, loan, loanInterest, priceDecPumpOpCost, priceDecTrOpCost, priceDecSOpCost, priceIncMaxL, maxLoan];
 	var other = [selectedCity, houses, HPP, WPH, price, PP, PO, money, hour, day, incRateHouses, curBalance, interest, stW, year, month];
 	localStorage.setItem("upgradesPrices", JSON.stringify(upgradesPrices));
 	localStorage.setItem("pumptreat", JSON.stringify(pumptreat));
@@ -356,36 +359,49 @@ window.setInterval(function(){
 	refFin();
 	updatePipes();
 	if(hour>=24){
+		incHouses();
 		hour=hour-24;
 		day=day+1;
 		changeweat();
+		updatePipes();
 		retLoanAuto();
-		incHouses();
 		autoIncBal();
+		if(buyMax>0){
+			var temp = parseInt(gEBI('bppM').innerHTML);
+			buyPipe(temp);
+			placePipe(temp);
+		}
 	}
-	if(allBank==1){
-		investMAX();
-		gEBI("warnAll").style.display = "block";
+	if(bankpercent>0){
+		if(bankpercentOn>0){
+			if(add>0){
+				invest((add/100)*bankpercent);
+			}
+		}
 	}
 	else{
 		gEBI("warnAll").style.display = "none";
 	}
-	if(day>=31){
+	if(day>=32){
 		month = month + 1;
 		day = day - 31;
-		gEBI("month").innerHTML = month;
 	}
-	if(month>=12){
+	if(month>=13){
 		year = year + 1;
 		month = month - 12;
 	}
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
+		gEBI("month").innerHTML = month;
 	}
 , fast)};
 function incHouses(){
+	oldhouses = houses;
 	houses = Math.floor((houses/100)*incRateHouses);
 	gEBI("houses").innerHTML = s(houses);
+	if(oldhouses<houses){
+		Success("New " + abbrNum(houses-oldhouses,0) + " houses have been build");
+	}
 }
 
 /*
