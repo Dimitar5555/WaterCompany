@@ -62,10 +62,10 @@ function refTreatment() {
 	gEBI("VBTpumpOpCost").innerHTML = "$" + s(treatCost[3]);
 }
 function refReserv() {
-	gEBI("SS").innerHTML = abbrNum(stWC[0],2);
-	gEBI("MS").innerHTML = abbrNum(stWC[1],2);
-	gEBI("BS").innerHTML = abbrNum(stWC[2],2);
-	gEBI("VBS").innerHTML = abbrNum(stWC[3],2);
+	gEBI("SS").innerHTML = abbrNum(stWC[0],0);
+	gEBI("MS").innerHTML = abbrNum(stWC[1],0);
+	gEBI("BS").innerHTML = abbrNum(stWC[2],0);
+	gEBI("VBS").innerHTML = abbrNum(stWC[3],0);
 	
 	gEBI("SSTotProd").innerHTML = abbrNum(stWC[0]*stWProd[0],0) + " m<sup>3</sup>";
 	gEBI("MSTotProd").innerHTML = abbrNum(stWC[1]*stWProd[1],0) + " m<sup>3</sup>";
@@ -94,12 +94,12 @@ function refReserv() {
 }
 function refFin() {
 	var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
 	gEBI("fopC").innerHTML = s(opC*48);
 	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
 	var g = (((curBalance/100)*(100+interest)-curBalance)/31);
-	gEBI("fProfit").innerHTML = s(add*48+g);
 	gEBI("fIntInc").innerHTML = s(g);
+	gEBI("fProfit").innerHTML = s(add*24+g);
+	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
 	gEBI("fLoanTax").innerHTML = s(loan/100);
 }
 function refUpgrades() {
@@ -139,4 +139,37 @@ function refUpgrades() {
 	gEBI("priceIncInt").innerHTML = s(priceIncInt);
 	gEBI("intNow").innerHTML = s(interest);
 	gEBI("intAft").innerHTML = s(interest+0.25);
+	gEBI("opCPB1").innerHTML = s(pumpCost[0]);
+	gEBI("opCPB2").innerHTML = s(pumpCost[1]);
+	gEBI("opCPB3").innerHTML = s(pumpCost[2]);
+	gEBI("opCPB4").innerHTML = s(pumpCost[3]);
+	gEBI("opCPA1").innerHTML = s(pumpCost[0]*0.9);
+	gEBI("opCPA2").innerHTML = s(pumpCost[1]*0.9);
+	gEBI("opCPA3").innerHTML = s(pumpCost[2]*0.9);
+	gEBI("opCPA4").innerHTML = s(pumpCost[3]*0.9);
+	gEBI("priceDecOpPump").innerHTML = s(priceDecPumpOpCost);
+	gEBI("opCTB1").innerHTML = s(treatCost[0]);
+	gEBI("opCTB2").innerHTML = s(treatCost[1]);
+	gEBI("opCTB3").innerHTML = s(treatCost[2]);
+	gEBI("opCTB4").innerHTML = s(treatCost[3]);
+	gEBI("opCTA1").innerHTML = s(treatCost[0]*0.9);
+	gEBI("opCTA2").innerHTML = s(treatCost[1]*0.9);
+	gEBI("opCTA3").innerHTML = s(treatCost[2]*0.9);
+	gEBI("opCTA4").innerHTML = s(treatCost[3]*0.9);
+	gEBI("priceDecOpTreat").innerHTML = s(priceDecTrOpCost);
+	gEBI("opCstWB1").innerHTML = s(stWCost[0]);
+	gEBI("opCstWB2").innerHTML = s(stWCost[1]);
+	gEBI("opCstWB3").innerHTML = s(stWCost[2]);
+	gEBI("opCstWB4").innerHTML = s(stWCost[3]);
+	gEBI("opCstWA1").innerHTML = s(stWCost[0]*0.9);
+	gEBI("opCstWA2").innerHTML = s(stWCost[1]*0.9);
+	gEBI("opCstWA3").innerHTML = s(stWCost[2]*0.9);
+	gEBI("opCstWA4").innerHTML = s(stWCost[3]*0.9);
+	gEBI("priceDecOpStW").innerHTML = s(priceDecSOpCost);
+	gEBI("priceIncMaxL").innerHTML = s(priceIncMaxL);
+	gEBI("maxLoanB").innerHTML = s(maxLoan);
+	gEBI("maxLoanA").innerHTML = s(maxLoan*2);
+	gEBI("maxLoanBank").innerHTML = s(maxLoan);
+	gEBI("pricem3").innerHTML =  "$" + s(price);
+	
 }

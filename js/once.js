@@ -21,7 +21,7 @@ function once() {
 	
 	
 	gEBI("houses").innerHTML = abbrNum(houses,2);
-	gEBI("pricem3").innerHTML =  "$" + abbrNum((price.toFixed(2)),2);
+	gEBI("pricem3").innerHTML =  "$" + s(price);
 	PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
 	TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
 	UW = HPP * WPH * PP;
