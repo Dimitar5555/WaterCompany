@@ -395,7 +395,7 @@ window.setInterval(function(){
 		gEBI("year").innerHTML = year;
 		gEBI("month").innerHTML = month;
 		if(gEBI("alertify-logs")){
-			if(gEBI("alertify-logs").childNodes.length>0){}
+			if(gEBI("alertify-logs").childNodes.length>0){gEBI("alertify-logs").style.display = "block";}
 			else{gEBI("alertify-logs").style.display = "none";}
 		}
 	}
