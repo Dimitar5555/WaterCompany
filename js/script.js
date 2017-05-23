@@ -55,8 +55,10 @@ function chechSaveFile() {
 		priceIncInt = upgradesPrices[8];
 		fast = 500;
 		
-		Alert("WARNING! This is a experimetal version of the game. Some features may not work properly and it could brake your game!");
 		
+		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could break your game!");
+		
+		formatNumber = localStorage.number;
 		var time = localStorage.offTime;
 		var oldBalance = curBalance;
 		var oldLoan = loan;
@@ -156,7 +158,6 @@ function chechSaveFile() {
 	}
 	
 	else {
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could brake your game!");
 		pumps = [1, 0, 0, 0];
 		pumpProd = [100, 500, 5000, 10000];
 		pumpPrice = [1500, 4750, 10000, 25000];
@@ -393,6 +394,10 @@ window.setInterval(function(){
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
 		gEBI("month").innerHTML = month;
+	}
+	if(gEBI("alertify-logs")){
+		if(gEBI("alertify-logs").childNodes.length>0){}
+		else{gEBI("alertify-logs").style.display = "none";}
 	}
 , fast)};
 function incHouses(){
