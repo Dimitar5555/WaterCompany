@@ -374,10 +374,11 @@ Month: <span id="month"></span></pre>
 			Placed pipes: <span id="PP"></span>
 			<br />
 			<br />
-			<button class="btn btn-primary" class="numPiO" onclick="buyPipe(PiO);">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
-			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
-			<button class="btn btn-primary" onclick="buyPipe(parseInt(gEBI('bmp').innerHTML));">Buy <span id="bmp"></span></button>
-			<button class="btn btn-primary" onclick="placePipe(parseInt(gEBI('pmp').innerHTML))">Place <span id="pmp"></span></button>
+			<button class="btn btn-primary" class="numPiO" onclick="if(unAbbrNum(gEBI('numPiO').innerHTML)>0){buyPipe(unAbbrNum(gEBI('numPiO').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('numPiO').innerHTML = 0;">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}gEBI('numPiP').innerHTML = 0;">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
+			<button class="btn btn-primary" onclick="
+			if(unAbbrNum(gEBI('bmp').innerHTML)>0){buyPipe(unAbbrNum(gEBI('bmp').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('bmp').innerHTML = 0;">Buy <span id="bmp"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('pmp').innerHTML)>0){placePipe(unAbbrNum(gEBI('pmp').innerHTML))}else{Error('You can not place negative pipes');}gEBI('pmp').innerHTML = 0;">Place <span id="pmp"></span></button>
 			<button class="btn btn-primary" onclick="var temp = parseInt(gEBI('bppM').innerHTML); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
 		</div>
 		<div id="tabs-4" class="tab-pane">
@@ -603,7 +604,7 @@ Month: <span id="month"></span></pre>
 				<tr>
 					<td>Current balance</td>
 					<td>$<span id="curBalance"></span></td>
-					<td>Interest</td>
+					<td>Monthly interest</td>
 					<td><span id="interestRate"></span>%</td>
 					<td rowspan="3">Turn on/off investments
 					<label class="switch">
@@ -625,19 +626,19 @@ Month: <span id="month"></span></pre>
 					<input id="bankpercent" type="number" min="0" max="100" onkeyup="bankpercent = Number(gEBI('bankpercent').value); if(bankpercent>100){bankpercent = 100;} else if(bankpercent<0){bankpercent=0;}else if(!bankpercent){bankpercent=0;}
 					if(gEBI('a').checked&&bankpercent>0){
 		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;}"></input>% in the bank from income
+		gEBI('percentBankUpper').innerHTML = bankpercent;}" class="form-control" style="width: 75px;"></input>% in the bank from income
 					</td>
 				</tr>
 				<tr>
 					<td>Invest</td>
-					<td><input id="inv" type="text" /></td>
-					<td><button class="btn btn-primary" onclick="invest(unabbrNum(gEBI('inv').value)); gEBI('inv').value = 0;">Invest</button></td>
+					<td><input id="inv" class="form-control" type="text" /></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('inv').value)>0){invest(unAbbrNum(gEBI('inv').value))}else{Error('You can not invest negative money');}gEBI('inv').value = 0;">Invest</button></td>
 					<td><button class="btn btn-primary" onclick="investMAX();">Invest max</button></td>
 				</tr>
 				<tr>
 					<td>Withdraw</td>
-					<td><input id="wd" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="withdraw(unabbrNum(gEBI('wd').value)); gEBI('wd').value = 0;">Withdraw</button></td>
+					<td><input id="wd" type="text" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('wd').value)>0){withdraw(unAbbrNum(gEBI('wd').value))}else{Error('You can not withdraw negative money');}gEBI('wd').value = 0;">Withdraw</button></td>
 					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
 				</tr>
 			</table>
@@ -653,11 +654,11 @@ Month: <span id="month"></span></pre>
 				</tr>
 				<tr>
 					<td>Get loan</td>
-					<td><input id="gl" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="getLoan(unabbrNum(gEBI('gl').value));">Get</button></td>
+					<td><input id="gl" min="0" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('gl').value)>0){getLoan(unAbbrNum(gEBI('gl').value))}else{Error('You can not get negative loan');}gEBI('gl').value = 0;">Get</button></td>
 					<td>Return loan</td>
-					<td><input id="rl" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="returnLoan(unabbrNum(gEBI('rl').value));">Return</button>
+					<td><input id="rl" min="0" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('rl').value)>0){returnLoan(unAbbrNum(gEBI('rl').value))}else{Error('You can not return negative loan');}gEBI('rl').value = 0;">Return</button>
 					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
 					</td>
 				</tr>
@@ -845,6 +846,17 @@ Month: <span id="month"></span></pre>
 			</table>
 		</div>
 		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3.2.1 Beta</h4>
+			<ul>
+				<li>Added dark theme</li>
+				<li>Bugfixes
+					<ul>
+						<li>You can now no longer invest negat</li>
+					</ul>
+				</li>
+				<li>Some little changes here and there</li>
+			</ul>
+			<hr />
 			<h4>Version 0.3.2 Beta</h4>
 			<ul>
 				<li>Bugfixes</li>
