@@ -186,8 +186,8 @@ function chechSaveFile() {
 		priceDecPP = 10000;
 		priceIncWaterProd = 100000;
 		priceIncTreatProd = 100000;
-		pumpCost = [5 ,20 ,180 ,400];
-		treatCost = [10 ,40 ,360 ,800];
+		pumpCost = [5 ,20 ,180 ,340];
+		treatCost = [10 ,40 ,360 ,680];
 		curBalance = 0;
 		interest = 0.5;
 		priceIncInt = 10000;
