@@ -22,7 +22,7 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="js/showErrors.js"></script>
 		
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<link id="STYLE-EL" rel="stylesheet" href="css/bootstrap.css"/>
 		<link rel="stylesheet" href="css/alertify.core.css"/>
 		<link rel="stylesheet" href="css/alertify.bootstrap.css"/>
 		<style>
@@ -98,7 +98,7 @@ input:checked + .slider:before {
 	</head>
 	<body style="padding: 5px; margin: 5px;" onload="chechSaveFile(); gEBI('fgg').click();">
 	<div>
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.2 Beta</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.2.1 Beta</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
@@ -318,18 +318,16 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiO(10);">10</button>
 							<button class="btn btn-primary" onclick="chPiO(25);">25</button>
 							<button class="btn btn-primary" onclick="chPiO(100);">100</button>
-							<button class="btn btn-primary" onclick="chPiO(1000);">1k</button>
-							<button class="btn btn-primary" onclick="chPiO(10000);">10k</button>
-							<button class="btn btn-primary" onclick="chPiO(100000);">100k</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000);">1m</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000);">10m</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000);">100m</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000000);">1b</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000000);">10b</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000000);">100b</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000000000);">1t</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000000000);">10t</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000000000);">100t</button>
+							<button class="btn btn-primary" onclick="chPiO(1000);">1K</button>
+							<button class="btn btn-primary" onclick="chPiO(10000);">10K</button>
+							<button class="btn btn-primary" onclick="chPiO(100000);">100K</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000);">1M</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000);">10M</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000);">100M</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000000);">1B</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000000);">10B</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000000);">100B</button>
+							<input id="BP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/>
 						</div>
 					</td>
 					<td>Synchronise
@@ -348,18 +346,17 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiP(10);">10</button>
 							<button class="btn btn-primary" onclick="chPiP(25);">25</button>
 							<button class="btn btn-primary" onclick="chPiP(100);">100</button>
-							<button class="btn btn-primary" onclick="chPiP(1000);">1k</button>
-							<button class="btn btn-primary" onclick="chPiP(10000);">10k</button>
-							<button class="btn btn-primary" onclick="chPiP(100000);">100k</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000);">1m</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000);">10m</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000);">100m</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000000);">1b</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000000);">10b</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000000);">100b</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000000000);">1t</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000000000);">10t</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000000000);">100t</button>
+							<button class="btn btn-primary" onclick="chPiP(1000);">1K</button>
+							<button class="btn btn-primary" onclick="chPiP(10000);">10K</button>
+							<button class="btn btn-primary" onclick="chPiP(100000);">100K</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000);">1M</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000);">10M</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000);">100M</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000000);">1B</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000000);">10B</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000000);">100B</button>
+							<input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/>
+						
 						</div>
 					</td>
 					<td rowspan="2">Buy max pipes every day if possible
@@ -377,10 +374,11 @@ Month: <span id="month"></span></pre>
 			Placed pipes: <span id="PP"></span>
 			<br />
 			<br />
-			<button class="btn btn-primary" class="numPiO" onclick="buyPipe(PiO);">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
-			<button class="btn btn-primary" onclick="placePipe(PiP);">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
-			<button class="btn btn-primary" onclick="buyPipe(parseInt(gEBI('bmp').innerHTML));">Buy <span id="bmp"></span></button>
-			<button class="btn btn-primary" onclick="placePipe(parseInt(gEBI('pmp').innerHTML))">Place <span id="pmp"></span></button>
+			<button class="btn btn-primary" class="numPiO" onclick="if(unAbbrNum(gEBI('numPiO').innerHTML)>0){buyPipe(unAbbrNum(gEBI('numPiO').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('numPiO').innerHTML = 0;">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}gEBI('numPiP').innerHTML = 0;">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
+			<button class="btn btn-primary" onclick="
+			if(unAbbrNum(gEBI('bmp').innerHTML)>0){buyPipe(unAbbrNum(gEBI('bmp').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('bmp').innerHTML = 0;">Buy <span id="bmp"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('pmp').innerHTML)>0){placePipe(unAbbrNum(gEBI('pmp').innerHTML))}else{Error('You can not place negative pipes');}gEBI('pmp').innerHTML = 0;">Place <span id="pmp"></span></button>
 			<button class="btn btn-primary" onclick="var temp = parseInt(gEBI('bppM').innerHTML); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
 		</div>
 		<div id="tabs-4" class="tab-pane">
@@ -404,7 +402,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chP(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chP(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chP(100000000000);">100B</button>
-							<input id="inBP" onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/>
+							<input id="inBP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/>
 						</td>
 					</tr>
 					<tr>
@@ -424,7 +422,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-danger" onclick="chPS(1000000000);">1B</button>
 							<button class="btn btn-danger" onclick="chPS(10000000000);">10B</button>
 							<button class="btn btn-danger" onclick="chPS(100000000000);">100B</button>
-							<input id="inSP" onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/>
+							<input id="inSP"  class="form-control" style="width: 150px;"onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/>
 						</td>
 					</tr>
 				</table>
@@ -512,7 +510,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-primary" onclick="chTr(1000000000);">1B</button>
 						<button class="btn btn-primary" onclick="chTr(10000000000);">10B</button>
 						<button class="btn btn-primary" onclick="chTr(100000000000);">100B</button>
-						<input id="treatPlB" onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/>
+						<input id="treatPlB"  class="form-control" style="width: 150px;"onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/>
 					</td>
 				</tr>
 				<tr>
@@ -532,7 +530,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-danger" onclick="chTrS(1000000000);">1B</button>
 						<button class="btn btn-danger" onclick="chTrS(10000000000);">10B</button>
 						<button class="btn btn-danger" onclick="chTrS(100000000000);">100B</button>
-						<input id="trPS" onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/>
+						<input id="trPS"  class="form-control" style="width: 150px;"onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/>
 					</td>
 				</tr>
 			</table>
@@ -606,7 +604,7 @@ Month: <span id="month"></span></pre>
 				<tr>
 					<td>Current balance</td>
 					<td>$<span id="curBalance"></span></td>
-					<td>Interest</td>
+					<td>Monthly interest</td>
 					<td><span id="interestRate"></span>%</td>
 					<td rowspan="3">Turn on/off investments
 					<label class="switch">
@@ -628,19 +626,19 @@ Month: <span id="month"></span></pre>
 					<input id="bankpercent" type="number" min="0" max="100" onkeyup="bankpercent = Number(gEBI('bankpercent').value); if(bankpercent>100){bankpercent = 100;} else if(bankpercent<0){bankpercent=0;}else if(!bankpercent){bankpercent=0;}
 					if(gEBI('a').checked&&bankpercent>0){
 		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;}"></input>% in the bank from income
+		gEBI('percentBankUpper').innerHTML = bankpercent;}" class="form-control" style="width: 75px;"></input>% in the bank from income
 					</td>
 				</tr>
 				<tr>
 					<td>Invest</td>
-					<td><input id="inv" type="text" /></td>
-					<td><button class="btn btn-primary" onclick="invest(unabbrNum(gEBI('inv').value)); gEBI('inv').value = 0;">Invest</button></td>
+					<td><input id="inv" class="form-control" type="text" /></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('inv').value)>0){invest(unAbbrNum(gEBI('inv').value))}else{Error('You can not invest negative money');}gEBI('inv').value = 0;">Invest</button></td>
 					<td><button class="btn btn-primary" onclick="investMAX();">Invest max</button></td>
 				</tr>
 				<tr>
 					<td>Withdraw</td>
-					<td><input id="wd" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="withdraw(unabbrNum(gEBI('wd').value)); gEBI('wd').value = 0;">Withdraw</button></td>
+					<td><input id="wd" type="text" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('wd').value)>0){withdraw(unAbbrNum(gEBI('wd').value))}else{Error('You can not withdraw negative money');}gEBI('wd').value = 0;">Withdraw</button></td>
 					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
 				</tr>
 			</table>
@@ -656,11 +654,11 @@ Month: <span id="month"></span></pre>
 				</tr>
 				<tr>
 					<td>Get loan</td>
-					<td><input id="gl" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="getLoan(unabbrNum(gEBI('gl').value));">Get</button></td>
+					<td><input id="gl" min="0" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('gl').value)>0){getLoan(unAbbrNum(gEBI('gl').value))}else{Error('You can not get negative loan');}gEBI('gl').value = 0;">Get</button></td>
 					<td>Return loan</td>
-					<td><input id="rl" min="0" /></td>
-					<td><button class="btn btn-primary" onclick="returnLoan(unabbrNum(gEBI('rl').value));">Return</button>
+					<td><input id="rl" min="0" class="form-control" style="width: 150px;"/></td>
+					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('rl').value)>0){returnLoan(unAbbrNum(gEBI('rl').value))}else{Error('You can not return negative loan');}gEBI('rl').value = 0;">Return</button>
 					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
 					</td>
 				</tr>
@@ -687,7 +685,7 @@ Month: <span id="month"></span></pre>
 			<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
 			<hr />
 			<h4>How does the bank account work?</h4>
-			<p>You can infinity money in it. Every day at 00:00 you get interest for your money in the account.</p>
+			<p>You can put money in it. Every day at 00:00 you get interest for your money in your cash on hand.</p>
 			<hr />
 			<h4>How are operating costs defined?</h4>
 			<p>Everything has a operating cost(exept pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
@@ -695,14 +693,20 @@ Month: <span id="month"></span></pre>
 		<div id="tabs-7" class="tab-pane">
 		<br />
 			<button class="btn btn-primary" onclick="save()">Save</button>
-		<p>The game is autosaved every 30 seconds.</p>
-		<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+			<p>The game is autosaved every 30 seconds.</p>
+			<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+			<br />
+			Dark theme:
+			<label class="switch">
+				<input id="STYLE" type="checkbox" onclick="if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}">
+				<div class="slider"></div>
+			</label>
 		</div>
 		<div id="tabs-9" class="tab-pane">
 		<br />
 			<table class="table">
 				<tr>
-					<th colspan="2">Revenues daily</th>
+					<th colspan="2">Income daily</th>
 				</tr>
 				<tr>
 					<td>From selling water</td>
@@ -754,7 +758,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-primary" onclick="chBS(1000000000);">1B</button>
 						<button class="btn btn-primary" onclick="chBS(10000000000);">10B</button>
 						<button class="btn btn-primary" onclick="chBS(100000000000);">100B</button>
-						<input id="SB" onkeyup="var SB = gEBI('SB').value; if(SB){chBS(unAbbrNum(SB, 2));}else{chBS(sBS);}"/>
+						<input id="SB"  class="form-control" style="width: 150px;"onkeyup="var SB = gEBI('SB').value; if(SB){chBS(unAbbrNum(SB, 2));}else{chBS(sBS);}"/>
 					</td>
 				</tr>
 				<tr>
@@ -774,7 +778,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-danger" onclick="chSS(1000000000);">1B</button>
 						<button class="btn btn-danger" onclick="chSS(10000000000);">10B</button>
 						<button class="btn btn-danger" onclick="chSS(100000000000);">100B</button>
-						<input id="SSS" onkeyup="var SSS = gEBI('SSS').value; if(SSS){chSS(unAbbrNum(SSS, 2));}else{chSS(sSS);}"/>
+						<input id="SSS"  class="form-control" style="width: 150px;"onkeyup="var SSS = gEBI('SSS').value; if(SSS){chSS(unAbbrNum(SSS, 2));}else{chSS(sSS);}"/>
 					</td>
 				</tr>
 			</table>
@@ -842,6 +846,13 @@ Month: <span id="month"></span></pre>
 			</table>
 		</div>
 		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3.2.1 Beta</h4>
+			<ul>
+				<li>Added dark theme</li>
+				<li>Bugfixes</li>
+				<li>Some little changes here and there</li>
+			</ul>
+			<hr />
 			<h4>Version 0.3.2 Beta</h4>
 			<ul>
 				<li>Bugfixes</li>
@@ -949,6 +960,7 @@ Month: <span id="month"></span></pre>
 		gEBI('warnAll').style.display = 'none';
 		gEBI('percentBankUpper').innerHTML = bankpercent;
 	}
+	if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}
 	</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="js/alertify.min.js"></script>
