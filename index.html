@@ -98,7 +98,7 @@ input:checked + .slider:before {
 	</head>
 	<body style="padding: 5px; margin: 5px;" onload="chechSaveFile(); gEBI('fgg').click();">
 	<div>
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.2 Beta</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.2.1 Beta</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
@@ -327,7 +327,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiO(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chPiO(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chPiO(100000000000);">100B</button>
-							<input id="BP" onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/>
+							<input id="BP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/>
 						</div>
 					</td>
 					<td>Synchronise
@@ -355,7 +355,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiP(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chPiP(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chPiP(100000000000);">100B</button>
-							<input id="iNPP" onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/>
+							<input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/>
 						
 						</div>
 					</td>
@@ -402,7 +402,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chP(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chP(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chP(100000000000);">100B</button>
-							<input id="inBP" onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/>
+							<input id="inBP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/>
 						</td>
 					</tr>
 					<tr>
@@ -422,7 +422,7 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-danger" onclick="chPS(1000000000);">1B</button>
 							<button class="btn btn-danger" onclick="chPS(10000000000);">10B</button>
 							<button class="btn btn-danger" onclick="chPS(100000000000);">100B</button>
-							<input id="inSP" onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/>
+							<input id="inSP"  class="form-control" style="width: 150px;"onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/>
 						</td>
 					</tr>
 				</table>
@@ -510,7 +510,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-primary" onclick="chTr(1000000000);">1B</button>
 						<button class="btn btn-primary" onclick="chTr(10000000000);">10B</button>
 						<button class="btn btn-primary" onclick="chTr(100000000000);">100B</button>
-						<input id="treatPlB" onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/>
+						<input id="treatPlB"  class="form-control" style="width: 150px;"onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/>
 					</td>
 				</tr>
 				<tr>
@@ -530,7 +530,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-danger" onclick="chTrS(1000000000);">1B</button>
 						<button class="btn btn-danger" onclick="chTrS(10000000000);">10B</button>
 						<button class="btn btn-danger" onclick="chTrS(100000000000);">100B</button>
-						<input id="trPS" onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/>
+						<input id="trPS"  class="form-control" style="width: 150px;"onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/>
 					</td>
 				</tr>
 			</table>
@@ -758,7 +758,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-primary" onclick="chBS(1000000000);">1B</button>
 						<button class="btn btn-primary" onclick="chBS(10000000000);">10B</button>
 						<button class="btn btn-primary" onclick="chBS(100000000000);">100B</button>
-						<input id="SB" onkeyup="var SB = gEBI('SB').value; if(SB){chBS(unAbbrNum(SB, 2));}else{chBS(sBS);}"/>
+						<input id="SB"  class="form-control" style="width: 150px;"onkeyup="var SB = gEBI('SB').value; if(SB){chBS(unAbbrNum(SB, 2));}else{chBS(sBS);}"/>
 					</td>
 				</tr>
 				<tr>
@@ -778,7 +778,7 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-danger" onclick="chSS(1000000000);">1B</button>
 						<button class="btn btn-danger" onclick="chSS(10000000000);">10B</button>
 						<button class="btn btn-danger" onclick="chSS(100000000000);">100B</button>
-						<input id="SSS" onkeyup="var SSS = gEBI('SSS').value; if(SSS){chSS(unAbbrNum(SSS, 2));}else{chSS(sSS);}"/>
+						<input id="SSS"  class="form-control" style="width: 150px;"onkeyup="var SSS = gEBI('SSS').value; if(SSS){chSS(unAbbrNum(SSS, 2));}else{chSS(sSS);}"/>
 					</td>
 				</tr>
 			</table>
@@ -849,11 +849,7 @@ Month: <span id="month"></span></pre>
 			<h4>Version 0.3.2.1 Beta</h4>
 			<ul>
 				<li>Added dark theme</li>
-				<li>Bugfixes
-					<ul>
-						<li>You can now no longer invest negat</li>
-					</ul>
-				</li>
+				<li>Bugfixes</li>
 				<li>Some little changes here and there</li>
 			</ul>
 			<hr />
