@@ -22,7 +22,7 @@
 		<script src="js/bootstrap.js"></script>
 		<script src="js/showErrors.js"></script>
 		
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<link id="STYLE-EL" rel="stylesheet" href="css/bootstrap.css"/>
 		<link rel="stylesheet" href="css/alertify.core.css"/>
 		<link rel="stylesheet" href="css/alertify.bootstrap.css"/>
 		<style>
@@ -318,18 +318,16 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiO(10);">10</button>
 							<button class="btn btn-primary" onclick="chPiO(25);">25</button>
 							<button class="btn btn-primary" onclick="chPiO(100);">100</button>
-							<button class="btn btn-primary" onclick="chPiO(1000);">1k</button>
-							<button class="btn btn-primary" onclick="chPiO(10000);">10k</button>
-							<button class="btn btn-primary" onclick="chPiO(100000);">100k</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000);">1m</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000);">10m</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000);">100m</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000000);">1b</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000000);">10b</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000000);">100b</button>
-							<button class="btn btn-primary" onclick="chPiO(1000000000000);">1t</button>
-							<button class="btn btn-primary" onclick="chPiO(10000000000000);">10t</button>
-							<button class="btn btn-primary" onclick="chPiO(100000000000000);">100t</button>
+							<button class="btn btn-primary" onclick="chPiO(1000);">1K</button>
+							<button class="btn btn-primary" onclick="chPiO(10000);">10K</button>
+							<button class="btn btn-primary" onclick="chPiO(100000);">100K</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000);">1M</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000);">10M</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000);">100M</button>
+							<button class="btn btn-primary" onclick="chPiO(1000000000);">1B</button>
+							<button class="btn btn-primary" onclick="chPiO(10000000000);">10B</button>
+							<button class="btn btn-primary" onclick="chPiO(100000000000);">100B</button>
+							<input id="BP" onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/>
 						</div>
 					</td>
 					<td>Synchronise
@@ -348,18 +346,17 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiP(10);">10</button>
 							<button class="btn btn-primary" onclick="chPiP(25);">25</button>
 							<button class="btn btn-primary" onclick="chPiP(100);">100</button>
-							<button class="btn btn-primary" onclick="chPiP(1000);">1k</button>
-							<button class="btn btn-primary" onclick="chPiP(10000);">10k</button>
-							<button class="btn btn-primary" onclick="chPiP(100000);">100k</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000);">1m</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000);">10m</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000);">100m</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000000);">1b</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000000);">10b</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000000);">100b</button>
-							<button class="btn btn-primary" onclick="chPiP(1000000000000);">1t</button>
-							<button class="btn btn-primary" onclick="chPiP(10000000000000);">10t</button>
-							<button class="btn btn-primary" onclick="chPiP(100000000000000);">100t</button>
+							<button class="btn btn-primary" onclick="chPiP(1000);">1K</button>
+							<button class="btn btn-primary" onclick="chPiP(10000);">10K</button>
+							<button class="btn btn-primary" onclick="chPiP(100000);">100K</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000);">1M</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000);">10M</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000);">100M</button>
+							<button class="btn btn-primary" onclick="chPiP(1000000000);">1B</button>
+							<button class="btn btn-primary" onclick="chPiP(10000000000);">10B</button>
+							<button class="btn btn-primary" onclick="chPiP(100000000000);">100B</button>
+							<input id="iNPP" onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/>
+						
 						</div>
 					</td>
 					<td rowspan="2">Buy max pipes every day if possible
@@ -687,7 +684,7 @@ Month: <span id="month"></span></pre>
 			<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
 			<hr />
 			<h4>How does the bank account work?</h4>
-			<p>You can infinity money in it. Every day at 00:00 you get interest for your money in the account.</p>
+			<p>You can put money in it. Every day at 00:00 you get interest for your money in your cash on hand.</p>
 			<hr />
 			<h4>How are operating costs defined?</h4>
 			<p>Everything has a operating cost(exept pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
@@ -695,14 +692,20 @@ Month: <span id="month"></span></pre>
 		<div id="tabs-7" class="tab-pane">
 		<br />
 			<button class="btn btn-primary" onclick="save()">Save</button>
-		<p>The game is autosaved every 30 seconds.</p>
-		<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+			<p>The game is autosaved every 30 seconds.</p>
+			<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
+			<br />
+			Dark theme:
+			<label class="switch">
+				<input id="STYLE" type="checkbox" onclick="if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}">
+				<div class="slider"></div>
+			</label>
 		</div>
 		<div id="tabs-9" class="tab-pane">
 		<br />
 			<table class="table">
 				<tr>
-					<th colspan="2">Revenues daily</th>
+					<th colspan="2">Income daily</th>
 				</tr>
 				<tr>
 					<td>From selling water</td>
@@ -949,6 +952,7 @@ Month: <span id="month"></span></pre>
 		gEBI('warnAll').style.display = 'none';
 		gEBI('percentBankUpper').innerHTML = bankpercent;
 	}
+	if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}
 	</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="js/alertify.min.js"></script>
