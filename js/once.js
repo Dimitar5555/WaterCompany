@@ -29,8 +29,8 @@ function once() {
 	gEBI("sup").innerHTML = s(HPP*PP);
 	gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);
 	gEBI("PPP").innerHTML = abbrNum(pricePPP.toFixed(2),2);
-	gEBI("PM").innerHTML = PO;
-	gEBI("PP").innerHTML = PP;
+	gEBI("PM").innerHTML = abbrNum(PO,0);
+	gEBI("PP").innerHTML = abbrNum(PP,0);
 	gEBI("PPH").innerHTML = HPP;
 	gEBI("WPH").innerHTML = WPH.toFixed(2);
 	gEBI("date").innerHTML = day;
