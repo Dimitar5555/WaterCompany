@@ -188,7 +188,7 @@ function chechSaveFile() {
 		priceIncTreatProd = 100000;
 		pumpCost = [5 ,20 ,180 ,340];
 		treatCost = [10 ,40 ,360 ,680];
-		curBalance = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+		curBalance = 0;
 		interest = 0.5;
 		priceIncInt = 10000;
 		stW = 0;
