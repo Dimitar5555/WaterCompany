@@ -5,11 +5,12 @@
 		<meta charset="utf-8">
 		<meta name="description" content="Online game for managing city water network">
 		<meta name="keywords" content="games, game, water, managment, idle, money, incremental">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=600, initial-scale=1.0">
 		<meta name="robots" content="all">
 		
 		<script>HardReset = 0;</script>
 		<script src="js/main.js"></script>
+		<script src="js/setVar.js"></script>
 		<script src="js/refresh.js"></script>
 		<script src="js/script.js"></script>
 		<script src="js/change.js"></script>
@@ -26,63 +27,63 @@
 		<link rel="stylesheet" href="css/alertify.core.css"/>
 		<link rel="stylesheet" href="css/alertify.bootstrap.css"/>
 		<style>
-		.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 34px;
+			}
 
-/* Hide default HTML checkbox */
-.switch input {display:none;}
+			/* Hide default HTML checkbox */
+			.switch input {display:none;}
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
+			/* The slider */
+			.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: .4s;
+			transition: .4s;
+			}
+			
+			.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+			}
+			
+			input:checked + .slider {
+			background-color: #2196F3;
+			}
+			
+			input:focus + .slider {
+			box-shadow: 0 0 1px #2196F3;
+			}
+			
+			input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+			}
+			
+			/* Rounded sliders */
+			.slider.round {
+			border-radius: 34px;
+			}
+			
+			.slider.round:before {
+			border-radius: 50%;
+			}
 		</style>
 		
 		<script>
@@ -96,9 +97,9 @@ input:checked + .slider:before {
 
 		</script>
 	</head>
-	<body style="padding: 5px; margin: 5px;" onload="chechSaveFile(); gEBI('fgg').click();">
+	<body style="padding: 5px; margin: 5px;" onload="gEBI('fgg').click();chechSaveFile();">
 	<div>
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.2.1 Beta</span>
+	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.3 Beta - 26 May 2017</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
 			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
@@ -143,7 +144,7 @@ Month: <span id="month"></span></pre>
 			<li class="pull-right"><a data-toggle="pill" href="#tabs-7">Options</a></li>
 			<li class="pull-right"><a data-toggle="pill" href="#tabs-11">Change log</a></li>
 			<li><a data-toggle="pill" href="#tabs-8">FAQ</a></li>
-			<li><a data-toggle="pill" href="#tabs-9">Finances</a></li>
+			<li><a data-toggle="pill" href="#tabs-9">Finance</a></li>
 			<li class="pull-right"><a data-toggle="pill" href="#tabs-12">About</a></li>
 		</ul>
 	</div>
@@ -175,8 +176,8 @@ Month: <span id="month"></span></pre>
 		</div>
 		<div id="tabs-2" class="tab-pane">
 		<br />
-			<div class="col-md-2">	
-				<ul class="nav nav-stacked" style="font-size: 17spx;">
+			<div style="float: left;">	
+				<ul class="nav nav-stacked" style="font-size: 17px;">
 					<li class="active"><a data-toggle="tab" href="#upgradestabs1">Pumps</a></li>
 					<li><a data-toggle="tab" href="#upgradestabs2">Treatment plants</a></li>
 					<li><a data-toggle="tab" href="#upgradestabs3">Water storage</a></li>
@@ -292,18 +293,7 @@ Month: <span id="month"></span></pre>
 					</table>
 				</div>
 			</div>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+			<p style="display: invisible;">Hidden</p>
 		</div>
 		<div id="tabs-3" class="tab-pane">
 			<br />
@@ -327,9 +317,9 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiO(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chPiO(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chPiO(100000000000);">100B</button>
-							<input id="BP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/>
 						</div>
 					</td>
+					<td><input id="BP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('BP').value; if(inBP){chPiO(unAbbrNum(inBP, 2));}else{chPiO(inBP);}"/></td>
 					<td>Synchronise
 					<label class="switch">
 						<input id="f" type="checkbox" onclick="if(gEBI('f').checked){sync=1} else{sync=0}">
@@ -355,10 +345,9 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chPiP(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chPiP(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chPiP(100000000000);">100B</button>
-							<input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/>
-						
 						</div>
 					</td>
+					<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/></td>
 					<td rowspan="2">Buy max pipes every day if possible
 					<label class="switch">
 						<input id="buyMax" type="checkbox" onclick="if(gEBI('buyMax').checked){buyMax=1} else{buyMax=0}">
@@ -374,12 +363,11 @@ Month: <span id="month"></span></pre>
 			Placed pipes: <span id="PP"></span>
 			<br />
 			<br />
-			<button class="btn btn-primary" class="numPiO" onclick="if(unAbbrNum(gEBI('numPiO').innerHTML)>0){buyPipe(unAbbrNum(gEBI('numPiO').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('numPiO').innerHTML = 0;">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
-			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}gEBI('numPiP').innerHTML = 0;">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
-			<button class="btn btn-primary" onclick="
-			if(unAbbrNum(gEBI('bmp').innerHTML)>0){buyPipe(unAbbrNum(gEBI('bmp').innerHTML))}else{Error('You can not buy negative pipes');}gEBI('bmp').innerHTML = 0;">Buy <span id="bmp"></span></button>
-			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('pmp').innerHTML)>0){placePipe(unAbbrNum(gEBI('pmp').innerHTML))}else{Error('You can not place negative pipes');}gEBI('pmp').innerHTML = 0;">Place <span id="pmp"></span></button>
-			<button class="btn btn-primary" onclick="var temp = parseInt(gEBI('bppM').innerHTML); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
+			<button class="btn btn-primary" class="numPiO" onclick="if(unAbbrNum(gEBI('numPiO').innerHTML)>0){buyPipe(unAbbrNum(gEBI('numPiO').innerHTML))}else{Error('You can not buy negative pipes');}">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
+			<button class="btn btn-primary" onclick="buyPipe(unAbbrNum(gEBI('bmp').value));">Buy <span id="bmp"></span></button>
+			<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('pmp').innerHTML)>0){placePipe(unAbbrNum(gEBI('pmp').innerHTML))}else{Error('You can not place negative pipes');}">Place <span id="pmp"></span></button>
+			<button class="btn btn-primary" onclick="var temp = unAbbrNum(gEBI('bppM').innerHTML,0); buyPipe(temp); placePipe(temp);">Buy & place <span id="bppM"></span></button>
 		</div>
 		<div id="tabs-4" class="tab-pane">
 		<br />
@@ -402,8 +390,8 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-primary" onclick="chP(1000000000);">1B</button>
 							<button class="btn btn-primary" onclick="chP(10000000000);">10B</button>
 							<button class="btn btn-primary" onclick="chP(100000000000);">100B</button>
-							<input id="inBP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/>
 						</td>
+						<td><input id="inBP"  class="form-control" style="width: 150px;"onkeyup="var inBP = gEBI('inBP').value; if(inBP){chP(unAbbrNum(inBP, 2));}else{chP(PuB);}"/></td>
 					</tr>
 					<tr>
 						<td>Sell</td>
@@ -422,8 +410,8 @@ Month: <span id="month"></span></pre>
 							<button class="btn btn-danger" onclick="chPS(1000000000);">1B</button>
 							<button class="btn btn-danger" onclick="chPS(10000000000);">10B</button>
 							<button class="btn btn-danger" onclick="chPS(100000000000);">100B</button>
-							<input id="inSP"  class="form-control" style="width: 150px;"onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/>
 						</td>
+						<td><input id="inSP"  class="form-control" style="width: 150px;"onkeyup="var inSP = gEBI('inSP').value; if(inSP){chPS(unAbbrNum(inSP, 2));}else{chPS(PuS);}"/></td>
 					</tr>
 				</table>
 				<br />
@@ -510,8 +498,8 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-primary" onclick="chTr(1000000000);">1B</button>
 						<button class="btn btn-primary" onclick="chTr(10000000000);">10B</button>
 						<button class="btn btn-primary" onclick="chTr(100000000000);">100B</button>
-						<input id="treatPlB"  class="form-control" style="width: 150px;"onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/>
 					</td>
+					<td><input id="treatPlB"  class="form-control" style="width: 150px;"onkeyup="var treatPlB = gEBI('treatPlB').value; if(treatPlB){chTr(unAbbrNum(treatPlB, 2));}else{chTr(TreatPlB);}"/></td>
 				</tr>
 				<tr>
 					<td>Sell</td>
@@ -530,8 +518,8 @@ Month: <span id="month"></span></pre>
 						<button class="btn btn-danger" onclick="chTrS(1000000000);">1B</button>
 						<button class="btn btn-danger" onclick="chTrS(10000000000);">10B</button>
 						<button class="btn btn-danger" onclick="chTrS(100000000000);">100B</button>
-						<input id="trPS"  class="form-control" style="width: 150px;"onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/>
 					</td>
+					<td><input id="trPS"  class="form-control" style="width: 150px;"onkeyup="var trPS = gEBI('trPS').value; if(trPS){chTrS(unAbbrNum(trPS, 2));}else{chTrS(TrPS);}"/></td>
 				</tr>
 			</table>
 			<br />
@@ -597,7 +585,7 @@ Month: <span id="month"></span></pre>
 				</tr>
 			</table>
 		</div>
-		<div id="tabs-6" class="tab-pane">
+		<div id="tabs-6" class="tab-pane" style="position: relative;">
 		<br />
 			<p>In the bank you can manage your money. You can invest in bank account and get a fixed interest every day or if you need money you can take out a loan.</p>
 			<table class="table" style="width: 250px;">
@@ -606,28 +594,6 @@ Month: <span id="month"></span></pre>
 					<td>$<span id="curBalance"></span></td>
 					<td>Monthly interest</td>
 					<td><span id="interestRate"></span>%</td>
-					<td rowspan="3">Turn on/off investments
-					<label class="switch">
-						<input id="a" type="checkbox" onclick="
-	if(gEBI('a').checked){
-		bankpercentOn = 1;
-		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}
-	else{
-		bankpercentOn = 0;
-		gEBI('warnAll').style.display = 'none';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}">
-						<div class="slider"></div>
-					</label>
-					<br />
-					Invest 
-					<input id="bankpercent" type="number" min="0" max="100" onkeyup="bankpercent = Number(gEBI('bankpercent').value); if(bankpercent>100){bankpercent = 100;} else if(bankpercent<0){bankpercent=0;}else if(!bankpercent){bankpercent=0;}
-					if(gEBI('a').checked&&bankpercent>0){
-		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;}" class="form-control" style="width: 75px;"></input>% in the bank from income
-					</td>
 				</tr>
 				<tr>
 					<td>Invest</td>
@@ -642,8 +608,7 @@ Month: <span id="month"></span></pre>
 					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
 				</tr>
 			</table>
-			
-			<table class="table" style="width: 50px;">
+			<table class="table" style="width: 500px;">
 				<tr>
 					<td>Current loan/max loan</td>
 					<td>$<span id="curLoan"></span>/$<span id="maxLoanBank"></span></td>
@@ -660,6 +625,28 @@ Month: <span id="month"></span></pre>
 					<td><input id="rl" min="0" class="form-control" style="width: 150px;"/></td>
 					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('rl').value)>0){returnLoan(unAbbrNum(gEBI('rl').value))}else{Error('You can not return negative loan');}gEBI('rl').value = 0;">Return</button>
 					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
+					</td>
+				</tr>
+			</table>
+			<table class="table"style="float: right; width: 300px; position: absolute; top: 70px; right: 10px;">
+				<tr>
+					<td>Turn on/off investments</td>
+					<td><label class="switch">
+						<input id="a" type="checkbox" onclick="if(gEBI('a').checked){bankpercentOn = 1;gEBI('warnAll').style.display = 'block';gEBI('percentBankUpper').innerHTML = bankpercent;}else{bankpercentOn = 0;gEBI('warnAll').style.display = 'none';gEBI('percentBankUpper').innerHTML = bankpercent;}">
+						<div class="slider"></div>
+					</label></td>
+				</tr>
+				<tr>
+					<td>Invest</td>
+					<td><input id="bankpercent" type="number" min="0" max="100" onkeyup="bankpercent = Number(gEBI('bankpercent').value); if(bankpercent>100){bankpercent = 100;} else if(bankpercent<0){bankpercent=0;}else if(!bankpercent){bankpercent=0;}if(gEBI('a').checked&&bankpercent>0){gEBI('warnAll').style.display = 'block';gEBI('percentBankUpper').innerHTML = bankpercent;}" class="form-control" style="width: 75px;"></input>% in the bank from income,<br /></td>
+				</tr>
+				<tr>
+					<td>Put money from interest in the bank </td>
+					<td>
+						<label class="switch">
+							<input id="INTBANK" type="checkbox" onclick="if(gEBI('INTBANK').checked){INTBANK = 1;}else{INTBANK = 0;}">
+							<div class="slider"></div>
+						</label>
 					</td>
 				</tr>
 			</table>
@@ -696,11 +683,43 @@ Month: <span id="month"></span></pre>
 			<p>The game is autosaved every 30 seconds.</p>
 			<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
 			<br />
-			Dark theme:
-			<label class="switch">
-				<input id="STYLE" type="checkbox" onclick="if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}">
-				<div class="slider"></div>
-			</label>
+			<br />
+			<table class="table">
+				<tr>
+					<td></td>
+					<td></td>
+					<td>
+						<select class="form-control" id="selecetTheme">
+							<option value="standart">Standart</option>
+							<option value="dark">Dark</option>
+							<option value="united">United</option>
+							<option value="cerulean">Cerulean</option>
+							<option value="cosmo">Cosmo</option>
+							<option value="cyborg">Cyborg</option>
+							<option value="darkly">Darkly</option>
+							<option value="solar">Solar</option>
+							<option value="yeti">Yeti</option>
+						</select>
+						<button class="btn btn-primary" onclick="var e = document.getElementById('selecetTheme');var strUser = (e.options[e.selectedIndex].value).toLowerCase();var styleel = 'css/bootstrap-' + strUser + '.css'; gEBI('STYLE-EL').href = styleel;">Apply style</button>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th colspan="4">Notifications</th>
+				</tr>
+				<tr>
+					<td>Turn off notifications for number of builded house</td>
+					<td><label class="switch"><input id="notBH" type="checkbox" onclick="if(gEBI('notBH').checked){notBH = 1;} else{notBH = 0;}"><div class="slider"></div></label></td>
+					<td>Turn off notifications for the received bank interest</td>
+					<td><label class="switch"><input id="notBI" type="checkbox" onclick="if(gEBI('notBI').checked){notBI = 1;} else{notBI = 0;}"><div class="slider"></div></label></td>
+				</tr>
+				<tr>
+					<td>Turn off notifications for payed loan tax</td>
+					<td><label class="switch"><input id="notPL" type="checkbox" onclick="if(gEBI('notPL').checked){notPL = 1;} else{notPL = 0;}"><div class="slider"></div></label></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
 		</div>
 		<div id="tabs-9" class="tab-pane">
 		<br />
@@ -846,6 +865,14 @@ Month: <span id="month"></span></pre>
 			</table>
 		</div>
 		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3.3 Beta - 26 May 2017</h4>
+			<ul>
+				<li>Added more themes</li>
+				<li>Added more options to turn on/off notifications</li>
+				<li>Redesigned options tab</li>
+				<li>Fixed wrong calculations in finance tab</li>
+			</ul>
+			<hr />
 			<h4>Version 0.3.2.1 Beta</h4>
 			<ul>
 				<li>Added dark theme</li>
@@ -937,9 +964,9 @@ Month: <span id="month"></span></pre>
 			</p>
 		</div>
 	</div>
-	<div id="weather" style="font-size: 20px; max-height: 350px; margin-top: 50px;" class="bg-primary">
+	<div id="weather" style="font-size: 20px; max-height: 350px; margin-top: 50px; float: left; padding: 10px;" class="bg-primary">
 		<span>Weather</span><br />
-		<div style="margin-bottom: 5px; padding-top: 30px;">Today:<span id="wtod"></span></div>
+		<div>Today:<span id="wtod"></span></div>
 		
 	</div>
 	<script>if(document.getElementById('f').checked){sync=1} else{sync=0}
@@ -961,7 +988,11 @@ Month: <span id="month"></span></pre>
 		gEBI('percentBankUpper').innerHTML = bankpercent;
 	}
 	if(gEBI('STYLE').checked){gEBI('STYLE-EL').href = 'css/bootstap-dark.css';} else{gEBI('STYLE-EL').href = 'css/bootstrap.css';}
-	</script>
+	if(gEBI('notBH').checked){notBH = 1;} else{notBH = 0;}
+	if(gEBI('notBI').checked){notBI = 1;} else{notBI = 0;}
+	if(gEBI('notPL').checked){notPL = 1;} else{notPL = 0;}
+	if(gEBI('INTBANK').checked){INTBANK = 1;}else{INTBANK = 0;}
+	var e = document.getElementById('selecetTheme');var strUser = (e.options[e.selectedIndex].value).toLowerCase();var styleel = 'css/bootstrap-' + strUser + '.css'; gEBI('STYLE-EL').href = styleel;	</script>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="js/alertify.min.js"></script>
 	</body>

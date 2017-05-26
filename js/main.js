@@ -1,8 +1,11 @@
 function abbrNum(number, decPlaces) {
 	var number = parseFloat(number);
 	var abbR = ["", "K","M","B","T","Qa","Qi","Sx","Sp","Oc","No","Dc","UDc","DDc","TDc","QaDc","QiDc","SxDc","SpDc","ODc","NDc","Vi","UVi","DVi","TVi","QaVi","QiVi","SxVi","SpVi","OVi","NVi","Tg","UTg","DTg","TTg","QaTg","QiTg","SxTg","SpTg","OTg","NTg","Qd","UQd","DQd","TQd","QaQd","QiQd","SxQd","SpQd","OQd","NQd","Qq","UQq","DQq","TQq","QaQq","QiQq","SxQq","SpQq","OQq","NQq","Sg","USg","DSg","TSg","QaSg","QiSg","SxSg","SpSg","OSg","NSg","St","USt","DSt","TSt","QaSt","QiSt","SxSt","SpSt","OSt","NSt","Og","UOg","DOg","TOg","QaOg","QiOg","SxOg","SpOg","OOg","NOg"];
-	for(i=0;number>=1000;i++){
+	for(i=0;number>=999;i++){
 		var number = number/1000;
+	}
+	for(i=i;abbR.length<i;i--){
+			number = number * 1000;
 	}
 	var number = number.toFixed(decPlaces);
 	var number = number + abbR[i];
@@ -39,13 +42,13 @@ function updatePipes() {
 	if(PO<maxP){
 		maxP = PO;
 	}
-	gEBI("bmp").innerHTML = maxB;
-	gEBI("pmp").innerHTML = maxP;
+	gEBI("bmp").innerHTML = s(maxB);
+	gEBI("pmp").innerHTML = s(maxP);
 	var maxPP = Math.floor(money/(pricePPM+pricePPP));
 	if(maxPP>maxAHouses){
 		maxPP = maxAHouses;
 	}
-	gEBI("bppM").innerHTML = maxPP;
+	gEBI("bppM").innerHTML = s(maxPP);
 }
 function unabbrNum(number) {
 	var abbrev = ['k', 'm', 'b', 't', 'q'];

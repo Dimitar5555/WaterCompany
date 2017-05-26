@@ -2,10 +2,10 @@ function invest(a) {
 	if(a<=money){
 		curBalance = curBalance + a;
 		money = money - a;
-		gEBI("curBalance").innerHTML = s(curBalance);
-		gEBI("money").innerHTML = s(money);
+		refBank();
 		refFin();
 		updatePipes();
+		refMoney();
 	}
 	else{NEMshow();}
 }
@@ -13,10 +13,10 @@ function withdraw(a) {
 	if(a<=curBalance){
 		curBalance = curBalance - a;
 		money = money + a;
-		gEBI("curBalance").innerHTML = s(curBalance);
-		gEBI("money").innerHTML = s(money);
+		refBank();
 		refFin();
 		updatePipes();
+		refMoney();
 	}
 		else{
 			otherError("Not enough bank balance");
@@ -25,11 +25,23 @@ function withdraw(a) {
 
 function autoIncBal() {
 	var g = (((curBalance/100)*(100+interest)-curBalance)/31);
-	money = money + g;
-	gEBI("money").innerHTML = s(money);
-	refFin();
-	if(g>0){
-		Success("You got $" + s(g) + " from interest from your bank balance" );
+	if(INTBANK==0){
+		money = money + g;
+		refFin();
+		refBank();
+		refMoney();
+		if(g>0 && notBI==0){
+			Success("You got $" + s(g) + " from interest from your bank balance");
+		}
+	}
+	else{
+		curBalance = curBalance + g;
+		refFin();
+		refBank();
+		if(g>0 && notBI==0){
+			Success("Your bank balance has been increased by $" + s(g));
+		}
+		
 	}
 }
 function retLoanAuto() {
@@ -37,18 +49,18 @@ function retLoanAuto() {
 	else if(0 <= money - (loan/100)){
 		loan = loan - (loan/100);
 		money = money - (loan/100);
-		gEBI("curLoan").innerHTML = s(loan);
-		gEBI("money").innerHTML = s(money);
-		gEBI("curTaxL").innerHTML = s(loan/100);
+		refMoney();
 		refFin();
-		Success("Your bank tax for the loan has been paid.");
+		refBank();
+		if(notPL=0){
+			Success("Your bank tax for the loan has been paid.");
+		}
 		updatePipes();
 	}
 	else{
 		var oldLoan = loan;
 		loan = (loan/100)*(loanInterest+100);
-		gEBI("curLoan").innerHTML = s(loan);
-		gEBI("curTaxL").innerHTML = s(loan/100);
+		refBank();
 		refFin();
 		Error("Not enough money to pay your loan tax! Your loan was increased from $" + s(oldLoan) + " to $" + s(loan));
 	}
@@ -58,18 +70,16 @@ function getLoan(a) {
 	if(loan+a<=maxLoan){
 		loan = loan + a;
 		money = money + a;
-		gEBI("curLoan").innerHTML = s(loan);
-		gEBI("money").innerHTML = s(money);
-		gEBI("curTaxL").innerHTML = s(loan/100);
+		refBank();
+		refMoney();
 		refFin();
 		updatePipes();
 		}
 	else{
 		money = money + (maxLoan - loan);
 		loan = maxLoan;
-		gEBI("curLoan").innerHTML = s(loan);
-		gEBI("money").innerHTML = s(money);
-		gEBI("curTaxL").innerHTML = s(loan/100);
+		refBank();
+		refMoney();
 		refFin();
 		updatePipes();
 	}
@@ -79,9 +89,8 @@ function returnLoan(a){
 		if(money - a >= 0){
 			loan = loan - a;
 			money = money - a;
-			gEBI("curLoan").innerHTML = s(loan);
-			gEBI("money").innerHTML = s(money);
-			gEBI("curTaxL").innerHTML = s(loan/100);
+			refBank();
+			refMoney();
 			refFin();
 			updatePipes();
 		}
@@ -97,8 +106,8 @@ function investMAX() {
 	if(money>0){
 		curBalance = curBalance + money;
 		money = 0;
-		gEBI("curBalance").innerHTML = s(curBalance);
-		gEBI("money").innerHTML = s(money);
+		refBank();
+		refMoney();
 		refFin();
 		updatePipes();
 	}
@@ -107,8 +116,8 @@ function withdrawMAX() {
 	if(curBalance>0){
 		money = money + curBalance;
 		curBalance = 0;
-		gEBI("curBalance").innerHTML = s(curBalance);
-		gEBI("money").innerHTML = s(money);
+		refBank();
+		refMoney();
 		refFin();
 		updatePipes();
 	}
