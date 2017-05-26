@@ -94,12 +94,12 @@ function refReserv() {
 }
 function refFin() {
 	var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-	gEBI("fopC").innerHTML = s(opC*48);
-	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*48);
+	gEBI("fopC").innerHTML = s(opC*24);
+	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*24);
 	var g = (((curBalance/100)*(100+interest)-curBalance)/31);
 	gEBI("fIntInc").innerHTML = s(g);
-	gEBI("fProfit").innerHTML = s(add*24+g);
-	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*48);
+	gEBI("fProfit").innerHTML = s(add*24+g-loan/100);
+	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*24);
 	gEBI("fLoanTax").innerHTML = s(loan/100);
 }
 function refUpgrades() {
@@ -171,5 +171,68 @@ function refUpgrades() {
 	gEBI("maxLoanA").innerHTML = s(maxLoan*2);
 	gEBI("maxLoanBank").innerHTML = s(maxLoan);
 	gEBI("pricem3").innerHTML =  "$" + s(price);
+}
+function refPipes() {
+	gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);
+	gEBI("PPP").innerHTML = abbrNum(pricePPP.toFixed(2),2);
+	gEBI("PM").innerHTML = abbrNum(PO,0);
+	gEBI("PP").innerHTML = abbrNum(PP,0);
+	maxPipes = Math.floor((houses/HPP) - (PO + PP));
+	maxP = Math.floor(money/pricePPP);
+	maxB = Math.floor(money/pricePPM);
+	if(maxB>maxPipes){
+		maxB = maxPipes;
+	}
 	
+	
+	if(maxP>=PO){
+		maxP = PO;
+		if(maxP>maxPipes){
+			maxP = maxPipes;
+		}
+	}
+	else if(maxP>=maxPipes){
+		maxP = maxPipes;
+		if(maxP>PO){
+			maxP = PO;
+		}
+	}
+	
+	
+	gEBI("bmp").innerHTML = abbrNum(maxB,0);
+	gEBI("pmp").innerHTML = abbrNum(maxP,0);
+	var maxPP = Math.floor(money/(pricePPM+pricePPP));
+	if(maxPP>maxPipes){
+		maxPP = maxPipes;
+	}
+	gEBI("bppM").innerHTML = s(maxPP);
+}
+function refUpper() {
+	gEBI("money").innerHTML = s(money);
+	gEBI("prd").innerHTML = s(PW);
+	gEBI("trt").innerHTML = s(TW);
+	gEBI("NW").innerHTML = s(UW);
+	gEBI("capacitystW").innerHTML = s(stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3]);
+	
+}
+function refBank() {
+	gEBI("curBalance").innerHTML = s(curBalance);
+	gEBI("interestRate").innerHTML = s(interest);
+	gEBI("curLoan").innerHTML = s(loan);
+	gEBI("lInt").innerHTML = s(loanInterest);
+	gEBI("curTaxL").innerHTML = s(loan/100);
+}
+function refMoney() {
+	if(add>0){
+		gEBI("income").innerHTML = "+" + "$<span style='color: green;'>" + s(add) + "</span>";
+	} 
+	else if(add<0){
+		add = add* (-1);
+		gEBI("income").innerHTML = "-" + "$<span style='color: red;'>" + s(add) + "</span>";
+		add = add*(-1);
+	}
+	else if(add==0){
+		gEBI("income").innerHTML = "+" + "$" + s(add);
+	}
+	gEBI("money").innerHTML = s(money);
 }

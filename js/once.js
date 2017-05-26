@@ -3,6 +3,7 @@ function once() {
 	refPumps();
 	refTreatment();
 	refReserv();
+	refBank();
 	//treatment production, total production abd price
 	//pump production, total production abd price
 	gEBI("year").innerHTML = year;
@@ -34,20 +35,12 @@ function once() {
 	gEBI("PPH").innerHTML = HPP;
 	gEBI("WPH").innerHTML = WPH.toFixed(2);
 	gEBI("date").innerHTML = day;
-	gEBI("prd").innerHTML = PW;
-	gEBI("trt").innerHTML = TW;
-	gEBI("NW").innerHTML = UW;
 	changeweat();
 	gEBI("month").innerHTML = month;
 	start();
 	
+	refUpper();
 	
-	gEBI("curBalance").innerHTML = s(curBalance);
-	gEBI("interestRate").innerHTML = s(interest);
-	gEBI("curLoan").innerHTML = s(loan);
-	gEBI("lInt").innerHTML = s(loanInterest);
-	gEBI("curTaxL").innerHTML = s(loan/100);
-	gEBI("capacitystW").innerHTML = s(stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3]);
 	gEBI("inv").value = 0;
 	gEBI("wd").value = 0;
 	document.getElementsByClassName("city").item(0).innerHTML = selectedCity;
