@@ -381,7 +381,7 @@ window.setInterval(function(){
 		gEBI("date").innerHTML = day;
 		gEBI("year").innerHTML = year;
 		gEBI("month").innerHTML = month;
-		refPipes();
+		updatePipes();
 	}, fast);}
 function incHouses(){
 	oldhouses = houses;
@@ -390,6 +390,7 @@ function incHouses(){
 	if(oldhouses<houses && notBH == 0){
 		Success(abbrNum(houses-oldhouses,0) + " new houses have been build");
 	}
+	updatePipes();
 }
 
 /*

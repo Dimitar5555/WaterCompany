@@ -1,18 +1,15 @@
 function buyPipe(a) {
-	if(houses/HPP >= (PP+PO+a)){
-		if(money>= a*pricePPM) {
-			var a=a;
-			var b=PP;
-			var c=PO;
-			PO = c + a;
-			money = money - a*pricePPM;
-			gEBI("PM").innerHTML = PO;
-			refMoney();
-			refPipes();
-		}
-		else {Error("Not enough money")}
+	if(money>= a*pricePPM) {
+		var a=a;
+		var b=PP;
+		var c=PO;
+		PO = Number(c) + Number(a);
+		money = money - a*pricePPM;
+		gEBI("PM").innerHTML = PO;
+		refMoney();
+		updatePipes();
 	}
-	else{Error("Not enough houses");}
+	else {Error("Not enough money")}
 }
 function placePipe(a) {
 	if(money>=a*pricePPP) {
@@ -20,24 +17,21 @@ function placePipe(a) {
 			var a=a;
 			var b=PP;
 			var c=PO;
-			if(houses >= (b+c-a)*2){	
-				PP = PP + a;
-				PO = PO - a;
-				money = money - a*pricePPP;
-				gEBI("PM").innerHTML = s(PO);
-				gEBI("PP").innerHTML = s(PP);
-				gEBI("sup").innerHTML = s(HPP*PP);
-				gEBI("money").innerHTML = s(money);
-				refMoney();
-				gEBI("prd").innerHTML = s(PW);
-				gEBI("trt").innerHTML = s(TW);
-				UW = HPP * WPH * PP;
-				gEBI("NW").innerHTML = s(UW);
-				addWater = s(extraWA * HPP * PP);
-				gEBI("extraW").innerHTML = s(extraWA * HPP * PP);
-				refPipes();
-			}
-			else{Error("Not enough houses");}
+			PP = Number(PP) + Number(a);
+			PO = Number(PO) - Number(a);
+			money = money - a*pricePPP;
+			gEBI("PM").innerHTML = s(PO);
+			gEBI("PP").innerHTML = s(PP);
+			gEBI("sup").innerHTML = s(HPP*PP);
+			gEBI("money").innerHTML = s(money);
+			refMoney();
+			gEBI("prd").innerHTML = s(PW);
+			gEBI("trt").innerHTML = s(TW);
+			UW = HPP * WPH * PP;
+			gEBI("NW").innerHTML = s(UW);
+			addWater = s(extraWA * HPP * PP);
+			gEBI("extraW").innerHTML = s(extraWA * HPP * PP);
+			updatePipes();
 		}
 		else{Error("Not enough owned pipes");}
 	}

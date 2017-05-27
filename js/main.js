@@ -31,23 +31,22 @@ function gEBI(a) {
 	return b;
 }
 function updatePipes() {
-	maxPipes = Math.floor(houses/HPP) - (PO + PP);
-	maxP = Math.floor(money/pricePPP);
-	maxB = Math.floor(money/pricePPM);
-	
-	maxAHouses = Math.floor(houses/HPP - PP - PO);
-	if(maxB>maxAHouses){
-		maxB = maxAHouses
+	var maxPipes = (houses/2) - (PO+PP);
+	var maxPipes = Math.floor(maxPipes);
+	var maxP = Math.floor(money/pricePPP);
+	var maxB = Math.floor(money/pricePPM);
+	if(maxB>maxPipes){
+		var maxB = maxPipes
 	}
 	if(PO<maxP){
-		maxP = PO;
+		var maxP = PO;
+	}
+	var maxPP = Math.floor(money/(pricePPM+pricePPP));
+	if(maxPP>maxPipes){
+		var maxPP = maxPipes;
 	}
 	gEBI("bmp").innerHTML = s(maxB);
 	gEBI("pmp").innerHTML = s(maxP);
-	var maxPP = Math.floor(money/(pricePPM+pricePPP));
-	if(maxPP>maxAHouses){
-		maxPP = maxAHouses;
-	}
 	gEBI("bppM").innerHTML = s(maxPP);
 }
 function unabbrNum(number) {

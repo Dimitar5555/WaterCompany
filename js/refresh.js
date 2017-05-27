@@ -177,35 +177,7 @@ function refPipes() {
 	gEBI("PPP").innerHTML = abbrNum(pricePPP.toFixed(2),2);
 	gEBI("PM").innerHTML = abbrNum(PO,0);
 	gEBI("PP").innerHTML = abbrNum(PP,0);
-	maxPipes = Math.floor((houses/HPP) - (PO + PP));
-	maxP = Math.floor(money/pricePPP);
-	maxB = Math.floor(money/pricePPM);
-	if(maxB>maxPipes){
-		maxB = maxPipes;
-	}
-	
-	
-	if(maxP>=PO){
-		maxP = PO;
-		if(maxP>maxPipes){
-			maxP = maxPipes;
-		}
-	}
-	else if(maxP>=maxPipes){
-		maxP = maxPipes;
-		if(maxP>PO){
-			maxP = PO;
-		}
-	}
-	
-	
-	gEBI("bmp").innerHTML = abbrNum(maxB,0);
-	gEBI("pmp").innerHTML = abbrNum(maxP,0);
-	var maxPP = Math.floor(money/(pricePPM+pricePPP));
-	if(maxPP>maxPipes){
-		maxPP = maxPipes;
-	}
-	gEBI("bppM").innerHTML = s(maxPP);
+	updatePipes();
 }
 function refUpper() {
 	gEBI("money").innerHTML = s(money);
