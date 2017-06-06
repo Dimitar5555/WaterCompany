@@ -149,3 +149,51 @@ function incMaxLoan() {
 		refUpgrades();
 	}
 }
+function incHWprice() {
+	if(money>=priceIncHW){
+		money = money - priceIncHW;
+		priceIncHW = priceIncHW * 1.5;
+		SWHprice = SWHprice*1.05;
+		refUpgrades();
+		refMoney();
+		refFin();
+		refHPipes();
+	}
+}
+function incCapWater() {
+	if(money>=priceIncStSt){
+		money = money - priceIncStSt;
+		priceIncStSt = priceIncStSt*1.9;
+		stWProd[0] = stWProd[0]*1.1;
+		stWProd[1] = stWProd[1]*1.1;
+		stWProd[2] = stWProd[2]*1.1;
+		stWProd[3] = stWProd[3]*1.1;
+		refReserv();
+		refUpgrades();
+		refMoney();
+		refUpper();
+		
+	}
+}
+function decHWPprice() {
+	if(money>=decPriceHPipesBuy){
+		money = money - decPriceHPipesBuy;
+		decPriceHPipesBuy = decPriceHPipesBuy * 1.5;
+		HPOprice = HPOprice*0.95;
+		refUpgrades();
+		refUpper();
+		chHPiO(buyHpipesNumber);
+		refmoney();
+	}
+}
+function decHWPpriceplace(){
+	if(money>=decPriceHpipesPlace){
+		money = money - decPriceHpipesPlace;
+		decPriceHpipesPlace = decPriceHpipesPlace * 1.5;
+		HPPprice = HPPprice*0.95;
+		refUpgrades();
+		refUpper();
+		chHPiP(placeHpipesNumber);
+		refmoney();
+	}
+}

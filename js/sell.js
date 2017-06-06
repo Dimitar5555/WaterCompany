@@ -33,3 +33,21 @@ function sellSt(a,b){
 		refReserv();
 	}
 }
+function sellCCP(a,b){
+	if(HWHF[a]>=b){
+		HWHF[a] = HWHF[a]-b;
+		money = money + HWHFPrice[a]*b;
+		refMoney();
+		refHPipes();
+		refHeat();
+	}
+}
+function sellCCPpump(a,b){
+	if(HWpump[a]>=b){
+		HWpump[a] = HWpump[a] -b;
+		money = money - HWpumpPrice[a]*b;
+		refMoney();
+		refHeat();
+		refHPipes();
+	}
+}
