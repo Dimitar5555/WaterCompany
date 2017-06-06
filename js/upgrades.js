@@ -105,7 +105,7 @@ function incInr() {
 }
 function decPumpOpCost() {
 	if(money>=priceDecPumpOpCost){
-		money - money - priceDecPumpOpCost;
+		money = money - priceDecPumpOpCost;
 		priceDecPumpOpCost = priceDecPumpOpCost*1.5;
 		pumpCost[0] = pumpCost[0]*0.9;
 		pumpCost[1] = pumpCost[1]*0.9;
