@@ -1,8 +1,8 @@
 function refPumps() {
-	gEBI("Spump").innerHTML = abbrNum(pumps[0].toFixed(0),0);
-	gEBI("Mpump").innerHTML = abbrNum(pumps[1].toFixed(0),0);
-	gEBI("Bpump").innerHTML = abbrNum(pumps[2].toFixed(0),0);
-	gEBI("VBpump").innerHTML = abbrNum(pumps[3].toFixed(0),0);
+	gEBI("Spump").innerHTML = abbrNum(pumps[0],0);
+	gEBI("Mpump").innerHTML = abbrNum(pumps[1],0);
+	gEBI("Bpump").innerHTML = abbrNum(pumps[2],0);
+	gEBI("VBpump").innerHTML = abbrNum(pumps[3],0);
 	
 	gEBI("SpumpPrice").innerHTML = s(pumpPrice[0]);
 	gEBI("MpumpPrice").innerHTML = s(pumpPrice[1]);
@@ -94,13 +94,18 @@ function refReserv() {
 }
 function refFin() {
 	var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-	gEBI("fopC").innerHTML = s(opC*24);
-	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*24);
+	var opCHeat = HWpumpOpC[0]*HWpump[0] + HWpumpOpC[1]*HWpump[1] + HWpumpOpC[2]*HWpump[2] + HWpumpOpC[3]*HWpump[3] + HWHF[0]*HWHFOpC[0] + HWHF[1]*HWHFOpC[1] + HWHF[2]*HWHFOpC[2] + HWHF[3]*HWHFOpC[3];
+	gEBI("TfopC").innerHTML = s((opC+opCHeat)*24);
+	gEBI("fcwater").innerHTML = s(opC*24);
+	gEBI("fhwater").innerHTML = s(opCHeat*24);
+	gEBI("fhiWater").innerHTML = s(SWH*SWHprice*24);
+	gEBI("fciWater").innerHTML = s(SW*price*24);
 	var g = (((curBalance/100)*(100+interest)-curBalance)/31);
 	gEBI("fIntInc").innerHTML = s(g);
-	gEBI("fProfit").innerHTML = s(add*24+g-loan/100);
-	gEBI("fWater").innerHTML = s((add + (fine/10000)*1000 + opC)*24);
+	gEBI("fWater").innerHTML = s((SWH*SWHprice+SW*price)*24);
 	gEBI("fLoanTax").innerHTML = s(loan/100);
+	gEBI("fFines").innerHTML = s(((fine/10000)*1000)*24);
+	gEBI("fProfit").innerHTML = s((SWH*SWHprice+SW*price-opC-opCHeat-(fine/10000)*1000)*24+g-loan/100);
 }
 function refUpgrades() {
 	gEBI("priceBefore").innerHTML = abbrNum(price.toFixed(2),2);
@@ -171,41 +176,31 @@ function refUpgrades() {
 	gEBI("maxLoanA").innerHTML = s(maxLoan*2);
 	gEBI("maxLoanBank").innerHTML = s(maxLoan);
 	gEBI("pricem3").innerHTML =  "$" + s(price);
+	gEBI("priceIncStSt").innerHTML = s(priceIncStSt);
+	gEBI("Bstst1").innerHTML = s(stWProd[0]);
+	gEBI("Bstst2").innerHTML = s(stWProd[1]);
+	gEBI("Bstst3").innerHTML = s(stWProd[2]);
+	gEBI("Bstst4").innerHTML = s(stWProd[3]);
+	gEBI("Astst1").innerHTML = s(stWProd[0]*1.1);
+	gEBI("Astst2").innerHTML = s(stWProd[1]*1.1);
+	gEBI("Astst3").innerHTML = s(stWProd[2]*1.1);
+	gEBI("Astst4").innerHTML = s(stWProd[3]*1.1);
+	gEBI("BpHW").innerHTML = s(SWHprice);
+	gEBI("BdecPHP").innerHTML = s(HPPprice);
+	gEBI("AdecPHP").innerHTML = s(HPPprice*0.95);
+	gEBI("priceIncHW").innerHTML = s(priceIncHW);
+	gEBI("ApHW").innerHTML = s(SWHprice*1.05);
+	gEBI("decPriceHPipesBuy").innerHTML = s(decPriceHPipesBuy);
+	gEBI("BdecBHP").innerHTML = s(HPOprice);
+	gEBI("decPriceHpipesPlace").innerHTML = s(decPriceHpipesPlace);
+	gEBI("AdecBHP").innerHTML = s(HPOprice*0.95);
 }
 function refPipes() {
 	gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);
 	gEBI("PPP").innerHTML = abbrNum(pricePPP.toFixed(2),2);
 	gEBI("PM").innerHTML = abbrNum(PO,0);
 	gEBI("PP").innerHTML = abbrNum(PP,0);
-	maxPipes = Math.floor((houses/HPP) - (PO + PP));
-	maxP = Math.floor(money/pricePPP);
-	maxB = Math.floor(money/pricePPM);
-	if(maxB>maxPipes){
-		maxB = maxPipes;
-	}
-	
-	
-	if(maxP>=PO){
-		maxP = PO;
-		if(maxP>maxPipes){
-			maxP = maxPipes;
-		}
-	}
-	else if(maxP>=maxPipes){
-		maxP = maxPipes;
-		if(maxP>PO){
-			maxP = PO;
-		}
-	}
-	
-	
-	gEBI("bmp").innerHTML = abbrNum(maxB,0);
-	gEBI("pmp").innerHTML = abbrNum(maxP,0);
-	var maxPP = Math.floor(money/(pricePPM+pricePPP));
-	if(maxPP>maxPipes){
-		maxPP = maxPipes;
-	}
-	gEBI("bppM").innerHTML = s(maxPP);
+	updatePipes();
 }
 function refUpper() {
 	gEBI("money").innerHTML = s(money);
@@ -235,4 +230,83 @@ function refMoney() {
 		gEBI("income").innerHTML = "+" + "$" + s(add);
 	}
 	gEBI("money").innerHTML = s(money);
+	drawCitya();
+}
+function refHeat() {
+	gEBI("SHPprice").innerHTML = s(HWpumpPrice[0]);
+	gEBI("MHPprice").innerHTML = s(HWpumpPrice[1]);
+	gEBI("BHPprice").innerHTML = s(HWpumpPrice[2]);
+	gEBI("VBHPprice").innerHTML = s(HWpumpPrice[3]);
+	
+	gEBI("SHPTOpC").innerHTML = "$" + s(HWpump[0]*HWpumpOpC[0]);
+	gEBI("MHPTOpC").innerHTML = "$" + s(HWpump[1]*HWpumpOpC[1]);
+	gEBI("BHPTOpC").innerHTML = "$" + s(HWpump[2]*HWpumpOpC[2]);
+	gEBI("VBHPTOpC").innerHTML = "$" + s(HWpump[3]*HWpumpOpC[3]);
+	
+	gEBI("SHPOpC").innerHTML = "$" + s(HWpumpOpC[0]);
+	gEBI("MHPOpC").innerHTML = "$" + s(HWpumpOpC[1]);
+	gEBI("BHPOpC").innerHTML = "$" + s(HWpumpOpC[2]);
+	gEBI("VBHPOpC").innerHTML = "$" + s(HWpumpOpC[3]);
+	
+	gEBI("SHP").innerHTML = abbrNum(HWpump[0],0);
+	gEBI("MHP").innerHTML = abbrNum(HWpump[1],0);
+	gEBI("BHP").innerHTML = abbrNum(HWpump[2],0);
+	gEBI("VBHP").innerHTML = abbrNum(HWpump[3],0);
+	
+	gEBI("SHPprod").innerHTML = s(HWpumpProd[0]) + " m<sup>3</sup>";
+	gEBI("MHPprod").innerHTML = s(HWpumpProd[1]) + " m<sup>3</sup>";
+	gEBI("BHPprod").innerHTML = s(HWpumpProd[2]) + " m<sup>3</sup>";
+	gEBI("VBHPprod").innerHTML = s(HWpumpProd[3]) + " m<sup>3</sup>";
+	
+	gEBI("SHPTprod").innerHTML = s(HWpump[0]*HWpumpProd[0]) + " m<sup>3</sup>";
+	gEBI("MHPTprod").innerHTML = s(HWpump[1]*HWpumpProd[1]) + " m<sup>3</sup>";
+	gEBI("BHPTprod").innerHTML = s(HWpump[2]*HWpumpProd[2]) + " m<sup>3</sup>";
+	gEBI("VBHPTprod").innerHTML = s(HWpump[3]*HWpumpProd[3]) + " m<sup>3</sup>";
+	
+	gEBI("SHHP").innerHTML =  abbrNum(HWHF[0],0);
+	gEBI("MHHP").innerHTML =  abbrNum(HWHF[1],0);
+	gEBI("BHHP").innerHTML =  abbrNum(HWHF[2],0);
+	gEBI("VBHHP").innerHTML = abbrNum(HWHF[3],0);
+	
+	gEBI("SHHPprice").innerHTML = "$" + s(HWHFPrice[0]);
+	gEBI("MHHPprice").innerHTML = "$" + s(HWHFPrice[1]);
+	gEBI("BHHPprice").innerHTML = "$" + s(HWHFPrice[2]);
+	gEBI("VBHHPprice").innerHTML = "$" + s(HWHFPrice[3]);
+	
+	gEBI("SHHPprod").innerHTML = s(HWHFProd[0]) + " m<sup>3</sup>";
+	gEBI("MHHPprod").innerHTML = s(HWHFProd[1]) + " m<sup>3</sup>";
+	gEBI("BHHPprod").innerHTML = s(HWHFProd[2]) + " m<sup>3</sup>";
+	gEBI("VBHHPprod").innerHTML = s(HWHFProd[3]) + " m<sup>3</sup>";
+	
+	gEBI("SHHPTprod").innerHTML = s(HWHFProd[0] * HWHF[0]) + " m<sup>3</sup>";
+	gEBI("MHHPTprod").innerHTML = s(HWHFProd[1] * HWHF[1]) + " m<sup>3</sup>";
+	gEBI("BHHPTprod").innerHTML = s(HWHFProd[2] * HWHF[2]) + " m<sup>3</sup>";
+	gEBI("VBHHPTprod").innerHTML = s(HWHFProd[3] * HWHF[3]) + " m<sup>3</sup>";
+	
+	gEBI("SHHPOpC").innerHTML = "$" + s(HWHFOpC[0]);
+	gEBI("MHHPOpC").innerHTML = "$" + s(HWHFOpC[1]);
+	gEBI("BHHPOpC").innerHTML = "$" + s(HWHFOpC[2]);
+	gEBI("VBHHPOpC").innerHTML = "$" + s(HWHFOpC[3]);
+	
+	gEBI("SHHPTOpC").innerHTML = "$" + s(HWHFOpC[0] * HWHF[0]);
+	gEBI("MHHPTOpC").innerHTML = "$" + s(HWHFOpC[1] * HWHF[1]);
+	gEBI("BHHPTOpC").innerHTML = "$" + s(HWHFOpC[2] * HWHF[2]);
+	gEBI("VBHHPTOpC").innerHTML = "$" + s(HWHFOpC[3] * HWHF[3]);
+}
+function refHPipes() {
+	gEBI("HPOprice").innerHTML = "$" + s(HPOprice);
+	gEBI("HPPprice").innerHTML = "$" + s(HPPprice);
+	gEBI("HPPP1").innerHTML = abbrNum(HPPP,0);
+	gEBI("HPPP2").innerHTML = abbrNum(HPPP,0);
+	gEBI("HOPP1").innerHTML = abbrNum(HPO,0);
+	gEBI("HOPP2").innerHTML = abbrNum(HPO,0);
+	gEBI("HSWHW").innerHTML = s(HPP*HPPP);
+	gEBI("HWusage").innerHTML = s(HPP*HPPP*0.5) + " m<sup>3</sup>";
+	var PWH = HWpump[0]*HWpumpProd[0] + HWpump[1]*HWpumpProd[1] + HWpump[2]*HWpumpProd[2] + HWpump[3]*HWpumpProd[3];
+	var HWH = HWHF[0]*HWHFProd[0] + HWHF[1]*HWHFProd[1] + HWHF[2]*HWHFProd[2] + HWHF[3]*HWHFProd[3];
+	gEBI("HWpumped").innerHTML = s(PWH) + " m<sup>3</sup>";
+	gEBI("HWheated").innerHTML = s(HWH) + " m<sup>3</sup>";
+	gEBI("HWPrice").innerHTML = "$" + s(SWHprice);
+}
+function refHover(){
 }

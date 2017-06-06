@@ -1,13 +1,18 @@
 function abbrNum(number, decPlaces) {
-	var number = parseFloat(number);
-	var abbR = ["", "K","M","B","T","Qa","Qi","Sx","Sp","Oc","No","Dc","UDc","DDc","TDc","QaDc","QiDc","SxDc","SpDc","ODc","NDc","Vi","UVi","DVi","TVi","QaVi","QiVi","SxVi","SpVi","OVi","NVi","Tg","UTg","DTg","TTg","QaTg","QiTg","SxTg","SpTg","OTg","NTg","Qd","UQd","DQd","TQd","QaQd","QiQd","SxQd","SpQd","OQd","NQd","Qq","UQq","DQq","TQq","QaQq","QiQq","SxQq","SpQq","OQq","NQq","Sg","USg","DSg","TSg","QaSg","QiSg","SxSg","SpSg","OSg","NSg","St","USt","DSt","TSt","QaSt","QiSt","SxSt","SpSt","OSt","NSt","Og","UOg","DOg","TOg","QaOg","QiOg","SxOg","SpOg","OOg","NOg"];
-	for(i=0;number>=999;i++){
-		var number = number/1000;
-	}
-	for(i=i;abbR.length<i;i--){
-			number = number * 1000;
-	}
-	var number = number.toFixed(decPlaces);
+		if(number<0){
+			var number = number*(-1);
+			var iso = 1;
+		}
+		var number = parseFloat(number);
+		var abbR = ["", "K","M","B","T","Qa","Qi","Sx","Sp","Oc","No","Dc","UDc","DDc","TDc","QaDc","QiDc","SxDc","SpDc","ODc","NDc","Vi","UVi","DVi","TVi","QaVi","QiVi","SxVi","SpVi","OVi","NVi","Tg","UTg","DTg","TTg","QaTg","QiTg","SxTg","SpTg","OTg","NTg","Qd","UQd","DQd","TQd","QaQd","QiQd","SxQd","SpQd","OQd","NQd","Qq","UQq","DQq","TQq","QaQq","QiQq","SxQq","SpQq","OQq","NQq","Sg","USg","DSg","TSg","QaSg","QiSg","SxSg","SpSg","OSg","NSg","St","USt","DSt","TSt","QaSt","QiSt","SxSt","SpSt","OSt","NSt","Og","UOg","DOg","TOg","QaOg","QiOg","SxOg","SpOg","OOg","NOg"];
+		for(i=0;number>=999;i++){
+			var number = number/1000;
+		}
+		if(iso==1){
+			var number = number*(-1);
+			var iso = 0;
+		}
+		var number = number.toFixed(decPlaces);
 	var number = number + abbR[i];
     return number;
 }
@@ -31,24 +36,46 @@ function gEBI(a) {
 	return b;
 }
 function updatePipes() {
-	maxPipes = Math.floor(houses/HPP) - (PO + PP);
-	maxP = Math.floor(money/pricePPP);
-	maxB = Math.floor(money/pricePPM);
-	
-	maxAHouses = Math.floor(houses/HPP - PP - PO);
-	if(maxB>maxAHouses){
-		maxB = maxAHouses
+	var maxPipes = (houses/2) - (PO+PP);
+	var maxPipes = Math.floor(maxPipes);
+	var maxP = Math.floor(money/pricePPP);
+	var maxB = Math.floor(money/pricePPM);
+	if(maxB>maxPipes){
+		var maxB = maxPipes
 	}
 	if(PO<maxP){
-		maxP = PO;
+		var maxP = PO;
+	}
+	var maxPP = Math.floor(money/(pricePPM+pricePPP));
+	if(maxPP>maxPipes){
+		var maxPP = maxPipes;
 	}
 	gEBI("bmp").innerHTML = s(maxB);
 	gEBI("pmp").innerHTML = s(maxP);
-	var maxPP = Math.floor(money/(pricePPM+pricePPP));
-	if(maxPP>maxAHouses){
-		maxPP = maxAHouses;
-	}
 	gEBI("bppM").innerHTML = s(maxPP);
+	var maxHPipes = Math.floor((houses/2) - (HPO + HPPP));
+	var maxHBP = Math.floor(money/HPOprice);
+	var maxHPP = Math.floor(money/HPPprice);
+	var maxHPBP = Math.floor(money/(HPOprice+HPPprice));
+	
+	
+	if(maxHPBP>maxHPipes){
+		maxHPBP = maxHPipes;
+	}
+	if(maxHPP>HPO){
+			maxHPP = HPO;
+	}
+	if(maxHBP>maxHPipes){
+		maxHBP = maxHPipes;
+	}
+	gEBI("maxHPP").innerHTML = s(maxHPP);
+	gEBI("maxHBP").innerHTML = s(maxHBP);
+	gEBI("maxHPBP").innerHTML = s(maxHPBP);
+	gEBI("maxHPPButton").setAttribute("onclick", "placeHpipes(" + Number(maxHPP) + ");");
+	gEBI("maxHBPButton").setAttribute("onclick", "buyHpipes(" + Number(maxHBP) + ");");
+	gEBI("maxHPBPButton").setAttribute("onclick", "buyHpipes(" + Number(maxHPBP) + "); placeHpipes(" + maxHPBP + ");");
+	
+	
 }
 function unabbrNum(number) {
 	var abbrev = ['k', 'm', 'b', 't', 'q'];
@@ -71,4 +98,22 @@ function updateStatsUpper(){
 	gEBI("stW").innerHTML = s(stW);
 	gEBI("trt").innerHTML = s(TW);
 	gEBI("prd").innerHTML = s(PW);
+}
+function getMaxPipes() {
+	var maxPipes = (houses/2) - (PO+PP);
+	var maxPipes = Math.floor(maxPipes);
+	var maxP = Math.floor(money/pricePPP);
+	var maxB = Math.floor(money/pricePPM);
+	if(maxB>maxPipes){
+		var maxB = maxPipes
+	}
+	if(PO<maxP){
+		var maxP = PO;
+	}
+	var maxPP = Math.floor(money/(pricePPM+pricePPP));
+	if(maxPP>maxPipes){
+		var maxPP = maxPipes;
+	}
+	var result = [maxP, maxB, maxPP];
+	return result;
 }

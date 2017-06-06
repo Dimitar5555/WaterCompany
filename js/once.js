@@ -4,18 +4,27 @@ function once() {
 	refTreatment();
 	refReserv();
 	refBank();
+	refHPipes();
 	//treatment production, total production abd price
 	//pump production, total production abd price
 	gEBI("year").innerHTML = year;
 	//...
-	chP(1);
-	chTr(1);
+	changeB('pump', pumpPrice, 1, 'numP', 'PuB');
+	changeS(1, 'numPS', 'PuS');
+	changeB('Tpump', treatPrice, 1, 'numTr', 'TreatPlB');
+	changeS(1, 'numTrS', 'TrPS');
+	changeB('st', stWPrice, 1, 'numBS', 'sBS');
+	changeS(1, 'numSS', 'sSS');
+	changeB('HP', HWpumpPrice, 1, 'numBHWP', 'BHP');
+	changeS(1, 'numSWHP', 'SHP');
+	changeB('HHP', HWHFPrice, 1, 'numBHHP', 'BHHP');
+	changeS(1, 'numSHHP', 'SHHP');
+	
+	
 	chPiO(1);
 	chPiP(1);
-	chTrS(1);
-	chPS(1);
-	chSS(1);
-	chBS(1);
+	chHPiO(1);
+	chHPiP(1);
 	//abbrnum
 	refUpgrades();
 	
@@ -40,6 +49,7 @@ function once() {
 	start();
 	
 	refUpper();
+	refHeat();
 	
 	gEBI("inv").value = 0;
 	gEBI("wd").value = 0;

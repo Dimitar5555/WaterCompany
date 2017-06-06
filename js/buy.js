@@ -1,18 +1,20 @@
 function buyPipe(a) {
-	if(houses/HPP >= (PP+PO+a)){
-		if(money>= a*pricePPM) {
+	if(money>= a*pricePPM) {
+		if(houses/2>=PO+PP+a){
 			var a=a;
 			var b=PP;
 			var c=PO;
-			PO = c + a;
+			PO = Number(c) + Number(a);
 			money = money - a*pricePPM;
 			gEBI("PM").innerHTML = PO;
 			refMoney();
-			refPipes();
+			updatePipes();
 		}
-		else {Error("Not enough money")}
+		else{
+			Error("Not enough houses");
+		}
 	}
-	else{Error("Not enough houses");}
+	else {Error("Not enough money to buy " + abbrNum(a,0) + " pipes")}
 }
 function placePipe(a) {
 	if(money>=a*pricePPP) {
@@ -20,24 +22,21 @@ function placePipe(a) {
 			var a=a;
 			var b=PP;
 			var c=PO;
-			if(houses >= (b+c-a)*2){	
-				PP = PP + a;
-				PO = PO - a;
-				money = money - a*pricePPP;
-				gEBI("PM").innerHTML = s(PO);
-				gEBI("PP").innerHTML = s(PP);
-				gEBI("sup").innerHTML = s(HPP*PP);
-				gEBI("money").innerHTML = s(money);
-				refMoney();
-				gEBI("prd").innerHTML = s(PW);
-				gEBI("trt").innerHTML = s(TW);
-				UW = HPP * WPH * PP;
-				gEBI("NW").innerHTML = s(UW);
-				addWater = s(extraWA * HPP * PP);
-				gEBI("extraW").innerHTML = s(extraWA * HPP * PP);
-				refPipes();
-			}
-			else{Error("Not enough houses");}
+			PP = Number(PP) + Number(a);
+			PO = Number(PO) - Number(a);
+			money = money - a*pricePPP;
+			gEBI("PM").innerHTML = s(PO);
+			gEBI("PP").innerHTML = s(PP);
+			gEBI("sup").innerHTML = s(HPP*PP);
+			gEBI("money").innerHTML = s(money);
+			refMoney();
+			gEBI("prd").innerHTML = s(PW);
+			gEBI("trt").innerHTML = s(TW);
+			UW = HPP * WPH * PP;
+			gEBI("NW").innerHTML = s(UW);
+			addWater = s(extraWA * HPP * PP);
+			gEBI("extraW").innerHTML = s(extraWA * HPP * PP);
+			updatePipes();
 		}
 		else{Error("Not enough owned pipes");}
 	}
@@ -46,15 +45,14 @@ function placePipe(a) {
 function buyPump(a,b) {
 	var Wprice = pumpPrice[a];
 	if(money>=(Wprice*b)) {
-		var x=pumps[a];
-		pumps[a] = x+b;
+		var x = parseInt(pumps[a]);
+		pumps[a] = x + b;
 		money = money - Wprice*b;
 		refMoney();
 		refPumps();
 		PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
 		gEBI("prd").innerHTML = s(PW);
-		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-		gEBI("fopC").innerHTML = s(opC);
+		refFin();
 	}
 	else{NEMshow();}
 }
@@ -62,7 +60,7 @@ function buyTreatmentPlant(a,b) {
 	var TrPprice = treatPrice[a];
 	if(money>=TrPprice*b){
 		var x = parseInt(treatPla[a]);
-		treatPla[a] = x+b;
+		treatPla[a] = x + b;
 		money = money - TrPprice*b;
 		refMoney();
 		refTreatment();
@@ -84,4 +82,64 @@ function buyReserv(a,b) {
 		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
 		gEBI("fopC").innerHTML = s(opC);
 	}
+}
+function buyHpipes(a){
+	if(money>=a*HPOprice){
+		if(houses/2>=HPO+HPPP+a){
+			HPO = HPO + a;
+			money = money - HPOprice*a;
+			refHPipes();
+			refMoney();
+		}
+		else{
+			Error("Not enough houses");
+		}
+	}
+	else{
+		Error("Not enough money");
+	}
+	updatePipes();
+}
+function placeHpipes(a){
+	if(money>=a*HPPprice){
+		if(HPO-a>=0){
+			HPPP = HPPP + a;
+			HPO = HPO - a;
+			money = money - HPPprice*a;
+			refHPipes();
+			refMoney();
+			updatePipes();
+		}
+		else{
+			Error("Not enough owned heat pipes");
+		}
+	}
+	else{
+		Error("Not enough money");
+	}
+}
+
+function buyCCP(a,b){
+	if(money>=b*HWHFPrice[a]){
+		HWHF[a] = HWHF[a] + b;
+		money = money - HWHFPrice[a]*b;
+		refHeat();
+		refMoney();
+		updatePipes();
+		refHPipes();
+	}
+	else{
+		Error("Not enough money");
+	}
+}
+function buyCCPpump(a,b){
+	if(money>=b*HWpumpPrice[a]){
+		money = money - HWpumpPrice[a]*b;
+		HWpump[a] = HWpump[a] + b;
+		refHeat();
+		refMoney();
+		updatePipes();
+		refHPipes();
+	}
+	updatePipes();
 }
