@@ -45,7 +45,7 @@ function sellCCP(a,b){
 function sellCCPpump(a,b){
 	if(HWpump[a]>=b){
 		HWpump[a] = HWpump[a] -b;
-		money = money - HWpumpPrice[a]*b;
+		money = money + HWpumpPrice[a]*b;
 		refMoney();
 		refHeat();
 		refHPipes();

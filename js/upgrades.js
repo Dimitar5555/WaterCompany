@@ -105,7 +105,7 @@ function incInr() {
 }
 function decPumpOpCost() {
 	if(money>=priceDecPumpOpCost){
-		money = money - priceDecPumpOpCost;
+		money - money - priceDecPumpOpCost;
 		priceDecPumpOpCost = priceDecPumpOpCost*1.5;
 		pumpCost[0] = pumpCost[0]*0.9;
 		pumpCost[1] = pumpCost[1]*0.9;
@@ -183,10 +183,10 @@ function decHWPprice() {
 		refUpgrades();
 		refUpper();
 		chHPiO(buyHpipesNumber);
-		refmoney();
+		refMoney();
 	}
 }
-function decHWPpriceplace(){
+function decHWPpriceplace() {
 	if(money>=decPriceHpipesPlace){
 		money = money - decPriceHpipesPlace;
 		decPriceHpipesPlace = decPriceHpipesPlace * 1.5;
@@ -194,6 +194,36 @@ function decHWPpriceplace(){
 		refUpgrades();
 		refUpper();
 		chHPiP(placeHpipesNumber);
-		refmoney();
+		refMoney();
+	}
+}
+function incProdHWpumps() {
+	if(money>=PriceincProdHWpumps){
+		money = money - PriceincProdHWpumps;
+		PriceincProdHWpumps = PriceincProdHWpumps * 1.5;
+		HWpumpProd[0] = HWpumpProd[0] * 1.1;
+		HWpumpProd[1] = HWpumpProd[1] * 1.1;
+		HWpumpProd[2] = HWpumpProd[2] * 1.1;
+		HWpumpProd[3] = HWpumpProd[3] * 1.1;
+		refUpgrades();
+		refUpper();
+		refMoney();
+		refUpper();
+		refHeat();
+	}
+}
+function decHWpumpsOpC() {
+	if(money>=priceDecHWpumpOpC){
+		money = money - priceDecHWpumpOpC;
+		priceDecHWpumpOpC = priceDecHWpumpOpC * 1.5;
+		HWpumpOpC[0] = HWpumpOpC[0]*0.9;
+		HWpumpOpC[1] = HWpumpOpC[1]*0.9;
+		HWpumpOpC[2] = HWpumpOpC[2]*0.9;
+		HWpumpOpC[3] = HWpumpOpC[3]*0.9;
+		refUpgrades();
+		refUpper();
+		refMoney();
+		refUpper();
+		refHeat();
 	}
 }
