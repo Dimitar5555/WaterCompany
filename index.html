@@ -18,10 +18,11 @@
 			ga('send', 'pageview');
 
 		</script>
+
 		<script>HardReset = 0;</script>
 		<script src="js/main.js"></script>
-		<script src="js/save.js"></script>
 		<script src="js/setVar.js"></script>
+		<script src="js/save.js"></script>
 		<script src="js/refresh.js"></script>
 		<script src="js/script.js"></script>
 		<script src="js/change.js"></script>
@@ -30,8 +31,8 @@
 		<script src="js/upgrades.js"></script>
 		<script src="js/sell.js"></script>
 		<script src="js/bank.js"></script>
-		<script src="js/jQuery.js"></script>
-		<script src="js/bootstrap.js"></script>
+		<script src="js/lib/jQuery.js"></script>
+		<script src="js/lib/bootstrap.js"></script>
 		<script src="js/showErrors.js"></script>
 		
 		<link id="STYLE-EL" rel="stylesheet" href="css/bootstrap.css"/>
@@ -97,6 +98,16 @@
 			}
 		</style>
 		
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-97511038-1', 'auto');
+			ga('send', 'pageview');
+
+		</script>
 	</head>
 	<body style="padding: 5px; margin: 5px;" onload="gEBI('fgg').click();chechSaveFile();">
 	<div>
@@ -108,11 +119,37 @@ Year: <span id="year"></span>
 Month: <span id="month"></span></pre>
 		</div>
 	</div>
-		<table class="table" style="width: 775px; white-space: nowrap;">
+		<table class="table" style="width: 750px; display: table;">
 			<tr>
 				<td>Money</td>
 				<td>$<span id="money"></span> <span id="income"></span></td>
-				<td colspan="1" id="warnAll"><span id="percentBankUpper"></span>% of the profits are transfered to the bank account</td>
+				<td colspan="3" id="warnAll" style="white-space: nowrap; "><span id="percentBankUpper"></span>% of the profits are transfered to the bank account</td>
+			</tr>
+			<tr>
+				<th colspan="4">Cold water</th>
+				<th colspan="4">Hot water</th>
+			</tr>
+			<tr>
+				<td>Water Pumped</td>
+				<td><span id="prd"></span> m<sup>3</sup></td>
+				<td>Water Treated</td>
+				<td><span id="trt"></span> m<sup>3</sup></td>
+				<td>Hot water pumped</td>
+				<td id="HWpumped"></td>
+				<td>Water heated</td>
+				<td id="HWheated"></td>
+			</tr>
+			<tr>
+				<td>Water Used</td>
+				<td><span id="NW"></span> m<sup>3</sup></td>
+				<td>Extra water</td>
+				<td><span id="extraW"></span> m<sup>3</sup></td>
+				<td>Hot water used</td>
+				<td id="HWusage"></td>
+			</tr>
+			<tr>
+				<td colspan="2">Stored water/max</td>
+				<td colspan="2"><span id="stW"></span> m<sup>3</sup>/<span id="capacitystW"></span> m<sup>3</sup> <span id="stWInc"></span></td>
 			</tr>
 		</table>
 		<br/>
@@ -183,7 +220,7 @@ Month: <span id="month"></span></pre>
 					<li><a data-toggle="tab" href="#upgradestabs6">Bank</a></li>
 				</ul>
 			</div>
-			<div class="tab-content col-md-10" style="float: left;">
+			<div class="tab-content col-md-10">
 				<div id="upgradestabs1" class="tab-pane active">
 					<h3 class="default btn-link">Pumps</h3>
 					<table class="table">
@@ -301,12 +338,41 @@ Month: <span id="month"></span></pre>
 					</table>
 				</div>
 				<div id="upgradestabs7" class="tab-pane">
-					<h3 class="default btn-link">Pumps</h3>
-					WORK IN PROGRESS
+					<h3 class="default btn-link">Heat pumps</h3>
+					<table class="table">
+						<tr>
+							<td>Increase production of heat pumps by 10% - $<span id="priceIncHPumpsProd"></span><br />
+							Small heat pump:    <span id="prodBHpumps0"></span> m<sup>3</sup>-><span id="prodAHpumps0"></span> m<sup>3</sup><br />
+							Medium heat pump:   <span id="prodBHpumps1"></span> m<sup>3</sup>-><span id="prodAHpumps1"></span> m<sup>3</sup><br />
+							Big heat pump:      <span id="prodBHpumps2"></span> m<sup>3</sup>-><span id="prodAHpumps2"></span> m<sup>3</sup><br />
+							Very big heat pump: <span id="prodBHpumps3"></span> m<sup>3</sup>-><span id="prodAHpumps3"></span> m<sup>3</sup>
+							</td>
+							<td><button class="btn btn-primary" onclick="incProdHWpumps()">Increase</button></td>
+							<td>Decrease operating costs of heat pumps by 10% - $<span id="priceDecHWpumpOpC"></span><br />
+							Small heat pump:    $<span id="opcbHW0"></span>->$<span id="opcaHW0"></span><br />
+							Medium heat pump:   $<span id="opcbHW1"></span>->$<span id="opcaHW1"></span><br />
+							Big heat pump:      $<span id="opcbHW2"></span>->$<span id="opcaHW2"></span><br />
+							Very big heat pump: $<span id="opcbHW3"></span>->$<span id="opcaHW3"></span>
+							</td>
+							<td><button class="btn btn-primary" onclick="decHWpumpsOpC()">Decrease</button></td>
+						</tr>
+					</table>
 				</div>
 				<div id="upgradestabs8" class="tab-pane">
 					<h3 class="default btn-link">Heating plants</h3>
-					WORK IN PROGRESS
+					<table class="table">
+						<tr>
+							<td>Increase production of heating plants by 10% - $<span id="priceIncHeatHeatingFac"></span><br />
+							Small heating plant:    <span id="prodbHHW0"></span> m<sup>3</sup>-><span id="prodaHHW0"></span> m<sup>3</sup><br />
+							Medium heating plant:   <span id="prodbHHW1"></span> m<sup>3</sup>-><span id="prodaHHW1"></span> m<sup>3</sup><br />
+							Big heating plant:      <span id="prodbHHW2"></span> m<sup>3</sup>-><span id="prodaHHW2"></span> m<sup>3</sup><br />
+							Very big heating plant: <span id="prodbHHW3"></span> m<sup>3</sup>-><span id="prodaHHW3"></span> m<sup>3</sup>
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
 				</div>
 				<div id="upgradestabs9" class="tab-pane">
 					<h3 class="default btn-link">Heat pipes</h3>
@@ -328,33 +394,12 @@ Month: <span id="month"></span></pre>
 		<div id="tabs-3" class="tab-pane">
 			<br />
 			<ul class="nav nav-stacked" style="font-size: 17px; float: left">
-				<li><a data-toggle="tab" href="#watertabs1">Overview</a></li>
 				<li><a data-toggle="tab" href="#watertabs2">Water pumps</a></li>
 				<li><a data-toggle="tab" href="#watertabs3">Water storage</a></li>
 				<li><a data-toggle="tab" href="#watertabs4">Treatment plants</a></li>
 				<li><a data-toggle="tab" href="#watertabs5">Pipes</a></li>
 			</ul>
 			<div class="tab-content">
-				<div id="watertabs1" class="tab-pane active">
-					<table class="table">
-						<tr>
-							<td>Water Produced</td>
-							<td><span id="prd"></span> m<sup>3</sup></td>
-							<td>Water Treated</td>
-							<td><span id="trt"></span> m<sup>3</sup></td>
-						</tr>
-						<tr>
-							<td>Water Used</td>
-							<td><span id="NW"></span> m<sup>3</sup></td>
-							<td>Extra water</td>
-							<td><span id="extraW"></span> m<sup>3</sup></td>
-							
-						</tr>
-						<tr>
-							<td colspan="2">Stored water/max</td>
-							<td colspan="2"><span id="stW"></span> m<sup>3</sup>/<span id="capacitystW"></span> m<sup>3</sup> <span id="stWInc"></span></td></tr>
-					</table>
-				</div>
 				<div id="watertabs2" class="tab-pane">
 					<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
 					<table>
@@ -751,7 +796,7 @@ Month: <span id="month"></span></pre>
 					<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
 					<button class="btn btn-primary" onclick="var buyPipesMax = getMaxPipes(); buyPipe(buyPipesMax[0],0);">Buy <span id="bmp"></span></button>
 					<button class="btn btn-primary" onclick="var placePipesMax = getMaxPipes();placePipe(placeMaxPipes[1]);">Place <span id="pmp"></span></button>
-					<button class="btn btn-primary" onclick="var temp = getMaxPipes(); buyPipe(temp[2]); placePipe(temp[2]);">Buy & place <span id="bppM"></span></button>
+					<button id="btnBPpipes" class="btn btn-primary" onclick="var temp = getMaxPipes(); buyPipe(temp[2]); placePipe(temp[2]);">Buy & place <span id="bppM"></span></button>
 				</div>
 			</div>
 		</div>
@@ -938,6 +983,14 @@ Month: <span id="month"></span></pre>
 		</div>
 		
 		<div id="tabs-11" class="tab-pane">
+			<h4>Version 0.3.4.1 Beta - 8 June 2017</h4>
+			<ul>
+				<li>Fixed bug: not loading data from the new update correctly</li>
+				<li>Fixed bug: autobuy functions</li>
+				<li>Added notification for autobuild water pipes</li>
+				<li>Balance: houses are increased by the coresponding percent every day/31(ie the increase is mountly)</li>
+			</ul>
+			<hr />
 			<h4>Version 0.3.4 Beta - 6 June 2017</h4>
 			<ul>
 				<li>Redesigned water menus</li>
@@ -1072,18 +1125,6 @@ Month: <span id="month"></span></pre>
 						<tr>
 							<td>Heat water price</td>
 							<td id="HWPrice"></td>
-						</tr>
-					</table>
-					<table class="table" style="width: 400px; ">
-						<tr>
-							<td>Water pumped</td>
-							<td id="HWpumped"></td>
-							<td>Water heated</td>
-							<td id="HWheated"></td>
-						</tr>
-						<tr>
-							<td>Heat water used</td>
-							<td id="HWusage"></td>
 						</tr>
 					</table>
 				</div>
@@ -1470,7 +1511,7 @@ function drawCitya() {
 }
 drawCitya();
 </script>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="js/alertify.min.js"></script>
+	<script src="js/lib/jquery.1.9.1.js"></script>
+	<script src="js/lib/alertify.min.js"></script>
 	</body>
 </html>
