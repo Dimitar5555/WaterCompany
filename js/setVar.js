@@ -74,5 +74,14 @@ function checkVars() {
 	if(typeof decPriceHpipesPlace=='undefined'){
 		decPriceHpipesPlace = 10000;
 	}
-	once();
+	if(typeof PriceincProdHWpumps=='undefined'){
+		PriceincProdHWpumps = 100000;
+	}
+	if(typeof priceDecHWpumpOpC=='undefined'){
+		priceDecHWpumpOpC = 100000;
+	}
+	if(typeof priceIncHeatHeatingFac=='undefined'){
+		priceIncHeatHeatingFac = 100000;
+	}
 }
+checkVars();

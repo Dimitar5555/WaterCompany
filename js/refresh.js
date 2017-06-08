@@ -194,6 +194,33 @@ function refUpgrades() {
 	gEBI("BdecBHP").innerHTML = s(HPOprice);
 	gEBI("decPriceHpipesPlace").innerHTML = s(decPriceHpipesPlace);
 	gEBI("AdecBHP").innerHTML = s(HPOprice*0.95);
+	gEBI("prodBHpumps0").innerHTML = s(HWpumpProd[0]);
+	gEBI("prodBHpumps1").innerHTML = s(HWpumpProd[1]);
+	gEBI("prodBHpumps2").innerHTML = s(HWpumpProd[2]);
+	gEBI("prodBHpumps3").innerHTML = s(HWpumpProd[3]);
+	gEBI("prodAHpumps0").innerHTML = s(HWpumpProd[0]*1.1);
+	gEBI("prodAHpumps1").innerHTML = s(HWpumpProd[1]*1.1);
+	gEBI("prodAHpumps2").innerHTML = s(HWpumpProd[2]*1.1);
+	gEBI("prodAHpumps3").innerHTML = s(HWpumpProd[3]*1.1);
+	gEBI("priceIncHPumpsProd").innerHTML = s(PriceincProdHWpumps);
+	gEBI("priceDecHWpumpOpC").innerHTML = s(priceDecHWpumpOpC);
+	gEBI("opcbHW0").innerHTML = s(HWpumpOpC[0]);
+	gEBI("opcbHW1").innerHTML = s(HWpumpOpC[1]);
+	gEBI("opcbHW2").innerHTML = s(HWpumpOpC[2]);
+	gEBI("opcbHW3").innerHTML = s(HWpumpOpC[3]);
+	gEBI("opcaHW0").innerHTML = s(HWpumpOpC[0]*0.9);
+	gEBI("opcaHW1").innerHTML = s(HWpumpOpC[1]*0.9);
+	gEBI("opcaHW2").innerHTML = s(HWpumpOpC[2]*0.9);
+	gEBI("opcaHW3").innerHTML = s(HWpumpOpC[3]*0.9);
+	gEBI("prodbHHW0").innerHTML = s(HWHFProd[0]);
+	gEBI("prodbHHW1").innerHTML = s(HWHFProd[1]);
+	gEBI("prodbHHW2").innerHTML = s(HWHFProd[2]);
+	gEBI("prodbHHW3").innerHTML = s(HWHFProd[3]);
+	gEBI("prodaHHW0").innerHTML = s(HWHFProd[0]*1.1);
+	gEBI("prodaHHW1").innerHTML = s(HWHFProd[1]*1.1);
+	gEBI("prodaHHW2").innerHTML = s(HWHFProd[2]*1.1);
+	gEBI("prodaHHW3").innerHTML = s(HWHFProd[3]*1.1);
+	gEBI("priceIncHeatHeatingFac").innerHTML = s(priceIncHeatHeatingFac);
 }
 function refPipes() {
 	gEBI("PPM").innerHTML = abbrNum(pricePPM.toFixed(2),2);

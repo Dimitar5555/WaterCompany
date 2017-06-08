@@ -58,6 +58,9 @@ function chechSaveFile() {
 		priceIncHW = upgradesPrices[10];
 		decPriceHPipesBuy = upgradesPrices[11];
 		decPriceHpipesPlace = upgradesPrices[12];
+		PriceincProdHWpumps = upgradesPrices[13];
+		priceDecHWpumpOpC = upgradesPrices[14];
+		priceIncHeatHeatingFac = upgradesPrices[15];
 		fast = 500;
 		
 		var heatWater = JSON.parse(localStorage.hotWater);
@@ -185,6 +188,7 @@ function chechSaveFile() {
 		houses = 1000;
 		HPP = 2;
 		WPH = 3;
+		priceDecHWpumpOpC = 100000;
 		SWHprice = 10;
 		priceIncHW = 10000;
 		price = 0.3;
@@ -219,6 +223,7 @@ function chechSaveFile() {
 		stWC = [0, 0, 0 , 0];
 		loan = 0;
 		loanInterest = 11;
+		priceIncHeatHeatingFac = 100000;
 		priceDecPumpOpCost = 10000;
 		priceDecTrOpCost = 10000;
 		priceDecSOpCost = 10000;
@@ -242,9 +247,9 @@ function chechSaveFile() {
 		HPOprice = 10000;
 		HPPprice = 1000;
 		priceIncStSt = 10000;
+		PriceincProdHWpumps = 100000;
 		decPriceHPipesBuy = 100000;
 		localStorage.setItem("offTime", time);
-		checkVars();
 		loadSets();
 		save();
 	}
@@ -254,7 +259,7 @@ function save() {
 	saveSets();
 	var time = Date.now();
 	localStorage.setItem("offTime", time);
-	var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt, priceIncStSt, priceIncHW, decPriceHPipesBuy, decPriceHpipesPlace];
+	var upgradesPrices = [priceIncP, priceDecPPP, priceIncWaterU, priceIncRateHouses, priceDecBP, priceDecPP, priceIncWaterProd, priceIncTreatProd, priceIncInt, priceIncStSt, priceIncHW, decPriceHPipesBuy, decPriceHpipesPlace, PriceincProdHWpumps, priceDecHWpumpOpC, priceIncHeatHeatingFac];
 	var pumptreat = [pumps, pumpProd, pumpPrice, treatPla, treatProd, treatPrice, pumpCost, treatCost, stWCost, stWPrice, stWProd, stWC];
 	var prices = [pricePPM, pricePPP, loan, loanInterest, priceDecPumpOpCost, priceDecTrOpCost, priceDecSOpCost, priceIncMaxL, maxLoan];
 	var other = [selectedCity, houses, HPP, WPH, price, PP, PO, money, hour, day, incRateHouses, curBalance, interest, stW, year, month, SWHprice];

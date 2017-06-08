@@ -168,10 +168,30 @@ window.setInterval(function(){
 		changeweat();
 		retLoanAuto();
 		autoIncBal();
+		var PPTemp = PP;
+		var HPPTemp = parseInt(HPPP);
+		var hbc = 0;
+		var hbh = 0;
 		if(buyMax>0){
-			var temp = unAbbrNum(gEBI('bppM').innerHTML,2);
-			buyPipe(temp);
-			placePipe(temp);
+			gEBI("btnBPpipes").click();
+			if(PPTemp<PP){
+				var hbc = 1;
+			}
+		}
+		if(buyMaxH>0){
+			gEBI("maxHPBPButton").click();
+			if(HPPP>HPPTemp){
+				var hbh = 1;
+			}
+		}
+		if(hbh==1 && hbc==1){
+			Success(s(PP-PPTemp) + " cold water pipes and " + s(HPPP-HPPTemp) + " hot water pipes have been build");
+		}
+		else if(hbc==1){
+			Success(s(PP-PPTemp) + " cold water pipes have been build");
+		}
+		else if(hbh==1){
+			Success(s(HPPP-HPPTemp) + " hot water pipes have been build");
 		}
 	}
 	if(bankpercent>0){
@@ -197,15 +217,12 @@ window.setInterval(function(){
 		gEBI("month").innerHTML = month;
 		updatePipes();
 	}, fast);}
+	
+	
 function incHouses(){
 	oldhouses = houses;
-	houses = Math.floor((houses/100)*incRateHouses);
-	if(houses<1000){
-		gEBI("houses").innerHTML = houses;
-	}
-	else{
-		gEBI("houses").innerHTML = s(houses);
-	}
+	houses = houses + (((houses/100)*incRateHouses)-houses)/372;
+	gEBI("houses").innerHTML = s(houses);
 	if(oldhouses<houses && notBH == 0){
 		Success(abbrNum(houses-oldhouses,0) + " new houses have been build");
 	}
