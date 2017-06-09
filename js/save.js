@@ -250,8 +250,8 @@ function chechSaveFile() {
 		PriceincProdHWpumps = 100000;
 		decPriceHPipesBuy = 100000;
 		localStorage.setItem("offTime", time);
-		loadSets();
 		save();
+		loadSets();
 	}
 }
 HardReset = 0; 
