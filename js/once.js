@@ -47,7 +47,6 @@ function once() {
 	changeweat();
 	gEBI("month").innerHTML = month;
 	start();
-	
 	refUpper();
 	refHeat();
 	
@@ -55,5 +54,4 @@ function once() {
 	gEBI("wd").value = 0;
 	document.getElementsByClassName("city").item(0).innerHTML = selectedCity;
 	document.getElementsByTagName("title").item(0).innerHTML = "Water Company - " + selectedCity;
-	refFin();
 }
