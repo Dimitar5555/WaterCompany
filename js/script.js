@@ -221,10 +221,10 @@ window.setInterval(function(){
 	
 function incHouses(){
 	oldhouses = houses;
-	houses = houses + (((houses/100)*incRateHouses)-houses)/372;
+	houses = houses + (((houses/100)*incRateHouses)-houses)/7;
 	gEBI("houses").innerHTML = s(houses);
 	if(oldhouses<houses && notBH == 0){
-		Success(abbrNum(houses-oldhouses,0) + " new houses have been build");
+		Success(abbrNum(houses-oldhouses,0) + " new houses have been built");
 	}
 	updatePipes();
 }
