@@ -88,7 +88,7 @@ function IncTreatProd() {
 }
 function incInr() {
 	if(0<=(money-priceIncInt)) {
-		if(interest<15){
+		if(interest<25){
 			money = money - priceIncInt;
 			gEBI("money").innerHTML = abbrNum(money.toFixed(2),2);
 			interest = interest + 0.25;
@@ -220,6 +220,21 @@ function decHWpumpsOpC() {
 		HWpumpOpC[1] = HWpumpOpC[1]*0.9;
 		HWpumpOpC[2] = HWpumpOpC[2]*0.9;
 		HWpumpOpC[3] = HWpumpOpC[3]*0.9;
+		refUpgrades();
+		refUpper();
+		refMoney();
+		refUpper();
+		refHeat();
+	}
+}
+function incHWPprod() {
+	if(money>=priceIncHeatHeatingFac){
+		money = money - priceIncHeatHeatingFac;
+		priceIncHeatHeatingFac = priceIncHeatHeatingFac * 1.5;
+		HWHFProd[0] = HWHFProd[0]*1.1;
+		HWHFProd[1] = HWHFProd[1]*1.1;
+		HWHFProd[2] = HWHFProd[2]*1.1;
+		HWHFProd[3] = HWHFProd[3]*1.1;
 		refUpgrades();
 		refUpper();
 		refMoney();
