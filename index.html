@@ -551,7 +551,7 @@ Month: <span id="month"></span></pre>
 								<button class="btn btn-danger" onclick="changeS(100000000000, 'numSS', 'sSS');">100B</button>
 							</td>
 							<td>
-								<input id="SSS"  class="form-control" style="width: 150px;"onkeyup="var SSS = unAbbrNum(gEBI('SSS').value,0); if(SSS>0){changeS(SSS, 'numSS', 'sSS');}"/>
+								<input id="SSS"  class="form-control" style="width: 150px;" onkeyup="var SSS = unAbbrNum(gEBI('SSS').value,0); if(SSS>0){changeS(SSS, 'numSS', 'sSS');}"/>
 							</td>
 						</tr>
 					</table>
@@ -987,6 +987,7 @@ Month: <span id="month"></span></pre>
 			<ul>
 				<li>Fixed bug: not loading data from the new update correctly</li>
 				<li>Fixed bug: autobuy functions</li>
+				<li>Fixed bug: custom number inputs in how water tab not working</li>
 				<li>Added notification for autobuild water pipes</li>
 				<li>Balance: houses are increased by the coresponding percent every day/7(ie the increase is weekly)</li>
 				<li>Balance: max interest rate is 25% now</li>
@@ -1152,7 +1153,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100000000000, 'numBHWP', 'BHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="BWHP"  class="form-control" style="width: 150px;"onkeyup="var BWHP = gEBI('BWHP').value; if(BWHP){chBHP(unAbbrNum(BWHP, 2));}else{chBHP(BWHP);}"/></td>
+							<td><input id="BWHP"  class="form-control" style="width: 150px;" onkeyup="var BWHP = unAbbrNum(gEBI('BWHP').value,0); if(BWHP>0){changeB('HP', HWpumpPrice, BWHP, 'numBHWP', 'BHP')}"/></td>
 						</tr>
 						<tr>
 							<td>Sell</td>
@@ -1174,7 +1175,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSWHP', 'SHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/></td>
+							<td><input id="inPP"  class="form-control" style="width: 150px;" onkeyup="var inPP = unAbbrNum(gEBI('inPP').value,0); if(inPP>0){changeS(inPP, 'numSWHP', 'SHP')}"/></td>
 						</tr>
 					</table>
 					<table class="table table-bordered">
@@ -1262,7 +1263,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100000000000, 'numBHHP', 'BHHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="BWHP"  class="form-control" style="width: 150px;"onkeyup="var BWHP = gEBI('BWHP').value; if(BWHP){chBHP(unAbbrNum(BWHP, 2));}else{chBHP(BWHP);}"/></td>
+							<td><input id="BWHHP"  class="form-control" style="width: 150px;" onkeyup="var BWHHP = unAbbrNum(gEBI('BWHHP').value,0); if(BWHHP>0){changeB('HHP', HWHFPrice, BWHHP, 'numBHHP', 'BHHP');}"/></td>
 						</tr>
 						<tr>
 							<td>Sell</td>
@@ -1284,7 +1285,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSHHP', 'SHHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/></td>
+							<td><input id="inHHPP"  class="form-control" style="width: 150px;"onkeyup="var inHHPP = unAbbrNum(gEBI('inHHPP').value,0); if(inHHPP>0){changeS(inHHPP, 'numSHHP', 'SHHP')}"/></td>
 						</tr>
 					</table>
 					<table class="table table-bordered">
