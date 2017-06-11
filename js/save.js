@@ -194,7 +194,7 @@ function chechSaveFile() {
 		price = 0.3;
 		PP = 10;
 		PO = 0;
-		money = 10000000000000000000000000000000000000000000000000000000;
+		money = 0;
 		priceIncP = 100;
 		decPriceHpipesPlace = 10000;
 		priceDecPPP = 10000;
