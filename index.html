@@ -29,7 +29,6 @@
 		<script src="js/once.js"></script>
 		<script src="js/buy.js"></script>
 		<script src="js/upgrades.js"></script>
-		<script src="js/sell.js"></script>
 		<script src="js/bank.js"></script>
 		<script src="js/lib/jQuery.js"></script>
 		<script src="js/lib/bootstrap.js"></script>
@@ -119,7 +118,7 @@ Year: <span id="year"></span>
 Month: <span id="month"></span></pre>
 		</div>
 	</div>
-		<table class="table" style="width: 750px; display: table;">
+		<table class="table" style="width: 950px; display: table;">
 			<tr>
 				<td>Money</td>
 				<td>$<span id="money"></span> <span id="income"></span></td>
@@ -231,14 +230,14 @@ Month: <span id="month"></span></pre>
 								Big pump:      <span id="pumpProdB3"></span>-><span id="pumpProdA3"></span><br />
 								Very big pump: <span id="pumpProdB4"></span>-><span id="pumpProdA4"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="IncWaterProd()">Increase</button></td>
+							<td><button class="btn btn-primary" onclick="incProd('pumpProd', 'priceIncWaterProd')">Increase</button></td>
 							<td>Decrease operating costs of pumps by 10% - $<span id="priceDecOpPump"></span><br />
 								Small pump:    $<span id="opCPB1"></span>->$<span id="opCPA1"></span><br />
 								Medium pump:   $<span id="opCPB2"></span>->$<span id="opCPA2"></span><br />
 								Big pump:      $<span id="opCPB3"></span>->$<span id="opCPA3"></span><br />
 								Very big pump: $<span id="opCPB4"></span>->$<span id="opCPA4"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="decPumpOpCost();">Decrease</button></td>
+							<td><button class="btn btn-primary" onclick="decopc('pumpCost', 'priceDecPumpOpCost')">Decrease</button></td>
 						</tr>
 					</table>
 				</div>
@@ -252,14 +251,14 @@ Month: <span id="month"></span></pre>
 								Big treatment plant:      <span id="treatProdB3"></span>-><span id="treatProdA3"></span><br />
 								Very big treatment plant: <span id="treatProdB4"></span>-><span id="treatProdA4"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="IncTreatProd()">Increase</button></td>
+							<td><button class="btn btn-primary" onclick="incProd('treatProd', 'priceIncTreatProd')">Increase</button></td>
 							<td>Decrease operating costs of treatment plants by 10% - $<span id="priceDecOpTreat"></span><br />
 								Small treatment plant:    $<span id="opCTB1"></span>->$<span id="opCTA1"></span><br />
 								Medium treatment plant:   $<span id="opCTB2"></span>->$<span id="opCTA2"></span><br />
 								Big treatment plant:      $<span id="opCTB3"></span>->$<span id="opCTA3"></span><br />
 								Very big treatment plant: $<span id="opCTB4"></span>->$<span id="opCTA4"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="decTrOpCost();">Decrease</button></td>
+							<td><button class="btn btn-primary" onclick="decopc('treatCost', 'priceDecTrOpCost');">Decrease</button></td>
 						</tr>
 					</table>
 				</div>
@@ -267,20 +266,20 @@ Month: <span id="month"></span></pre>
 					<h3 class="default btn-link">Water storage</h3>
 					<table class="table">
 						<tr>
-							<td>Decrease operating costs of storage tanks by 10% - $<span id="priceDecOpStW"></span><br />
-							Small storage:    $<span id="opCstWB1"></span>->$<span id="opCstWA1"></span><br />
-							Medium storage:   $<span id="opCstWB2"></span>->$<span id="opCstWA2"></span><br />
-							Big storage:      $<span id="opCstWB3"></span>->$<span id="opCstWA3"></span><br />
-							Very big storage: $<span id="opCstWB4"></span>->$<span id="opCstWA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decSOpCost();">Decrease</button></td>
 							<td>Increase capacity of water storage units by 10% - $<span id="priceIncStSt"></span><br />
 							Small storage:    <span id="Bstst1"></span>m<sup>3</sup>-><span id="Astst1"></span><br />
 							Medium storage:   <span id="Bstst2"></span>m<sup>3</sup>-><span id="Astst3"></span><br />
 							Big storage:      <span id="Bstst3"></span>m<sup>3</sup>-><span id="Astst4"></span><br />
 							Very big storage: <span id="Bstst4"></span>m<sup>3</sup>-><span id="Astst2"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="incCapWater()">Increase</button></td>
+							<td><button class="btn btn-primary" onclick="incProd('stWProd', 'priceIncStSt')">Increase</button></td>
+							<td>Decrease operating costs of storage tanks by 10% - $<span id="priceDecOpStW"></span><br />
+							Small storage:    $<span id="opCstWB1"></span>->$<span id="opCstWA1"></span><br />
+							Medium storage:   $<span id="opCstWB2"></span>->$<span id="opCstWA2"></span><br />
+							Big storage:      $<span id="opCstWB3"></span>->$<span id="opCstWA3"></span><br />
+							Very big storage: $<span id="opCstWB4"></span>->$<span id="opCstWA4"></span>
+							</td>
+							<td><button class="btn btn-primary" onclick="decopc('stWCost', 'priceDecSOpCost')">Decrease</button></td>
 						</tr>
 					</table>
 				</div>
@@ -347,14 +346,14 @@ Month: <span id="month"></span></pre>
 							Big heat pump:      <span id="prodBHpumps2"></span> m<sup>3</sup>-><span id="prodAHpumps2"></span> m<sup>3</sup><br />
 							Very big heat pump: <span id="prodBHpumps3"></span> m<sup>3</sup>-><span id="prodAHpumps3"></span> m<sup>3</sup>
 							</td>
-							<td><button class="btn btn-primary" onclick="incProdHWpumps()">Increase</button></td>
+							<td><button class="btn btn-primary" onclick="incProd('HWpumpProd', 'PriceincProdHWpumps')">Increase</button></td>
 							<td>Decrease operating costs of heat pumps by 10% - $<span id="priceDecHWpumpOpC"></span><br />
 							Small heat pump:    $<span id="opcbHW0"></span>->$<span id="opcaHW0"></span><br />
 							Medium heat pump:   $<span id="opcbHW1"></span>->$<span id="opcaHW1"></span><br />
 							Big heat pump:      $<span id="opcbHW2"></span>->$<span id="opcaHW2"></span><br />
 							Very big heat pump: $<span id="opcbHW3"></span>->$<span id="opcaHW3"></span>
 							</td>
-							<td><button class="btn btn-primary" onclick="decHWpumpsOpC()">Decrease</button></td>
+							<td><button class="btn btn-primary" onclick="decopc('HWpumpOpC', 'priceDecHWpumpOpC')">Decrease</button></td>
 						</tr>
 					</table>
 				</div>
@@ -368,7 +367,7 @@ Month: <span id="month"></span></pre>
 							Big heating plant:      <span id="prodbHHW2"></span> m<sup>3</sup>-><span id="prodaHHW2"></span> m<sup>3</sup><br />
 							Very big heating plant: <span id="prodbHHW3"></span> m<sup>3</sup>-><span id="prodaHHW3"></span> m<sup>3</sup>
 							</td>
-							<td></td>
+							<td><button class="btn btn-primary" onclick="incProd('HWHFProd', 'priceIncHeatHeatingFac');">Increase</button></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -400,7 +399,7 @@ Month: <span id="month"></span></pre>
 				<li><a data-toggle="tab" href="#watertabs5">Pipes</a></li>
 			</ul>
 			<div class="tab-content">
-				<div id="watertabs2" class="tab-pane">
+				<div id="watertabs2" class="tab-pane active">
 					<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
 					<table>
 						<tr>
@@ -461,8 +460,8 @@ Month: <span id="month"></span></pre>
 							<td>Small pump</td>
 							<td>$<span id="SpumpPrice"></span></td>
 							<td>$<span id="SpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyPump(0,PuB)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellPump(0,PuS)">Sell <span class="numPS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,0)">Buy <span class="numP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,0)">Sell <span class="numPS"></span></button></td>
 							<td id="Spump"></td>
 							<td id="SpumpProd"></td>
 							<td id="SpumpTotProd"></td>
@@ -473,8 +472,8 @@ Month: <span id="month"></span></pre>
 							<td>Medium pump</td>
 							<td>$<span id="MpumpPrice"></span></td>
 							<td>$<span id="MpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyPump(1,PuB)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellPump(1,PuS)">Sell <span class="numPS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,1)">Buy <span class="numP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,1)">Sell <span class="numPS"></span></button></td>
 							<td id="Mpump"></td>
 							<td id="MpumpProd"></td>
 							<td id="MpumpTotProd"></td>
@@ -485,8 +484,8 @@ Month: <span id="month"></span></pre>
 							<td>Big pump</td>
 							<td>$<span id="BpumpPrice"></span></td>
 							<td>$<span id="BpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyPump(2,PuB)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellPump(2,PuS)">Sell <span class="numPS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,2)">Buy <span class="numP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,2)">Sell <span class="numPS"></span></button></td>
 							<td id="Bpump"></td>
 							<td id="BpumpProd"></td>
 							<td id="BpumpTotProd"></td>
@@ -497,8 +496,8 @@ Month: <span id="month"></span></pre>
 							<td>Very big pump</td>
 							<td>$<span id="VBpumpPrice"></span></td>
 							<td>$<span id="VBpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyPump(3,PuB)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellPump(3,PuS)">Sell <span class="numPS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,3)">Buy <span class="numP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,3)">Sell <span class="numPS"></span></button></td>
 							<td id="VBpump"></td>
 							<td id="VBpumpProd"></td>
 							<td id="VBpumpTotProd"></td>
@@ -551,7 +550,7 @@ Month: <span id="month"></span></pre>
 								<button class="btn btn-danger" onclick="changeS(100000000000, 'numSS', 'sSS');">100B</button>
 							</td>
 							<td>
-								<input id="SSS"  class="form-control" style="width: 150px;"onkeyup="var SSS = unAbbrNum(gEBI('SSS').value,0); if(SSS>0){changeS(SSS, 'numSS', 'sSS');}"/>
+								<input id="SSS"  class="form-control" style="width: 150px;" onkeyup="var SSS = unAbbrNum(gEBI('SSS').value,0); if(SSS>0){changeS(SSS, 'numSS', 'sSS');}"/>
 							</td>
 						</tr>
 					</table>
@@ -572,8 +571,8 @@ Month: <span id="month"></span></pre>
 							<td>Small storage</td>
 							<td>$<span id="SSPrice"></span></td>
 							<td>$<span  id="SstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyReserv(0,sBS);">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellSt(0, sSS)">Sell <span class="numSS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 0)">Buy <span class="numBS"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 0)">Sell <span class="numSS"></span></button></td>
 							<td id="SS"></td>
 							<td id="SSProd"></td>
 							<td id="SSTotProd"></td>
@@ -584,8 +583,8 @@ Month: <span id="month"></span></pre>
 							<td>Medium storage</td>
 							<td>$<span id="MSPrice"></span></td>
 							<td>$<span  id="MstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyReserv(1,sBS);">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellSt(1, sSS)">Sell <span class="numSS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 1)">Buy <span class="numBS"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 1)">Sell <span class="numSS"></span></button></td>
 							<td id="MS"></td>
 							<td id="MSProd"></td>
 							<td id="MSTotProd"></td>
@@ -596,8 +595,8 @@ Month: <span id="month"></span></pre>
 							<td>Big storage</td>
 							<td>$<span id="BSPrice"></span></td>
 							<td>$<span  id="BstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyReserv(2,sBS);">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellSt(2, sSS)">Sell <span class="numSS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 2)">Buy <span class="numBS"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 2)">Sell <span class="numSS"></span></button></td>
 							<td id="BS"></td>
 							<td id="BSProd"></td>
 							<td id="BSTotProd"></td>
@@ -608,8 +607,8 @@ Month: <span id="month"></span></pre>
 							<td>Very big storage</td>
 							<td>$<span id="VBSPrice"></span></td>
 							<td>$<span  id="VBstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyReserv(3,sBS);">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellSt(3, sSS)">Sell <span class="numSS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 3)">Buy <span class="numBS"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 3)">Sell <span class="numSS"></span></button></td>
 							<td id="VBS"></td>
 							<td id="VBSProd"></td>
 							<td id="VBSTotProd"></td>
@@ -679,8 +678,8 @@ Month: <span id="month"></span></pre>
 							<td>Small treatment plant</td>
 							<td>$<span id="STpumpPrice"></span></td>
 							<td>$<span  id="STpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyTreatmentPlant(0,TreatPlB)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellTrP(0,TrPS)">Sell <span class="numTrS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 0)">Buy <span class="numTr"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 0)">Sell <span class="numTrS"></span></button></td>
 							<td id="STpump"></td>
 							<td id="STpumpProd"></td>
 							<td id="STpumpTotProd"></td>
@@ -691,8 +690,8 @@ Month: <span id="month"></span></pre>
 							<td>Medium treatment plant</td>
 							<td>$<span id="MTpumpPrice"></span></td>
 							<td>$<span  id="MTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyTreatmentPlant(1,TreatPlB)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellTrP(1,TrPS)">Sell <span class="numTrS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 1)">Buy <span class="numTr"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 1)">Sell <span class="numTrS"></span></button></td>
 							<td id="MTpump"></td>
 							<td id="MTpumpProd"></td>
 							<td id="MTpumpTotProd"></td>
@@ -703,8 +702,8 @@ Month: <span id="month"></span></pre>
 							<td>Big treatment plant</td>
 							<td>$<span id="BTpumpPrice"></span></td>
 							<td>$<span  id="BTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyTreatmentPlant(2,TreatPlB)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellTrP(2,TrPS)">Sell <span class="numTrS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 2)">Buy <span class="numTr"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 2)">Sell <span class="numTrS"></span></button></td>
 							<td id="BTpump"></td>
 							<td id="BTpumpProd"></td>
 							<td id="BTpumpTotProd"></td>
@@ -715,8 +714,8 @@ Month: <span id="month"></span></pre>
 							<td>Very big treatment plant</td>
 							<td>$<span id="VBTpumpPrice"></span></td>
 							<td>$<span  id="VBTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyTreatmentPlant(3,TreatPlB)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellTrP(3,TrPS)">Sell <span class="numTrS"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 3)">Buy <span class="numTr"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 3)">Sell <span class="numTrS"></span></button></td>
 							<td id="VBTpump"></td>
 							<td id="VBTpumpProd"></td>
 							<td id="VBTpumpTotProd"></td>
@@ -726,7 +725,7 @@ Month: <span id="month"></span></pre>
 					</table>
 				</div>
 				<div id="watertabs5" class="tab-pane">
-					<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main(and only) source of money. Each pipe supplies <span id="PPH"></span> houses at a time.</p>
+					<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies <span id="PPH"></span> houses at a time.</p>
 					<table>
 						<tr>
 							<td>Buy</td>
@@ -987,8 +986,11 @@ Month: <span id="month"></span></pre>
 			<ul>
 				<li>Fixed bug: not loading data from the new update correctly</li>
 				<li>Fixed bug: autobuy functions</li>
+				<li>Fixed bug: custom number inputs in how water tab not working</li>
+				<li>Optimized game loading speed</li>
 				<li>Added notification for autobuild water pipes</li>
-				<li>Balance: houses are increased by the coresponding percent every day/31(ie the increase is mountly)</li>
+				<li>Balance: houses are increased by the coresponding percent every day/7(ie the increase is weekly)</li>
+				<li>Balance: max interest rate is 25% now</li>
 			</ul>
 			<hr />
 			<h4>Version 0.3.4 Beta - 6 June 2017</h4>
@@ -1151,7 +1153,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100000000000, 'numBHWP', 'BHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="BWHP"  class="form-control" style="width: 150px;"onkeyup="var BWHP = gEBI('BWHP').value; if(BWHP){chBHP(unAbbrNum(BWHP, 2));}else{chBHP(BWHP);}"/></td>
+							<td><input id="BWHP"  class="form-control" style="width: 150px;" onkeyup="var BWHP = unAbbrNum(gEBI('BWHP').value,0); if(BWHP>0){changeB('HP', HWpumpPrice, BWHP, 'numBHWP', 'BHP')}"/></td>
 						</tr>
 						<tr>
 							<td>Sell</td>
@@ -1173,7 +1175,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSWHP', 'SHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/></td>
+							<td><input id="inPP"  class="form-control" style="width: 150px;" onkeyup="var inPP = unAbbrNum(gEBI('inPP').value,0); if(inPP>0){changeS(inPP, 'numSWHP', 'SHP')}"/></td>
 						</tr>
 					</table>
 					<table class="table table-bordered">
@@ -1192,8 +1194,8 @@ Month: <span id="month"></span></pre>
 							<td>Small heat water pump</td>
 							<td id="SHPprice"></td>
 							<td id="SHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyCCPpump(0, BHP)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellCCPpump(0, SHP)">Sell <span class="numSWHP"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 0)">Buy <span class="numBHWP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 0)">Sell <span class="numSWHP"></span></button></td>
 							<td id="SHP"></td>
 							<td id="SHPprod"></td>
 							<td id="SHPTprod"></td>
@@ -1204,8 +1206,8 @@ Month: <span id="month"></span></pre>
 							<td>Medium heat water pump</td>
 							<td id="MHPprice"></td>
 							<td id="MHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyCCPpump(1, BHP)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellCCPpump(1, SHP)">Sell <span class="numSWHP"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 1)">Buy <span class="numBHWP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 1)">Sell <span class="numSWHP"></span></button></td>
 							<td id="MHP"></td>
 							<td id="MHPprod"></td>
 							<td id="MHPTprod"></td>
@@ -1216,8 +1218,8 @@ Month: <span id="month"></span></pre>
 							<td>Big heat water pump</td>
 							<td id="BHPprice"></td>
 							<td id="BHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyCCPpump(2, BHP)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellCCPpump(2, SHP)">Sell <span class="numSWHP"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 2)">Buy <span class="numBHWP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 2)">Sell <span class="numSWHP"></span></button></td>
 							<td id="BHP"></td>
 							<td id="BHPprod"></td>
 							<td id="BHPTprod"></td>
@@ -1228,8 +1230,8 @@ Month: <span id="month"></span></pre>
 							<td>Very big heat water pump</td>
 							<td id="VBHPprice"></td>
 							<td id="VBHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyCCPpump(3, BHP)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellCCPpump(3, SHP)">Sell <span class="numSWHP"></span></button></td>
+							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 3)">Buy <span class="numBHWP"></span></button>
+							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 3)">Sell <span class="numSWHP"></span></button></td>
 							<td id="VBHP"></td>
 							<td id="VBHPprod"></td>
 							<td id="VBHPTprod"></td>
@@ -1261,7 +1263,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100000000000, 'numBHHP', 'BHHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="BWHP"  class="form-control" style="width: 150px;"onkeyup="var BWHP = gEBI('BWHP').value; if(BWHP){chBHP(unAbbrNum(BWHP, 2));}else{chBHP(BWHP);}"/></td>
+							<td><input id="BWHHP"  class="form-control" style="width: 150px;" onkeyup="var BWHHP = unAbbrNum(gEBI('BWHHP').value,0); if(BWHHP>0){changeB('HHP', HWHFPrice, BWHHP, 'numBHHP', 'BHHP');}"/></td>
 						</tr>
 						<tr>
 							<td>Sell</td>
@@ -1283,7 +1285,7 @@ Month: <span id="month"></span></pre>
 									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSHHP', 'SHHP');">100B</button>
 								</div>
 							</td>
-							<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = gEBI('iNPP').value; if(inPP){chPiP(unAbbrNum(inPP, 2));}else{chPiP(inPP);}"/></td>
+							<td><input id="inHHPP"  class="form-control" style="width: 150px;"onkeyup="var inHHPP = unAbbrNum(gEBI('inHHPP').value,0); if(inHHPP>0){changeS(inHHPP, 'numSHHP', 'SHHP')}"/></td>
 						</tr>
 					</table>
 					<table class="table table-bordered">
@@ -1303,8 +1305,8 @@ Month: <span id="month"></span></pre>
 							<td id="SHHPprice"></td>
 							<td id="SHHPTprice"></td>
 							<td>
-								<button class="btn btn-primary" onclick="buyCCP(0, BHHP)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellCCP(0, SHHP)">Sell <span class="numSHHP"></span></button>
+								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 0)">Buy <span class="numBHHP"></span></button>
+								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 0)">Sell <span class="numSHHP"></span></button>
 							</td>
 							<td id="SHHP"></td>
 							<td id="SHHPprod"></td>
@@ -1317,8 +1319,8 @@ Month: <span id="month"></span></pre>
 							<td id="MHHPprice"></td>
 							<td id="MHHPTprice"></td>
 							<td>
-								<button class="btn btn-primary" onclick="buyCCP(1, BHHP)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellCCP(1, SHHP)">Sell <span class="numSHHP"></span></button>
+								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 1)">Buy <span class="numBHHP"></span></button>
+								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 1)">Sell <span class="numSHHP"></span></button>
 							</td>
 							<td id="MHHP"></td>
 							<td id="MHHPprod"></td>
@@ -1331,8 +1333,8 @@ Month: <span id="month"></span></pre>
 							<td id="BHHPprice"></td>
 							<td id="BHHPTprice"></td>
 							<td>
-								<button class="btn btn-primary" onclick="buyCCP(2, BHHP)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellCCP(2, SHHP)">Sell <span class="numSHHP"></span></button>
+								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 2)">Buy <span class="numBHHP"></span></button>
+								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 2)">Sell <span class="numSHHP"></span></button>
 							</td>
 							<td id="BHHP"></td>
 							<td id="BHHPprod"></td>
@@ -1345,8 +1347,8 @@ Month: <span id="month"></span></pre>
 							<td id="VBHHPprice"></td>
 							<td id="VBHHPTprice"></td>
 							<td>
-								<button class="btn btn-primary" onclick="buyCCP(3, BHHP)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellCCP(3, SHHP)">Sell <span class="numSHHP"></span></button>
+								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 3)">Buy <span class="numBHHP"></span></button>
+								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 3)">Sell <span class="numSHHP"></span></button>
 							</td>
 							<td id="VBHHP"></td>
 							<td id="VBHHPprod"></td>
