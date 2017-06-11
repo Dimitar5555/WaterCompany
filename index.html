@@ -110,20 +110,27 @@
 	</head>
 	<body style="padding: 5px; margin: 5px;" onload="gEBI('fgg').click();chechSaveFile();">
 	<div>
-	<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.4.1 Beta - 8 June 2017</span>
+		<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.4.1 Beta - 8 June 2017</span>
 		<div style="float: right; margin-bottom: 5px; width: 180px;">
-			<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
+		<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
 <span id="time" style="font-size: 50px;"></span>
 Year: <span id="year"></span>
-Month: <span id="month"></span></pre>
-		</div>
+Month: <span id="month"></span></pre></div>
+		<br />
+		
 	</div>
+	
 		<table class="table" style="width: 950px; display: table;">
 			<tr>
 				<td>Money</td>
 				<td>$<span id="money"></span> <span id="income"></span></td>
-				<td colspan="3" id="warnAll" style="white-space: nowrap; "><span id="percentBankUpper"></span>% of the profits are transfered to the bank account</td>
+				<td id="warnAll" style="white-space: nowrap; "><span id="percentBankUpper"></span>% of the profits are transfered to the bank account</td>
+				<td id="weather" style="font-size: 20px; max-height: 350px; " class="bg-primary">
+Weather today:<span id="wtod"></span>
+</td>
 			</tr>
+		</table>
+		<table class="table" style="width: 950px; display: table;">
 			<tr>
 				<th colspan="4">Cold water</th>
 				<th colspan="4">Hot water</th>
@@ -197,8 +204,7 @@ Month: <span id="month"></span></pre>
 		</div>
 		<div id="tabs-2" class="tab-pane">
 		<br />
-			<div style="float: left;">
-				<ul class="nav nav-stacked" style="font-size: 17px;">
+				<ul class="nav nav-stacked col-xs-2" style="font-size: 17px;">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cold water<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -207,7 +213,8 @@ Month: <span id="month"></span></pre>
 							<li><a data-toggle="tab" href="#upgradestabs3">Water storage</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs4">Pipes</a></li>
 						</ul>
-					</li><li class="dropdown">
+					</li>
+					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Hot water<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a data-toggle="tab" href="#upgradestabs7">Pumps</a></li>
@@ -218,8 +225,7 @@ Month: <span id="month"></span></pre>
 					<li><a data-toggle="tab" href="#upgradestabs5">Houses</a></li>
 					<li><a data-toggle="tab" href="#upgradestabs6">Bank</a></li>
 				</ul>
-			</div>
-			<div class="tab-content col-md-10">
+			<div class="tab-content col-xs-10">
 				<div id="upgradestabs1" class="tab-pane active">
 					<h3 class="default btn-link">Pumps</h3>
 					<table class="table">
@@ -986,7 +992,9 @@ Month: <span id="month"></span></pre>
 			<ul>
 				<li>Fixed bug: not loading data from the new update correctly</li>
 				<li>Fixed bug: autobuy functions</li>
-				<li>Fixed bug: custom number inputs in how water tab not working</li>
+				<li>Fixed bug: custom number inputs in hot water tab not working</li>
+				<li>Fixed bug: upgrade tabs weren't clickable on Kongregate</li>
+				<li>Changed postion of the weather bar(what do you think?)</li>
 				<li>Optimized game loading speed</li>
 				<li>Added notification for autobuild water pipes</li>
 				<li>Balance: houses are increased by the coresponding percent every day/7(ie the increase is weekly)</li>
@@ -1430,10 +1438,6 @@ Month: <span id="month"></span></pre>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div id="weather" style="font-size: 20px; max-height: 350px; margin-top: 50px; float: left; padding: 10px;" class="bg-primary">
-		<span>Weather</span><br />
-		Today:<span id="wtod"></span>
 	</div>
 	<script>
 	if(document.getElementById('f').checked){sync=1} else{sync=0}
