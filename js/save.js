@@ -194,7 +194,7 @@ function chechSaveFile() {
 		price = 0.3;
 		PP = 10;
 		PO = 0;
-		money = 0;
+		money = 10000000000000000000000000000000000000000000000000000000;
 		priceIncP = 100;
 		decPriceHpipesPlace = 10000;
 		priceDecPPP = 10000;
@@ -250,8 +250,8 @@ function chechSaveFile() {
 		PriceincProdHWpumps = 100000;
 		decPriceHPipesBuy = 100000;
 		localStorage.setItem("offTime", time);
-		loadSets();
 		save();
+		loadSets();
 	}
 }
 HardReset = 0; 
@@ -303,75 +303,82 @@ function saveSets() {
 	localStorage.setItem("settings", JSON.stringify(localSets));
 }
 function loadSets() {
-	var settings = JSON.parse(localStorage.settings);
-	sync = settings[0];
-	bankpercent = settings[1];
-	notBH = settings[2];
-	notBI = settings[3];
-	notPL = settings[4];
-	INTBANK = settings[5];
-	bankpercentOn = settings[6];
-	buyMax = settings[7];
-	theme = settings[8];
-	notAS = settings[9];
-	syncH = settings[10];
-	buyMaxH = settings[11];
-	var styleel = 'css/bootstrap-' + theme + '.css';
-	gEBI('STYLE-EL').href = styleel;
-	if(sync==1){
-		gEBI("f").checked = true;
+	if(!JSON.parse(localStorage.settings)){
+		saveSets();
+		loadSets();
 	}
 	else{
-		gEBI("f").checked = false;
-	}
-	if(bankpercent>0 && bankpercentOn==1){
-		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}
-	else{
-		gEBI('warnAll').style.display = 'none';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}
-	if(notBH==1){
-		gEBI("notBH").checked = true;
-	}
-	else{
-		gEBI("notBH").checked = false;
-	}
-	if(notBI==1){
-		gEBI("notBI").checked = true;
-	}
-	else{
-		gEBI("notBI").checked = false;
-	}
-	if(notPL==1){
-		gEBI("notPL").checked = true;
-	}
-	else{
-		gEBI("notPL").checked = false;
-	}
-	if(INTBANK==1){
-		gEBI("INTBANK").checked = true;
-	}
-	else{
-		gEBI("INTBANK").checked = false;
-	}
-	if(notAS==1){
-		gEBI("notAS").checked = true;
-	}
-	else{
-		gEBI("notAS").checked = false;
-	}
-	if(buyMaxH==1){
-		gEBI("buyMaxH").checked = true;
-	}
-	else{
-		gEBI("buyMaxH").checked = false;
-	}
-	if(syncH==1){
-		gEBI("Hf").checked = true;
-	}
-	else{
-		gEBI("Hf").checked = false;
+		var settings = JSON.parse(localStorage.settings);
+		sync = settings[0];
+		bankpercent = settings[1];
+		notBH = settings[2];
+		notBI = settings[3];
+		notPL = settings[4];
+		INTBANK = settings[5];
+		bankpercentOn = settings[6];
+		buyMax = settings[7];
+		theme = settings[8];
+		notAS = settings[9];
+		syncH = settings[10];
+		buyMaxH = settings[11];
+		var styleel = 'css/bootstrap-' + theme + '.css';
+		gEBI('STYLE-EL').href = styleel;
+		if(sync==1){
+			gEBI("f").checked = true;
+		}
+		else{
+			gEBI("f").checked = false;
+		}
+		if(bankpercent>0 && bankpercentOn==1){
+			gEBI('warnAll').style.display = 'block';
+			gEBI('percentBankUpper').innerHTML = bankpercent;
+			gEBI('bankpercent').value = bankpercent;
+		}
+		else{
+			gEBI('warnAll').style.display = 'none';
+			gEBI('percentBankUpper').innerHTML = bankpercent;
+		}
+		if(notBH==1){
+			gEBI("notBH").checked = true;
+		}
+		else{
+			gEBI("notBH").checked = false;
+		}
+		if(notBI==1){
+			gEBI("notBI").checked = true;
+		}
+		else{
+			gEBI("notBI").checked = false;
+		}
+		if(notPL==1){
+			gEBI("notPL").checked = true;
+		}
+		else{
+			gEBI("notPL").checked = false;
+		}
+		if(INTBANK==1){
+			gEBI("INTBANK").checked = true;
+		}
+		else{
+			gEBI("INTBANK").checked = false;
+		}
+		if(notAS==1){
+			gEBI("notAS").checked = true;
+		}
+		else{
+			gEBI("notAS").checked = false;
+		}
+		if(buyMaxH==1){
+			gEBI("buyMaxH").checked = true;
+		}
+		else{
+			gEBI("buyMaxH").checked = false;
+		}
+		if(syncH==1){
+			gEBI("Hf").checked = true;
+		}
+		else{
+			gEBI("Hf").checked = false;
+		}
 	}
 }
