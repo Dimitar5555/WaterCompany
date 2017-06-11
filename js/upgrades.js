@@ -156,6 +156,6 @@ function decopc(opc, price){
 		refReserv();
 	}
 	else{
-		Error("Not enough money";)
+		Error("Not enough money");
 	}
 }
