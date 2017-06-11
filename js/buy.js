@@ -42,47 +42,6 @@ function placePipe(a) {
 	}
 	else {Error("Not enough money");}
 }
-function buyPump(a,b) {
-	var Wprice = pumpPrice[a];
-	if(money>=(Wprice*b)) {
-		var x = parseInt(pumps[a]);
-		pumps[a] = x + b;
-		money = money - Wprice*b;
-		refMoney();
-		refPumps();
-		PW = pumps[0] * pumpProd[0] + pumps[1] * pumpProd[1] + pumps[2] * pumpProd[2] + pumps[3] * pumpProd[3];
-		gEBI("prd").innerHTML = s(PW);
-		refFin();
-	}
-	else{NEMshow();}
-}
-function buyTreatmentPlant(a,b) {
-	var TrPprice = treatPrice[a];
-	if(money>=TrPprice*b){
-		var x = parseInt(treatPla[a]);
-		treatPla[a] = x + b;
-		money = money - TrPprice*b;
-		refMoney();
-		refTreatment();
-		TW = treatPla[0] * treatProd[0] + treatPla[1] * treatProd[1] + treatPla[2] * treatProd[2] + treatPla[3] * treatProd[3];
-		gEBI("trt").innerHTML = s(TW);
-		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-		gEBI("fopC").innerHTML = s(opC);
-	}
-	else{NEMshow();}
-}
-function buyReserv(a,b) {
-	var ResPrice = stWPrice[a]
-	if(money-ResPrice*b>=0){
-		money = money - ResPrice*b;
-		refMoney();
-		stWC[a] = stWC[a] + b;
-		gEBI("capacitystW").innerHTML = s(stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3]);
-		refReserv();
-		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-		gEBI("fopC").innerHTML = s(opC);
-	}
-}
 function buyHpipes(a){
 	if(money>=a*HPOprice){
 		if(houses/2>=HPO+HPPP+a){
@@ -119,27 +78,37 @@ function placeHpipes(a){
 	}
 }
 
-function buyCCP(a,b){
-	if(money>=b*HWHFPrice[a]){
-		HWHF[a] = HWHF[a] + b;
-		money = money - HWHFPrice[a]*b;
+function buyUt(build, price, count, tier){
+	var builda = window[build][tier];
+	var pricea = window[price][tier];
+	if(money>=count*pricea){
+		window[build][tier] = builda + count;
+		money = money - count * pricea;
 		refHeat();
 		refMoney();
 		updatePipes();
 		refHPipes();
+		refTreatment();
+		refReserv();
+		refFin();
+		refPumps();
 	}
 	else{
 		Error("Not enough money");
 	}
 }
-function buyCCPpump(a,b){
-	if(money>=b*HWpumpPrice[a]){
-		money = money - HWpumpPrice[a]*b;
-		HWpump[a] = HWpump[a] + b;
+function sellUt(build, price, count, tier){
+	if(window[build][tier]>=count){
+		window[build][tier] = window[build][tier] -  count;
+		money = money + count * window[price][tier];
 		refHeat();
 		refMoney();
 		updatePipes();
 		refHPipes();
+		refTreatment();
+		refReserv();
+		refFin();
+		refPumps();
+		
 	}
-	updatePipes();
 }
