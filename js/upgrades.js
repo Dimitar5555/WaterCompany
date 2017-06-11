@@ -159,3 +159,18 @@ function decopc(opc, price){
 		Error("Not enough money";)
 	}
 }
+function incHWPprod() {
+	if(money>=priceIncHeatHeatingFac){
+		money = money - priceIncHeatHeatingFac;
+		priceIncHeatHeatingFac = priceIncHeatHeatingFac * 1.5;
+		HWHFProd[0] = HWHFProd[0]*1.1;
+		HWHFProd[1] = HWHFProd[1]*1.1;
+		HWHFProd[2] = HWHFProd[2]*1.1;
+		HWHFProd[3] = HWHFProd[3]*1.1;
+		refUpgrades();
+		refUpper();
+		refMoney();
+		refUpper();
+		refHeat();
+	}
+}
