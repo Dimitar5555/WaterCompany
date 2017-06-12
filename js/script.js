@@ -108,7 +108,7 @@ window.setInterval(function(){
 		stW = MSW;
 	}
 	PWH = HWpump[0]*HWpumpProd[0] + HWpump[1]*HWpumpProd[1] + HWpump[2]*HWpumpProd[2] + HWpump[3]*HWpumpProd[3];
-	UWH = HPPP*HPP*0.5;
+	UWH = HPPP*HPP*1;
 	HWH = HWHF[0]*HWHFProd[0] + HWHF[1]*HWHFProd[1] + HWHF[2]*HWHFProd[2] + HWHF[3]*HWHFProd[3];
 	if(PWH>HWH){
 		maxSHW = HWH;
