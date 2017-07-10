@@ -19,11 +19,17 @@
 				width: auto;
 				max-width: 82.5%
 			}
+			.nav-stacked > li > ul > a{
+				margin-left: 10px;
+			}
+			#notfluid > tr > td, th{
+				width: auto;
+			}
 		</style>
 	</head>
 	<body style="padding: 2.5px; max-width: 1000px; min-width: 925px;margin: 0 auto;padding: 10px 2px 10px 2px;">
 		<h2 style="color: #42a4f4;">Water Company: Recoded</h2> <span class="text-muted"> <h4>version 0.4</h4></span>
-		<table class="table table-bordered" style="width: auto;">
+		<table class="table table-bordered" id="notfluid">
 			<tr>
 				<td>Money</td>
 				<td>$<span id="money"></span> <span id="income"></span></td>
@@ -31,14 +37,14 @@
 				
 			</tr>
 			<tr>
-				<th colspan="4">Cold water</th>
-				<th colspan="4">Hot water</th>
-				<th colspan="4">Time</th>
+				<th class="xs-6" colspan="4">Cold water</th>
+				<th class="xs-5" colspan="4">Hot water</th>
+				<th class="xs-1" colspan="4">Time</th>
 			</tr>
 			<tr>
 				<td>Water used</td>
 				<td id="headercdused"></td>
-				<td>Water produced</td>
+				<td>Water pumped</td>
 				<td id="headercdpumped"></td>
 				<td>Water used</td>
 				<td id="headerhdused"></td>
@@ -54,9 +60,8 @@
 				<td id="headercdstored"></td>
 				<td>Water treated</td>
 				<td id="headercdtreated"></td>
-				<td>Water pumped</td>
-				<td id="headerhdpumped"></td>
-				<td colspan="2"></td>
+				<td colspan="2">Water pumped</td>
+				<td colspan="2" id="headerhdpumped"></td>
 				<td>Month</td>
 				<td id="headermonth"></td>
 				<td>Year</td>
@@ -125,18 +130,17 @@
 			</div>
 			<div id="tab2" class="tab-pane">
 				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cold water<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+					<li><a>Cold water</a>
+						<ul>
 							<li><a data-toggle="tab" href="#upgradestabs1">Pumps</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs2">Treatment plants</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs3">Water storage</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs4">Pipes</a></li>
-						</ul>
+						</ul>	
+						
 					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Hot water<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+					<li><a>Hot water</a>
+						<ul>
 							<li><a data-toggle="tab" href="#upgradestabs5">Pumps</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs6">Heating plants</a></li>
 							<li><a data-toggle="tab" href="#upgradestabs7">Heat pipes</a></li>
@@ -231,14 +235,14 @@
 									Buying price $<span id="uptab4coldwaterpipesbuyb"></span>->$<span id="uptab4coldwaterpipesbuya"></span>
 								</td>
 								<td>
-									<button class="btn btn-success">$<span id="coldwaterpipebuy"></span></button>
+									<button onclick="decpipeprice('coldwater', 'coldwaterpipebuy', 0)" class="btn btn-success">$<span id="coldwaterpipebuy"></span></button>
 								</td>
 								<td>
 									Decrease the price for placing pipes by 2.5%<br />
 									Placing pipes $<span id="uptab4coldwaterpipesplaceb"></span>->$<span id="uptab4coldwaterpipesplacea"></span>
 								</td>
 								<td>
-									<button class="btn btn-success">$<span id="coldwaterpipeplace"></span></button>
+									<button onclick="decpipeprice('coldwater', 'coldwaterpipeplace', 1)" class="btn btn-success">$<span id="coldwaterpipeplace"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -303,14 +307,14 @@
 									Buying hot water pipes $<span id="uptab7hotwaterpricebuyb"></span>->$<span id="uptab7hotwaterpricebuya"></span>
 								</td>
 								<td>
-									<button class="btn btn-success">$<span id="hotwaterpipebuy"></span></button>
+									<button onclick="decpipeprice('hotwater', 'hotwaterpipebuy', 0)" class="btn btn-success">$<span id="hotwaterpipebuy"></span></button>
 								</td>
 								<td>
 									Decrease price for placing hot water pipes by 5%<br />
 									Placing hot water pipes $<span id="uptab7hotwaterpriceplaceb"></span>->$<span id="uptab7hotwaterpriceplacea"></span>
 								</td>
 								<td>
-									<button class="btn btn-success">$<span id="hotwaterpipeplace"></span></button>
+									<button onclick="decpipeprice('hotwater', 'hotwaterpipeplace', 1)" class="btn btn-success">$<span id="hotwaterpipeplace"></span></button>
 								</td>
 							</tr>
 						</table>
