@@ -77,7 +77,7 @@ function chechSaveFile() {
 		HPOprice = heatWater[10];
 		HPPprice = heatWater[11];
 		
-		Alert("WARNING! This is a experimetal version of the game. Some features can not work properly and it could break your game!");
+		Alert("You can try version 0.4. Just click <a href='https://dimitar5555.github.io/WaterCompany/Water Company Recoded.zip'>here</a>, unzip the file and follow the instructions in readme.txt.");
 		
 		formatNumber = localStorage.number;
 		var time = localStorage.offTime;
