@@ -77,7 +77,7 @@ function chechSaveFile() {
 		HPOprice = heatWater[10];
 		HPPprice = heatWater[11];
 		
-		Alert("You can try version 0.4. Just click <a target="_blank" href='https://dimitar5555.github.io/WaterCompany/0.4/'>here</a>.");
+		Alert("You can try version 0.4. Just click <a target='_blank' href='https://dimitar5555.github.io/WaterCompany/0.4/'>here</a>.");
 		
 		formatNumber = localStorage.number;
 		var time = localStorage.offTime;
