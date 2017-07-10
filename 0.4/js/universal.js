@@ -78,3 +78,18 @@ function sell(water, thing, number, tier){
 		id2w("money", sn2(game.bank.money));
 	}
 }
+//water, price name, tier
+function decpipeprice(a, b, c){
+	var price = game['upgrades']['decrease'][b];
+	if(price<=game.bank.money){
+		game[a]['pipeprice'][c] = game[a]['pipeprice'][c] - (game[a]['pipeprice'][c]/100)*2.5;
+		game.bank.money = game.bank.money - price;
+		game['upgrades']['decrease'][b] = game['upgrades']['decrease'][b] * 1.5;
+	refreshupgrades();
+	refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, watertab4buynumber, 'watertab4buynumber');
+refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, watertab4placenumber, 'watertab4placenumber');
+refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, watertab7buynumber, 'watertab7buynumber');
+refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, watertab7placenumber, 'watertab7placenumber');
+
+	}
+}

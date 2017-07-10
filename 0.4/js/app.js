@@ -341,8 +341,8 @@ function refreshupgrades(){
 	id2w("uptab6hotwatercosta3", sn2(hd.heatingplantcost[3]*0.9));
 	id2w("uptab7hotwaterpricebuyb", sn2(hd.pipeprice[0]));
 	id2w("uptab7hotwaterpricebuya", sn2(hd.pipeprice[0]*0.95));
-	id2w("uptab7hotwaterpriceplaceb", sn2(hd.pipeprice[0]));
-	id2w("uptab7hotwaterpriceplacea", sn2(hd.pipeprice[0]*0.95));
+	id2w("uptab7hotwaterpriceplaceb", sn2(hd.pipeprice[1]));
+	id2w("uptab7hotwaterpriceplacea", sn2(hd.pipeprice[1]*0.95));
 	
 	//houses
 	id2w("uptab8coldwaterpriceb", sn2(cd.waterprice));
