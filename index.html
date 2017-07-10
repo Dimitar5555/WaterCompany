@@ -1,216 +1,96 @@
-<!doctype html>
-<html lang="en">
+<html lang="en" style="background: linear-gradient(to right, #459ABF, #4AA8C9); ">
 	<head>
-		<title>5</title>
-		<meta charset="utf-8">
-		<meta name="description" content="Online game for managing city water network">
-		<meta name="keywords" content="games, game, water, managment, idle, money, incremental">
-		<meta name="viewport" content="width=600, initial-scale=1.0">
-		<meta name="robots" content="all">
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=11371551; 
-var sc_invisible=1; 
-var sc_security="6d5b890d"; 
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" +
-scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="web counter"
-href="http://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="//c.statcounter.com/11371551/0/6d5b890d/1/" alt="web
-counter"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
-
-		<script>HardReset = 0;</script>
-		<script src="js/main.js"></script>
-		<script src="js/setVar.js"></script>
-		<script src="js/save.js"></script>
-		<script src="js/refresh.js"></script>
-		<script src="js/script.js"></script>
-		<script src="js/change.js"></script>
-		<script src="js/once.js"></script>
-		<script src="js/buy.js"></script>
-		<script src="js/upgrades.js"></script>
-		<script src="js/bank.js"></script>
+		<meta charset="UTF-8">
+		<title>Water Company: Recoded</title>
 		<script src="js/lib/jQuery.js"></script>
-		<script src="js/lib/bootstrap.js"></script>
-		<script src="js/showErrors.js"></script>
 		
-		<link id="STYLE-EL" rel="stylesheet" href="css/bootstrap.css"/>
-		<link rel="stylesheet" href="css/alertify.core.css"/>
-		<link rel="stylesheet" href="css/alertify.bootstrap.css"/>
+		<script src="js/lib/bootstrap.js"></script>
+		<link rel="stylesheet" href="css/lib/bootstrap-standart.css" />
 		<style>
-			.switch {
-				position: relative;
-				display: inline-block;
-				width: 60px;
-				height: 34px;
+			.nav-stacked{
+				float: left;
+				max-width: 17.5%;
 			}
-
-			/* Hide default HTML checkbox */
-			.switch input {display:none;}
-
-			/* The slider */
-			.slider {
-			position: absolute;
-			cursor: pointer;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-color: #ccc;
-			-webkit-transition: .4s;
-			transition: .4s;
+			.tab-pane{
+				height:65%;
 			}
-			
-			.slider:before {
-			position: absolute;
-			content: "";
-			height: 26px;
-			width: 26px;
-			left: 4px;
-			bottom: 4px;
-			background-color: white;
-			-webkit-transition: .4s;
-			transition: .4s;
-			}
-			
-			input:checked + .slider {
-			background-color: #2196F3;
-			}
-			
-			input:focus + .slider {
-			box-shadow: 0 0 1px #2196F3;
-			}
-			
-			input:checked + .slider:before {
-			-webkit-transform: translateX(26px);
-			-ms-transform: translateX(26px);
-			transform: translateX(26px);
-			}
-			
-			/* Rounded sliders */
-			.slider.round {
-			border-radius: 34px;
-			}
-			
-			.slider.round:before {
-			border-radius: 50%;
+			.tab-pane > table, .tab-pane > p{
+				float: left;
+				width: auto;
+				max-width: 82.5%
 			}
 		</style>
-		
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-			
-			ga('create', 'UA-97511038-1', 'auto');
-			ga('send', 'pageview');
-
-		</script>
 	</head>
-	<body style="padding: 5px; max-width: 1300px; margin: 0 auto;" onload="gEBI('fgg').click();chechSaveFile();">
-	<div>
-		<span id="logo" style="font-size: 40px; font-family: Arial;	color: #0059ff; font-weight: bold;">Water Company</span><span class="text-muted">version 0.3.4.1 Beta - 8 June 2017</span>
-		<div style="float: right; margin-bottom: 5px; width: 180px;">
-		<pre><span style="font-size: 30px;">Day:<span id="date"></span></span>
-<span id="time" style="font-size: 50px;"></span>
-Year: <span id="year"></span>
-Month: <span id="month"></span></pre></div>
-		<br />
-		
-	</div>
-	
-		<table class="table" style="width: 950px; display: table;">
+	<body style="padding: 2.5px; max-width: 1000px; min-width: 925px;margin: 0 auto;padding: 10px 2px 10px 2px;">
+		<h2 style="color: #42a4f4;">Water Company: Recoded</h2> <span class="text-muted"> <h4>version 0.4</h4></span>
+		<table class="table">
 			<tr>
 				<td>Money</td>
 				<td>$<span id="money"></span> <span id="income"></span></td>
-				<td id="warnAll" style="white-space: nowrap; "><span id="percentBankUpper"></span>% of the profits are transfered to the bank account</td>
-				<td id="weather" style="font-size: 20px; max-height: 350px; " class="bg-primary">
-Weather today:<span id="wtod"></span>
-</td>
 			</tr>
 		</table>
-		<table class="table" style="width: 950px; display: table;">
-			<tr>
-				<th colspan="4">Cold water</th>
-				<th colspan="4">Hot water</th>
-			</tr>
-			<tr>
-				<td>Water Pumped</td>
-				<td><span id="prd"></span> m<sup>3</sup></td>
-				<td>Water Treated</td>
-				<td><span id="trt"></span> m<sup>3</sup></td>
-				<td>Hot water pumped</td>
-				<td id="HWpumped"></td>
-				<td>Water heated</td>
-				<td id="HWheated"></td>
-			</tr>
-			<tr>
-				<td>Water Used</td>
-				<td><span id="NW"></span> m<sup>3</sup></td>
-				<td>Extra water</td>
-				<td><span id="extraW"></span> m<sup>3</sup></td>
-				<td>Hot water used</td>
-				<td id="HWusage"></td>
-			</tr>
-			<tr>
-				<td colspan="2">Stored water/max</td>
-				<td colspan="2"><span id="stW"></span> m<sup>3</sup>/<span id="capacitystW"></span> m<sup>3</sup> <span id="stWInc"></span></td>
-			</tr>
-		</table>
-		<br/>
-	<div>
 		<ul class="nav nav-tabs">
-			<li class="active"><a data-toggle="pill" href="#tabs-1" id="fgg">City</a></li>
-			<li><a data-toggle="pill" href="#tabs-2">Upgrades</a></li>
-			<li><a data-toggle="pill" href="#tabs-3">Water</a></li>
-			<li><a data-toggle="pill" href="#tabs-13">Hot water</a></li>
-			<li><a data-toggle="pill" href="#tabs-6">Bank</a></li>
-			<li><a data-toggle="pill" href="#tabs-8">FAQ</a></li>
-			<li><a data-toggle="pill" href="#tabs-9">Finance</a></li>
-			<li class="pull-right"><a data-toggle="pill" href="#tabs-7">Options</a></li>
-			<li class="pull-right"><a data-toggle="pill" href="#tabs-11">Change log</a></li>
-			<li class="pull-right"><a data-toggle="pill" href="#tabs-12">About</a></li>
+			<li class="active"><a href="#tab1" data-toggle="tab">City</a></li>
+			<li><a href="#tab2" data-toggle="tab">Upgrades</a></li>
+			<li><a href="#tab3" data-toggle="tab">Cold water</a></li>
+			<li><a href="#tab4" data-toggle="tab">Hot water</a></li>
+		    <li><a href="#tab5" data-toggle="tab">Bank</a></li>
+		    <li><a href="#tab6" data-toggle="tab">Finance</a></li>
+		    <li><a href="#tab7" data-toggle="tab">FAQ</a></li>
+			<li class="pull-right"><a href="#tab8" data-toggle="tab">Options</a></li>
+			<li class="pull-right"><a href="https://github.com/Dimitar5555/WaterCompany/tree/master#change-log" target="_blank">Change log</a></li>
+			<li class="pull-right"><a href="#tab10" data-toggle="tab">About</a></li>
 		</ul>
-	</div>
-	<div class="tab-content">
-		<div id="tabs-1" class="tab-pane active">
-		<br />
-			<table class="table">
-				<tr>
-					<td>City</td>
-					<td class="city"></td>
-				</tr>
-				<tr>
-					<td>Houses</td>
-					<td id="houses"></td>
-				</tr>
-				<tr>
-					<td>Supplied houses</td>
-					<td id="sup"></td>
-				</tr>
-				<tr>
-					<td>Water price</td>
-					<td id="pricem3"></td>
-				</tr>
-				<tr>
-					<td>Water needed per house</td>
-					<td id="WPH"></td>
-				</tr>
-			</table>
-			<button class="btn btn-primary" onclick="drawCitya()">Redraw city map</button><br />
-			Suplied houses(map):<br />
-			<canvas id="myCanvas" style="width: 300px; height: 300px; border: 1px solid black;"></canvas>
-		</div>
-		<div id="tabs-2" class="tab-pane">
-		<br />
-				<ul class="nav nav-stacked col-xs-2" style="font-size: 17px;">
+		<div class="tab-content">
+			<div id="tab1" class="tab-pane active">
+				<table class="table table-bordered">
+					<tr>
+						<td colspan="2">City</td>
+						<td colspan="2" id="tab1city"></td>
+					</tr>
+					<tr>
+						<th colspan="4">Population</th>
+					</tr>
+					<tr>
+						<td>Population</td>
+						<td id="tab1population"></td>
+						<td>Population growth(montly)</td>
+						<td id="tab1populationgrowth"></td>
+					</tr>
+					<tr>
+						<th colspan="4">Water coverage</th>
+					</tr>
+					<tr>
+						<td>Population covered with cold water pipes</td>
+						<td id="tab1coldpipecoverage"></td>
+						<td>Cold water supplied</td>
+						<td id="tab1coldwatercoverage"></td>
+					</tr>
+					<tr>
+						<td>Population covered with hot water pipes</td>
+						<td id="tab1hotpipecoverage"></td>
+						<td>Hot water supplied</td>
+						<td id="tab1hotwatercoverage"></td>
+					</tr>
+					<tr>
+						<th colspan="4">Price & usage</th>
+					</tr>
+					<tr>
+						<td>Cold water price</td>
+						<td id="tab1coldwaterprice"></td>
+						<td>Cold water price</td>
+						<td id="tab1coldwaterusage"></td>
+					</tr>
+					<tr>
+						<td>Hot water usage</td>
+						<td id="tab1hotwaterprice"></td>
+						<td>Hot water usage</td>
+						<td id="tab1hotwaterusage"></td>
+					</tr>
+				</table>
+			</div>
+			<div id="tab2" class="tab-pane">
+				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Cold water<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -223,1308 +103,860 @@ Weather today:<span id="wtod"></span>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Hot water<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a data-toggle="tab" href="#upgradestabs7">Pumps</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs8">Heating plants</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs9">Heat pipes</a></li>
+							<li><a data-toggle="tab" href="#upgradestabs5">Pumps</a></li>
+							<li><a data-toggle="tab" href="#upgradestabs6">Heating plants</a></li>
+							<li><a data-toggle="tab" href="#upgradestabs7">Heat pipes</a></li>
 						</ul>
 					</li>
-					<li><a data-toggle="tab" href="#upgradestabs5">Houses</a></li>
-					<li><a data-toggle="tab" href="#upgradestabs6">Bank</a></li>
+					<li><a data-toggle="tab" href="#upgradestabs8">Houses</a></li>
+					<li><a data-toggle="tab" href="#upgradestabs9">Bank</a></li>
 				</ul>
-			<div class="tab-content col-xs-10">
-				<div id="upgradestabs1" class="tab-pane active">
-					<h3 class="default btn-link">Pumps</h3>
-					<table class="table">
-						<tr>
-							<td>Increase water production from pumps by 10% - $<span id="priceIncWaterProd"></span><br />
-								Small pump:    <span id="pumpProdB1"></span>-><span id="pumpProdA1"></span><br />
-								Medium pump:   <span id="pumpProdB2"></span>-><span id="pumpProdA2"></span><br />
-								Big pump:      <span id="pumpProdB3"></span>-><span id="pumpProdA3"></span><br />
-								Very big pump: <span id="pumpProdB4"></span>-><span id="pumpProdA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="incProd('pumpProd', 'priceIncWaterProd')">Increase</button></td>
-							<td>Decrease operating costs of pumps by 10% - $<span id="priceDecOpPump"></span><br />
-								Small pump:    $<span id="opCPB1"></span>->$<span id="opCPA1"></span><br />
-								Medium pump:   $<span id="opCPB2"></span>->$<span id="opCPA2"></span><br />
-								Big pump:      $<span id="opCPB3"></span>->$<span id="opCPA3"></span><br />
-								Very big pump: $<span id="opCPB4"></span>->$<span id="opCPA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decopc('pumpCost', 'priceDecPumpOpCost')">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs2" class="tab-pane">
-					<h3 class="default btn-link">Treatment plants</h3>
-					<table class="table">
-						<tr>
-							<td>Increase treatment plant production by 10% - $<span id="priceIncTreatProd"></span><br />
-								Small treatment plant:    <span id="treatProdB1"></span>-><span id="treatProdA1"></span><br />
-								Medium treatment plant:   <span id="treatProdB2"></span>-><span id="treatProdA2"></span><br />
-								Big treatment plant:      <span id="treatProdB3"></span>-><span id="treatProdA3"></span><br />
-								Very big treatment plant: <span id="treatProdB4"></span>-><span id="treatProdA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="incProd('treatProd', 'priceIncTreatProd')">Increase</button></td>
-							<td>Decrease operating costs of treatment plants by 10% - $<span id="priceDecOpTreat"></span><br />
-								Small treatment plant:    $<span id="opCTB1"></span>->$<span id="opCTA1"></span><br />
-								Medium treatment plant:   $<span id="opCTB2"></span>->$<span id="opCTA2"></span><br />
-								Big treatment plant:      $<span id="opCTB3"></span>->$<span id="opCTA3"></span><br />
-								Very big treatment plant: $<span id="opCTB4"></span>->$<span id="opCTA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decopc('treatCost', 'priceDecTrOpCost');">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs3" class="tab-pane">
-					<h3 class="default btn-link">Water storage</h3>
-					<table class="table">
-						<tr>
-							<td>Increase capacity of water storage units by 10% - $<span id="priceIncStSt"></span><br />
-							Small storage:    <span id="Bstst1"></span>m<sup>3</sup>-><span id="Astst1"></span><br />
-							Medium storage:   <span id="Bstst2"></span>m<sup>3</sup>-><span id="Astst3"></span><br />
-							Big storage:      <span id="Bstst3"></span>m<sup>3</sup>-><span id="Astst4"></span><br />
-							Very big storage: <span id="Bstst4"></span>m<sup>3</sup>-><span id="Astst2"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="incProd('stWProd', 'priceIncStSt')">Increase</button></td>
-							<td>Decrease operating costs of storage tanks by 10% - $<span id="priceDecOpStW"></span><br />
-							Small storage:    $<span id="opCstWB1"></span>->$<span id="opCstWA1"></span><br />
-							Medium storage:   $<span id="opCstWB2"></span>->$<span id="opCstWA2"></span><br />
-							Big storage:      $<span id="opCstWB3"></span>->$<span id="opCstWA3"></span><br />
-							Very big storage: $<span id="opCstWB4"></span>->$<span id="opCstWA4"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decopc('stWCost', 'priceDecSOpCost')">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs4" class="tab-pane">
-					<h3 class="default btn-link">Pipes</h3>
-					<table class="table">
-						<tr>
-							<td>Decrease cost of buying pipes by 2.5% - $<span id="dcbpp"></span><br />
-							$<span id="bpb"></span> -> $<span id="bpa"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="DecBP();">Decrease</button></td>
-							<td>
-								Decrease cost of placing pipes by 2.5% - $<span id="priceDecPlP"></span><br />
-								$<span id="ppb"></span> -> $<span id="ppa"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="DecPP()">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs5" class="tab-pane">
-					<h3 class="default btn-link">Houses</h3>
-					<table class="table">
-						<tr>
-							<td>Increase rate of building of new houses by 0.25% - $<span id="priceIncRateHouses"></span><br />
-							<span id="rateHB"></span> -> <span id="rateHA"></span></td>
-							<td><button class="btn btn-primary" onclick="IncRateHouses()">Increase</button></td>
-							<td>Increase water needed per house by 2.5% - $<span id="priceIncWater"></span><br />
-							<span id="waterUB"></span> -> <span id="waterUA"></span></td>
-							<td><button class="btn btn-primary" onclick="IncWaterNeeded();">Increase</button></td>
-						</tr>
-						<tr>
-							<td>Increase price of cold water by 5% - $<span id="IncPP"></span><br />
-							$<span id="priceBefore"></span> -> $<span id="priceAfter"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="IncWaterPrice();">Increase</button></td>
-							<td>Increase price of hot water by 5% - $<span id="priceIncHW"></span><br />
-							$<span id="BpHW"></span>->$<span id="ApHW"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="incHWprice()">Increase</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs6" class="tab-pane">
-					<h3 class="default btn-link">Bank</h3>
-					<table class="table">
-						<tr>
-							<td>Increase interest rate by 0.25% - $<span id="priceIncInt"></span><br />
-							<span id="intNow"></span>%-><span id="intAft"></span>%</td>
-							<td><button class="btn btn-primary" onclick="incInr();">Increase</button></td>
-							<td>Increase max loan by 100% - $<span id="priceIncMaxL"></span><br />
-							Maximum loan: $<span id="maxLoanB"></span>->$<span id="maxLoanA"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="incMaxLoan();">Increase</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs7" class="tab-pane">
-					<h3 class="default btn-link">Heat pumps</h3>
-					<table class="table">
-						<tr>
-							<td>Increase production of heat pumps by 10% - $<span id="priceIncHPumpsProd"></span><br />
-							Small heat pump:    <span id="prodBHpumps0"></span> m<sup>3</sup>-><span id="prodAHpumps0"></span> m<sup>3</sup><br />
-							Medium heat pump:   <span id="prodBHpumps1"></span> m<sup>3</sup>-><span id="prodAHpumps1"></span> m<sup>3</sup><br />
-							Big heat pump:      <span id="prodBHpumps2"></span> m<sup>3</sup>-><span id="prodAHpumps2"></span> m<sup>3</sup><br />
-							Very big heat pump: <span id="prodBHpumps3"></span> m<sup>3</sup>-><span id="prodAHpumps3"></span> m<sup>3</sup>
-							</td>
-							<td><button class="btn btn-primary" onclick="incProd('HWpumpProd', 'PriceincProdHWpumps')">Increase</button></td>
-							<td>Decrease operating costs of heat pumps by 10% - $<span id="priceDecHWpumpOpC"></span><br />
-							Small heat pump:    $<span id="opcbHW0"></span>->$<span id="opcaHW0"></span><br />
-							Medium heat pump:   $<span id="opcbHW1"></span>->$<span id="opcaHW1"></span><br />
-							Big heat pump:      $<span id="opcbHW2"></span>->$<span id="opcaHW2"></span><br />
-							Very big heat pump: $<span id="opcbHW3"></span>->$<span id="opcaHW3"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decopc('HWpumpOpC', 'priceDecHWpumpOpC')">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs8" class="tab-pane">
-					<h3 class="default btn-link">Heating plants</h3>
-					<table class="table">
-						<tr>
-							<td>Increase production of heating plants by 10% - $<span id="priceIncHeatHeatingFac"></span><br />
-							Small heating plant:    <span id="prodbHHW0"></span> m<sup>3</sup>-><span id="prodaHHW0"></span> m<sup>3</sup><br />
-							Medium heating plant:   <span id="prodbHHW1"></span> m<sup>3</sup>-><span id="prodaHHW1"></span> m<sup>3</sup><br />
-							Big heating plant:      <span id="prodbHHW2"></span> m<sup>3</sup>-><span id="prodaHHW2"></span> m<sup>3</sup><br />
-							Very big heating plant: <span id="prodbHHW3"></span> m<sup>3</sup>-><span id="prodaHHW3"></span> m<sup>3</sup>
-							</td>
-							<td><button class="btn btn-primary" onclick="incProd('HWHFProd', 'priceIncHeatHeatingFac');">Increase</button></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-				</div>
-				<div id="upgradestabs9" class="tab-pane">
-					<h3 class="default btn-link">Heat pipes</h3>
-					<table class="table">
-						<tr>
-							<td>Decrease cost of buying heat pipes by 5% - $<span id="decPriceHPipesBuy"></span><br />
-							$<span id="BdecBHP"></span>->$<span id="AdecBHP"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decHWPprice()">Decrease</button></td>
-							<td>Decrease cost of pacing heat pipes by 5% - $<span id="decPriceHpipesPlace"></span><br />
-							$<span id="BdecPHP"></span>->$<span id="AdecPHP"></span>
-							</td>
-							<td><button class="btn btn-primary" onclick="decHWPpriceplace()">Decrease</button></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div id="tabs-3" class="tab-pane">
-			<br />
-			<ul class="nav nav-stacked" style="font-size: 17px; float: left">
-				<li><a data-toggle="tab" href="#watertabs2">Water pumps</a></li>
-				<li><a data-toggle="tab" href="#watertabs3">Water storage</a></li>
-				<li><a data-toggle="tab" href="#watertabs4">Treatment plants</a></li>
-				<li><a data-toggle="tab" href="#watertabs5">Pipes</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="watertabs2" class="tab-pane active">
-					<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
-					<table>
-						<tr>
-							<td>Buy</td>
-							<td class="btn-group">
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 1, 'numP', 'PuB');">1</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 5, 'numP', 'PuB');">5</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 10, 'numP', 'PuB');">10</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 25, 'numP', 'PuB');">25</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 100, 'numP', 'PuB');">100</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 1000, 'numP', 'PuB');">1K</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 10000, 'numP', 'PuB');">10K</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 100000, 'numP', 'PuB');">100K</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 1000000, 'numP', 'PuB');">1M</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 10000000, 'numP', 'PuB');">10M</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 100000000, 'numP', 'PuB');">100M</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 1000000000, 'numP', 'PuB');;">1B</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 10000000000, 'numP', 'PuB');">10B</button>
-								<button class="btn btn-primary" onclick="changeB('pump', pumpPrice, 100000000000, 'numP', 'PuB');">100B</button>
-							</td>
-							<td><input id="inBP"  class="form-control" style="width: 150px;"onkeyup="var inBP = unAbbrNum(gEBI('inBP').value,0); if(inBP>0){changeB('pump', pumpPrice, inBP, 'numP', 'PuB');}"/></td>
-						</tr>
-						<tr>
-							<td>Sell</td>
-							<td class="btn-group">
-								<button class="btn btn-danger" onclick="changeS(1, 'numPS', 'PuS');">1</button>
-								<button class="btn btn-danger" onclick="changeS(5, 'numPS', 'PuS');">5</button>
-								<button class="btn btn-danger" onclick="changeS(10, 'numPS', 'PuS');">10</button>
-								<button class="btn btn-danger" onclick="changeS(25, 'numPS', 'PuS');">25</button>
-								<button class="btn btn-danger" onclick="changeS(100, 'numPS', 'PuS');">100</button>
-								<button class="btn btn-danger" onclick="changeS(1000, 'numPS', 'PuS');">1K</button>
-								<button class="btn btn-danger" onclick="changeS(10000, 'numPS', 'PuS');">10K</button>
-								<button class="btn btn-danger" onclick="changeS(100000, 'numPS', 'PuS');">100K</button>
-								<button class="btn btn-danger" onclick="changeS(1000000, 'numPS', 'PuS');">1M</button>
-								<button class="btn btn-danger" onclick="changeS(10000000, 'numPS', 'PuS');">10M</button>
-								<button class="btn btn-danger" onclick="changeS(100000000, 'numPS', 'PuS');">100M</button>
-								<button class="btn btn-danger" onclick="changeS(1000000000, 'numPS', 'PuS');">1B</button>
-								<button class="btn btn-danger" onclick="changeS(10000000000, 'numPS', 'PuS');">10B</button>
-								<button class="btn btn-danger" onclick="changeS(100000000000, 'numPS', 'PuS');">100B</button>
-							</td>
-							<td><input id="inSP"  class="form-control" style="width: 150px;" onkeyup="var inSP = unAbbrNum(gEBI('inSP').value,0); if(inSP>0){changeS(inSP, 'numPS', 'PuS');}"/></td>
-						</tr>
-					</table>
-					<br />
-					<table class="table table-bordered table-stripped">
-						<tr>
-							<th>Pump</th>
-							<th>Price</th>
-							<th>Total</th>
-							<th></th>
-							<th>Owned</th>
-							<th>Water pumped</th>
-							<th>Total pumped water</th>
-							<th>Operating cost</th>
-							<th>Total operating cost</th>
-						</tr>
-						<tr>
-							<td>Small pump</td>
-							<td>$<span id="SpumpPrice"></span></td>
-							<td>$<span id="SpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,0)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,0)">Sell <span class="numPS"></span></button></td>
-							<td id="Spump"></td>
-							<td id="SpumpProd"></td>
-							<td id="SpumpTotProd"></td>
-							<td id="SpumpOpC"></td>
-							<td id="SpumpTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Medium pump</td>
-							<td>$<span id="MpumpPrice"></span></td>
-							<td>$<span id="MpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,1)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,1)">Sell <span class="numPS"></span></button></td>
-							<td id="Mpump"></td>
-							<td id="MpumpProd"></td>
-							<td id="MpumpTotProd"></td>
-							<td id="MpumpOpC"></td>
-							<td id="MpumpTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Big pump</td>
-							<td>$<span id="BpumpPrice"></span></td>
-							<td>$<span id="BpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,2)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,2)">Sell <span class="numPS"></span></button></td>
-							<td id="Bpump"></td>
-							<td id="BpumpProd"></td>
-							<td id="BpumpTotProd"></td>
-							<td id="BpumpOpC"></td>
-							<td id="BpumpTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Very big pump</td>
-							<td>$<span id="VBpumpPrice"></span></td>
-							<td>$<span id="VBpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('pumps','pumpPrice',PuB,3)">Buy <span class="numP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('pumps','pumpPrice',PuS,3)">Sell <span class="numPS"></span></button></td>
-							<td id="VBpump"></td>
-							<td id="VBpumpProd"></td>
-							<td id="VBpumpTotProd"></td>
-							<td id="VBpumpOpC"></td>
-							<td id="VBpumpTotOpC"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="watertabs3" class="tab-pane">
-					<p>Water storage is used to store water like water towers. Whene there is too much water, it is stored if possible. When there is a shortage of water, the water from the tower is used.</p>
-					<table>	
-						<tr>
-							<td>Buy</td>
-							<td class="btn-group">
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 1, 'numBS', 'sBS');">1</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 5, 'numBS', 'sBS');">5</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 10, 'numBS', 'sBS');">10</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 25, 'numBS', 'sBS');">25</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 100, 'numBS', 'sBS');">100</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 1000, 'numBS', 'sBS');">1K</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 10000, 'numBS', 'sBS');">10K</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 100000, 'numBS', 'sBS');">100K</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 1000000, 'numBS', 'sBS');">1M</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 10000000, 'numBS', 'sBS');">10M</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 100000000, 'numBS', 'sBS');">100M</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 1000000000, 'numBS', 'sBS');">1B</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 10000000000, 'numBS', 'sBS');">10B</button>
-								<button class="btn btn-primary" onclick="changeB('st', stWPrice, 100000000000, 'numBS', 'sBS');">100B</button>
-							</td>
-							<td>
-								<input id="SB"  class="form-control" style="width: 150px;"onkeyup="var SB = unAbbrNum(gEBI('SB').value,0); if(SB>0){changeB('st', stWPrice, SB, 'numBS', 'sBS');}"/>
-							</td>
-						</tr>
-						<tr>
-							<td>Sell</td>
-							<td class="btn-group">
-								<button class="btn btn-danger" onclick="changeS(1, 'numSS', 'sSS');">1</button>
-								<button class="btn btn-danger" onclick="changeS(5, 'numSS', 'sSS');">5</button>
-								<button class="btn btn-danger" onclick="changeS(10, 'numSS', 'sSS');">10</button>
-								<button class="btn btn-danger" onclick="changeS(25, 'numSS', 'sSS');">25</button>
-								<button class="btn btn-danger" onclick="changeS(100, 'numSS', 'sSS');">100</button>
-								<button class="btn btn-danger" onclick="changeS(1000, 'numSS', 'sSS');">1K</button>
-								<button class="btn btn-danger" onclick="changeS(10000, 'numSS', 'sSS');">10K</button>
-								<button class="btn btn-danger" onclick="changeS(100000, 'numSS', 'sSS');">100K</button>
-								<button class="btn btn-danger" onclick="changeS(1000000, 'numSS', 'sSS');">1M</button>
-								<button class="btn btn-danger" onclick="changeS(10000000, 'numSS', 'sSS');">10M</button>
-								<button class="btn btn-danger" onclick="changeS(100000000, 'numSS', 'sSS');">100M</button>
-								<button class="btn btn-danger" onclick="changeS(1000000000, 'numSS', 'sSS');">1B</button>
-								<button class="btn btn-danger" onclick="changeS(10000000000, 'numSS', 'sSS');">10B</button>
-								<button class="btn btn-danger" onclick="changeS(100000000000, 'numSS', 'sSS');">100B</button>
-							</td>
-							<td>
-								<input id="SSS"  class="form-control" style="width: 150px;" onkeyup="var SSS = unAbbrNum(gEBI('SSS').value,0); if(SSS>0){changeS(SSS, 'numSS', 'sSS');}"/>
-							</td>
-						</tr>
-					</table>
-					<br />
-					<table class="table table-bordered table-stripped">
-						<tr>
-							<th>Storage type</th>
-							<th>Price</th>
-							<th>Total</th>
-							<th></th>
-							<th>Owned</th>
-							<th>Water max stored</th>
-							<th>Total max stored water</th>
-							<th>Operating cost</th>
-							<th>Total operating cost</th>
-						</tr>
-						<tr>
-							<td>Small storage</td>
-							<td>$<span id="SSPrice"></span></td>
-							<td>$<span  id="SstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 0)">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 0)">Sell <span class="numSS"></span></button></td>
-							<td id="SS"></td>
-							<td id="SSProd"></td>
-							<td id="SSTotProd"></td>
-							<td id="SSOpC"></td>
-							<td id="SSTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Medium storage</td>
-							<td>$<span id="MSPrice"></span></td>
-							<td>$<span  id="MstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 1)">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 1)">Sell <span class="numSS"></span></button></td>
-							<td id="MS"></td>
-							<td id="MSProd"></td>
-							<td id="MSTotProd"></td>
-							<td id="MSOpC"></td>
-							<td id="MSTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Big storage</td>
-							<td>$<span id="BSPrice"></span></td>
-							<td>$<span  id="BstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 2)">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 2)">Sell <span class="numSS"></span></button></td>
-							<td id="BS"></td>
-							<td id="BSProd"></td>
-							<td id="BSTotProd"></td>
-							<td id="BSOpC"></td>
-							<td id="BSTotOpC"></td>
-						</tr>
-						<tr>
-							<td>Very big storage</td>
-							<td>$<span id="VBSPrice"></span></td>
-							<td>$<span  id="VBstTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('stWC', 'stWPrice', sBS, 3)">Buy <span class="numBS"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('stWC', 'stWPrice', sSS, 3)">Sell <span class="numSS"></span></button></td>
-							<td id="VBS"></td>
-							<td id="VBSProd"></td>
-							<td id="VBSTotProd"></td>
-							<td id="VBSOpC"></td>
-							<td id="VBSTotOpC"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="watertabs4" class="tab-pane">
-					<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m<sup>3</sup> you dispose in river you need to pay $100.</p>
-					<table>	
-						<tr>
-							<td>Buy</td>
-							<td class="btn-group">
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 1, 'numTr', 'TreatPlB');">1</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 5, 'numTr', 'TreatPlB');">5</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 10, 'numTr', 'TreatPlB');">10</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 25, 'numTr', 'TreatPlB');">25</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 100, 'numTr', 'TreatPlB');">100</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 1000, 'numTr', 'TreatPlB');">1K</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 10000, 'numTr', 'TreatPlB');">10K</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 100000, 'numTr', 'TreatPlB');">100K</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 1000000, 'numTr', 'TreatPlB');">1M</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 10000000, 'numTr', 'TreatPlB');">10M</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 100000000, 'numTr', 'TreatPlB');">100M</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 1000000000, 'numTr', 'TreatPlB');">1B</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 10000000000, 'numTr', 'TreatPlB');">10B</button>
-								<button class="btn btn-primary" onclick="changeB('Tpump', treatPrice, 100000000000, 'numTr', 'TreatPlB');">100B</button>
-							</td>
-							<td><input id="treatPlB"  class="form-control" style="width: 150px;"onkeyup="var treatPlB = unAbbrNum(gEBI('treatPlB').value,0); if(treatPlB>0){changeB('Tpump', treatPrice, treatPlB, 'numTr', 'TreatPlB');}"/></td>
-						</tr>
-						<tr>
-							<td>Sell</td>
-							<td class="btn-group">
-								<button class="btn btn-danger" onclick="changeS(1, 'numTrS', 'TrPS');">1</button>
-								<button class="btn btn-danger" onclick="changeS(5, 'numTrS', 'TrPS');">5</button>
-								<button class="btn btn-danger" onclick="changeS(10, 'numTrS', 'TrPS');">10</button>
-								<button class="btn btn-danger" onclick="changeS(25, 'numTrS', 'TrPS');">25</button>
-								<button class="btn btn-danger" onclick="changeS(100, 'numTrS', 'TrPS');">100</button>
-								<button class="btn btn-danger" onclick="changeS(1000, 'numTrS', 'TrPS');">1K</button>
-								<button class="btn btn-danger" onclick="changeS(10000, 'numTrS', 'TrPS');">10K</button>
-								<button class="btn btn-danger" onclick="changeS(100000, 'numTrS', 'TrPS');">100K</button>
-								<button class="btn btn-danger" onclick="changeS(1000000, 'numTrS', 'TrPS');">1M</button>
-								<button class="btn btn-danger" onclick="changeS(10000000, 'numTrS', 'TrPS');">10M</button>
-								<button class="btn btn-danger" onclick="changeS(100000000, 'numTrS', 'TrPS');">100M</button>
-								<button class="btn btn-danger" onclick="changeS(1000000000, 'numTrS', 'TrPS');">1B</button>
-								<button class="btn btn-danger" onclick="changeS(10000000000, 'numTrS', 'TrPS');">10B</button>
-								<button class="btn btn-danger" onclick="changeS(100000000000, 'numTrS', 'TrPS');">100B</button>
-							</td>
-							<td><input id="trPS"  class="form-control" style="width: 150px;"onkeyup="var trPS = unAbbrNum(gEBI('trPS').value,0); if(trPS>0){changeS(trPS, 'numTrS', 'TrPS');}"/></td>
-						</tr>
-					</table>
-					<br />
-					<table class="table table-bordered table-stripped">
-						<tr>
-							<th>Treatment plant</th>
-							<th>Price</th>
-							<th>Total</th>
-							<th></th>
-							<th>Owned</th>
-							<th>Water treated</th>
-							<th>Total treated water</th>
-							<th>Operating cost</th>
-							<th>Total operating cost</th>
-						</tr>
-						<tr>
-							<td>Small treatment plant</td>
-							<td>$<span id="STpumpPrice"></span></td>
-							<td>$<span  id="STpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 0)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 0)">Sell <span class="numTrS"></span></button></td>
-							<td id="STpump"></td>
-							<td id="STpumpProd"></td>
-							<td id="STpumpTotProd"></td>
-							<td id="STpumpOpCost"></td>
-							<td id="STpumpTotOpCost"></td>
-						</tr>
-						<tr>
-							<td>Medium treatment plant</td>
-							<td>$<span id="MTpumpPrice"></span></td>
-							<td>$<span  id="MTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 1)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 1)">Sell <span class="numTrS"></span></button></td>
-							<td id="MTpump"></td>
-							<td id="MTpumpProd"></td>
-							<td id="MTpumpTotProd"></td>
-							<td id="MTpumpOpCost"></td>
-							<td id="MTpumpTotOpCost"></td>
-						</tr>
-						<tr>
-							<td>Big treatment plant</td>
-							<td>$<span id="BTpumpPrice"></span></td>
-							<td>$<span  id="BTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 2)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 2)">Sell <span class="numTrS"></span></button></td>
-							<td id="BTpump"></td>
-							<td id="BTpumpProd"></td>
-							<td id="BTpumpTotProd"></td>
-							<td id="BTpumpOpCost"></td>
-							<td id="BTpumpTotOpCost"></td>
-						</tr>
-						<tr>
-							<td>Very big treatment plant</td>
-							<td>$<span id="VBTpumpPrice"></span></td>
-							<td>$<span  id="VBTpumpTprice"></span></td>
-							<td><button class="btn btn-primary" onclick="buyUt('treatPla', 'treatPrice', TreatPlB, 3)">Buy <span class="numTr"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('treatPla', 'treatPrice', TrPS, 3)">Sell <span class="numTrS"></span></button></td>
-							<td id="VBTpump"></td>
-							<td id="VBTpumpProd"></td>
-							<td id="VBTpumpTotProd"></td>
-							<td id="VBTpumpOpCost"></td>
-							<td id="VBTpumpTotOpCost"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="watertabs5" class="tab-pane">
-					<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies <span id="PPH"></span> houses at a time.</p>
-					<table>
-						<tr>
-							<td>Buy</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="chPiO(1);">1</button>
-									<button class="btn btn-primary" onclick="chPiO(5);">5</button>
-									<button class="btn btn-primary" onclick="chPiO(10);">10</button>
-									<button class="btn btn-primary" onclick="chPiO(25);">25</button>
-									<button class="btn btn-primary" onclick="chPiO(100);">100</button>
-									<button class="btn btn-primary" onclick="chPiO(1000);">1K</button>
-									<button class="btn btn-primary" onclick="chPiO(10000);">10K</button>
-									<button class="btn btn-primary" onclick="chPiO(100000);">100K</button>
-									<button class="btn btn-primary" onclick="chPiO(1000000);">1M</button>
-									<button class="btn btn-primary" onclick="chPiO(10000000);">10M</button>
-									<button class="btn btn-primary" onclick="chPiO(100000000);">100M</button>
-									<button class="btn btn-primary" onclick="chPiO(1000000000);">1B</button>
-									<button class="btn btn-primary" onclick="chPiO(10000000000);">10B</button>
-									<button class="btn btn-primary" onclick="chPiO(100000000000);">100B</button>
-								</div>
-							</td>
-							<td><input id="BP"  class="form-control" style="width: 150px;"onkeyup="var inBP = unAbbrNum(gEBI('BP').value,2); if(inBP>0){chPiO(inBP);}"/></td>
-							<td>Synchronise
-							<label class="switch">
-								<input id="f" type="checkbox" onclick="if(gEBI('f').checked){sync=1} else{sync=0}">
-								<div class="slider"></div>
-							</label>
-							</td>
-						</tr>
-						<tr id="hide">
-							<td>Place</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="chPiP(1);">1</button>
-									<button class="btn btn-primary" onclick="chPiP(5);">5</button>
-									<button class="btn btn-primary" onclick="chPiP(10);">10</button>
-									<button class="btn btn-primary" onclick="chPiP(25);">25</button>
-									<button class="btn btn-primary" onclick="chPiP(100);">100</button>
-									<button class="btn btn-primary" onclick="chPiP(1000);">1K</button>
-									<button class="btn btn-primary" onclick="chPiP(10000);">10K</button>
-									<button class="btn btn-primary" onclick="chPiP(100000);">100K</button>
-									<button class="btn btn-primary" onclick="chPiP(1000000);">1M</button>
-									<button class="btn btn-primary" onclick="chPiP(10000000);">10M</button>
-									<button class="btn btn-primary" onclick="chPiP(100000000);">100M</button>
-									<button class="btn btn-primary" onclick="chPiP(1000000000);">1B</button>
-									<button class="btn btn-primary" onclick="chPiP(10000000000);">10B</button>
-									<button class="btn btn-primary" onclick="chPiP(100000000000);">100B</button>
-								</div>
-							</td>
-							<td><input id="iNPP"  class="form-control" style="width: 150px;"onkeyup="var inPP = unAbbrNum(gEBI('iNPP').value,2); if(inPP>0){chPiP(inPP);}"/></td>
-							<td rowspan="2">Buy max pipes every day if possible
-							<label class="switch">
-								<input id="buyMax" type="checkbox" onclick="if(gEBI('buyMax').checked){buyMax=1} else{buyMax=0}">
-								<div class="slider"></div>
-							</label>
-							</td>
-						</tr>
-					</table>
-					<br />
-					Pipes you have: <span id="PM"></span><br />
-					Cost for buying one pipe: $<span id="PPM"></span><br />
-					Cost for placing one pipe: $<span id="PPP"></span><br />
-					Placed pipes: <span id="PP"></span>
-					<br />
-					<br />
-					<button class="btn btn-primary" class="numPiO" onclick="if(unAbbrNum(gEBI('numPiO').innerHTML)>0){buyPipe(unAbbrNum(gEBI('numPiO').innerHTML))}else{Error('You can not buy negative pipes');}">Buy <span id="numPiO"></span> pipe(s) for $<span id="paap"></span></button>
-					<button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('numPiP').innerHTML)>0){placePipe(unAbbrNum(gEBI('numPiP').innerHTML))}else{Error('You can not place negative pipes');}">Place <span id="numPiP"></span> pipe(s) for $<span id="pppp"></span></button><br />
-					<button class="btn btn-primary" onclick="var buyPipesMax = getMaxPipes(); buyPipe(buyPipesMax[0],0);">Buy <span id="bmp"></span></button>
-					<button class="btn btn-primary" onclick="var placePipesMax = getMaxPipes();placePipe(placeMaxPipes[1]);">Place <span id="pmp"></span></button>
-					<button id="btnBPpipes" class="btn btn-primary" onclick="var temp = getMaxPipes(); buyPipe(temp[2]); placePipe(temp[2]);">Buy & place <span id="bppM"></span></button>
+				<div class="tab-content">
+					<div id="upgradestabs1" class="tab-pane active">
+						<table class="table">
+							<tr>
+								<td>
+									Increase production of cold water pumps by 10%<br />
+									Small cold water pump <span id="uptab1coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda0"></span> m<sup>3</sup><br />
+									Medium cold water pump <span id="uptab1coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda1"></span> m<sup>3</sup><br />
+									Big cold water pump <span id="uptab1coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda2"></span> m<sup>3</sup><br />
+									Very big cold water pump <span id="uptab1coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda3"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'pumpprod', 1.1, 'coldwaterpumpprod', 1.2, 4)" class="btn btn-success">$<span id="coldwaterpumpprod"></span><br /></button>
+								</td>
+								<td>
+									Decrease operating cost of cold water pumps by 10%<br />
+									Small cold water pump $<span id="uptab1coldwatercostb0"></span>->$<span id="uptab1coldwatercosta0"></span><br />
+									Medium cold water pump $<span id="uptab1coldwatercostb1"></span>->$<span id="uptab1coldwatercosta1"></span><br />
+									Big cold water pump $<span id="uptab1coldwatercostb2"></span>->$<span id="uptab1coldwatercosta2"></span><br />
+									Very big cold water pump $<span id="uptab1coldwatercostb3"></span>->$<span id="uptab1coldwatercosta3"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'pumpcost', 0.9, 'coldwaterpumpcost', 1.25, 4)" class="btn btn-success">$<span id="coldwaterpumpcost"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs2" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Increase productin of treatment plants by 10%<br />
+									Small treatment plant <span id="uptab2coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda0"></span> m<sup>3</sup><br />
+								    Medium treatment plant <span id="uptab2coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda1"></span> m<sup>3</sup><br />
+								    Big treatment plant <span id="uptab2coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda2"></span> m<sup>3</sup><br />
+								    Very bigtreatment plant <span id="uptab2coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda3"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'treatmentplantprod', 1.1, 'coldwatertreatmentplantprod', 1.2, 4)" class="btn btn-success">$<span id="coldwatertreatmentplantprod"></span></button>								</td>
+								<td>
+									Decrease operating cost of treatment plants by 10%<br />
+									Small treatment plant   $<span id="uptab2coldwatercostb0"></span>->$<span id="uptab2coldwatercosta0"></span><br />
+									Medium treatment plant  $<span id="uptab2coldwatercostb1"></span>->$<span id="uptab2coldwatercosta1"></span><br />
+									Big treatment plant     $<span id="uptab2coldwatercostb2"></span>->$<span id="uptab2coldwatercosta2"></span><br />
+									Very bigtreatment plant $<span id="uptab2coldwatercostb3"></span>->$<span id="uptab2coldwatercosta3"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'treatmentplantcost', 0.9, 'coldwatertreatmentplantcost', 1.25, 4)" class="btn btn-success">$<span id="coldwatertreatmentplantcost"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs3" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Increase maximum storage of storage units by 10%<br />
+									Small storage unit    <span id="uptab3coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda0"></span> m<sup>3</sup><br />
+									Medium storage unit   <span id="uptab3coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda1"></span> m<sup>3</sup><br />
+									Big storage unit      <span id="uptab3coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda2"></span> m<sup>3</sup><br />
+									Very big storage unit <span id="uptab3coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda3"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'storageprod', 1.1, 'coldwaterstoragemax', 1.2, 4)" class="btn btn-success">$<span id="coldwaterstoragemax"></span></button>
+								</td>
+								<td>
+									Decrease operating cost of storage units by 10%<br />
+									Small storage unit    $<span id="uptab3coldwatercostb0"></span>->$<span id="uptab3coldwatercosta0"></span><br />
+									Medium storage unit   $<span id="uptab3coldwatercostb1"></span>->$<span id="uptab3coldwatercosta1"></span><br />
+									Big storage unit      $<span id="uptab3coldwatercostb2"></span>->$<span id="uptab3coldwatercosta2"></span><br />
+									Very big storage unit $<span id="uptab3coldwatercostb3"></span>->$<span id="uptab3coldwatercosta3"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'storagecost', 0.9, 'coldwaterstoragecost', 1.25, 4)" class="btn btn-success">$<span id="coldwaterstoragecost"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs4" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Decrease the price for buyig pipes by 2.5%<br />
+									Buying price $<span id="uptab4coldwaterpipesbuyb"></span>->$<span id="uptab4coldwaterpipesbuya"></span>
+								</td>
+								<td>
+									<button class="btn btn-success">$<span id="coldwaterpipebuy"></span></button>
+								</td>
+								<td>
+									Decrease the price for placing pipes by 2.5%<br />
+									Placing pipes $<span id="uptab4coldwaterpipesplaceb"></span>->$<span id="uptab4coldwaterpipesplacea"></span>
+								</td>
+								<td>
+									<button class="btn btn-success">$<span id="coldwaterpipeplace"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs5" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Increase production of hot water pumps by 10%<br />
+									hot water pump <span id="uptab5hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda0"></span> m<sup>3</sup><br />
+									hot water pump <span id="uptab5hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda1"></span> m<sup>3</sup><br />
+									hot water pump <span id="uptab5hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda2"></span> m<sup>3</sup><br />
+									hot water pump <span id="uptab5hotwaterprodb3"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda3"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'pumpprod', 1.1, 'hotwaterpumpprod', 1.2, 4)" class="btn btn-success">$<span id="hotwaterpumpprod"></span></button></button>
+								</td>
+								<td>
+									Decrease operating cost of hot water pumps by 10%<br />
+									hot water pump $<span id="uptab5hotwatercostb0"></span>->$<span id="uptab5hotwatercosta0"></span><br />
+									hot water pump $<span id="uptab5hotwatercostb1"></span>->$<span id="uptab5hotwatercosta1"></span><br />
+									hot water pump $<span id="uptab5hotwatercostb2"></span>->$<span id="uptab5hotwatercosta2"></span><br />
+									hot water pump $<span id="uptab5hotwatercostb3"></span>->$<span id="uptab5hotwatercosta3"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'pumpcost', 0.9, 'hotwaterpumpcost', 1.25, 4)" class="btn btn-success">$<span id="hotwaterpumpcost"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs6" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Increase production of water heating plants by 10%<br />
+                                    heating plant <span id="uptab6hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda0"></span> m<sup>3</sup><br />
+                                    heating plant <span id="uptab6hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda1"></span> m<sup>3</sup><br />
+                                    heating plant <span id="uptab6hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda2"></span> m<sup>3</sup><br />
+									heating plant <span id="uptab6hotwaterprodb3"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda3"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'heatingplantprod', 1.1, 'hotwaterheatingplantprod', 1.2, 4)" class="btn btn-success">$<span id="hotwaterheatingplantprod"></span></button>
+								</td>
+								<td>
+									Decrease operating cost of water heating plants by 10%<br />
+									heating plant $<span id="uptab6hotwatercostb0"></span>->$<span id="uptab6hotwatercosta0"></span><br />
+									heating plant $<span id="uptab6hotwatercostb1"></span>->$<span id="uptab6hotwatercosta1"></span><br />
+									heating plant $<span id="uptab6hotwatercostb2"></span>->$<span id="uptab6hotwatercosta2"></span><br />
+									heating plant $<span id="uptab6hotwatercostb3"></span>->$<span id="uptab6hotwatercosta3"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'heatingplantcost', 0.9, 'hotwaterheatingplantcost', 1.25, 4)" class="btn btn-success">$<span id="hotwaterheatingplantcost"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs7" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Decrease price for buying hot water pipes by 5%<br />
+									Buying hot water pipes $<span id="uptab7hotwaterpricebuyb"></span>->$<span id="uptab7hotwaterpricebuya"></span>
+								</td>
+								<td>
+									<button class="btn btn-success">$<span id="hotwaterpipebuy"></span></button>
+								</td>
+								<td>
+									Decrease price for placing hot water pipes by 5%<br />
+									Placing hot water pipes $<span id="uptab7hotwaterpriceplaceb"></span>->$<span id="uptab7hotwaterpriceplacea"></span>
+								</td>
+								<td>
+									<button class="btn btn-success">$<span id="hotwaterpipeplace"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs8" class="tab-pane">
+						<table class="table">
+							<tr>
+								<th colspan="2">Cold water</th>
+								<th colspan="2">Hot water</th>
+							</tr>
+							<tr>
+								<td>
+									Increase price of cold water by 5%<br />
+									Price of cold water $<span id="uptab8coldwaterpriceb"></span>->$<span id="uptab8coldwaterpricea"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'waterprice', 1.05, 'coldwaterprice', 1.25, 1)" class="btn btn-success">$<span id="coldwaterprice"></span></button>
+								</td>
+								<td>
+									Increase price of hot water by 5%<br />
+									Price of hot water $<span id="uptab8hotwaterpriceb"></span>->$<span id="uptab8hotwaterpricea"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'waterprice', 1.05, 'hotwaterprice', 1.25, 1)" class="btn btn-success">$<span id="hotwaterprice"></span></button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Increase the use of cold water by 2.5%<br />
+									Cold water used per house <span id="uptab8coldwaterusedb"></span> m<sup>3</sup>-><span id="uptab8coldwateruseda"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('coldwater', 'waterperhouse', 1.025, 'coldwaterperhouse', 1.25, 1)" class="btn btn-success">$<span id="coldwaterperhouse"></span></button>
+								</td>
+								<td>
+									Increase the use of hot water by 2.5%<br />
+									Hot water used per house <span id="uptab8hotwaterusedb"></span> m<sup>3</sup>-><span id="uptab8hotwateruseda"></span> m<sup>3</sup>
+								</td>
+								<td>
+									<button onclick="upgrade('hotwater', 'waterperhouse', 1.025, 'hotwaterperhouse', 1.25, 1)" class="btn btn-success">$<span id="hotwaterperhouse"></span></button>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									Increase the rate of building new houses by 10%<br />
+									Rate of building houses <span id="uptab8houserateb"></span>-><span id="uptab8houseratea"></span>
+								</td>
+								<td colspan="2">
+									<button onclick="upgrade('city', 'rate', 1.1, 'houserate', 1.5, 1)" class="btn btn-success">$<span id="houserate"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="upgradestabs9" class="tab-pane">
+						<table class="table">
+							<tr>
+								<td>
+									Increase interest rate by 0.5%<br />
+									Interest rate <span id="uptab9intb"></span>%-><span id="uptab9inta"></span>%
+								</td>
+								<td>
+									<button onclick="upgrade('bank', 'interest', 1.05, 'loaninterestrate', 1.5, 1)" class="btn btn-success">$<span id="loaninterestrate"></span></button>
+								</td>
+								<td>
+									Increase maximum loan by 100%<br />
+									Maximum loan $<span id="uptab9maxloanb"></span>->$<span id="uptab9maxloana"></span>
+								</td>
+								<td>
+									<button onclick="upgrade('bank', 'maxloan', 2, 'maxloan', 1.5, 1)" class="btn btn-success">$<span id="maxloan"></span></button>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="tabs-6" class="tab-pane" style="position: relative;">
-		<br />
-			<p>In the bank you can manage your money. You can invest in bank account and get a fixed interest every day or if you need money you can take out a loan.</p>
-			<table class="table" style="width: 250px;">
-				<tr>
-					<td>Current balance</td>
-					<td>$<span id="curBalance"></span></td>
-					<td>Monthly interest</td>
-					<td><span id="interestRate"></span>%</td>
-				</tr>
-				<tr>
-					<td>Invest</td>
-					<td><input id="inv" class="form-control" type="text" /></td>
-					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('inv').value)>0){invest(unAbbrNum(gEBI('inv').value))}else{Error('You can not invest negative money');}gEBI('inv').value = 0;">Invest</button></td>
-					<td><button class="btn btn-primary" onclick="investMAX();">Invest max</button></td>
-				</tr>
-				<tr>
-					<td>Withdraw</td>
-					<td><input id="wd" type="text" class="form-control" style="width: 150px;"/></td>
-					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('wd').value)>0){withdraw(unAbbrNum(gEBI('wd').value))}else{Error('You can not withdraw negative money');}gEBI('wd').value = 0;">Withdraw</button></td>
-					<td><button class="btn btn-primary" onclick="withdrawMAX();">Withdraw max</button></td>
-				</tr>
-			</table>
-			<table class="table" style="width: 500px;">
-				<tr>
-					<td>Current loan/max loan</td>
-					<td>$<span id="curLoan"></span>/$<span id="maxLoanBank"></span></td>
-					<td>Loan interest</td>
-					<td><span id="lInt"></span>%</td>
-					<td>Current tax for loan</td>
-					<td>$<span id="curTaxL"></span></td>
-				</tr>
-				<tr>
-					<td>Get loan</td>
-					<td><input id="gl" min="0" class="form-control" style="width: 150px;"/></td>
-					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('gl').value)>0){getLoan(unAbbrNum(gEBI('gl').value))}else{Error('You can not get negative loan');}gEBI('gl').value = 0;">Get</button></td>
-					<td>Return loan</td>
-					<td><input id="rl" min="0" class="form-control" style="width: 150px;"/></td>
-					<td><button class="btn btn-primary" onclick="if(unAbbrNum(gEBI('rl').value)>0){returnLoan(unAbbrNum(gEBI('rl').value))}else{Error('You can not return negative loan');}gEBI('rl').value = 0;">Return</button>
-					<button class="btn btn-primary" onclick="if(loan>=money){returnLoan(money);} else{returnLoan(loan);}">Return max loan</button>
-					</td>
-				</tr>
-			</table>
-			<table class="table"style="float: right; width: 300px; position: absolute; top: 70px; right: 10px;">
-				<tr>
-					<td>Turn on/off investments</td>
-					<td><label class="switch">
-						<input id="a" type="checkbox" onclick="if(gEBI('a').checked){bankpercentOn = 1;gEBI('warnAll').style.display = 'block';gEBI('percentBankUpper').innerHTML = bankpercent;}else{bankpercentOn = 0;gEBI('warnAll').style.display = 'none';gEBI('percentBankUpper').innerHTML = bankpercent;}">
-						<div class="slider"></div>
-					</label></td>
-				</tr>
-				<tr>
-					<td>Invest</td>
-					<td><input id="bankpercent" type="number" min="0" max="100" onkeyup="bankpercent = Number(gEBI('bankpercent').value); if(bankpercent>100){bankpercent = 100;} else if(bankpercent<0){bankpercent=0;}else if(!bankpercent){bankpercent=0;}if(gEBI('a').checked&&bankpercent>0){gEBI('warnAll').style.display = 'block';gEBI('percentBankUpper').innerHTML = bankpercent;}" class="form-control" style="width: 75px;"></input>% in the bank from income,<br /></td>
-				</tr>
-				<tr>
-					<td>Put money from interest in the bank </td>
-					<td>
-						<label class="switch">
-							<input id="INTBANK" type="checkbox" onclick="if(gEBI('INTBANK').checked){INTBANK = 1;}else{INTBANK = 0;}">
-							<div class="slider"></div>
-						</label>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div id="tabs-8" class="tab-pane">
-		<br />
-			<h4>I've found a bug. What should I do?</h4>
-			<p>You should report it in <a href="https://www.reddit.com/r/WaterCompany/comments/6cttcl/bugs_and_glitches/" target="_blank">this reddit post</a> or you can open a new issue in github on <a href="https://github.com/Dimitar5555/WaterCompany/issues" target="_blank">this</a> address.</p>
-			<hr />
-			<h4>I've got a suggestion/feature for the game. Where can I share my idea?</h4>
-			<p>You can <a href="https://www.reddit.com/r/WaterCompany/comments/6cttiy/suggestions/" target="_blank">add your suggestion</a> on reddit.</p>
-			<hr />
-			<h4>Why do I need treatment plant and what will happen if I don't have?</h4>
-			<p>The treatment plant cleans the water from sawage. If you let not treated water to the river, you will pay a fine of $1000 for every 10000m<sup>3</sup> not treated water.</p>
-			<hr />
-			<h4>What will happen if I can't supply enough water?</h4>
-			<p>Simply people will pay fo the water you supplied. If you supply 10m<sup>3</sup>, but they need 20m<sup>3</sup>, people will pay for 10m<sup>3</sup> only.</p>
-			<hr />
-			<h4>How does the bank loan system work?</h4>
-			<p>On the next day on 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by the percentage of the loan interest.</p>
-			<hr />
-			<h4>I want to get x money via loan but I can't. Why?</h4>
-			<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
-			<hr />
-			<h4>How does the bank account work?</h4>
-			<p>You can put money in it. Every day at 00:00 you get interest for your money in your cash on hand.</p>
-			<hr />
-			<h4>How are operating costs defined?</h4>
-			<p>Everything has a operating cost(exept pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
-		</div>
-		<div id="tabs-7" class="tab-pane">
-		<br />
-			<button class="btn btn-primary" onclick="save()">Save</button>
-			<p>The game is autosaved every 30 seconds.</p>
-			<button class="btn btn-danger" onclick="HardReset = HardReset + 1; if(HardReset == 3){localStorage.pumptreat = ''; localStorage.other = ''; localStorage.prices=''; localStorage.upgradesPrices = ''; location.reload(); }">Hard Reset(press 3 times)</button>
-			<br />
-			<br />
-			<table class="table">
-				<tr>
-					<td>Turn off autosave</td>
-					<td><label class="switch"><input id="notAS" type="checkbox" onclick="if(gEBI('notAS').checked){notAS = 1;} else{notAS = 0;}"><div class="slider"></div></label></td>
-					<td>
-						<select class="form-control" id="selecetTheme">
-							<option value="standart">Standart</option>
-							<option value="dark">Dark</option>
-							<option value="united">United</option>
-							<option value="cerulean">Cerulean</option>
-							<option value="cosmo">Cosmo</option>
-							<option value="cyborg">Cyborg</option>
-							<option value="darkly">Darkly</option>
-							<option value="solar">Solar</option>
-							<option value="yeti">Yeti</option>
-						</select>
-						<button class="btn btn-primary" onclick="var e = document.getElementById('selecetTheme');var strUser = (e.options[e.selectedIndex].value).toLowerCase();var styleel = 'css/bootstrap-' + strUser + '.css'; gEBI('STYLE-EL').href = styleel;">Apply style</button>
-					</td>
-					<td><button class="btn btn-primary" onclick="saveSets();">Save settings</button></td>
-				</tr>
-				<tr>
-					<th colspan="4">Notifications</th>
-				</tr>
-				<tr>
-					<td>Turn off notifications for number of builded house</td>
-					<td><label class="switch"><input id="notBH" type="checkbox" onclick="if(gEBI('notBH').checked){notBH = 1;} else{notBH = 0;}"><div class="slider"></div></label></td>
-					<td>Turn off notifications for the received bank interest</td>
-					<td><label class="switch"><input id="notBI" type="checkbox" onclick="if(gEBI('notBI').checked){notBI = 1;} else{notBI = 0;}"><div class="slider"></div></label></td>
-				</tr>
-				<tr>
-					<td>Turn off notifications for payed loan tax</td>
-					<td><label class="switch"><input id="notPL" type="checkbox" onclick="if(gEBI('notPL').checked){notPL = 1;} else{notPL = 0;}"><div class="slider"></div></label></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-		</div>
-		<div id="tabs-9" class="tab-pane">
-		<br />
-			<table class="table">
-				<tr>
-					<th colspan="2">Income daily</th>
-					<th colspan="2">Expenditures daily</th>
-				</tr>
-				<tr>
-					<td>Selling water</td>
-					<td>$<span id="fciWater"></span></td>
-					<td>Operating costs water</td>
-					<td>$<span id="fcwater"></span></td>
-				</tr>
-				<tr>
-					<td>Selling heated water</td>
-					<td>$<span id="fhiWater"></span></td>
-					<td>Operating costs heated water</td>
-					<td>$<span id="fhwater"></span></td>
-				</tr>
-				<tr>
-					<th>Selling water total</th>
-					<th>$<span id="fWater"></span></th>
-					<th>Operating costs total</th>
-					<th>$<span id="TfopC"></span></th>
-				</tr>
-				<tr>
-					<td>From interest(in bank account)</td>
-					<td>$<span id="fIntInc"></span></td>
-					<td>Loans</td>
-					<td>$<span id="fLoanTax"></span></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>Fines</td>
-					<td>$<span id="fFines"></span></td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td colspan="2">Profit</td>
-					<td colspan="2">$<span id="fProfit"></span></td>
-				</tr>
-			</table>
-		</div>
-		
-		<div id="tabs-11" class="tab-pane">
-			<h4>Version 0.3.4.1 Beta - 8 June 2017</h4>
-			<ul>
-				<li>Fixed bug: not loading data from the new update correctly</li>
-				<li>Fixed bug: autobuy functions</li>
-				<li>Fixed bug: custom number inputs in hot water tab not working</li>
-				<li>Fixed bug: upgrade tabs weren't clickable on Kongregate</li>
-				<li>Changed postion of the weather bar(what do you think?)</li>
-				<li>Optimized game loading speed</li>
-				<li>Added notification for autobuild water pipes</li>
-				<li>Balance: houses are increased by the coresponding percent every day/7(ie the increase is weekly)</li>
-				<li>Balance: max interest rate is 25% now</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3.4 Beta - 6 June 2017</h4>
-			<ul>
-				<li>Redesigned water menus</li>
-				<li>Redesigned upgrades tab</li>
-				<li>Added heated water sales and utilites</li>
-				<li>Added added some upgrades for heated water utilites(will add more)</li>
-				<li>Save setting function</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3.3 Beta - 26 May 2017</h4>
-			<ul>
-				<li>Added more themes</li>
-				<li>Added more options to turn on/off notifications</li>
-				<li>Redesigned options tab</li>
-				<li>Fixed wrong calculations in finance tab</li>
-				<li>Added function to insert some prices if they are undefined</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3.2.1 Beta</h4>
-			<ul>
-				<li>Added dark theme</li>
-				<li>Bugfixes</li>
-				<li>Some little changes here and there</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3.2 Beta</h4>
-			<ul>
-				<li>Bugfixes</li>
-				<li>Typos</li>
-				<li>Redesign of city tab</li>
-				<li>Redesign of upgrades tab</li>
-				<li>New upgrades
-					<ul>
-						<li>Decrease operating costs</li>
-						<li>Increase max loan</li>
-					</ul>
-				</li>
-				<li>Custon inputs for buying/selling</li>
-				<li>All inputs for numbers(except the percentage one in bank) can get abbreviations (1.541Qa, 95.47t, 54.31Q). It is case insensitive(1t and 1T is the same number)</li>
-				<li>Toggable percentage of income in the bank</li>
-				<li>Auto buy pipes every day toggle</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3.1 Beta</h4>
-			<ul>
-				<li>Bugfixes</li>
-				<li>Game balance<ul>
-					<li>Bank now gives 1/31 of the interest rate per day</li>
-					<li>Increased operating costs</li>
-					<li>Increased effect of some upgrades</li>
-				</ul></li>
-				<li>Better number shortening system</li>
-				<li>Code optimisation</li>
-				<li>Added month</li>
-				<li>Buttons for buying and placing max pipes</li>
-				<li>Sell button are now red</li>
-				<li>Invest everything in the bank button</li>
-				<li>Added about tab</li>
-			</ul>
-			<hr />
-			<h4>Version 0.3 Beta: The Money River</h4>
-			<ul>
-				<li>Added bank
-					<ul>
-						<li>Loan system with up to $100k loan</li>
-						<li>Interest rate and bank balance</li>
-						<li>Upgrade to increase the interest rate</li>
-					</ul>
-				</li>
-				<li>Added water storage</li>
-				<li>Added operating costs to buildings</li>
-				<li>Added FAQ section</li>
-				<li>Balance
-					<ul>
-						<li>Decreased rate of building new houses</li>
-						<li>Changed prices for buying buildings</li>
-						<li>Lowered effects and/or price for some upgrades</li>
-					</ul>
-				</li>
-				<li>Added year counter</li>
-				<li>Changed save system</li>
-				<li>Lowered the size of the javascript files</li>
-				<li>Changed notification system</li>
-				<li>Bugfixes</li>
-			</ul>
-			<hr />
-			<h4>Version 0.2 Beta</h4>
-			<ul>
-				<li>Added change log</li>
-				<li>Added sell function for treatment plants and pumps</li>
-				<li>Fixed typos</li>
-				<li>Fixed bugs</li>
-				<li>Added default value for city</li>
-				<li>Semi natural increase in houses over time</li>
-				<li>Upgrades for treatment plants and pumps</li>
-				<li>Sync option for pipes</li>
-			</ul>
-		</div>
-		<div id="tabs-12" class="tab-pane">
-			<img style="float: right;" src="bulgaria-made.png" />
-			<p>This game is made using the folowing libraries:
-			<ul>
-				<li><a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a> by <a href="https://github.com/twbs" target="_blank">twbs</a></li>
-				<li><a href="https://github.com/jquery/jquery" target="_blank">jquery</a> by <a href="https://github.com/jquery/" target="_blank">jquery</a></li>
-				<li><a href="https://github.com/fabien-d/alertify.js" target="_blank">Alertify</a> by <a href="https://github.com/fabien-d">fabien-d</a></li>
-			</ul>
-			</p>
-
-		</div>
-		<div id="tabs-13" class="tab-pane">
-			<br />
-			<ul class="nav nav-stacked" style="float: left; font-size: 17px; width: 150px;">
-				<li><a data-toggle="tab" href="#Htabs1">Overview</a></li>
-				<li><a data-toggle="tab" href="#Htabs2">Heat pumps</a></li>
-				<li><a data-toggle="tab" href="#Htabs3">Heating plants</a></li>
-				<li><a data-toggle="tab" href="#Htabs4">Heat pipes</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="Htabs1" class="tab-pane active">
-					<table class="table">
-						<tr>
-							<td>Heat pipes placed</td>
-							<td id="HPPP1"></td>
-						</tr>
-						<tr>
-							<td>Heat pipes owned</td>
-							<td id="HOPP2"></td>
-						</tr>
-						<tr>
-							<td>Houses supplied with heated water</td>
-							<td id="HSWHW"></td>
-						</tr>
-						<tr>
-							<td>Heat water price</td>
-							<td id="HWPrice"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="Htabs2" class="tab-pane">
-					<p>Heat pumps work like regular pumps. They pump water from the river and pump it to the heating facilyties.</p>
-					<table>
-						<tr>
-							<td>Buy</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 1, 'numBHWP', 'BHP');">1</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 5, 'numBHWP', 'BHP');">5</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 10, 'numBHWP', 'BHP');">10</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 25, 'numBHWP', 'BHP');">25</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100, 'numBHWP', 'BHP');">100</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 1000, 'numBHWP', 'BHP');">1K</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 10000, 'numBHWP', 'BHP');">10K</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100000, 'numBHWP', 'BHP');">100K</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 1000000, 'numBHWP', 'BHP');">1M</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 10000000, 'numBHWP', 'BHP');">10M</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100000000, 'numBHWP', 'BHP');">100M</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 1000000000, 'numBHWP', 'BHP');">1B</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 10000000000, 'numBHWP', 'BHP');">10B</button>
-									<button class="btn btn-primary" onclick="changeB('HP', HWpumpPrice, 100000000000, 'numBHWP', 'BHP');">100B</button>
-								</div>
-							</td>
-							<td><input id="BWHP"  class="form-control" style="width: 150px;" onkeyup="var BWHP = unAbbrNum(gEBI('BWHP').value,0); if(BWHP>0){changeB('HP', HWpumpPrice, BWHP, 'numBHWP', 'BHP')}"/></td>
-						</tr>
-						<tr>
-							<td>Sell</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-danger" onclick="changeS(1, 'numSWHP', 'SHP');">1</button>
-									<button class="btn btn-danger" onclick="changeS(5, 'numSWHP', 'SHP');">5</button>
-									<button class="btn btn-danger" onclick="changeS(10, 'numSWHP', 'SHP');">10</button>
-									<button class="btn btn-danger" onclick="changeS(25, 'numSWHP', 'SHP');">25</button>
-									<button class="btn btn-danger" onclick="changeS(100, 'numSWHP', 'SHP');">100</button>
-									<button class="btn btn-danger" onclick="changeS(1000, 'numSWHP', 'SHP');">1K</button>
-									<button class="btn btn-danger" onclick="changeS(10000, 'numSWHP', 'SHP');">10K</button>
-									<button class="btn btn-danger" onclick="changeS(100000, 'numSWHP', 'SHP');">100K</button>
-									<button class="btn btn-danger" onclick="changeS(1000000, 'numSWHP', 'SHP');">1M</button>
-									<button class="btn btn-danger" onclick="changeS(10000000, 'numSWHP', 'SHP');">10M</button>
-									<button class="btn btn-danger" onclick="changeS(100000000, 'numSWHP', 'SHP');">100M</button>
-									<button class="btn btn-danger" onclick="changeS(1000000000, 'numSWHP', 'SHP');">1B</button>
-									<button class="btn btn-danger" onclick="changeS(10000000000, 'numSWHP', 'SHP');">10B</button>
-									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSWHP', 'SHP');">100B</button>
-								</div>
-							</td>
-							<td><input id="inPP"  class="form-control" style="width: 150px;" onkeyup="var inPP = unAbbrNum(gEBI('inPP').value,0); if(inPP>0){changeS(inPP, 'numSWHP', 'SHP')}"/></td>
-						</tr>
-					</table>
-					<table class="table table-bordered">
-						<tr>
-							<th>Pump</th>
-							<th>Price</th>
-							<th>Total price</th>
-							<th></th>
-							<th>Owned</th>
-							<th>Water pumped</th>
-							<th>Total pumped water</th>
-							<th>Operating cost</th>
-							<th>Total operating cost</th>
-						</tr>
-						<tr>
-							<td>Small heat water pump</td>
-							<td id="SHPprice"></td>
-							<td id="SHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 0)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 0)">Sell <span class="numSWHP"></span></button></td>
-							<td id="SHP"></td>
-							<td id="SHPprod"></td>
-							<td id="SHPTprod"></td>
-							<td id="SHPOpC"></td>
-							<td id="SHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Medium heat water pump</td>
-							<td id="MHPprice"></td>
-							<td id="MHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 1)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 1)">Sell <span class="numSWHP"></span></button></td>
-							<td id="MHP"></td>
-							<td id="MHPprod"></td>
-							<td id="MHPTprod"></td>
-							<td id="MHPOpC"></td>
-							<td id="MHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Big heat water pump</td>
-							<td id="BHPprice"></td>
-							<td id="BHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 2)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 2)">Sell <span class="numSWHP"></span></button></td>
-							<td id="BHP"></td>
-							<td id="BHPprod"></td>
-							<td id="BHPTprod"></td>
-							<td id="BHPOpC"></td>
-							<td id="BHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Very big heat water pump</td>
-							<td id="VBHPprice"></td>
-							<td id="VBHPTprice"></td>
-							<td><button class="btn btn-primary" onclick="buyUt('HWpump', 'HWpumpPrice', BHP, 3)">Buy <span class="numBHWP"></span></button>
-							<button class="btn btn-danger" onclick="sellUt('HWpump', 'HWpumpPrice', SHP, 3)">Sell <span class="numSWHP"></span></button></td>
-							<td id="VBHP"></td>
-							<td id="VBHPprod"></td>
-							<td id="VBHPTprod"></td>
-							<td id="VBHPOpC"></td>
-							<td id="VBHPTOpC"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="Htabs3" class="tab-pane">
-					<p>Heating plants use fuel(coal, gas, sun) to heat water and pump the heated water to the houses.</p>
-					<table>
-						<tr>
-							<td>Buy</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 1, 'numBHHP', 'BHHP');">1</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 5, 'numBHHP', 'BHHP');">5</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 10, 'numBHHP', 'BHHP');">10</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 25, 'numBHHP', 'BHHP');">25</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100, 'numBHHP', 'BHHP');">100</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 1000, 'numBHHP', 'BHHP');">1K</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 10000, 'numBHHP', 'BHHP');">10K</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100000, 'numBHHP', 'BHHP');">100K</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 1000000, 'numBHHP', 'BHHP');">1M</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 10000000, 'numBHHP', 'BHHP');">10M</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100000000, 'numBHHP', 'BHHP');">100M</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 1000000000, 'numBHHP', 'BHHP');">1B</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 10000000000, 'numBHHP', 'BHHP');">10B</button>
-									<button class="btn btn-primary" onclick="changeB('HHP', HWHFPrice, 100000000000, 'numBHHP', 'BHHP');">100B</button>
-								</div>
-							</td>
-							<td><input id="BWHHP"  class="form-control" style="width: 150px;" onkeyup="var BWHHP = unAbbrNum(gEBI('BWHHP').value,0); if(BWHHP>0){changeB('HHP', HWHFPrice, BWHHP, 'numBHHP', 'BHHP');}"/></td>
-						</tr>
-						<tr>
-							<td>Sell</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-danger" onclick="changeS(1, 'numSHHP', 'SHHP');">1</button>
-									<button class="btn btn-danger" onclick="changeS(5, 'numSHHP', 'SHHP');">5</button>
-									<button class="btn btn-danger" onclick="changeS(10, 'numSHHP', 'SHHP');">10</button>
-									<button class="btn btn-danger" onclick="changeS(25, 'numSHHP', 'SHHP');">25</button>
-									<button class="btn btn-danger" onclick="changeS(100, 'numSHHP', 'SHHP');">100</button>
-									<button class="btn btn-danger" onclick="changeS(1000, 'numSHHP', 'SHHP');">1K</button>
-									<button class="btn btn-danger" onclick="changeS(10000, 'numSHHP', 'SHHP');">10K</button>
-									<button class="btn btn-danger" onclick="changeS(100000, 'numSHHP', 'SHHP');">100K</button>
-									<button class="btn btn-danger" onclick="changeS(1000000, 'numSHHP', 'SHHP');">1M</button>
-									<button class="btn btn-danger" onclick="changeS(10000000, 'numSHHP', 'SHHP');">10M</button>
-									<button class="btn btn-danger" onclick="changeS(100000000, 'numSHHP', 'SHHP');">100M</button>
-									<button class="btn btn-danger" onclick="changeS(1000000000, 'numSHHP', 'SHHP');">1B</button>
-									<button class="btn btn-danger" onclick="changeS(10000000000, 'numSHHP', 'SHHP');">10B</button>
-									<button class="btn btn-danger" onclick="changeS(100000000000, 'numSHHP', 'SHHP');">100B</button>
-								</div>
-							</td>
-							<td><input id="inHHPP"  class="form-control" style="width: 150px;"onkeyup="var inHHPP = unAbbrNum(gEBI('inHHPP').value,0); if(inHHPP>0){changeS(inHHPP, 'numSHHP', 'SHHP')}"/></td>
-						</tr>
-					</table>
-					<table class="table table-bordered">
-						<tr>
-							<th>Heating plant</th>
-							<th>Price</th>
-							<th>Total price</th>
-							<th></th>
-							<th>Owned</th>
-							<th>Water heated</th>
-							<th>Total heated water</th>
-							<th>Operating cost</th>
-							<th>Total operating cost</th>
-						</tr>
-						<tr>
-							<td>Small heating water plant</td>
-							<td id="SHHPprice"></td>
-							<td id="SHHPTprice"></td>
-							<td>
-								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 0)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 0)">Sell <span class="numSHHP"></span></button>
-							</td>
-							<td id="SHHP"></td>
-							<td id="SHHPprod"></td>
-							<td id="SHHPTprod"></td>
-							<td id="SHHPOpC"></td>
-							<td id="SHHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Medium heating water plant</td>
-							<td id="MHHPprice"></td>
-							<td id="MHHPTprice"></td>
-							<td>
-								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 1)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 1)">Sell <span class="numSHHP"></span></button>
-							</td>
-							<td id="MHHP"></td>
-							<td id="MHHPprod"></td>
-							<td id="MHHPTprod"></td>
-							<td id="MHHPOpC"></td>
-							<td id="MHHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Big heating water plant</td>
-							<td id="BHHPprice"></td>
-							<td id="BHHPTprice"></td>
-							<td>
-								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 2)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 2)">Sell <span class="numSHHP"></span></button>
-							</td>
-							<td id="BHHP"></td>
-							<td id="BHHPprod"></td>
-							<td id="BHHPTprod"></td>
-							<td id="BHHPOpC"></td>
-							<td id="BHHPTOpC"></td>
-						</tr>
-						<tr>
-							<td>Very big heating water plant</td>
-							<td id="VBHHPprice"></td>
-							<td id="VBHHPTprice"></td>
-							<td>
-								<button class="btn btn-primary" onclick="buyUt('HWHF', 'HWHFPrice', BHHP, 3)">Buy <span class="numBHHP"></span></button>
-								<button class="btn btn-danger" onclick="sellUt('HWHF', 'HWHFPrice', SHHP, 3)">Sell <span class="numSHHP"></span></button>
-							</td>
-							<td id="VBHHP"></td>
-							<td id="VBHHPprod"></td>
-							<td id="VBHHPTprod"></td>
-							<td id="VBHHPOpC"></td>
-							<td id="VBHHPTOpC"></td>
-						</tr>
-					</table>
-				</div>
-				<div id="Htabs4" class="tab-pane">
-					<p>Heat pipes are special pipes. They are insulated and more thicker so they don't melt and the water doesn't cool down so fast. They are also much more expensive. They treansport the hot water to homes from the CPP.</p>
-					<table>
-						<tr>
-							<td>Buy</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="chHPiO(1);">1</button>
-									<button class="btn btn-primary" onclick="chHPiO(5);">5</button>
-									<button class="btn btn-primary" onclick="chHPiO(10);">10</button>
-									<button class="btn btn-primary" onclick="chHPiO(25);">25</button>
-									<button class="btn btn-primary" onclick="chHPiO(100);">100</button>
-									<button class="btn btn-primary" onclick="chHPiO(1000);">1K</button>
-									<button class="btn btn-primary" onclick="chHPiO(10000);">10K</button>
-									<button class="btn btn-primary" onclick="chHPiO(100000);">100K</button>
-									<button class="btn btn-primary" onclick="chHPiO(1000000);">1M</button>
-									<button class="btn btn-primary" onclick="chHPiO(10000000);">10M</button>
-									<button class="btn btn-primary" onclick="chHPiO(100000000);">100M</button>
-									<button class="btn btn-primary" onclick="chHPiO(1000000000);">1B</button>
-									<button class="btn btn-primary" onclick="chHPiO(10000000000);">10B</button>
-									<button class="btn btn-primary" onclick="chHPiO(100000000000);">100B</button>
-								</div>
-							</td>
-							<td><input id="HBP"  class="form-control" style="width: 150px;"onkeyup="var inBHP = unAbbrNum(gEBI('HBP').value,2); if(inBHP>0){chHPiO(inBHP);}"/></td>
-							<td>Synchronise
-							<label class="switch">
-								<input id="Hf" type="checkbox" onclick="if(gEBI('Hf').checked){syncH=1} else{syncH=0}">
-								<div class="slider"></div>
-							</label>
-							</td>
-						</tr>
-						<tr id="hide">
-							<td>Place</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-primary" onclick="chHPiP(1);">1</button>
-									<button class="btn btn-primary" onclick="chHPiP(5);">5</button>
-									<button class="btn btn-primary" onclick="chHPiP(10);">10</button>
-									<button class="btn btn-primary" onclick="chHPiP(25);">25</button>
-									<button class="btn btn-primary" onclick="chHPiP(100);">100</button>
-									<button class="btn btn-primary" onclick="chHPiP(1000);">1K</button>
-									<button class="btn btn-primary" onclick="chHPiP(10000);">10K</button>
-									<button class="btn btn-primary" onclick="chHPiP(100000);">100K</button>
-									<button class="btn btn-primary" onclick="chHPiP(1000000);">1M</button>
-									<button class="btn btn-primary" onclick="chHPiP(10000000);">10M</button>
-									<button class="btn btn-primary" onclick="chHPiP(100000000);">100M</button>
-									<button class="btn btn-primary" onclick="chHPiP(1000000000);">1B</button>
-									<button class="btn btn-primary" onclick="chHPiP(10000000000);">10B</button>
-									<button class="btn btn-primary" onclick="chHPiP(100000000000);">100B</button>
-								</div>
-							</td>
-							<td><input id="iNHPP"  class="form-control" style="width: 150px;"onkeyup="var iNHPP = unAbbrNum(gEBI('iNHPP').value,2); if(iNHPP>0){chHPiP(iNHPP);}"/></td>
-							<td rowspan="2">Buy max heat pipes every day if possible
-							<label class="switch">
-								<input id="buyMaxH" type="checkbox" onclick="if(gEBI('buyMaxH').checked){buyMaxH=1} else{buyMaxH=0}">
-								<div class="slider"></div>
-							</label>
-							</td>
-						</tr>
-					</table>
-					Heat pipes owned:<span id="HOPP1"></span><br />
-					Heat pipes placed:<span id="HPPP2"></span><br />
-					Heat pipe buy/place cost:<span id="HPOprice"></span>/<span id="HPPprice"></span><br />
-					<button class="btn btn-primary" onclick="buyHpipes(buyHpipesNumber);">Buy <span id="buyHpipes"></span> for <span id="buyHpipesPrice"></span></button>
-					<button class="btn btn-primary" onclick="placeHpipes(placeHpipesNumber);">Place <span id="placeHpipes"></span> for <span id="placeHpipesPrice"></span></button>
-					<br />
-					<button class="btn btn-primary" id="maxHBPButton">Buy <span id="maxHBP"></span> hot water pipes</button>
-					<button class="btn btn-primary" id="maxHPPButton">Place <span id="maxHPP"></span> hot water pipes</button>
-					<button class="btn btn-primary" id="maxHPBPButton">Buy & place <span id="maxHPBP"></span> hot water pipes</button>
+			<div id="tab3" class="tab-pane">
+				<ul class="nav nav-stacked" style="font-size: 17px;">
+					<li class="active"><a data-toggle="tab" href="#watertab1">Water pumps</a></li>
+					<li><a data-toggle="tab" href="#watertab2">Water storage</a></li>
+					<li><a data-toggle="tab" href="#watertab3">Treatment plants</a></li>
+					<li><a data-toggle="tab" href="#watertab4">Pipes</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="watertab1" class="tab-pane active">
+						<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
+						<br />
+						<table>
+							<tr>
+								<td>Buy </td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab1number', 1, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab1number', 10, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab1number', 100, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab1numberinput').value;if(Number(number)>0){refnumber('watertab1number', Number(number), 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice');}" id="watertab1numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Pump</th>
+								<th>Price</th>
+								<th></th>
+								<th>Owned</th>
+								<th>Water pumped</th>
+								<th>Total pumped water</th>
+								<th>Operating cost</th>
+								<th>Total operating cost</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3pprice0"></td>
+								<td>
+									<button onclick="buy('coldwater', 'pump', watertab1number, 0)" class="btn btn-success">Buy <span id="watertab1number0"></span> - $<span id="watertab1total0"></span></button>
+								</td>
+								<td id="tab3powned0"></td>
+								<td id="tab3pprodu0"></td>
+								<td id="tab3ptprod0"></td>
+								<td id="tab3popeco0"></td>
+								<td id="tab3ptopec0"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3pprice1"></td>
+								<td>
+									<button onclick="buy('coldwater', 'pump', watertab1number, 1)" class="btn btn-success">Buy <span id="watertab1number1"></span> - $<span id="watertab1total1"></span></button>
+								</td>
+								<td id="tab3powned1"></td>
+								<td id="tab3pprodu1"></td>
+								<td id="tab3ptprod1"></td>
+								<td id="tab3popeco1"></td>
+								<td id="tab3ptopec1"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3pprice2"></td>
+								<td>
+									<button onclick="buy('coldwater', 'pump', watertab1number, 2)" class="btn btn-success">Buy <span id="watertab1number2"></span> - $<span id="watertab1total2"></span></button>
+								</td>
+								<td id="tab3powned2"></td>
+								<td id="tab3pprodu2"></td>
+								<td id="tab3ptprod2"></td>
+								<td id="tab3popeco2"></td>
+								<td id="tab3ptopec2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3pprice3"></td>
+								<td>
+									<button onclick="buy('coldwater', 'pump', watertab1number, 3)" class="btn btn-success">Buy <span id="watertab1number3"></span> - $<span id="watertab1total3"></span></button>
+								</td>
+								<td id="tab3powned3"></td>
+								<td id="tab3pprodu3"></td>
+								<td id="tab3ptprod3"></td>
+								<td id="tab3popeco3"></td>
+								<td id="tab3ptopec3"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watertab2" class="tab-pane">
+						<p>Water storage is used to store water like water towers. Whene there is too much water, it is stored if possible. When there is a shortage of water, the water from the tower is used.</p>
+						<br />
+						<table>
+							<tr>
+								<td>Buy </td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab2number', 1, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab2number', 10, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab2number', 100, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab2numberinput').value; if(Number(number)>0){refnumber('watertab2number', Number(number), 'watertab2number', 'watertab2total', 'coldwater', 'storageprice');}" id="watertab2numberinput" class="form-control" />
+								</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Storage unit</th>
+								<th>Price</th>
+								<th></th>
+								<th>Owned</th>
+								<th>Water stored</th>
+								<th>Total water stored</th>
+								<th>Operating cost</th>
+								<th>Total operating cost</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3sprice0"></td>
+								<td>
+									<button onclick="buy('coldwater', 'storage', watertab2number, 0)" class="btn btn-success">Buy <span id="watertab2number0"></span> - $<span id="watertab2total0"></span></button>
+								</td>
+								<td id="tab3sowned0"></td>
+								<td id="tab3sprodu0"></td>
+								<td id="tab3stprod0"></td>
+								<td id="tab3sopeco0"></td>
+								<td id="tab3stopec0"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3sprice1"></td>
+								<td>
+									<button onclick="buy('coldwater', 'storage', watertab2number, 1)" class="btn btn-success">Buy <span id="watertab2number1"></span> - $<span id="watertab2total1"></span></button>
+								</td>
+								<td id="tab3sowned1"></td>
+								<td id="tab3sprodu1"></td>
+								<td id="tab3stprod1"></td>
+								<td id="tab3sopeco1"></td>
+								<td id="tab3stopec1"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3sprice2"></td>
+								<td>
+									<button onclick="buy('coldwater', 'storage', watertab2number, 2)" class="btn btn-success">Buy <span id="watertab2number2"></span> - $<span id="watertab2total2"></span></button>
+								</td>
+								<td id="tab3sowned2"></td>
+								<td id="tab3sprodu2"></td>
+								<td id="tab3stprod2"></td>
+								<td id="tab3sopeco2"></td>
+								<td id="tab3stopec2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3sprice3"></td>
+								<td>
+									<button onclick="buy('coldwater', 'storage', watertab2number, 3)" class="btn btn-success">Buy <span id="watertab2number3"></span> - $<span id="watertab2total3"></span></button>
+								</td>
+								<td id="tab3sowned3"></td>
+								<td id="tab3sprodu3"></td>
+								<td id="tab3stprod3"></td>
+								<td id="tab3sopeco3"></td>
+								<td id="tab3stopec3"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watertab3" class="tab-pane">
+						<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m3 you dispose in river you need to pay $100.</p>
+						<br />
+						<table>
+							<tr>
+								<td>Buy </td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab3number', 1, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab3number', 10, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab3number', 100, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab3numberinput').value;if(Number(number)>0){refnumber('watertab3number', Number(number), 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')}" id="watertab3numberinput" class="form-control"/>
+								</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Treatment plant</th>
+								<th>Price</th>
+								<th></th>
+								<th>Owned</th>
+								<th>Water treated</th>
+								<th>Total water treated</th>
+								<th>Operating cost</th>
+								<th>Total operating cost</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3tprice0"></td>
+								<td>
+									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 0)" class="btn btn-success">Buy <span id="watertab3number0"></span> - $<span id="watertab3total0"></span></button>
+								</td>
+								<td id="tab3towned0"></td>
+								<td id="tab3tprodu0"></td>
+								<td id="tab3ttprod0"></td>
+								<td id="tab3topeco0"></td>
+								<td id="tab3ttopec0"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3tprice1"></td>
+								<td>
+									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 1)" class="btn btn-success">Buy <span id="watertab3number1"></span> - $<span id="watertab3total1"></span></button>
+								</td>
+								<td id="tab3towned1"></td>
+								<td id="tab3tprodu1"></td>
+								<td id="tab3ttprod1"></td>
+								<td id="tab3topeco1"></td>
+								<td id="tab3ttopec1"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3tprice2"></td>
+								<td>
+									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 2)" class="btn btn-success">Buy <span id="watertab3number2"></span> - $<span id="watertab3total2"></span></button>
+								</td>
+								<td id="tab3towned2"></td>
+								<td id="tab3tprodu2"></td>
+								<td id="tab3ttprod2"></td>
+								<td id="tab3topeco2"></td>
+								<td id="tab3ttopec2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab3tprice3"></td>
+								<td>
+									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 3)" class="btn btn-success">Buy <span id="watertab3number3"></span> - $<span id="watertab3total3"></span></button>
+								</td>
+								<td id="tab3towned3"></td>
+								<td id="tab3tprodu3"></td>
+								<td id="tab3ttprod3"></td>
+								<td id="tab3topeco3"></td>
+								<td id="tab3ttopec3"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watertab4" class="tab-pane">
+						<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies 2 houses at a time.</p>
+						<table class="table">
+							<tr>
+								<td>Buy</td>
+								<td class="btn-group">
+									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 1, 'watertab4buynumber')" class="btn btn-info">1</button>
+									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 10, 'watertab4buynumber')" class="btn btn-info">10</button>
+									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 100, 'watertab4buynumber')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input id="watertab4buynumberinput" onkeyup="var number = Number(document.getElementById('watertab4buynumberinput').value); if(number>0){refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, number, 'watertab4buynumber');}" class="form-control"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Place</td>
+								<td class="btn-group">
+									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 1, 'watertab4placenumber')" class="btn btn-info">1</button>
+									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 10, 'watertab4placenumber')" class="btn btn-info">10</button>
+									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 100, 'watertab4placenumber')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input id="watertab4placenumberinput" onkeyup="var number = Number(document.getElementById('watertab4placenumberinput').value); if(number>0){refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 0, number, 'watertab4placenumber');}" class="form-control"/>
+								</td>
+							</tr>
+						</table>
+						<br />
+						<table class="table">
+							<tr>
+								<th colspan="4">Pipes</th>
+							</tr>
+							<tr>
+								<td>Owned</td>
+								<td id="watertab4owned"></td>
+								<td>Placed</td>
+								<td id="watertab4placed"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><button onclick="buypipes(watertab4buynumber, 'coldwater', 0)" class="btn btn-success">Buy <span id="watertab4buy"></span> for $<span id="watertab4buyprice"></span></button></td>
+								<td colspan="2"><button onclick="buypipes(watertab4placenumber, 'coldwater', 1)" class="btn btn-success">Place <span id="watertab4place"></span> for $<span id="watertab4placeprice"></span></button></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
+			<div id="tab4" class="tab-pane">
+				<ul class="nav nav-stacked" style="font-size: 17px;">
+					<li class="active"><a data-toggle="tab" href="#watertab5">Hot water pump</a></li>
+					<li><a data-toggle="tab" href="#watertab6">Hot water heating plant</a></li>
+					<li><a data-toggle="tab" href="#watertab7">How water pipes</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="watertab5" class="tab-pane active">
+						<table>
+							<tr>
+								<td>Buy </td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab5number', 1, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab5number', 10, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab5number', 100, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab5numberinput').value;if(Number(number)>0){refnumber('watertab5number', Number(number), 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');}" id="watertab5numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Pump</th>
+								<th>Price</th>
+								<th></th>
+								<th>Owned</th>
+								<th>Production</th>
+								<th>Total production</th>
+								<th>Operatong cost</th>
+								<th>Total operatong cost</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab5hpprice0"></td>
+								<td>
+									<button onclick="buy('hotwater', 'pump', watertab5number, 0)" class="btn btn-success">Buy <span id="watertab5number0"></span> - $<span id="watertab5total0"></span></button>
+								</td>
+								<td id="tab5hpowned0"></td>
+								<td id="tab5hpprodu0"></td>
+								<td id="tab5hptprod0"></td>
+								<td id="tab5hpopeco0"></td>
+								<td id="tab5hptopec0"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab5hpprice1"></td>
+								<td>
+									<button onclick="buy('hotwater', 'pump', watertab5number, 1)" class="btn btn-success">Buy <span id="watertab5number1"></span> - $<span id="watertab5total1"></span></button>
+								</td>
+								<td id="tab5hpowned1"></td>
+								<td id="tab5hpprodu1"></td>
+								<td id="tab5hptprod1"></td>
+								<td id="tab5hpopeco1"></td>
+								<td id="tab5hptopec1"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab5hpprice2"></td>
+								<td>
+									<button onclick="buy('hotwater', 'pump', watertab5number, 2)" class="btn btn-success">Buy <span id="watertab5number2"></span> - $<span id="watertab5total2"></span></button>
+								</td>
+								<td id="tab5hpowned2"></td>
+								<td id="tab5hpprodu2"></td>
+								<td id="tab5hptprod2"></td>
+								<td id="tab5hpopeco2"></td>
+								<td id="tab5hptopec2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab5hpprice3"></td>
+								<td>
+									<button onclick="buy('hotwater', 'pump', watertab5number, 3)" class="btn btn-success">Buy <span id="watertab5number3"></span> - $<span id="watertab5total3"></span></button>
+								</td>
+								<td id="tab5hpowned3"></td>
+								<td id="tab5hpprodu3"></td>
+								<td id="tab5hptprod3"></td>
+								<td id="tab5hpopeco3"></td>
+								<td id="tab5hptopec3"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watertab6" class="tab-pane">
+						<table>
+							<tr>
+								<td>Buy </td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab6number', 1, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab6number', 10, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab6number', 100, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab6numberinput').value;if(Number(number)>0){refnumber('watertab6number', Number(number), 'watertab6number', 'watertab6total', 'hotwater', 'pumpprice');}" id="watertab6numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<th>Heating plant</th>
+								<th>Price</th>
+								<th></th>
+								<th>Owned</th>
+								<th>Production</th>
+								<th>Total production</th>
+								<th>Operatong cost</th>
+								<th>Total operatong cost</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab6hpprice0"></td>
+								<td>
+									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 0)" class="btn btn-success">Buy <span id="watertab6number0"></span> - $<span id="watertab6total0"></span></button>
+								</td>
+								<td id="tab6hpowned0"></td>
+								<td id="tab6hpprodu0"></td>
+								<td id="tab6hptprod0"></td>
+								<td id="tab6hpopeco0"></td>
+								<td id="tab6hptopec0"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab6hpprice1"></td>
+								<td>
+									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 1)" class="btn btn-success">Buy <span id="watertab6number1"></span> - $<span id="watertab6total1"></span></button>
+								</td>
+								<td id="tab6hpowned1"></td>
+								<td id="tab6hpprodu1"></td>
+								<td id="tab6hptprod1"></td>
+								<td id="tab6hpopeco1"></td>
+								<td id="tab6hptopec1"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab6hpprice2"></td>
+								<td>
+									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 2)" class="btn btn-success">Buy <span id="watertab6number2"></span> - $<span id="watertab6total2"></span></button>
+								</td>
+								<td id="tab6hpowned2"></td>
+								<td id="tab6hpprodu2"></td>
+								<td id="tab6hptprod2"></td>
+								<td id="tab6hpopeco2"></td>
+								<td id="tab6hptopec2"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td id="tab6hpprice3"></td>
+								<td>
+									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 3)" class="btn btn-success">Buy <span id="watertab6number3"></span> - $<span id="watertab6total3"></span></button>
+								</td>
+								<td id="tab6hpowned3"></td>
+								<td id="tab6hpprodu3"></td>
+								<td id="tab6hptprod3"></td>
+								<td id="tab6hpopeco3"></td>
+								<td id="tab6hptopec3"></td>
+							</tr>
+						</table>
+					</div>
+					<div id="watertab7" class="tab-pane">
+						<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies 2 houses at a time.</p>
+						<table class="table">
+							<tr>
+								<td>Buy</td>
+								<td class="btn-group">
+									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 1, 'watertab7buynumber')" class="btn btn-info">1</button>
+									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 10, 'watertab7buynumber')" class="btn btn-info">10</button>
+									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 100, 'watertab7buynumber')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input id="watertab7buynumberinput" onkeyup="var number = Number(document.getElementById('watertab7buynumberinput').value); if(number>0){refpipesnumber('watertab7buy', 'watertab7buyprice', 'coldwater', 0, number, 'watertab7buynumber');}" class="form-control"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Place</td>
+								<td class="btn-group">
+									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 1, 'watertab7placenumber')" class="btn btn-info">1</button>
+									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 10, 'watertab7placenumber')" class="btn btn-info">10</button>
+									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 100, 'watertab7placenumber')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input id="watertab7placenumberinput" onkeyup="var number = Number(document.getElementById('watertab7placenumberinput').value); if(number>0){refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 0, number, 'watertab7placenumber');}" class="form-control"/>
+								</td>
+							</tr>
+						</table>
+						<br />
+						<table class="table">
+							<tr>
+								<th colspan="4">Pipes</th>
+							</tr>
+							<tr>
+								<td>Owned</td>
+								<td id="watertab7owned"></td>
+								<td>Placed</td>
+								<td id="watertab7placed"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><button onclick="buypipes(watertab7buynumber, 'hotwater', 0)" class="btn btn-success">Buy <span id="watertab7buy"></span> for $<span id="watertab7buyprice"></span></button></td>
+								<td colspan="2"><button onclick="buypipes(watertab7placenumber, 'hotwater', 1)" class="btn btn-success">Place <span id="watertab7place"></span> for $<span id="watertab7placeprice"></span></button></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="tab5" class="tab-pane">
+				<table class="table">
+					<tr>
+						<td>Loan</td>
+						<td id="tab5loan"></td>
+						<td>Loan interest</td>
+						<td id="tab5loaninterest"></td>
+					</tr>
+					<tr>
+						<td>Max loan</td>
+						<td id="tab5maxloan"></td>
+					</tr>
+					<tr>
+						<td>Bank balance</td>
+						<td id="tab5balance"></td>
+						<td>Bank account interst</td>
+						<td id="tab5balanceinterest"></td>
+					</tr>
+				</table>
+				<table class="table table-bordered">
+					<tr>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalanceout').value; if(Number(a)>0){id2w('tab5bankbalanceoutnumber', sn2(a)); window['tab5bankbalanceoutnumber'] = a;}" id="tab5bankbalanceout"/></td>
+						<td><button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalancein').value; if(Number(a)>0){id2w('tab5bankbalanceinnumber', sn2(a)); window['tab5bankbalanceinnumber'] = a;}" id="tab5bankbalancein"/></td>
+						<td><button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button></td>
+					</tr>
+					<tr>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanout').value; if(Number(a)>0){id2w('tab5loanoutnumber', sn2(a)); window['tab5loanoutnumber'] = a;}" id="tab5loanout"/></td>
+						<td><button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanin').value; if(Number(a)>0){id2w('tab5loaninnumber', sn2(a)); window['tab5loaninnumber'] = a;}" id="tab5loanin"/></td>
+						<td><button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button></td>
+					
+					</tr>
+				</table>
+				<br />
+				</div>
+			<div id="tab6" class="tab-pane">
+				<center><h2>Profit statment</h2></center>
+				<table class="table table-bordered">
+					<tr>
+						<th colspan="2"><center>Daily income</center></th>
+						<th colspan="2"><center>Daily expenditure</center></th>
+					</tr>
+					<tr>
+						<td>Selling cold water</td>
+						<td id="finsellcoldwater"></td>
+						<td>Cold water utilities</td>
+						<td id="fincoldwaterexp"></td>
+					</tr>
+					<tr>
+						<td>Selling hot water</td>
+						<td id="finsellhotwater"></td>
+						<td>Hot water utilities</td>
+						<td id="finhotwaterexp"></td>
+					</tr>
+					<tr>
+						<th>Total income</th>
+						<th id="fintotwaterinc"></th>
+						<th>Total expenditure</th>
+						<th id="fintotwaterexp"></th>
+					</tr>
+					<tr>
+						<th colspan="2">Profit</th>
+						<th colspan="2" id="profit"></th>
+					</tr>
+				</table>
+			</div>
+			<div id="tab7" class="tab-pane" style="height: auto;">
+				<h3>Frequently Asked Questions</h3>
+				<h4>Why do I have one hot water pipe placed from the beginnings?</h4>
+				<p>If there weren't, that will cause a mess in the code because of an infinite loop and that is easier for me :P</p>
+				<br>
+				</br>
+				<hr />
+				<h4>I've found a bug. What should I do?</h4>
+				<p>You should report it in <a href="https://www.reddit.com/r/WaterCompany/comments/6cttcl/bugs_and_glitches/" target="_blank">this reddit post</a> or you can open a new issue in github on <a href="https://github.com/Dimitar5555/WaterCompany/issues" target="_blank">this</a> address.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>I've got a suggestion/feature for the game. Where can I share my idea?</h4>
+				<p>You can <a href="https://www.reddit.com/r/WaterCompany/comments/6cttiy/suggestions/" target="_blank">add your suggestion</a> to reddit.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>Why do I need treatment plant and what will happen if I don't have?</h4>
+				<p>The treatment plant cleans the water from sewage. If you let not treated water to the river, you will pay a fine of $1000 for every 10000m<sup>3</sup> not treated water.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>What will happen if I can't supply enough water?</h4>
+				<p>Simply people will pay for the water you supplied. If you supply 10m<sup>3</sup>, but they need 20m<sup>3</sup>, people will pay for 10m<sup>3</sup> only.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>How does the bank loan system work?</h4>
+				<p>On the next day at 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by the percentage of the loan interest.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>I want to get x money via loan, but I can't. Why?</h4>
+				<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
+				<br>
+				</br>
+				<hr />
+				<h4>How does the bank balance work?</h4>
+				<p>You can put money in it. Every day at 00:00 you get interest for your money in your cash on hand(or back in the bank depends on the option selected).</p>
+				<br>
+				</br>
+				<hr />
+				<h4>How are operating costs calculated?</h4>
+				<p>Everything has an operating cost(except pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
+				<br>
+				</br>
+			</div>
+			<div id="tab8" class="tab-pane"></div>
+			<div id="tab9" class="tab-pane"></div>
+			<div id="tab10" class="tab-pane"></div>
 		</div>
-	</div>
-	<script>
-	if(document.getElementById('f').checked){sync=1} else{sync=0}
-	if(gEBI('buyMax').checked){buyMax=1} else{buyMax=0}
-	bankpercent = Number(gEBI('bankpercent').value);
-	if(bankpercent>100){bankpercent = 100;} 
-	else if(bankpercent<0){bankpercent=0;}
-	else if(!bankpercent){bankpercent=0;}
-	gEBI('percentBankUpper').innerHTML = bankpercent;
-	if(gEBI('a').checked){
-		bankpercentOn = 1;
-		gEBI('warnAll').style.display = 'block';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}
-	else{
-		bankpercentOn = 0;
-		gEBI('warnAll').style.display = 'none';
-		gEBI('percentBankUpper').innerHTML = bankpercent;
-	}
-	if(gEBI('buyMax').checked){buyMax=1} else{buyMax=0}
-	if(gEBI('notBH').checked){notBH = 1;} else{notBH = 0;}
-	if(gEBI('notBI').checked){notBI = 1;} else{notBI = 0;}
-	if(gEBI('notPL').checked){notPL = 1;} else{notPL = 0;}
-	if(gEBI('notAS').checked){notAS = 1;} else{notAS = 0;}
-	loadSets();
-	if(gEBI('INTBANK').checked){INTBANK = 1;}else{INTBANK = 0;}
-	var e = document.getElementById('selecetTheme');var strUser = (e.options[e.selectedIndex].value).toLowerCase();var styleel = 'css/bootstrap-' + strUser + '.css'; gEBI('STYLE-EL').href = styleel;
-function drawCitya() {
-	var top = 0;
-	var left = 0;
-	var c = document.getElementById("myCanvas");
-	var ctx = c.getContext("2d");
-	var supH = Math.floor(((2*PP)/houses)*100);
-	var supB = 100-supH;
-	for(i=0;i<supH;i++){
-		ctx.beginPath();
-		ctx.lineWidth="0.5";
-		ctx.strokeStyle="black";
-		ctx.fillStyle="#4286f4";
-		ctx.fillRect(top,left,31,31);
-		ctx.stroke();
-		var left = left + 31;
-		if(left==310){
-			var left = 0;
-			var top = top + 31;
-		}
-	}
-	if(supB>0){
-		for(i=0;i<supB;i++){
-			ctx.beginPath();
-			ctx.lineWidth="0.5";
-			ctx.strokeStyle="black";
-			ctx.fillStyle="#ff0000";
-			ctx.fillRect(top,left,31,31);
-			ctx.stroke();
-			left = left + 31;
-			if(left==310){
-				left = 0;
-				top = top + 31;
-			}
-		}
-	}
-	var topa = 0;
-	var left = 0;
-	for(i=0;i<100;i++){
-		ctx.beginPath();
-		ctx.lineWidth="0.5";
-		ctx.strokeStyle="black";
-		ctx.rect(left,topa,31,31);
-		ctx.stroke();
-		left = left + 31;
-		if(left==310){
-			left = 0;
-			topa = topa + 31;
-		}
-	}
-}
-drawCitya();
-</script>
-	<script src="js/lib/jquery.1.9.1.js"></script>
-	<script src="js/lib/alertify.min.js"></script>
+		<script src="js/universal.js"></script>
+		<script src="js/app.js"></script>
 	</body>
 </html>
