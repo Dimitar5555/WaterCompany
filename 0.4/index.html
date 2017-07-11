@@ -6,6 +6,8 @@
 		
 		<script src="js/lib/bootstrap.js"></script>
 		<link rel="stylesheet" href="css/lib/bootstrap-standart.css" />
+		<script src="js/lib/sweetalert.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/lib/sweetalert.css">
 		<style>
 			.nav-stacked{
 				float: left;
@@ -76,7 +78,8 @@
 		    <li><a href="#tab5" data-toggle="tab">Bank</a></li>
 		    <li><a href="#tab6" data-toggle="tab">Finance</a></li>
 		    <li><a href="#tab7" data-toggle="tab">FAQ</a></li>
-			<li class="pull-right"><a href="#tab8" data-toggle="tab">Options</a></li>
+		    <li><a href="#tab8" data-toggle="tab">Tutorial</a></li>
+			<li class="pull-right"><a href="#tab9" data-toggle="tab">Options</a></li>
 			<li class="pull-right"><a href="https://github.com/Dimitar5555/WaterCompany/tree/master#change-log" target="_blank">Change log</a></li>
 			<li class="pull-right"><a href="#tab10" data-toggle="tab">About</a></li>
 		</ul>
@@ -85,7 +88,12 @@
 				<table class="table table-bordered">
 					<tr>
 						<td colspan="2">City</td>
-						<td colspan="2" id="tab1city"></td>
+						<td id="tab1city"></td>
+						<td>
+							<button class="btn btn-success" onclick="swal({title: 'City name', text: 'How will be your city called?', type: 'input', showCancelButton: false, closeOnConfirm: false, confirmButtonText: 'Name city'},
+function(inputValue){if (inputValue === false) return false;if (inputValue === '') {swal.showInputError('You need to write something!');return false}
+swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputValue;localStorage.setItem('save', JSON.stringify(game));id2w('tab1city', inputValue);});">Rename city</button>
+						</td>
 					</tr>
 					<tr>
 						<th colspan="4">Population</th>
@@ -117,11 +125,11 @@
 					<tr>
 						<td>Cold water price</td>
 						<td id="tab1coldwaterprice"></td>
-						<td>Cold water price</td>
+						<td>Cold water usage</td>
 						<td id="tab1coldwaterusage"></td>
 					</tr>
 					<tr>
-						<td>Hot water usage</td>
+						<td>Hot water price</td>
 						<td id="tab1hotwaterprice"></td>
 						<td>Hot water usage</td>
 						<td id="tab1hotwaterusage"></td>
@@ -376,7 +384,7 @@
 									Interest rate <span id="uptab9intb"></span>%-><span id="uptab9inta"></span>%
 								</td>
 								<td>
-									<button onclick="upgrade('bank', 'interest', 1.05, 'loaninterestrate', 1.5, 1)" class="btn btn-success">$<span id="loaninterestrate"></span></button>
+									<button onclick="increaseinterest();" class="btn btn-success">$<span id="loaninterestrate"></span></button>
 								</td>
 								<td>
 									Increase maximum loan by 100%<br />
@@ -403,7 +411,7 @@
 						<br />
 						<table>
 							<tr>
-								<td>Buy </td>
+								<td>Buy</td>
 								<td class="btn-group">
 									<button onclick="refnumber('watertab1number', 1, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">1</button>
 									<button onclick="refnumber('watertab1number', 10, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">10</button>
@@ -411,6 +419,17 @@
 								</td>
 								<td>
 									<input onkeyup="var number = document.getElementById('watertab1numberinput').value;if(Number(number)>0){refnumber('watertab1number', Number(number), 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice');}" id="watertab1numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>Sell</td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab1numbersell', 1, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab1numbersell', 10, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab1numbersell', 100, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab1numberinputsell').value;if(Number(number)>0){refnumber('watertab1numbersell', Number(number), 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice');}" id="watertab1numberinputsell" class="form-control" style="width: auto;"></input>
 								</td>
 							</tr>
 						</table>
@@ -430,6 +449,7 @@
 								<td id="tab3pprice0"></td>
 								<td>
 									<button onclick="buy('coldwater', 'pump', watertab1number, 0)" class="btn btn-success">Buy <span id="watertab1number0"></span> - $<span id="watertab1total0"></span></button>
+									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 0)" class="btn btn-danger">Sell <span id="watertab1numbersell0"></span> - $<span id="watertab1totalsell0"></span></button>
 								</td>
 								<td id="tab3powned0"></td>
 								<td id="tab3pprodu0"></td>
@@ -442,6 +462,7 @@
 								<td id="tab3pprice1"></td>
 								<td>
 									<button onclick="buy('coldwater', 'pump', watertab1number, 1)" class="btn btn-success">Buy <span id="watertab1number1"></span> - $<span id="watertab1total1"></span></button>
+									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 1s)" class="btn btn-danger">Sell <span id="watertab1numbersell1"></span> - $<span id="watertab1totalsell1"></span></button>
 								</td>
 								<td id="tab3powned1"></td>
 								<td id="tab3pprodu1"></td>
@@ -454,6 +475,7 @@
 								<td id="tab3pprice2"></td>
 								<td>
 									<button onclick="buy('coldwater', 'pump', watertab1number, 2)" class="btn btn-success">Buy <span id="watertab1number2"></span> - $<span id="watertab1total2"></span></button>
+									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 2)" class="btn btn-danger">Sell <span id="watertab1numbersell2"></span> - $<span id="watertab1totalsell2"></span></button>
 								</td>
 								<td id="tab3powned2"></td>
 								<td id="tab3pprodu2"></td>
@@ -466,6 +488,7 @@
 								<td id="tab3pprice3"></td>
 								<td>
 									<button onclick="buy('coldwater', 'pump', watertab1number, 3)" class="btn btn-success">Buy <span id="watertab1number3"></span> - $<span id="watertab1total3"></span></button>
+									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 3)" class="btn btn-danger">Sell <span id="watertab1numbersell3"></span> - $<span id="watertab1totalsell3"></span></button>
 								</td>
 								<td id="tab3powned3"></td>
 								<td id="tab3pprodu3"></td>
@@ -480,7 +503,7 @@
 						<br />
 						<table>
 							<tr>
-								<td>Buy </td>
+								<td>Buy</td>
 								<td class="btn-group">
 									<button onclick="refnumber('watertab2number', 1, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">1</button>
 									<button onclick="refnumber('watertab2number', 10, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">10</button>
@@ -488,6 +511,17 @@
 								</td>
 								<td>
 									<input onkeyup="var number = document.getElementById('watertab2numberinput').value; if(Number(number)>0){refnumber('watertab2number', Number(number), 'watertab2number', 'watertab2total', 'coldwater', 'storageprice');}" id="watertab2numberinput" class="form-control" />
+								</td>
+							</tr>
+							<tr>
+								<td>Sell</td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab2numbersell', 1, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab2numbersell', 10, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab2numbersell', 100, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab2numberinputsell').value; if(Number(number)>0){refnumber('watertab2numbersell', Number(number), 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice');}" id="watertab2numberinputsell" class="form-control" />
 								</td>
 							</tr>
 						</table>
@@ -507,6 +541,7 @@
 								<td id="tab3sprice0"></td>
 								<td>
 									<button onclick="buy('coldwater', 'storage', watertab2number, 0)" class="btn btn-success">Buy <span id="watertab2number0"></span> - $<span id="watertab2total0"></span></button>
+									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 0)" class="btn btn-danger">Sell <span id="watertab2numbersell0"></span> - $<span id="watertab2totalsell0"></span></button>
 								</td>
 								<td id="tab3sowned0"></td>
 								<td id="tab3sprodu0"></td>
@@ -519,6 +554,7 @@
 								<td id="tab3sprice1"></td>
 								<td>
 									<button onclick="buy('coldwater', 'storage', watertab2number, 1)" class="btn btn-success">Buy <span id="watertab2number1"></span> - $<span id="watertab2total1"></span></button>
+									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 1)" class="btn btn-danger">Sell <span id="watertab2numbersell1"></span> - $<span id="watertab2totalsell1"></span></button>
 								</td>
 								<td id="tab3sowned1"></td>
 								<td id="tab3sprodu1"></td>
@@ -531,6 +567,7 @@
 								<td id="tab3sprice2"></td>
 								<td>
 									<button onclick="buy('coldwater', 'storage', watertab2number, 2)" class="btn btn-success">Buy <span id="watertab2number2"></span> - $<span id="watertab2total2"></span></button>
+									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 2)" class="btn btn-danger">Sell <span id="watertab2numbersell2"></span> - $<span id="watertab2totalsell2"></span></button>
 								</td>
 								<td id="tab3sowned2"></td>
 								<td id="tab3sprodu2"></td>
@@ -543,6 +580,7 @@
 								<td id="tab3sprice3"></td>
 								<td>
 									<button onclick="buy('coldwater', 'storage', watertab2number, 3)" class="btn btn-success">Buy <span id="watertab2number3"></span> - $<span id="watertab2total3"></span></button>
+									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 3)" class="btn btn-danger">Sell <span id="watertab2numbersell3"></span> - $<span id="watertab2totalsell3"></span></button>
 								</td>
 								<td id="tab3sowned3"></td>
 								<td id="tab3sprodu3"></td>
@@ -557,7 +595,7 @@
 						<br />
 						<table>
 							<tr>
-								<td>Buy </td>
+								<td>Buy</td>
 								<td class="btn-group">
 									<button onclick="refnumber('watertab3number', 1, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">1</button>
 									<button onclick="refnumber('watertab3number', 10, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">10</button>
@@ -565,6 +603,17 @@
 								</td>
 								<td>
 									<input onkeyup="var number = document.getElementById('watertab3numberinput').value;if(Number(number)>0){refnumber('watertab3number', Number(number), 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')}" id="watertab3numberinput" class="form-control"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Sell</td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab3numbersell', 1, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab3numbersell', 10, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab3numbersell', 100, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab3numberinputsell').value;if(Number(number)>0){refnumber('watertab3numbersell', Number(number), 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')}" id="watertab3numberinputsell" class="form-control"/>
 								</td>
 							</tr>
 						</table>
@@ -584,6 +633,7 @@
 								<td id="tab3tprice0"></td>
 								<td>
 									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 0)" class="btn btn-success">Buy <span id="watertab3number0"></span> - $<span id="watertab3total0"></span></button>
+									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 0)" class="btn btn-danger">Sell <span id="watertab3numbersell0"></span> - $<span id="watertab3totalsell0"></span></button>
 								</td>
 								<td id="tab3towned0"></td>
 								<td id="tab3tprodu0"></td>
@@ -596,6 +646,7 @@
 								<td id="tab3tprice1"></td>
 								<td>
 									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 1)" class="btn btn-success">Buy <span id="watertab3number1"></span> - $<span id="watertab3total1"></span></button>
+									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 1)" class="btn btn-danger">Sell <span id="watertab3numbersell1"></span> - $<span id="watertab3totalsell1"></span></button>
 								</td>
 								<td id="tab3towned1"></td>
 								<td id="tab3tprodu1"></td>
@@ -608,6 +659,7 @@
 								<td id="tab3tprice2"></td>
 								<td>
 									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 2)" class="btn btn-success">Buy <span id="watertab3number2"></span> - $<span id="watertab3total2"></span></button>
+									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 2)" class="btn btn-danger">Sell <span id="watertab3numbersell2"></span> - $<span id="watertab3totalsell2"></span></button>
 								</td>
 								<td id="tab3towned2"></td>
 								<td id="tab3tprodu2"></td>
@@ -620,6 +672,7 @@
 								<td id="tab3tprice3"></td>
 								<td>
 									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 3)" class="btn btn-success">Buy <span id="watertab3number3"></span> - $<span id="watertab3total3"></span></button>
+									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 3)" class="btn btn-danger">Sell <span id="watertab3numbersell3"></span> - $<span id="watertab3totalsell3"></span></button>
 								</td>
 								<td id="tab3towned3"></td>
 								<td id="tab3tprodu3"></td>
@@ -651,7 +704,7 @@
 									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 100, 'watertab4placenumber')" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input id="watertab4placenumberinput" onkeyup="var number = Number(document.getElementById('watertab4placenumberinput').value); if(number>0){refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 0, number, 'watertab4placenumber');}" class="form-control"/>
+									<input id="watertab4placenumberinput" onkeyup="var number = Number(document.getElementById('watertab4placenumberinput').value); if(number>0){refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, number, 'watertab4placenumber');}" class="form-control"/>
 								</td>
 							</tr>
 						</table>
@@ -684,11 +737,22 @@
 					<div id="watertab5" class="tab-pane active">
 						<table>
 							<tr>
-								<td>Buy </td>
+								<td>Buy</td>
 								<td class="btn-group">
 									<button onclick="refnumber('watertab5number', 1, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">1</button>
 									<button onclick="refnumber('watertab5number', 10, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">10</button>
 									<button onclick="refnumber('watertab5number', 100, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab5numberinput').value;if(Number(number)>0){refnumber('watertab5number', Number(number), 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');}" id="watertab5numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>Sell</td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab5numbersell', 1, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab5numbersell', 10, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab5numbersell', 100, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">100</button>
 								</td>
 								<td>
 									<input onkeyup="var number = document.getElementById('watertab5numberinput').value;if(Number(number)>0){refnumber('watertab5number', Number(number), 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');}" id="watertab5numberinput" class="form-control" style="width: auto;"></input>
@@ -703,14 +767,15 @@
 								<th>Owned</th>
 								<th>Production</th>
 								<th>Total production</th>
-								<th>Operatong cost</th>
-								<th>Total operatong cost</th>
+								<th>Operating cost</th>
+								<th>Total operating cost</th>
 							</tr>
 							<tr>
 								<td></td>
 								<td id="tab5hpprice0"></td>
 								<td>
 									<button onclick="buy('hotwater', 'pump', watertab5number, 0)" class="btn btn-success">Buy <span id="watertab5number0"></span> - $<span id="watertab5total0"></span></button>
+									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 0)" class="btn btn-danger">Sell <span id="watertab5numbersell0"></span> - $<span id="watertab5totalsell0"></span></button>
 								</td>
 								<td id="tab5hpowned0"></td>
 								<td id="tab5hpprodu0"></td>
@@ -723,6 +788,7 @@
 								<td id="tab5hpprice1"></td>
 								<td>
 									<button onclick="buy('hotwater', 'pump', watertab5number, 1)" class="btn btn-success">Buy <span id="watertab5number1"></span> - $<span id="watertab5total1"></span></button>
+									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 1)" class="btn btn-danger">Sell <span id="watertab5numbersell1"></span> - $<span id="watertab5totalsell1"></span></button>
 								</td>
 								<td id="tab5hpowned1"></td>
 								<td id="tab5hpprodu1"></td>
@@ -735,6 +801,7 @@
 								<td id="tab5hpprice2"></td>
 								<td>
 									<button onclick="buy('hotwater', 'pump', watertab5number, 2)" class="btn btn-success">Buy <span id="watertab5number2"></span> - $<span id="watertab5total2"></span></button>
+									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 2)" class="btn btn-danger">Sell <span id="watertab5numbersell2"></span> - $<span id="watertab5totalsell2"></span></button>
 								</td>
 								<td id="tab5hpowned2"></td>
 								<td id="tab5hpprodu2"></td>
@@ -747,6 +814,7 @@
 								<td id="tab5hpprice3"></td>
 								<td>
 									<button onclick="buy('hotwater', 'pump', watertab5number, 3)" class="btn btn-success">Buy <span id="watertab5number3"></span> - $<span id="watertab5total3"></span></button>
+									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 3)" class="btn btn-danger">Sell <span id="watertab5numbersell3"></span> - $<span id="watertab5totalsell3"></span></button>
 								</td>
 								<td id="tab5hpowned3"></td>
 								<td id="tab5hpprodu3"></td>
@@ -759,7 +827,7 @@
 					<div id="watertab6" class="tab-pane">
 						<table>
 							<tr>
-								<td>Buy </td>
+								<td>Buy</td>
 								<td class="btn-group">
 									<button onclick="refnumber('watertab6number', 1, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">1</button>
 									<button onclick="refnumber('watertab6number', 10, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">10</button>
@@ -767,6 +835,17 @@
 								</td>
 								<td>
 									<input onkeyup="var number = document.getElementById('watertab6numberinput').value;if(Number(number)>0){refnumber('watertab6number', Number(number), 'watertab6number', 'watertab6total', 'hotwater', 'pumpprice');}" id="watertab6numberinput" class="form-control" style="width: auto;"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>Sell</td>
+								<td class="btn-group">
+									<button onclick="refnumber('watertab6numbersell', 1, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">1</button>
+									<button onclick="refnumber('watertab6numbersell', 10, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">10</button>
+									<button onclick="refnumber('watertab6numbersell', 100, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">100</button>
+								</td>
+								<td>
+									<input onkeyup="var number = document.getElementById('watertab6numberinputsell').value;if(Number(number)>0){refnumber('watertab6numbersell', Number(number), 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'pumpprice');}" id="watertab6numberinput" class="form-control" style="width: auto;"></input>
 								</td>
 							</tr>
 						</table>
@@ -778,14 +857,15 @@
 								<th>Owned</th>
 								<th>Production</th>
 								<th>Total production</th>
-								<th>Operatong cost</th>
-								<th>Total operatong cost</th>
+								<th>Operating cost</th>
+								<th>Total operating cost</th>
 							</tr>
 							<tr>
 								<td></td>
 								<td id="tab6hpprice0"></td>
 								<td>
 									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 0)" class="btn btn-success">Buy <span id="watertab6number0"></span> - $<span id="watertab6total0"></span></button>
+									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 0)" class="btn btn-danger">Buy <span id="watertab6numbersell0"></span> - $<span id="watertab6totalsell0"></span></button>
 								</td>
 								<td id="tab6hpowned0"></td>
 								<td id="tab6hpprodu0"></td>
@@ -798,6 +878,7 @@
 								<td id="tab6hpprice1"></td>
 								<td>
 									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 1)" class="btn btn-success">Buy <span id="watertab6number1"></span> - $<span id="watertab6total1"></span></button>
+									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 1)" class="btn btn-danger">Sell <span id="watertab6numbersell1"></span> - $<span id="watertab6totalsell1"></span></button>
 								</td>
 								<td id="tab6hpowned1"></td>
 								<td id="tab6hpprodu1"></td>
@@ -810,6 +891,7 @@
 								<td id="tab6hpprice2"></td>
 								<td>
 									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 2)" class="btn btn-success">Buy <span id="watertab6number2"></span> - $<span id="watertab6total2"></span></button>
+									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 2)" class="btn btn-danger">Sell <span id="watertab6numbersell2"></span> - $<span id="watertab6totalsell2"></span></button>
 								</td>
 								<td id="tab6hpowned2"></td>
 								<td id="tab6hpprodu2"></td>
@@ -822,6 +904,7 @@
 								<td id="tab6hpprice3"></td>
 								<td>
 									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 3)" class="btn btn-success">Buy <span id="watertab6number3"></span> - $<span id="watertab6total3"></span></button>
+									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 3)" class="btn btn-danger">Sell <span id="watertab6numbersell3"></span> - $<span id="watertab6totalsell3"></span></button>
 								</td>
 								<td id="tab6hpowned3"></td>
 								<td id="tab6hpprodu3"></td>
@@ -842,7 +925,7 @@
 									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 100, 'watertab7buynumber')" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input id="watertab7buynumberinput" onkeyup="var number = Number(document.getElementById('watertab7buynumberinput').value); if(number>0){refpipesnumber('watertab7buy', 'watertab7buyprice', 'coldwater', 0, number, 'watertab7buynumber');}" class="form-control"/>
+									<input id="watertab7buynumberinput" onkeyup="var number = Number(document.getElementById('watertab7buynumberinput').value); if(number>0){refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, number, 'watertab7buynumber');}" class="form-control"/>
 								</td>
 							</tr>
 							<tr>
@@ -853,7 +936,7 @@
 									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 100, 'watertab7placenumber')" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input id="watertab7placenumberinput" onkeyup="var number = Number(document.getElementById('watertab7placenumberinput').value); if(number>0){refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 0, number, 'watertab7placenumber');}" class="form-control"/>
+									<input id="watertab7placenumberinput" onkeyup="var number = Number(document.getElementById('watertab7placenumberinput').value); if(number>0){refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, number, 'watertab7placenumber');}" class="form-control"/>
 								</td>
 							</tr>
 						</table>
@@ -898,15 +981,27 @@
 				<table class="table table-bordered">
 					<tr>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalanceout').value; if(Number(a)>0){id2w('tab5bankbalanceoutnumber', sn2(a)); window['tab5bankbalanceoutnumber'] = a;}" id="tab5bankbalanceout"/></td>
-						<td><button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button></td>
+						<td class="btn-group">
+							<button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button>
+							<button onclick="Bank(1, 1, game.bank.balance)" class="btn btn-info">Withdraw max</button>
+						</td>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalancein').value; if(Number(a)>0){id2w('tab5bankbalanceinnumber', sn2(a)); window['tab5bankbalanceinnumber'] = a;}" id="tab5bankbalancein"/></td>
-						<td><button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button></td>
+						<td class="btn-group">
+							<button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button>
+							<button onclick="Bank(1, 0, game.bank.money)" class="btn btn-info">Invest max</button>
+						</td>
 					</tr>
 					<tr>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanout').value; if(Number(a)>0){id2w('tab5loanoutnumber', sn2(a)); window['tab5loanoutnumber'] = a;}" id="tab5loanout"/></td>
-						<td><button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button></td>
+						<td class="btn-group">
+							<button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button>
+							<button onclick="Bank(0, 1, game.bank.maxloan-game.bank.loan)" class="btn btn-info">Get max</button>
+						</td>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanin').value; if(Number(a)>0){id2w('tab5loaninnumber', sn2(a)); window['tab5loaninnumber'] = a;}" id="tab5loanin"/></td>
-						<td><button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button></td>
+						<td class="btn-group">
+							<button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button>
+							<button onclick="if(game.bank.loan>game.bank.money){Bank(0, 0, game.bank.money)}else{Bank(0, 0, game.bank.loan)}" class="btn btn-info">Return max</button>
+						</td>
 					
 					</tr>
 				</table>
@@ -932,6 +1027,12 @@
 						<td id="finhotwaterexp"></td>
 					</tr>
 					<tr>
+						<td>Interest</td>
+						<td id="finintbank"></td>
+						<td>Fines</td>
+						<td id="finfines"></td>
+					</tr>
+					<tr>
 						<th>Total income</th>
 						<th id="fintotwaterinc"></th>
 						<th>Total expenditure</th>
@@ -944,7 +1045,7 @@
 				</table>
 			</div>
 			<div id="tab7" class="tab-pane" style="height: auto;">
-				<h3>Frequently Asked Questions</h3>
+				<h3 class="text">Frequently Asked Questions</h3>
 				<h4>Why do I have one hot water pipe placed from the beginnings?</h4>
 				<p>If there weren't, that will cause a mess in the code because of an infinite loop and that is easier for me :P</p>
 				<br>
@@ -991,12 +1092,15 @@
 				</br>
 			</div>
 			<div id="tab8" class="tab-pane">
+				<h3>Basic tutorial</h3>
+				<p>You start with 10 placed pipes for cold water. Each pipe can suply 2 houses. Each house requeres 2m<sup>3</sup> water(if you havent bought the upgrade for increasing the required water in upgrades tab > houses). So you need to suply 10*2*2 = 40m<sup>3</sup> per ingame hour. With your pump, you pump 100m<sup>3</sup> per ingame hour, so they have enough water. You can suply more houses by buying and placing more pipes. That is good, but after some time your income will not go up. Why? You can't suply enoug water. You need to buy another pump. But then you see in finance tab there is fines. What is that thing? Why am I getting fined? You suply people with water, but your treatment plant can't treate all the water. The untreated water is send back in river and it is polluting it. How to fix this? Buy a treatment plant. A note: treatment plants have double the price of a pump and double operating costs compared to a pump.</p>
+			</div>
+			<div id="tab9" class="tab-pane">
 				The game is autosaved every ingame day.
 				<script>reset = 0;</script>
 				<button class="btn btn-success" onclick="localStorage.setItem('save', JSON.stringify(game))">Save</button>
 				<button class="btn btn-danger" onclick="reset = reset + 1; if(reset>=3){localStorage.setItem('save', ''); location.reload();}">Reset game</button>
 			</div>
-			<div id="tab9" class="tab-pane"></div>
 			<div id="tab10" class="tab-pane"></div>
 		</div>
 		<script src="js/universal.js"></script>
