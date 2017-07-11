@@ -51,7 +51,7 @@ else{
 			maxloan:100000,
 			balance:0,
 			interest:1,
-			money:p(200)*p(200)*p(200),
+			money:0,
 		},
 		upgrades:{
 			decrease:{
@@ -88,6 +88,27 @@ else{
 			hour:0,
 		}
 	}
+	swal({
+		title: "City name",
+		text: "How will be your city called?",
+		type: "input",
+		showCancelButton: false,
+		closeOnConfirm: false,
+		confirmButtonText: "Name city"
+	},
+	function(inputValue){
+		if (inputValue === false) return false;
+		
+		if (inputValue === "") {
+			swal.showInputError("You need to write something!");
+			return false
+		}
+		
+		swal("Nice!", "You city is called: " + inputValue + ".");
+		game.city.name = inputValue;
+		localStorage.setItem("save", JSON.stringify(game));
+		id2w('tab1city', inputValue);
+	});
 }
 id2w("money", sn2(game.bank.money));
 var timenow = Date.now();
@@ -178,8 +199,10 @@ setInterval(function(){
 		id2w("fincoldwaterexp", "$" + sn2(24*coldexpense));
 		id2w("finhotwaterexp", "$" + sn2(24*heatexpense));
 		id2w("fintotwaterexp", "$" + sn2(24*totexpense));
-		id2w("fintotwaterinc", "$" + sn2(24*totincome));
-		id2w("profit", "$" + sn2(totincome*24 - totexpense*24));
+		id2w("fintotwaterinc", "$" + sn2(24*totincome+(game.bank.balance/100)*game.bank.interest));
+		id2w("finintbank", "$" + sn2((game.bank.balance/100)*game.bank.interest));
+		id2w("finfines", "$" + sn2(fine));
+		id2w("profit", "$" + sn2(totincome*24 - totexpense*24+(game.bank.balance/100)*game.bank.interest));
 		var totcap = 0;
 		for(i=0;i<cd.storage.length;i++){
 			var totcap = totcap + cd.storage[i] * cd.storageprod[i];
@@ -593,11 +616,22 @@ function refnumber(id, number, name, total, where, price){
 	id2w(total + "2", sn2(window['game'][where][price][2]*number));
 	id2w(total + "3", sn2(window['game'][where][price][3]*number));
 }
+
+//buy
 refnumber('watertab1number', 1, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice');
 refnumber('watertab2number', 1, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice');
 refnumber('watertab3number', 1, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice');
 refnumber('watertab5number', 1, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');
 refnumber('watertab6number', 1, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice');
+
+//sell
+refnumber('watertab1numbersell', 1, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice');
+refnumber('watertab2numbersell', 1, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice');
+refnumber('watertab3numbersell', 1, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice');
+refnumber('watertab5numbersell', 1, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice');
+refnumber('watertab6numbersell', 1, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice');
+
+
 function refpipes(){
 	id2w("watertab4owned", sn(game.coldwater.pipe[0], 0));
 	id2w("watertab4placed", sn(game.coldwater.pipe[1], 0));

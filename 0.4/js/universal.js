@@ -11,14 +11,28 @@ function buypipes(count, water, tier){
 				window['game'][water]['pipe'][tier] = game[water]['pipe'][tier] + count;
 				refpipes();
 			}
+			else{
+				Error("Money printer broken", "Not enough money.");
+			}
+		}
+		else{
+			Error("Cloning machine broken", "Not enough houses in the city.");
 		}
 	}
 	else{
-		if(price*count<=game.bank.money && game[water]['pipe'][0]>=count){
-			game.bank.money = game.bank.money - price*count;
-			window['game'][water]['pipe'][1] = game[water]['pipe'][1] + count;
-			window['game'][water]['pipe'][0] = game[water]['pipe'][0] - count;
-			refpipes();
+		if(price*count<=game.bank.money){
+			if(game[water]['pipe'][0]>=count){
+				game.bank.money = game.bank.money - price*count;
+				window['game'][water]['pipe'][1] = game[water]['pipe'][1] + count;
+				window['game'][water]['pipe'][0] = game[water]['pipe'][0] - count;
+				refpipes();
+			}
+			else{
+				Error("China plastic production shortage", "Not enough owned pipes.");
+			}
+		}
+		else{
+			Error("Money printer broken", "Not enough money.");
 		}
 	}	
 	refreshcity();
@@ -49,7 +63,7 @@ function upgrade(where, what, multiplier, price, pricemultiplier, number){
 		id2w("money", sn2(game.bank.money));
 	}
 	else{
-		alert("Not enoug money");
+		Error("Money printer broken", "Not enough money.");
 	}
 	refreshupgrades();
 	refreshwater();
@@ -65,7 +79,7 @@ function buy(water, thing, number, tier){
 		refreshcity();
 	}
 	else{
-		alert("Not enugh money");
+		Error("Money printer broken", "Not enough money.");
 	}
 }
 function sell(water, thing, number, tier){
@@ -77,6 +91,9 @@ function sell(water, thing, number, tier){
 		refreshcity();
 		id2w("money", sn2(game.bank.money));
 	}
+	else{
+		Error("IRS audit", "Not enough utilites to sell.");
+	}
 }
 //water, price name, tier
 function decpipeprice(a, b, c){
@@ -85,11 +102,37 @@ function decpipeprice(a, b, c){
 		game[a]['pipeprice'][c] = game[a]['pipeprice'][c] - (game[a]['pipeprice'][c]/100)*2.5;
 		game.bank.money = game.bank.money - price;
 		game['upgrades']['decrease'][b] = game['upgrades']['decrease'][b] * 1.5;
-	refreshupgrades();
-	refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, watertab4buynumber, 'watertab4buynumber');
-refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, watertab4placenumber, 'watertab4placenumber');
-refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, watertab7buynumber, 'watertab7buynumber');
-refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, watertab7placenumber, 'watertab7placenumber');
-
+		refreshupgrades();
+		refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, watertab4buynumber, 'watertab4buynumber');
+		refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, watertab4placenumber, 'watertab4placenumber');
+		refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, watertab7buynumber, 'watertab7buynumber');
+		refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, watertab7placenumber, 'watertab7placenumber');
 	}
+	else{
+		Error("Money printer broken", "Not enough money.");
+	}
+}
+
+function Error(title1, text1){
+	swal({
+		title: title1,
+		text: text1,
+		type: "error",
+		confirmButtonText: "Okay"
+	})
+}
+function increaseinterest(){
+	if(game.bank.interest+0.5<=25){
+		if(game.bank.money>=game.upgrades.increase.balanceinterestrate){
+			game.bank.money = game.bank.money - game.upgrades.increase.balanceinterestrate;
+			game.bank.interest = game.bank.interest + 0.5;
+		}
+		else{
+			Error("Money printer broken", "Not enough money.");
+		}
+	}
+	refreshupgrades();
+	refreshwater();
+	refreshbank();
+	refreshcity();
 }
