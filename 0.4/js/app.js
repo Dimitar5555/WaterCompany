@@ -246,7 +246,7 @@ setInterval(function(){
 		}
 		localStorage.setItem("save", JSON.stringify(game));
 		id2w("money", sn2(game.bank.money));
-		game.city.house = game.city.house + (game.city.house/100)*game.city.rate;
+		game.city.house = game.city.house + ((game.city.house/100)*game.city.rate)/32;
 		refreshcity();
 	}
 },500);
