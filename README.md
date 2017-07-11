@@ -8,9 +8,16 @@
 * Redone HTML file
 * Redone CSS user desgn
 * Moved chnage log to github
-* Removed the notification system for now. I plan on adding one later.
 * Removed option to write 1M(for example), but you can write 1e6(where six is the number of digits after the digit one). Just don't write number like 1e100 or bigger than 100. This may make the browser to stop responding and you will need to kill it from task manager.
-* There is no save system for now
+* Added save system
+* Added alert & prompt system
+* Added max buttons in the bank
+* Added small tutorial
+* Added interest income and fine expenses in finance tab
+* Added rename city option
+* Added sell buttons
+
+
 #### Version 0.3.4.1 Beta - 8 June 2017
 
 * Fixed bug: not loading data from the new update correctly
