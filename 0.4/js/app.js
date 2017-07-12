@@ -51,7 +51,7 @@ else{
 			maxloan:100000,
 			balance:0,
 			interest:1,
-			money:0,
+			money:p(p(p(p(500000)))),
 		},
 		upgrades:{
 			decrease:{
@@ -76,9 +76,9 @@ else{
 				hotwaterpumpprod:100000, 
 				hotwaterperhouse:50000,
 				hotwaterheatingplantprod:100000,
-				balanceinterestrate:10000,
-				loaninterestrate:80000,
-				maxloan:10000,
+				balanceinterestrate:10000000,
+				loaninterestrate:8000000,
+				maxloan:1000000,
 			}
 		},
 		time:{
@@ -234,7 +234,7 @@ setInterval(function(){
 	if(interestratetimer>=24){
 		interestratetimer = interestratetimer-24;
 		var temp = game.bank.balance;
-		game.bank.balance = game.bank.balance + (game.bank.balance/100)*game.bank.interest;
+		game.bank.balance = game.bank.balance + ((game.bank.balance/100)*game.bank.interest)/384;
 		refreshbank();
 		if(game.bank.loan>0){
 			if(game.bank.loan/365<=game.bank.money){
