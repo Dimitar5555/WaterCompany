@@ -377,9 +377,9 @@ function refreshupgrades(){
 	id2w("uptab8hotwaterusedb", sn2(hd.waterperhouse));
 	id2w("uptab8hotwateruseda", sn2(hd.waterperhouse*1.05));
 	id2w("uptab8houserateb", sn2(game.city.rate));
-	id2w("uptab8houseratea", sn2(game.city.rate*1.1));
+	id2w("uptab8houseratea", sn2(game.city.rate+0.1));
 	id2w("uptab9intb", sn2(game.bank.interest));
-	id2w("uptab9inta", sn2(game.bank.interest*1.05));
+	id2w("uptab9inta", sn2(game.bank.interest+0.5));
 	id2w("uptab9maxloanb", sn2(game.bank.maxloan));
 	id2w("uptab9maxloana", sn2(game.bank.maxloan*2));
 	

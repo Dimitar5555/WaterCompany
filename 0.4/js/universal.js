@@ -136,3 +136,22 @@ function increaseinterest(){
 	refreshbank();
 	refreshcity();
 }
+function increasepopincrease() {
+	if(game.bank.money>=game.upgrades.increase.houserate){
+		if(game.city.rate+0.1<=10){
+			game.bank.money = game.bank.money - game.upgrades.increase.houserate;
+			game.city.rate = game.city.rate + 0.1;
+			game.upgrades.increase.houserate = game.upgrades.increase.houserate * 2;
+			refreshupgrades();
+			refreshwater();
+			refreshbank();
+			refreshcity();
+		}
+		else{
+			Error("Green activists problems", "You can't upgrade more the population increase rate.");
+		}
+	}
+	else{
+		Error("Money printer broken", "Not enough money.");
+	}
+}
