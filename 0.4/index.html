@@ -2,6 +2,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Water Company: Recoded</title>
+		<!-- Start of StatCounter Code for Default Guide -->
+		<script type="text/javascript">
+			var sc_project=11393695; 
+			var sc_invisible=1; 
+			var sc_security="fc228861"; 
+			var scJsHost = (("https:" == document.location.protocol) ?
+			"https://secure." : "http://www.");
+			document.write("<sc"+"ript type='text/javascript' src='" +
+			scJsHost+
+			"statcounter.com/counter/counter.js'></"+"script>");
+			</script>
+			<noscript><div class="statcounter"><a title="web analytics"
+			href="http://statcounter.com/" target="_blank"><img
+			class="statcounter"
+			src="//c.statcounter.com/11393695/0/fc228861/1/" alt="web
+		analytics"></a></div></noscript>
+		<!-- End of StatCounter Code for Default Guide -->
 		<script src="js/lib/jQuery.js"></script>
 		
 		<script src="js/lib/bootstrap.js"></script>
@@ -29,7 +46,7 @@
 			}
 		</style>
 	</head>
-	<body style="padding: 2.5px; max-width: 1200px; min-width: 975px;margin: 0 auto;padding: 10px 2px 10px 2px;">
+	<body style="padding: 2.5px; max-width: 1150px; min-width: 975px;margin: 0 auto;padding: 10px 2px 10px 2px;">
 		<h2 style="color: #42a4f4;">Water Company: Recoded</h2> <span class="text-muted"> <h4>version 0.4</h4></span>
 		<table class="table table-bordered" id="notfluid">
 			<tr>
@@ -367,11 +384,11 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td colspan="2">
-									Increase the rate of building new houses by 10%<br />
+									Increase the rate of building new houses by 0.1%(max 10%)<br />
 									Rate of building houses <span id="uptab8houserateb"></span>-><span id="uptab8houseratea"></span>
 								</td>
 								<td colspan="2">
-									<button onclick="upgrade('city', 'rate', 1.1, 'houserate', 1.5, 1)" class="btn btn-success">$<span id="houserate"></span></button>
+									<button onclick="increasepopincrease()" class="btn btn-success">$<span id="houserate"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -380,7 +397,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<table class="table">
 							<tr>
 								<td>
-									Increase interest rate by 0.5%<br />
+									Increase interest rate by 0.5%(max 25%)<br />
 									Interest rate <span id="uptab9intb"></span>%-><span id="uptab9inta"></span>%
 								</td>
 								<td>
