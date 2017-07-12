@@ -16,6 +16,11 @@
 * Added interest income and fine expenses in finance tab
 * Added rename city option
 * Added sell buttons
+* Fixed bug with pipes
+* Interest rate for bank balance is yearly
+* Population growth is monthly
+* Made the game wider
+* Increased price on two upgrades
 
 
 #### Version 0.3.4.1 Beta - 8 June 2017
