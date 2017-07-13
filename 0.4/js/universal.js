@@ -160,3 +160,21 @@ function increasepopincrease() {
 		Error("Money printer broken", "Not enough money.");
 	}
 }
+function increasemaxloan(){
+	if(game.bank.loan>0){
+		Error('Cheat detected', 'You can not increase max loan size if you are in debt');
+	}
+	else{
+		if(game.bank.money>=game.upgrades.increase.maxloan){
+			game.bank.money = game.bank.money - game.upgrades.increase.maxloan;
+			game.upgrades.increase.maxloan = game.upgrades.increase.maxloan * 3;
+			refreshupgrades();
+			refreshwater();
+			refreshbank();
+			refreshcity();
+		}
+		else{
+			Error("Money printer broken", "Not enough money.");
+		}
+	}
+}

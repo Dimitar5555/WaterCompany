@@ -131,19 +131,20 @@ if(!game.stats){
 		totalearnedmoney:0,
 	};
 }
+alert(game['unlocked']['bank']);
 document.getElementById('hotwatertab').style.display = "none";
 document.getElementById('banktab').style.display = "none";
-if(game['stats']['totalearnedmoney']>=1e6){
+if(game['stats']['totalearnedmoney']>=1000000){
 	game['unlocked']['hotwater'] = 1;
 }
 if(game['unlocked']['hotwater'] == 1){
-	document.getElementById('hotwatertab').style.display = "intial";
+	document.getElementById('hotwatertab').style.display = "inherit";
 }
-if(game['stats']['totalearnedmoney']>=1e3){
+if(game['stats']['totalearnedmoney']>=1000){
 	game['unlocked']['bank'] = 1;
 }
 if(game['unlocked']['bank'] == 1){
-	document.getElementById('banktab').style.display = "intial";
+	document.getElementById('banktab').style.display = "inherit";
 }
 id2w("money", sn2(game.bank.money));
 var timenow = Date.now();
@@ -230,6 +231,18 @@ setInterval(function(){
 			id2w("income", "+$" + sn2(totincome - totexpense));
 		}
 		game['stats']['totalearnedmoney'] = game['stats']['totalearnedmoney'] + totincome - totexpense;
+		if(game['stats']['totalearnedmoney']>=1000000){
+			game['unlocked']['hotwater'] = 1;
+		}
+		if(game['unlocked']['hotwater'] == 1){
+			document.getElementById('hotwatertab').style.display = "inherit";
+		}
+		if(game['stats']['totalearnedmoney']>=1000){
+			game['unlocked']['bank'] = 1;
+		}
+		if(game['unlocked']['bank'] == 1){
+			document.getElementById('banktab').style.display = "inherit";
+		}
 		id2w("finsellcoldwater", "$" + sn2(24*coldwaterincome));
 		id2w("finsellhotwater", "$" + sn2(24*hotwaterincome));
 		id2w("fincoldwaterexp", "$" + sn2(24*coldexpense));
@@ -270,7 +283,12 @@ setInterval(function(){
 	if(interestratetimer>=24){
 		interestratetimer = interestratetimer-24;
 		var temp = game.bank.balance;
-		game.bank.balance = game.bank.balance + ((game.bank.balance/100)*game.bank.interest)/384;
+		if(game['stats']['totalearnedmoney']*0.4>=((game.bank.balance/100)*game.bank.interest)/384){
+			game.bank.balance = game.bank.balance + ((game.bank.balance/100)*game.bank.interest)/384;
+		}
+		else{
+			game.bank.balance = game.bank.balance + game['stats']['totalearnedmoney']*0.4;
+		}
 		refreshbank();
 		if(game.bank.loan>0){
 			if(game.bank.loan/365<=game.bank.money){
