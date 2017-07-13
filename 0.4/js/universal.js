@@ -127,6 +127,10 @@ function increaseinterest(){
 			game.bank.money = game.bank.money - game.upgrades.increase.balanceinterestrate;
 			game.bank.interest = game.bank.interest + 0.5;
 			game.upgrades.increase.balanceinterestrate = game.upgrades.increase.balanceinterestrate * 10;
+			refreshupgrades();
+			refreshwater();
+			refreshbank();
+			refreshcity();
 		}
 		else{
 			Error("Money printer broken", "Not enough money.");

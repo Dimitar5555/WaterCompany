@@ -86,6 +86,14 @@ else{
 			month:1,
 			year:1,
 			hour:0,
+		},
+		uncloked:{
+			hotwater:0,
+			bank:0,
+			waterstorage:0,
+		},
+		stats:{
+			totalearnedmoney:0,
 		}
 	}
 	swal({
@@ -109,6 +117,33 @@ else{
 		localStorage.setItem("save", JSON.stringify(game));
 		id2w('tab1city', inputValue);
 	});
+}
+
+if(!game.unlocked){
+	game.unlocked = {
+			hotwater:0,
+			bank:0,
+			waterstorage:0,
+		}
+}
+if(!game.stats){
+	game['stats'] = {
+		totalearnedmoney:0,
+	};
+}
+document.getElementById('hotwatertab').style.display = "none";
+document.getElementById('banktab').style.display = "none";
+if(game['stats']['totalearnedmoney']>=1e6){
+	game['unlocked']['hotwater'] = 1;
+}
+if(game['unlocked']['hotwater'] == 1){
+	document.getElementById('hotwatertab').style.display = "intial";
+}
+if(game['stats']['totalearnedmoney']>=1e3){
+	game['unlocked']['bank'] = 1;
+}
+if(game['unlocked']['bank'] == 1){
+	document.getElementById('banktab').style.display = "intial";
 }
 id2w("money", sn2(game.bank.money));
 var timenow = Date.now();
@@ -194,6 +229,7 @@ setInterval(function(){
 		else{
 			id2w("income", "+$" + sn2(totincome - totexpense));
 		}
+		game['stats']['totalearnedmoney'] = game['stats']['totalearnedmoney'] + totincome - totexpense;
 		id2w("finsellcoldwater", "$" + sn2(24*coldwaterincome));
 		id2w("finsellhotwater", "$" + sn2(24*hotwaterincome));
 		id2w("fincoldwaterexp", "$" + sn2(24*coldexpense));
