@@ -21,6 +21,9 @@
 * Population growth is monthly
 * Made the game wider
 * Increased price on two upgrades
+* You can no longer get out a loan if you have money in the bank
+* You can no longer invest money in the bank if you have a loan
+* Made error messages titles diffrent from 'Error'
 
 
 #### Version 0.3.4.1 Beta - 8 June 2017
