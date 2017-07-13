@@ -1,7 +1,7 @@
 # WaterCompany
 ## Change log
 
-#### Version 0.4 - TBA
+#### [Version 0.4](https://dimitar5555.github.io/WaterCompany/0.4)
 
 * Changed background to gradient
 * Redone javascript functions
@@ -26,6 +26,8 @@
 * Made error messages titles diffrent from 'Error'
 * Bank tab will show when you have earned(total) at least 1k money
 * Hot water tab will show when you have earned(total) at least 1m money
+* Your daily income from bank balance can't be bigger then 0.4 times if the lifetime profit
+* If you have a loan, you can't upgrade max loan.
 
 
 #### Version 0.3.4.1 Beta - 8 June 2017
