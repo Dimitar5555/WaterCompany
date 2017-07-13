@@ -51,7 +51,7 @@ else{
 			maxloan:100000,
 			balance:0,
 			interest:1,
-			money:p(p(p(p(500000)))),
+			money:0,
 		},
 		upgrades:{
 			decrease:{
@@ -660,21 +660,56 @@ function Bank(a, b, c){
 	c amount of money
 	*/
 	var c = Number(c);
-	if(a==0 && b==0 && game.bank.money>=c && game.bank.loan-c>=0){
-		game.bank.loan = game.bank.loan - c;
-		game.bank.money = game.bank.money - c;
+	if(a==0 && b==0){
+		if(game.bank.loan-c>=0){
+			if(game.bank.money>=c){
+				game.bank.loan = game.bank.loan - c;
+				game.bank.money = game.bank.money - c;
+			}
+			else{
+				Error("Money printer broken", "Not enough money.");
+			}
+		}
+		else{
+			Error("Your bank file is empty", "You don't have loan to return.");
+		}
 	}
-	else if(a==0 && b==1 && game.bank.loan+c<=game.bank.maxloan){
-		game.bank.loan = game.bank.loan + c;
-		game.bank.money = game.bank.money + c;
+	else if(a==0 && b==1){
+		if(game.bank.balance==0){
+			if(game.bank.loan+c<=game.bank.maxloan){
+				game.bank.loan = game.bank.loan + c;
+				game.bank.money = game.bank.money + c;
+			}
+			else{
+				Error("IRS audit", "You will pass your loan limit of you get that much money. Try with smaller sum.");
+			}
+		}
+		else{
+			Error("No money shortage detected", "You don't need a lon. You have money in the bank. Use them first, before making it into bancruptcy.");
+		}
 	}
-	else if(a==1 && b==0 && game.bank.money>=c){
-		game.bank.balance= game.bank.balance + c;
-		game.bank.money = game.bank.money - c;
+	else if(a==1 && b==0){
+		if(game.bank.loan==0){
+			if(game.bank.money>=c){
+				game.bank.balance= game.bank.balance + c;
+				game.bank.money = game.bank.money - c;
+			}
+			else{
+				Error("Money printer broken", "Not enough money.");
+			}
+		}
+		else{
+			Error("You have loan", "You need to return all of your loan before investing");
+		}
 	}
-	else if(a==1 && b==1 && game.bank.balance>=c){
-		game.bank.balance = game.bank.balance - c;
-		game.bank.money = game.bank.money + c;
+	else if(a==1 && b==1){
+		if(game.bank.balance>=c){
+			game.bank.balance = game.bank.balance - c;
+			game.bank.money = game.bank.money + c;
+		}
+		else{
+			Error("Don't cheat the bank!", "You don't have enough money in the bank balance.");
+		}
 	}
 	id2w("money", sn2(game.bank.money));
 	refreshbank();
