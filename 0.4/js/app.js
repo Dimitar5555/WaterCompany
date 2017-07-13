@@ -131,7 +131,6 @@ if(!game.stats){
 		totalearnedmoney:0,
 	};
 }
-alert(game['unlocked']['bank']);
 document.getElementById('hotwatertab').style.display = "none";
 document.getElementById('banktab').style.display = "none";
 if(game['stats']['totalearnedmoney']>=1000000){
