@@ -24,6 +24,8 @@
 * You can no longer get out a loan if you have money in the bank
 * You can no longer invest money in the bank if you have a loan
 * Made error messages titles diffrent from 'Error'
+* Bank tab will show when you have earned(total) at least 1k money
+* Hot water tab will show when you have earned(total) at least 1m money
 
 
 #### Version 0.3.4.1 Beta - 8 June 2017
