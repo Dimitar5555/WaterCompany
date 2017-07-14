@@ -51,7 +51,7 @@ else{
 			maxloan:100000,
 			balance:0,
 			interest:1,
-			money:1e20,
+			money:0,
 		},
 		upgrades:{
 			decrease:{
