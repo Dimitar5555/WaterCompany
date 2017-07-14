@@ -51,7 +51,7 @@ else{
 			maxloan:100000,
 			balance:0,
 			interest:1,
-			money:0,
+			money:1e20,
 		},
 		upgrades:{
 			decrease:{
@@ -448,7 +448,7 @@ function refreshupgrades(){
 	id2w("coldwaterperhouse", sn2(up.increase.coldwaterperhouse));
 	id2w("hotwaterperhouse", sn2(up.increase.hotwaterperhouse));
 	id2w("houserate", sn2(up.increase.houserate));
-	id2w("loaninterestrate", sn2(up.increase.loaninterestrate));
+	id2w("balanceinterestrate", sn2(up.increase.balanceinterestrate));
 	id2w("maxloan", sn2(up.increase.maxloan));
 }
 function refreshwater() {
