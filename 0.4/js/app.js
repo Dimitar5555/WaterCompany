@@ -249,7 +249,7 @@ setInterval(function(){
 		id2w("fintotwaterexp", "$" + sn2(24*totexpense));
 		id2w("fintotwaterinc", "$" + sn2(24*totincome+((game.bank.balance/100)*game.bank.interest)/384));
 		id2w("finintbank", "$" + sn2(((game.bank.balance/100)*game.bank.interest)/384));
-		id2w("finfines", "$" + sn2(fine));
+		id2w("finfines", "$" + sn2(fine*24));
 		id2w("profit", "$" + sn2(totincome*24 - totexpense*24+((game.bank.balance/100)*game.bank.interest)/384));
 		var totcap = 0;
 		for(i=0;i<cd.storage.length;i++){
