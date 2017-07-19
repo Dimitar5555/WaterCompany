@@ -133,7 +133,7 @@ if(!game.stats){
 }
 document.getElementById('hotwatertab').style.display = "none";
 document.getElementById('banktab').style.display = "none";
-if(game['stats']['totalearnedmoney']>=1000000){
+if(game['stats']['totalearnedmoney']>=100000){
 	game['unlocked']['hotwater'] = 1;
 }
 if(game['unlocked']['hotwater'] == 1){
@@ -230,7 +230,7 @@ setInterval(function(){
 			id2w("income", "+$" + sn2(totincome - totexpense));
 		}
 		game['stats']['totalearnedmoney'] = game['stats']['totalearnedmoney'] + totincome - totexpense;
-		if(game['stats']['totalearnedmoney']>=1000000){
+		if(game['stats']['totalearnedmoney']>=100000){
 			game['unlocked']['hotwater'] = 1;
 		}
 		if(game['unlocked']['hotwater'] == 1){
