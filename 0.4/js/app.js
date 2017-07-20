@@ -622,8 +622,8 @@ function refreshcity(){
 	id2w('tab1city', game.city.name);
 	id2w('tab1population', sn2(game.city.house));
 	id2w('tab1populationgrowth', sn2(game.city.rate) + "%");
-	id2w('tab1coldpipecoverage', sn2(((game['coldwater']['pipe'][1])/(game.city.house))*100) + "%");
-	id2w('tab1hotpipecoverage', sn2(((game['hotwater']['pipe'][1])/(game.city.house))*100) + "%");
+	id2w('tab1coldpipecoverage', sn2(((game['coldwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
+	id2w('tab1hotpipecoverage', sn2(((game['hotwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
 	var cd = game['coldwater'];
 	var prodcoldwater = cd.pumpprod[0] * cd.pump[0] + cd.pumpprod[1] * cd.pump[1] + cd.pumpprod[2] * cd.pump[2] + cd.pumpprod[3] * cd.pump[3];
 	if((prodcoldwater/game.coldwater.pipe[1]*game.coldwater.waterperhouse)*100>100){
