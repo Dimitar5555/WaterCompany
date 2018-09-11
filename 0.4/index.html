@@ -39,6 +39,9 @@
 			#notfluid > tr > td, th{
 				width: auto;
 			}
+			.spacer{
+				clear: both;
+			}
 		</style>
 	</head>
 	<body style="padding: 2.5px; max-width: 1150px; min-width: 975px;margin: 0 auto;padding: 10px 2px 10px 2px;">
@@ -147,6 +150,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<td id="tab1hotwaterusage"></td>
 					</tr>
 				</table>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab2" class="tab-pane">
 				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
@@ -409,6 +413,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 					</div>
 				</div>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab3" class="tab-pane">
 				<ul class="nav nav-stacked" style="font-size: 17px;">
@@ -738,6 +743,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 					</div>
 				</div>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab4" class="tab-pane">
 				<ul class="nav nav-stacked" style="font-size: 17px;">
@@ -970,6 +976,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 					</div>
 				</div>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab5" class="tab-pane">
 				<table class="table">
@@ -1018,7 +1025,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					</tr>
 				</table>
 				<br />
-				</div>
+				<div class="spacer"></div>
+			</div>
 			<div id="tab6" class="tab-pane">
 				<center><h2>Profit statement</h2></center>
 				<table class="table table-bordered">
@@ -1055,6 +1063,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<th colspan="2" id="profit"></th>
 					</tr>
 				</table>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab7" class="tab-pane" style="height: auto;">
 				<h3 class="text">Frequently Asked Questions</h3>
@@ -1093,16 +1102,19 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<h4>How are operating costs calculated?</h4>
 				<p>Everything has an operating cost(except pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
 				<br />
+				<div class="spacer"></div>
 			</div>
 			<div id="tab8" class="tab-pane">
 				<h3>Basic tutorial</h3>
 				<p>You start with 10 placed pipes for cold water. Each pipe can supply 2 houses. Each house requires 2m<sup>3</sup> water(if you haven't bought the upgrade for increasing the required water in upgrades tab > houses). So you need to supply 10*2*2 = 40m<sup>3</sup> per in game hour. With your pump, you pump 100m<sup>3</sup> per in game hour, so they have enough water. You can supply more houses by buying and placing more pipes. That is good, but after some time your income will not go up. Why? You can't supply enough water. You need to buy another pump. But then you see in finance tab there is fines. What is that thing? Why am I getting fined? You supply people with water, but your treatment plant can't treat all the water. The untreated water is send back in river and it is polluting it. How to fix this? Buy a treatment plant. A note: treatment plants have double the price of a pump and double operating costs compared to a pump.</p>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab9" class="tab-pane">
 				The game is autosaved every ingame day.
 				<script>reset = 0;</script>
 				<button class="btn btn-success" onclick="localStorage.setItem('save', JSON.stringify(game))">Save</button>
 				<button class="btn btn-danger" onclick="reset = reset + 1; if(reset>=3){localStorage.setItem('save', ''); location.reload();}">Reset game</button>
+				<div class="spacer"></div>
 			</div>
 			<div id="tab10" class="tab-pane"></div>
 		</div>
