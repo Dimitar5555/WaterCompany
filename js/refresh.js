@@ -244,7 +244,7 @@ function refBank() {
 	gEBI("lInt").innerHTML = s(loanInterest);
 	gEBI("curTaxL").innerHTML = s(loan/100);
 }
-function refMoney() {
+function refMoney(add) {
 	if(add>0){
 		gEBI("income").innerHTML = "+" + "$<span style='color: green;'>" + s(add) + "</span>";
 	} 
