@@ -151,7 +151,7 @@ function chechSaveFile() {
 		gEBI("time").innerHTML = hour + ":00";
 		gEBI("NW").innerHTML = s(UW);
 		gEBI("stW").innerHTML = s(stW);
-		refMoney();
+		refMoney(add);
 		gEBI("trt").innerHTML = s(TW);
 		gEBI("prd").innerHTML = s(PW);
 		gEBI("curBalance").innerHTML = s(curBalance);
@@ -252,6 +252,7 @@ function chechSaveFile() {
 		localStorage.setItem("offTime", time);
 		save();
 		loadSets();
+		chechSaveFile();
 	}
 }
 HardReset = 0; 
