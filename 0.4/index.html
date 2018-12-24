@@ -38,7 +38,7 @@
 			.tab-pane{
 				height:65%;
 			}
-			.tab-pane > table, .tab-pane > p{
+			.tab-pane > table, .tab-pane > p, .customtab > table, .customtab > p {
 				float: left;
 				width: auto;
 				max-width: 82.5%
@@ -50,6 +50,9 @@
 				width: auto;
 			}
 			.spacer{
+				clear: both;
+			}
+			.clear {
 				clear: both;
 			}
 		</style>
@@ -165,25 +168,25 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
 					<li><a>Cold water</a>
 						<ul>
-							<li><a data-toggle="tab" href="#upgradestabs1">Pumps</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs2">Treatment plants</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs3">Water storage</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs4">Pipes</a></li>
+							<li onclick="goTab(1);"><a>Pumps</a></li>
+							<li onclick="goTab(2);"><a>Treatment plants</a></li>
+							<li onclick="goTab(3);"><a>Water storage</a></li>
+							<li onclick="goTab(4);"><a>Pipes</a></li>
 						</ul>	
 						
 					</li>
 					<li><a>Hot water</a>
 						<ul>
-							<li><a data-toggle="tab" href="#upgradestabs5">Pumps</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs6">Heating plants</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs7">Heat pipes</a></li>
+							<li onclick="goTab(5);"><a>Pumps</a></li>
+							<li onclick="goTab(6);"><a>Heating plants</a></li>
+							<li onclick="goTab(7);"><a>Heat pipes</a></li>
 						</ul>
 					</li>
-					<li><a data-toggle="tab" href="#upgradestabs8">Houses</a></li>
-					<li><a data-toggle="tab" href="#upgradestabs9">Bank</a></li>
+					<li onclick="goTab(8);"><a>Houses</a></li>
+					<li onclick="goTab(9);"><a>Bank</a></li>
 				</ul>
 				<div class="tab-content">
-					<div id="upgradestabs1" class="tab-pane active">
+					<div id="upgradestabs1" class="customtab">
 						<table class="table">
 							<tr>
 								<td>
@@ -208,8 +211,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs2" class="tab-pane">
+					<div id="upgradestabs2" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -233,8 +237,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs3" class="tab-pane">
+					<div id="upgradestabs3" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -259,8 +264,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs4" class="tab-pane">
+					<div id="upgradestabs4" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -279,8 +285,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs5" class="tab-pane">
+					<div id="upgradestabs5" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -305,8 +312,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs6" class="tab-pane">
+					<div id="upgradestabs6" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -331,8 +339,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs7" class="tab-pane">
+					<div id="upgradestabs7" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -351,8 +360,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs8" class="tab-pane">
+					<div id="upgradestabs8" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<th colspan="2">Cold water</th>
@@ -400,8 +410,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs9" class="tab-pane">
+					<div id="upgradestabs9" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -420,6 +431,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 				</div>
 				<div class="spacer"></div>
@@ -523,6 +535,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="tab3ptopec3"></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 					<div id="watertab2" class="tab-pane">
 						<p>Water storage is used to store water like water towers. When there is too much water, it is stored if possible. When there is a shortage of water, the water from the tower is used.</p>
@@ -615,6 +628,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="tab3stopec3"></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 					<div id="watertab3" class="tab-pane">
 						<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m3 you dispose in river you need to pay $100.</p>
@@ -707,6 +721,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="tab3ttopec3"></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 					<div id="watertab4" class="tab-pane">
 						<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies 2 houses at a time.</p>
@@ -750,6 +765,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td colspan="2"><button onclick="buypipes(watertab4placenumber, 'coldwater', 1)" class="btn btn-success">Place <span id="watertab4place"></span> for $<span id="watertab4placeprice"></span></button></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 				</div>
 				<div class="spacer"></div>
@@ -850,6 +866,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="tab5hptopec3"></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 					<div id="watertab6" class="tab-pane">
 						<table>
@@ -940,6 +957,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="tab6hptopec3"></td>
 							</tr>
 						</table>
+						<div class="clear"></div>
 					</div>
 					<div id="watertab7" class="tab-pane">
 						<p>Pipes are the most important thing for your company. Without them you can't supply people with water. They are the main source of money. Each pipe supplies 2 houses at a time.</p>
@@ -1034,7 +1052,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					</tr>
 				</table>
 				<br />
-				<div class="spacer"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="tab6" class="tab-pane">
 				<center><h2>Profit statement</h2></center>
@@ -1072,7 +1090,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<th colspan="2" id="profit"></th>
 					</tr>
 				</table>
-				<div class="spacer"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="tab7" class="tab-pane" style="height: auto;">
 				<h3 class="text">Frequently Asked Questions</h3>
@@ -1111,19 +1129,19 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<h4>How are operating costs calculated?</h4>
 				<p>Everything has an operating cost(except pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
 				<br />
-				<div class="spacer"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="tab8" class="tab-pane">
 				<h3>Basic tutorial</h3>
 				<p>You start with 10 placed pipes for cold water. Each pipe can supply 2 houses. Each house requires 2m<sup>3</sup> water(if you haven't bought the upgrade for increasing the required water in upgrades tab > houses). So you need to supply 10*2*2 = 40m<sup>3</sup> per in game hour. With your pump, you pump 100m<sup>3</sup> per in game hour, so they have enough water. You can supply more houses by buying and placing more pipes. That is good, but after some time your income will not go up. Why? You can't supply enough water. You need to buy another pump. But then you see in finance tab there is fines. What is that thing? Why am I getting fined? You supply people with water, but your treatment plant can't treat all the water. The untreated water is send back in river and it is polluting it. How to fix this? Buy a treatment plant. A note: treatment plants have double the price of a pump and double operating costs compared to a pump.</p>
-				<div class="spacer"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="tab9" class="tab-pane">
 				The game is autosaved every ingame day.
 				<script>reset = 0;</script>
 				<button class="btn btn-success" onclick="localStorage.setItem('save', JSON.stringify(game))">Save</button>
 				<button class="btn btn-danger" onclick="reset = reset + 1; if(reset>=3){localStorage.setItem('save', ''); location.reload();}">Reset game</button>
-				<div class="spacer"></div>
+				<div class="clear"></div>
 			</div>
 			<div id="tab10" class="tab-pane"></div>
 		</div>
