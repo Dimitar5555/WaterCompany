@@ -3,7 +3,7 @@ function sn2(a){var b = sn(a,2); return b;}
 function id2w(a, b){return document.getElementById(a).innerHTML = b;}
 function p(a){return a*a;}
 function goTab(tab){
-	for(i=1;i<9;i++){
+	for(i=1;i<10;i++){
 		if(tab==i){
 			document.getElementById("upgradestabs" + i).classList.remove('hidden');
 		}
