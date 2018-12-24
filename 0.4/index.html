@@ -165,25 +165,25 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
 					<li><a>Cold water</a>
 						<ul>
-							<li><a data-toggle="tab" href="#upgradestabs1">Pumps</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs2">Treatment plants</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs3">Water storage</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs4">Pipes</a></li>
+							<li onclick="goTab(1);"><a>Pumps</a></li>
+							<li onclick="goTab(2);"><a>Treatment plants</a></li>
+							<li onclick="goTab(3);"><a>Water storage</a></li>
+							<li onclick="goTab(4);"><a>Pipes</a></li>
 						</ul>	
 						
 					</li>
 					<li><a>Hot water</a>
 						<ul>
-							<li><a data-toggle="tab" href="#upgradestabs5">Pumps</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs6">Heating plants</a></li>
-							<li><a data-toggle="tab" href="#upgradestabs7">Heat pipes</a></li>
+							<li onclick="goTab(5);"><a>Pumps</a></li>
+							<li onclick="goTab(6);"><a>Heating plants</a></li>
+							<li onclick="goTab(7);"><a>Heat pipes</a></li>
 						</ul>
 					</li>
-					<li><a data-toggle="tab" href="#upgradestabs8">Houses</a></li>
-					<li><a data-toggle="tab" href="#upgradestabs9">Bank</a></li>
+					<li onclick="goTab(8);"><a>Houses</a></li>
+					<li onclick="goTab(9);"><a>Bank</a></li>
 				</ul>
 				<div class="tab-content">
-					<div id="upgradestabs1" class="tab-pane active">
+					<div id="upgradestabs1" class="customtab">
 						<table class="table">
 							<tr>
 								<td>
@@ -209,7 +209,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs2" class="tab-pane">
+					<div id="upgradestabs2" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -234,7 +234,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs3" class="tab-pane">
+					<div id="upgradestabs3" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -260,7 +260,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs4" class="tab-pane">
+					<div id="upgradestabs4" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -280,7 +280,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs5" class="tab-pane">
+					<div id="upgradestabs5" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -306,7 +306,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs6" class="tab-pane">
+					<div id="upgradestabs6" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -332,7 +332,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs7" class="tab-pane">
+					<div id="upgradestabs7" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -352,7 +352,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs8" class="tab-pane">
+					<div id="upgradestabs8" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<th colspan="2">Cold water</th>
@@ -401,7 +401,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 						</table>
 					</div>
-					<div id="upgradestabs9" class="tab-pane">
+					<div id="upgradestabs9" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
