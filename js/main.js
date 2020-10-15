@@ -36,6 +36,9 @@ function gEBI(a) {
 	return b;
 }
 function updatePipes() {
+	if(typeof money !=='number'){
+		money = parseFloat(money);
+	}
 	var maxPipes = (houses/2) - (PO+PP);
 	var maxPipes = Math.floor(maxPipes);
 	var maxP = Math.floor(money/pricePPP);
