@@ -1,18 +1,18 @@
 function chechSaveFile() {
 	if(localStorage.upgradesPrices && localStorage.pumptreat && localStorage.prices && localStorage.other){
 		var pumptreat = JSON.parse(localStorage.pumptreat);
-		pumps = [pumptreat[0][0], pumptreat[0][1], pumptreat[0][2], pumptreat[0][3]];
-		pumpProd = [pumptreat[1][0], pumptreat[1][1], pumptreat[1][2], pumptreat[1][3]];
-		pumpPrice = [pumptreat[2][0], pumptreat[2][1], pumptreat[2][2], pumptreat[2][3]];
-		treatPla = [pumptreat[3][0], pumptreat[3][1], pumptreat[3][2], pumptreat[3][3]];
-		treatProd = [pumptreat[4][0], pumptreat[4][1], pumptreat[4][2], pumptreat[4][3]];
-		treatPrice =[pumptreat[5][0], pumptreat[5][1], pumptreat[5][2], pumptreat[5][3]];
-		pumpCost = [pumptreat[6][0], pumptreat[6][1], pumptreat[6][2], pumptreat[6][3]];
-		treatCost = [pumptreat[7][0], pumptreat[7][1], pumptreat[7][2], pumptreat[7][3]];
-		stWCost = [pumptreat[8][0], pumptreat[8][1], pumptreat[8][2], pumptreat[8][3]];
-		stWPrice = [pumptreat[9][0], pumptreat[9][1], pumptreat[9][2], pumptreat[9][3]];
-		stWProd = [pumptreat[10][0], pumptreat[10][1], pumptreat[10][2], pumptreat[10][3]];
-		stWC = [pumptreat[11][0], pumptreat[11][1], pumptreat[11][2], pumptreat[11][3]];
+		pumps = pumptreat[0];
+		pumpProd = pumptreat[1];
+		pumpPrice = pumptreat[2];
+		treatPla = pumptreat[3];
+		treatProd = pumptreat[4];
+		treatPrice =pumptreat[5];
+		pumpCost = pumptreat[6];
+		treatCost = pumptreat[7];
+		stWCost = pumptreat[8];
+		stWPrice = pumptreat[9];
+		stWProd = pumptreat[10];
+		stWC = pumptreat[11];
 		
 		var other = JSON.parse(localStorage.other);
 		selectedCity = other[0];
@@ -64,14 +64,14 @@ function chechSaveFile() {
 		fast = 500;
 		
 		var heatWater = JSON.parse(localStorage.hotWater);
-		HWpumpProd = [heatWater[0][0], heatWater[0][1], heatWater[0][2], heatWater[0][3]];
-		HWpump = [heatWater[1][0], heatWater[1][1], heatWater[1][2], heatWater[1][3]];
-		HWpumpPrice = [heatWater[2][0], heatWater[2][1], heatWater[2][2], heatWater[2][3]];
-		HWpumpOpC = [heatWater[3][0], heatWater[3][1], heatWater[3][2], heatWater[3][3]];
-		HWHFProd = [heatWater[4][0], heatWater[4][1], heatWater[4][2], heatWater[4][3]];
-		HWHFPrice = [heatWater[5][0], heatWater[5][1], heatWater[5][2], heatWater[5][3]];
-		HWHFOpC = [heatWater[6][0], heatWater[6][1], heatWater[6][2], heatWater[6][3]];
-		HWHF = [heatWater[7][0], heatWater[7][1], heatWater[7][2], heatWater[7][3]];
+		HWpumpProd = heatWater[0];
+		HWpump = heatWater[1];
+		HWpumpPrice = heatWater[2];
+		HWpumpOpC = heatWater[3];
+		HWHFProd = heatWater[4];
+		HWHFPrice = heatWater[5];
+		HWHFOpC = heatWater[6];
+		HWHF = heatWater[7];
 		HPO = heatWater[8];
 		HPPP = heatWater[9];
 		HPOprice = heatWater[10];
