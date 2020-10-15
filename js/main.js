@@ -17,15 +17,15 @@ function abbrNum(number, decPlaces) {
     return number;
 }
 function unAbbrNum(number, decPlaces) {
-		var abbR = ["", "K","M","B","T","QA","QI","SX","SP","OC","NO","DC","UDC","DDC","TDC","QADC","QIDC","SXDC","SPDC","ODC","NDC","VI","UVI","DVI","TVI","QAVI","QIVI","SXVI","SPVI","OVI","NVI","TG","UTG","DTG","TTG","QATG","QITG","SXTG","SPTG","OTG","NTG","QD","UQD","DQD","TQD","QAQD","QIQD","SXQD","SPQD","OQD","NQD","QQ","UQQ","DQQ","TQQ","QAQQ","QIQQ","SXQQ","SPQQ","OQQ","NQQ","SG","USG","DSG","TSG","QASG","QISG","SXSG","SPSG","OSG","NSG","ST","UST","DST","TST","QAST","QIST","SXST","SPST","OST","NST","OG","UOG","DOG","TOG","QAOG","QIOG","SXOG","SPOG","OOG","NOG"];
-		var number = number.toUpperCase();
-		for(i=0;i<abbR.length;i++){
-			if(parseFloat(number) + abbR[i]===number){
-				var number = parseFloat(number);
-				var number = number * (Math.pow(1000,i));
-			}
+	var abbR = ["", "K","M","B","T","QA","QI","SX","SP","OC","NO","DC","UDC","DDC","TDC","QADC","QIDC","SXDC","SPDC","ODC","NDC","VI","UVI","DVI","TVI","QAVI","QIVI","SXVI","SPVI","OVI","NVI","TG","UTG","DTG","TTG","QATG","QITG","SXTG","SPTG","OTG","NTG","QD","UQD","DQD","TQD","QAQD","QIQD","SXQD","SPQD","OQD","NQD","QQ","UQQ","DQQ","TQQ","QAQQ","QIQQ","SXQQ","SPQQ","OQQ","NQQ","SG","USG","DSG","TSG","QASG","QISG","SXSG","SPSG","OSG","NSG","ST","UST","DST","TST","QAST","QIST","SXST","SPST","OST","NST","OG","UOG","DOG","TOG","QAOG","QIOG","SXOG","SPOG","OOG","NOG"];
+	var number = number.toUpperCase();
+	for(i=0;i<abbR.length;i++){
+		if(parseFloat(number) + abbR[i]===number){
+			var number = parseFloat(number);
+			var number = number * (Math.pow(1000,i));
 		}
-	return number;
+	}
+	return parseFloat(number);
 }
 function s(a) {
 	var c = abbrNum(a,2);
