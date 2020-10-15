@@ -22,11 +22,11 @@ function chechSaveFile() {
 		price = other[4];
 		PP = other[5];
 		PO = other[6];
-		money = other[7];
+		money = parseFloat(other[7]);
 		hour = other[8];
 		day = other[9];
 		incRateHouses = other[10];
-		curBalance = other[11];
+		curBalance = parseFloat(other[11]);
 		interest = other[12];
 		stW = other[13];
 		year = other[14];
@@ -101,31 +101,31 @@ function chechSaveFile() {
 		gEBI("extraW").innerHTML = s(b);
 		MSW = stWC[0]*stWProd[0] + stWC[1]*stWProd[1] + stWC[2]*stWProd[2] + stWC[3]*stWProd[3];
 		var opC = pumps[0] * pumpCost[0] + pumps[1] * pumpCost[1] + pumps[2] * pumpCost[2] + pumps[3] * pumpCost[3]	+ treatPla[0] * treatCost[0] + treatPla[1] * treatCost[1] + treatPla[2] * treatCost[2] + treatPla[3] * treatCost[3] + stWC[0] * stWCost[0] + stWC[1] * stWCost[1] + stWC[2] * stWCost[2] + stWC[3] * stWCost[3];
-			
-		for(i=0;i<times;i++){
-			stWB = stW;
-			stW = stW + PW;
-			if(stW-UW>=0){
-				SW = UW;
-				stW = stW - UW;
-				if(UW>TW){
-					fine = UW - TW;
-				}
-				else{
-					fine = 0;
-				}
+		
+		stWB = stW;
+		stW = stW + PW;
+		if(stW-UW>=0){
+			SW = UW;
+			stW = stW - UW;
+			if(UW>TW){
+				fine = UW - TW;
 			}
 			else{
-				SW = stW;
-				stW = 0;
-				if(SW>TW){
-					fine = SW - TW;
-				}
-				else{
-					fine = 0;
-				}
+				fine = 0;
 			}
-			add = SW * price - (fine/10000)*1000 - opC;
+		}
+		else{
+			SW = stW;
+			stW = 0;
+			if(SW>TW){
+				fine = SW - TW;
+			}
+			else{
+				fine = 0;
+			}
+		}
+		add = SW * price - (fine/10000)*1000 - opC;	
+		for(i=0;i<times;i++){
 			money = money + add;
 			hour = hour + 1;
 			if(hour>=24){
@@ -148,10 +148,10 @@ function chechSaveFile() {
 				day = day - 365;
 			}
 		}
+		refMoney(add);
 		gEBI("time").innerHTML = hour + ":00";
 		gEBI("NW").innerHTML = s(UW);
 		gEBI("stW").innerHTML = s(stW);
-		refMoney(add);
 		gEBI("trt").innerHTML = s(TW);
 		gEBI("prd").innerHTML = s(PW);
 		gEBI("curBalance").innerHTML = s(curBalance);
