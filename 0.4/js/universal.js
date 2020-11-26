@@ -178,6 +178,7 @@ function increasemaxloan(){
 		if(game.bank.money>=game.upgrades.increase.maxloan){
 			game.bank.money = game.bank.money - game.upgrades.increase.maxloan;
 			game.upgrades.increase.maxloan = game.upgrades.increase.maxloan * 3;
+			game.bank.maxloan = game.bank.maxloan * 2;
 			refreshupgrades();
 			refreshwater();
 			refreshbank();
