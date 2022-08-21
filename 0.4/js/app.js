@@ -738,7 +738,7 @@ function Bank(a, b, c){
 			}
 		}
 		else{
-			Error("No money shortage detected", "You don't need a lon. You have money in the bank. Use them first, before making it into bancruptcy.");
+			Error("No money shortage detected", "You don't need a loan. You have money in the bank. Use them first, before making it into bancruptcy.");
 		}
 	}
 	else if(a==1 && b==0){
