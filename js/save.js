@@ -149,7 +149,7 @@ function chechSaveFile() {
 			}
 		}
 		refMoney(add);
-		gEBI("time").innerHTML = hour + ":00";
+		updateTime(hour);
 		gEBI("NW").innerHTML = s(UW);
 		gEBI("stW").innerHTML = s(stW);
 		gEBI("trt").innerHTML = s(TW);
