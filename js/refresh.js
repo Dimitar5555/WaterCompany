@@ -1,5 +1,5 @@
 function updateTime(hour) {
-	document.querySelector('#time').innerText = hour.toString(2, '0').padStart()+':00';
+	document.querySelector('#time').innerText = hour.toString().padStart(2, '0')+':00';
 }
 function refPumps() {
 	gEBI("Spump").innerHTML = abbrNum(pumps[0],0);
