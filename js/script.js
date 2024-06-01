@@ -158,7 +158,6 @@ window.setInterval(function(){
 		stW = MSW;
 	}
 	hour++;
-	updateTime();
 	updateStatsUpper();
 	refFin();
 	if(hour>=24){
