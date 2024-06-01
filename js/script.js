@@ -157,8 +157,8 @@ window.setInterval(function(){
 	if(stW>MSW){
 		stW = MSW;
 	}
-	hour = hour + 1;
-	gEBI("time").innerHTML = hour + ":00";
+	hour++;
+	updateTime();
 	updateStatsUpper();
 	refFin();
 	if(hour>=24){
@@ -194,6 +194,7 @@ window.setInterval(function(){
 			Success(s(HPPP-HPPTemp) + " hot water pipes have been build");
 		}
 	}
+	updateTime(hour);
 	if(bankpercent>0){
 		if(bankpercentOn>0){
 			if(add>0){
