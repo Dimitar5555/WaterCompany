@@ -133,7 +133,7 @@
 						<td>
 							<button class="btn btn-success" onclick="swal({title: 'City name', text: 'How will be your city called?', type: 'input', showCancelButton: false, closeOnConfirm: false, confirmButtonText: 'Name city'},
 function(inputValue){if (inputValue === false) return false;if (inputValue === '') {swal.showInputError('You need to write something!');return false}
-swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputValue;localStorage.setItem('save', JSON.stringify(game));id2w('tab1city', inputValue);});">Rename city</button>
+swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputValue;localStorage.setItem('save', JSON.stringify(game));set_text('tab1city', inputValue);});">Rename city</button>
 						</td>
 					</tr>
 					<tr>
@@ -167,41 +167,31 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<td>Cold water price</td>
 						<td id="tab1coldwaterprice"></td>
 						<td>Cold water usage</td>
-						<td id="tab1coldwaterusage"></td>
+						<td><span id="tab1coldwaterusage"></span> m<sup>3</sup></td>
+
 					</tr>
 					<tr>
 						<td>Hot water price</td>
 						<td id="tab1hotwaterprice"></td>
 						<td>Hot water usage</td>
-						<td id="tab1hotwaterusage"></td>
+						<td><span id="tab1hotwaterusage"></span> m<sup>3</sup></td>
 					</tr>
 				</table>
 				<div class="spacer"></div>
 			</div>
 			<div id="tab2" class="tab-pane">
 				<ul class="nav nav-stacked " style="font-size: 17px; float: left;">
-					<li><a>Cold water</a>
-						<ul>
-							<li onclick="goTab(1);"><a>Pumps</a></li>
-							<li onclick="goTab(2);"><a>Treatment plants</a></li>
-							<li onclick="goTab(3);"><a>Water storage</a></li>
-							<li onclick="goTab(4);"><a>Pipes</a></li>
-						</ul>	
-						
-					</li>
-					<li><a>Hot water</a>
-						<ul>
-							<li onclick="goTab(5);"><a>Pumps</a></li>
-							<li onclick="goTab(6);"><a>Heating plants</a></li>
-							<li onclick="goTab(7);"><a>Heat pipes</a></li>
-						</ul>
-					</li>
-					<li onclick="goTab(8);"><a>Houses</a></li>
-					<li onclick="goTab(9);"><a>Bank</a></li>
+					<li onclick="goTab(1);"><a>Cold Water</a></li>
+					<li onclick="goTab(2);"><a>Hot Water</a></li>
+					<li onclick="goTab(3);"><a>Houses</a></li>
+					<li onclick="goTab(4);"><a>Bank</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="upgradestabs1" class="customtab">
 						<table class="table">
+							<tr>
+								<th colspan="4">Cold Water</th>
+							</tr>
 							<tr>
 								<td>
 									Increase production of cold water pumps by 10%<br />
@@ -224,18 +214,16 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="upgrade('coldwater', 'pumpcost', 0.9, 'coldwaterpumpcost', 1.25, 4)" class="btn btn-success">$<span id="coldwaterpumpcost"></span></button>
 								</td>
 							</tr>
-						</table>
-						<div class="clear"></div>
-					</div>
-					<div id="upgradestabs2" class="customtab hidden">
-						<table class="table">
+							<tr>
+								<th colspan="4">Treatment Plants</th>
+							</tr>
 							<tr>
 								<td>
 									Increase production of treatment plants by 10%<br />
 									Small treatment plant <span id="uptab2coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda0"></span> m<sup>3</sup><br />
-								    Medium treatment plant <span id="uptab2coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda1"></span> m<sup>3</sup><br />
-								    Big treatment plant <span id="uptab2coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda2"></span> m<sup>3</sup><br />
-								    Very big treatment plant <span id="uptab2coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda3"></span> m<sup>3</sup>
+									Medium treatment plant <span id="uptab2coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda1"></span> m<sup>3</sup><br />
+									Big treatment plant <span id="uptab2coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda2"></span> m<sup>3</sup><br />
+									Very big treatment plant <span id="uptab2coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('coldwater', 'treatmentplantprod', 1.1, 'coldwatertreatmentplantprod', 1.2, 4)" class="btn btn-success">$<span id="coldwatertreatmentplantprod"></span></button>								</td>
@@ -250,11 +238,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="upgrade('coldwater', 'treatmentplantcost', 0.9, 'coldwatertreatmentplantcost', 1.25, 4)" class="btn btn-success">$<span id="coldwatertreatmentplantcost"></span></button>
 								</td>
 							</tr>
-						</table>
-						<div class="clear"></div>
-					</div>
-					<div id="upgradestabs3" class="customtab hidden">
-						<table class="table">
+							<tr>
+								<th colspan="4">Water Storage</th>
+							</tr>
 							<tr>
 								<td>
 									Increase maximum storage of storage units by 10%<br />
@@ -277,11 +263,10 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="upgrade('coldwater', 'storagecost', 0.9, 'coldwaterstoragecost', 1.25, 4)" class="btn btn-success">$<span id="coldwaterstoragecost"></span></button>
 								</td>
 							</tr>
-						</table>
-						<div class="clear"></div>
-					</div>
-					<div id="upgradestabs4" class="customtab hidden">
-						<table class="table">
+							
+							<tr>
+								<th colspan="4">Pipes</th>
+							</tr>
 							<tr>
 								<td>
 									Decrease the price for buying pipes by 2.5%<br />
@@ -301,8 +286,11 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs5" class="customtab hidden">
+					<div id="upgradestabs2" class="customtab hidden">
 						<table class="table">
+							<tr>
+								<th colspan="4">Pumping Plants</th>
+							</tr>
 							<tr>
 								<td>
 									Increase production of hot water pumps by 10%<br />
@@ -325,17 +313,15 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="upgrade('hotwater', 'pumpcost', 0.9, 'hotwaterpumpcost', 1.25, 4)" class="btn btn-success">$<span id="hotwaterpumpcost"></span></button>
 								</td>
 							</tr>
-						</table>
-						<div class="clear"></div>
-					</div>
-					<div id="upgradestabs6" class="customtab hidden">
-						<table class="table">
+							<tr>
+								<th colspan="4">Heating Plants</th>
+							</tr>
 							<tr>
 								<td>
 									Increase production of water heating plants by 10%<br />
-                                    heating plant <span id="uptab6hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda0"></span> m<sup>3</sup><br />
-                                    heating plant <span id="uptab6hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda1"></span> m<sup>3</sup><br />
-                                    heating plant <span id="uptab6hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda2"></span> m<sup>3</sup><br />
+									heating plant <span id="uptab6hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda0"></span> m<sup>3</sup><br />
+									heating plant <span id="uptab6hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda1"></span> m<sup>3</sup><br />
+									heating plant <span id="uptab6hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda2"></span> m<sup>3</sup><br />
 									heating plant <span id="uptab6hotwaterprodb3"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
@@ -352,11 +338,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="upgrade('hotwater', 'heatingplantcost', 0.9, 'hotwaterheatingplantcost', 1.25, 4)" class="btn btn-success">$<span id="hotwaterheatingplantcost"></span></button>
 								</td>
 							</tr>
-						</table>
-						<div class="clear"></div>
-					</div>
-					<div id="upgradestabs7" class="customtab hidden">
-						<table class="table">
+							<tr>
+								<th colspan="4">Pipes</th>
+							</tr>
 							<tr>
 								<td>
 									Decrease price for buying hot water pipes by 5%<br />
@@ -376,7 +360,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs8" class="customtab hidden">
+					<div id="upgradestabs3" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<th colspan="2">Cold water</th>
@@ -426,7 +410,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						</table>
 						<div class="clear"></div>
 					</div>
-					<div id="upgradestabs9" class="customtab hidden">
+					<div id="upgradestabs4" class="customtab hidden">
 						<table class="table">
 							<tr>
 								<td>
@@ -504,8 +488,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 0)" class="btn btn-danger">Sell <span id="watertab1numbersell0"></span> - $<span id="watertab1totalsell0"></span></button>
 								</td>
 								<td id="tab3powned0"></td>
-								<td id="tab3pprodu0"></td>
-								<td id="tab3ptprod0"></td>
+								<td><span id="tab3pprodu0"></span> m<sup>3</sup></td>
+								<td><span id="tab3ptprod0"></span> m<sup>3</sup></td>
 								<td id="tab3popeco0"></td>
 								<td id="tab3ptopec0"></td>
 							</tr>
@@ -517,8 +501,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 1)" class="btn btn-danger">Sell <span id="watertab1numbersell1"></span> - $<span id="watertab1totalsell1"></span></button>
 								</td>
 								<td id="tab3powned1"></td>
-								<td id="tab3pprodu1"></td>
-								<td id="tab3ptprod1"></td>
+								<td><span id="tab3pprodu1"></span> m<sup>3</sup></td>
+								<td><span id="tab3ptprod1"></span> m<sup>3</sup></td>
 								<td id="tab3popeco1"></td>
 								<td id="tab3ptopec1"></td>
 							</tr>
@@ -530,8 +514,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 2)" class="btn btn-danger">Sell <span id="watertab1numbersell2"></span> - $<span id="watertab1totalsell2"></span></button>
 								</td>
 								<td id="tab3powned2"></td>
-								<td id="tab3pprodu2"></td>
-								<td id="tab3ptprod2"></td>
+								<td><span id="tab3pprodu2"></span> m<sup>3</sup></td>
+								<td><span id="tab3ptprod2"></span> m<sup>3</sup></td>
 								<td id="tab3popeco2"></td>
 								<td id="tab3ptopec2"></td>
 							</tr>
@@ -543,8 +527,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 3)" class="btn btn-danger">Sell <span id="watertab1numbersell3"></span> - $<span id="watertab1totalsell3"></span></button>
 								</td>
 								<td id="tab3powned3"></td>
-								<td id="tab3pprodu3"></td>
-								<td id="tab3ptprod3"></td>
+								<td><span id="tab3pprodu3"></span> m<sup>3</sup></td>
+								<td><span id="tab3ptprod3"></span> m<sup>3</sup></td>
 								<td id="tab3popeco3"></td>
 								<td id="tab3ptopec3"></td>
 							</tr>
@@ -597,8 +581,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 0)" class="btn btn-danger">Sell <span id="watertab2numbersell0"></span> - $<span id="watertab2totalsell0"></span></button>
 								</td>
 								<td id="tab3sowned0"></td>
-								<td id="tab3sprodu0"></td>
-								<td id="tab3stprod0"></td>
+								<td><span id="tab3sprodu0"></span> m<sup>3</sup></td>
+								<td><span id="tab3stprod0"></span> m<sup>3</sup></td>
 								<td id="tab3sopeco0"></td>
 								<td id="tab3stopec0"></td>
 							</tr>
@@ -610,8 +594,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 1)" class="btn btn-danger">Sell <span id="watertab2numbersell1"></span> - $<span id="watertab2totalsell1"></span></button>
 								</td>
 								<td id="tab3sowned1"></td>
-								<td id="tab3sprodu1"></td>
-								<td id="tab3stprod1"></td>
+								<td><span id="tab3sprodu1"></span> m<sup>3</sup></td>
+								<td><span id="tab3stprod1"></span> m<sup>3</sup></td>
 								<td id="tab3sopeco1"></td>
 								<td id="tab3stopec1"></td>
 							</tr>
@@ -623,8 +607,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 2)" class="btn btn-danger">Sell <span id="watertab2numbersell2"></span> - $<span id="watertab2totalsell2"></span></button>
 								</td>
 								<td id="tab3sowned2"></td>
-								<td id="tab3sprodu2"></td>
-								<td id="tab3stprod2"></td>
+								<td><span id="tab3sprodu2"></span> m<sup>3</sup></td>
+								<td><span id="tab3stprod2"></span> m<sup>3</sup></td>
 								<td id="tab3sopeco2"></td>
 								<td id="tab3stopec2"></td>
 							</tr>
@@ -636,8 +620,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 3)" class="btn btn-danger">Sell <span id="watertab2numbersell3"></span> - $<span id="watertab2totalsell3"></span></button>
 								</td>
 								<td id="tab3sowned3"></td>
-								<td id="tab3sprodu3"></td>
-								<td id="tab3stprod3"></td>
+								<td><span id="tab3sprodu3"></span> m<sup>3</sup></td>
+								<td><span id="tab3stprod3"></span> m<sup>3</sup></td>
 								<td id="tab3sopeco3"></td>
 								<td id="tab3stopec3"></td>
 							</tr>
@@ -645,7 +629,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 						<div class="clear"></div>
 					</div>
 					<div id="watertab3" class="tab-pane">
-						<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m3 you dispose in river you need to pay $100.</p>
+						<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m<sup>3</sup> you dispose in river you need to pay $100.</p>
 						<br />
 						<table>
 							<tr>
@@ -835,8 +819,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 0)" class="btn btn-danger">Sell <span id="watertab5numbersell0"></span> - $<span id="watertab5totalsell0"></span></button>
 								</td>
 								<td id="tab5hpowned0"></td>
-								<td id="tab5hpprodu0"></td>
-								<td id="tab5hptprod0"></td>
+								<td><span id="tab5hpprodu0"></span> m<sup>3</sup></td>
+								<td><span id="tab5hptprod0"></span> m<sup>3</sup></td>
 								<td id="tab5hpopeco0"></td>
 								<td id="tab5hptopec0"></td>
 							</tr>
@@ -848,8 +832,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 1)" class="btn btn-danger">Sell <span id="watertab5numbersell1"></span> - $<span id="watertab5totalsell1"></span></button>
 								</td>
 								<td id="tab5hpowned1"></td>
-								<td id="tab5hpprodu1"></td>
-								<td id="tab5hptprod1"></td>
+								<td><span id="tab5hpprodu1"></span> m<sup>3</sup></td>
+								<td><span id="tab5hptprod1"></span> m<sup>3</sup></td>
 								<td id="tab5hpopeco1"></td>
 								<td id="tab5hptopec1"></td>
 							</tr>
@@ -861,8 +845,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 2)" class="btn btn-danger">Sell <span id="watertab5numbersell2"></span> - $<span id="watertab5totalsell2"></span></button>
 								</td>
 								<td id="tab5hpowned2"></td>
-								<td id="tab5hpprodu2"></td>
-								<td id="tab5hptprod2"></td>
+								<td><span id="tab5hpprodu2"></span> m<sup>3</sup></td>
+								<td><span id="tab5hptprod2"></span> m<sup>3</sup></td>
 								<td id="tab5hpopeco2"></td>
 								<td id="tab5hptopec2"></td>
 							</tr>
@@ -874,8 +858,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 3)" class="btn btn-danger">Sell <span id="watertab5numbersell3"></span> - $<span id="watertab5totalsell3"></span></button>
 								</td>
 								<td id="tab5hpowned3"></td>
-								<td id="tab5hpprodu3"></td>
-								<td id="tab5hptprod3"></td>
+								<td><span id="tab5hpprodu3"></span> m<sup>3</sup></td>
+								<td><span id="tab5hptprod3"></span> m<sup>3</sup></td>
 								<td id="tab5hpopeco3"></td>
 								<td id="tab5hptopec3"></td>
 							</tr>
@@ -926,8 +910,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 0)" class="btn btn-danger">Sell <span id="watertab6numbersell0"></span> - $<span id="watertab6totalsell0"></span></button>
 								</td>
 								<td id="tab6hpowned0"></td>
-								<td id="tab6hpprodu0"></td>
-								<td id="tab6hptprod0"></td>
+								<td><span id="tab6hpprodu0"></span> m<sup>3</sup></td>
+								<td><span id="tab6hptprod0"></span> m<sup>3</sup></td>
 								<td id="tab6hpopeco0"></td>
 								<td id="tab6hptopec0"></td>
 							</tr>
@@ -939,8 +923,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 1)" class="btn btn-danger">Sell <span id="watertab6numbersell1"></span> - $<span id="watertab6totalsell1"></span></button>
 								</td>
 								<td id="tab6hpowned1"></td>
-								<td id="tab6hpprodu1"></td>
-								<td id="tab6hptprod1"></td>
+								<td><span id="tab6hpprodu1"></span> m<sup>3</sup></td>
+								<td><span id="tab6hptprod1"></span> m<sup>3</sup></td>
 								<td id="tab6hpopeco1"></td>
 								<td id="tab6hptopec1"></td>
 							</tr>
@@ -952,8 +936,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 2)" class="btn btn-danger">Sell <span id="watertab6numbersell2"></span> - $<span id="watertab6totalsell2"></span></button>
 								</td>
 								<td id="tab6hpowned2"></td>
-								<td id="tab6hpprodu2"></td>
-								<td id="tab6hptprod2"></td>
+								<td><span id="tab6hpprodu2"></span> m<sup>3</sup></td>
+								<td><span id="tab6hptprod2"></span> m<sup>3</sup></td>
 								<td id="tab6hpopeco2"></td>
 								<td id="tab6hptopec2"></td>
 							</tr>
@@ -965,8 +949,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 3)" class="btn btn-danger">Sell <span id="watertab6numbersell3"></span> - $<span id="watertab6totalsell3"></span></button>
 								</td>
 								<td id="tab6hpowned3"></td>
-								<td id="tab6hpprodu3"></td>
-								<td id="tab6hptprod3"></td>
+								<td><span id="tab6hpprodu3"></span> m<sup>3</sup></td>
+								<td><span id="tab6hptprod3"></span> m<sup>3</sup></td>
 								<td id="tab6hpopeco3"></td>
 								<td id="tab6hptopec3"></td>
 							</tr>
@@ -1040,24 +1024,24 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				</table>
 				<table class="table table-bordered">
 					<tr>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalanceout').value; if(Number(a)>0){id2w('tab5bankbalanceoutnumber', sn2(a)); window['tab5bankbalanceoutnumber'] = a;}" id="tab5bankbalanceout"/></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalanceout').value; if(Number(a)>0){set_text('tab5bankbalanceoutnumber', sn2(a)); window['tab5bankbalanceoutnumber'] = a;}" id="tab5bankbalanceout"/></td>
 						<td class="btn-group">
 							<button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button>
 							<button onclick="Bank(1, 1, game.bank.balance)" class="btn btn-info">Withdraw max</button>
 						</td>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalancein').value; if(Number(a)>0){id2w('tab5bankbalanceinnumber', sn2(a)); window['tab5bankbalanceinnumber'] = a;}" id="tab5bankbalancein"/></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalancein').value; if(Number(a)>0){set_text('tab5bankbalanceinnumber', sn2(a)); window['tab5bankbalanceinnumber'] = a;}" id="tab5bankbalancein"/></td>
 						<td class="btn-group">
 							<button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button>
 							<button onclick="Bank(1, 0, game.bank.money)" class="btn btn-info">Invest max</button>
 						</td>
 					</tr>
 					<tr>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanout').value; if(Number(a)>0){id2w('tab5loanoutnumber', sn2(a)); window['tab5loanoutnumber'] = a;}" id="tab5loanout"/></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanout').value; if(Number(a)>0){set_text('tab5loanoutnumber', sn2(a)); window['tab5loanoutnumber'] = a;}" id="tab5loanout"/></td>
 						<td class="btn-group">
 							<button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button>
 							<button onclick="Bank(0, 1, game.bank.maxloan-game.bank.loan)" class="btn btn-info">Get max</button>
 						</td>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanin').value; if(Number(a)>0){id2w('tab5loaninnumber', sn2(a)); window['tab5loaninnumber'] = a;}" id="tab5loanin"/></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanin').value; if(Number(a)>0){set_text('tab5loaninnumber', sn2(a)); window['tab5loaninnumber'] = a;}" id="tab5loanin"/></td>
 						<td class="btn-group">
 							<button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button>
 							<button onclick="if(game.bank.loan>game.bank.money){Bank(0, 0, game.bank.money)}else{Bank(0, 0, game.bank.loan)}" class="btn btn-info">Return max</button>
