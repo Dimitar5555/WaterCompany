@@ -1,6 +1,11 @@
 # WaterCompany
 ## Change log
 
+### Version 0.4.1
+
+* Improved code for readabilty
+* 
+
 #### [Version 0.4](https://dimitar5555.github.io/WaterCompany/0.4)
 
 * Changed background to gradient

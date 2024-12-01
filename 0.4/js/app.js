@@ -300,148 +300,148 @@ function refreshupgrades(){
 	var hd = game.hotwater;
 	var up = game.upgrades;
 	//cold water pumps, storage and water treatment plants operating costs and production display
-	set_text("uptab1coldwaterprodb0", sn2(cd.pumpprod[0]));
-	set_text("uptab1coldwaterprodb1", sn2(cd.pumpprod[1]));
-	set_text("uptab1coldwaterprodb2", sn2(cd.pumpprod[2]));
-	set_text("uptab1coldwaterprodb3", sn2(cd.pumpprod[3]));
+	set_text("uptab1coldwaterprodb0", round_to_2_decimals(cd.pumpprod[0]));
+	set_text("uptab1coldwaterprodb1", round_to_2_decimals(cd.pumpprod[1]));
+	set_text("uptab1coldwaterprodb2", round_to_2_decimals(cd.pumpprod[2]));
+	set_text("uptab1coldwaterprodb3", round_to_2_decimals(cd.pumpprod[3]));
 	
-	set_text("uptab1coldwaterproda0", sn2(cd.pumpprod[0]*1.1));
-	set_text("uptab1coldwaterproda1", sn2(cd.pumpprod[1]*1.1));
-	set_text("uptab1coldwaterproda2", sn2(cd.pumpprod[2]*1.1));
-	set_text("uptab1coldwaterproda3", sn2(cd.pumpprod[3]*1.1));
+	set_text("uptab1coldwaterproda0", round_to_2_decimals(cd.pumpprod[0]*1.1));
+	set_text("uptab1coldwaterproda1", round_to_2_decimals(cd.pumpprod[1]*1.1));
+	set_text("uptab1coldwaterproda2", round_to_2_decimals(cd.pumpprod[2]*1.1));
+	set_text("uptab1coldwaterproda3", round_to_2_decimals(cd.pumpprod[3]*1.1));
 	
-	set_text("uptab1coldwatercostb0", sn2(cd.pumpcost[0]));
-	set_text("uptab1coldwatercostb1", sn2(cd.pumpcost[1]));
-	set_text("uptab1coldwatercostb2", sn2(cd.pumpcost[2]));
-	set_text("uptab1coldwatercostb3", sn2(cd.pumpcost[3]));
+	set_text("uptab1coldwatercostb0", round_to_2_decimals(cd.pumpcost[0]));
+	set_text("uptab1coldwatercostb1", round_to_2_decimals(cd.pumpcost[1]));
+	set_text("uptab1coldwatercostb2", round_to_2_decimals(cd.pumpcost[2]));
+	set_text("uptab1coldwatercostb3", round_to_2_decimals(cd.pumpcost[3]));
 	
-	set_text("uptab1coldwatercosta0", sn2(cd.pumpcost[0]*0.9));
-	set_text("uptab1coldwatercosta1", sn2(cd.pumpcost[1]*0.9));
-	set_text("uptab1coldwatercosta2", sn2(cd.pumpcost[2]*0.9));
-	set_text("uptab1coldwatercosta3", sn2(cd.pumpcost[3]*0.9));
+	set_text("uptab1coldwatercosta0", round_to_2_decimals(cd.pumpcost[0]*0.9));
+	set_text("uptab1coldwatercosta1", round_to_2_decimals(cd.pumpcost[1]*0.9));
+	set_text("uptab1coldwatercosta2", round_to_2_decimals(cd.pumpcost[2]*0.9));
+	set_text("uptab1coldwatercosta3", round_to_2_decimals(cd.pumpcost[3]*0.9));
 	
-	set_text("uptab2coldwaterprodb0", sn2(cd.treatmentplantprod[0]));
-	set_text("uptab2coldwaterprodb1", sn2(cd.treatmentplantprod[1]));
-	set_text("uptab2coldwaterprodb2", sn2(cd.treatmentplantprod[2]));
-	set_text("uptab2coldwaterprodb3", sn2(cd.treatmentplantprod[3]));
+	set_text("uptab2coldwaterprodb0", round_to_2_decimals(cd.treatmentplantprod[0]));
+	set_text("uptab2coldwaterprodb1", round_to_2_decimals(cd.treatmentplantprod[1]));
+	set_text("uptab2coldwaterprodb2", round_to_2_decimals(cd.treatmentplantprod[2]));
+	set_text("uptab2coldwaterprodb3", round_to_2_decimals(cd.treatmentplantprod[3]));
 	
-	set_text("uptab2coldwaterproda0", sn2(cd.treatmentplantprod[0]*1.1));
-	set_text("uptab2coldwaterproda1", sn2(cd.treatmentplantprod[1]*1.1));
-	set_text("uptab2coldwaterproda2", sn2(cd.treatmentplantprod[2]*1.1));
-	set_text("uptab2coldwaterproda3", sn2(cd.treatmentplantprod[3]*1.1));
+	set_text("uptab2coldwaterproda0", round_to_2_decimals(cd.treatmentplantprod[0]*1.1));
+	set_text("uptab2coldwaterproda1", round_to_2_decimals(cd.treatmentplantprod[1]*1.1));
+	set_text("uptab2coldwaterproda2", round_to_2_decimals(cd.treatmentplantprod[2]*1.1));
+	set_text("uptab2coldwaterproda3", round_to_2_decimals(cd.treatmentplantprod[3]*1.1));
 	
-	set_text("uptab2coldwatercostb0", sn2(cd.treatmentplantcost[0]));
-	set_text("uptab2coldwatercostb1", sn2(cd.treatmentplantcost[1]));
-	set_text("uptab2coldwatercostb2", sn2(cd.treatmentplantcost[2]));
-	set_text("uptab2coldwatercostb3", sn2(cd.treatmentplantcost[3]));
+	set_text("uptab2coldwatercostb0", round_to_2_decimals(cd.treatmentplantcost[0]));
+	set_text("uptab2coldwatercostb1", round_to_2_decimals(cd.treatmentplantcost[1]));
+	set_text("uptab2coldwatercostb2", round_to_2_decimals(cd.treatmentplantcost[2]));
+	set_text("uptab2coldwatercostb3", round_to_2_decimals(cd.treatmentplantcost[3]));
 	
-	set_text("uptab2coldwatercosta0", sn2(cd.treatmentplantcost[0]*0.9));
-	set_text("uptab2coldwatercosta1", sn2(cd.treatmentplantcost[1]*0.9));
-	set_text("uptab2coldwatercosta2", sn2(cd.treatmentplantcost[2]*0.9));
-	set_text("uptab2coldwatercosta3", sn2(cd.treatmentplantcost[3]*0.9));
+	set_text("uptab2coldwatercosta0", round_to_2_decimals(cd.treatmentplantcost[0]*0.9));
+	set_text("uptab2coldwatercosta1", round_to_2_decimals(cd.treatmentplantcost[1]*0.9));
+	set_text("uptab2coldwatercosta2", round_to_2_decimals(cd.treatmentplantcost[2]*0.9));
+	set_text("uptab2coldwatercosta3", round_to_2_decimals(cd.treatmentplantcost[3]*0.9));
 	
-	set_text("uptab3coldwaterprodb0", sn2(cd.storageprod[0]));
-	set_text("uptab3coldwaterprodb1", sn2(cd.storageprod[1]));
-	set_text("uptab3coldwaterprodb2", sn2(cd.storageprod[2]));
-	set_text("uptab3coldwaterprodb3", sn2(cd.storageprod[3]));
+	set_text("uptab3coldwaterprodb0", round_to_2_decimals(cd.storageprod[0]));
+	set_text("uptab3coldwaterprodb1", round_to_2_decimals(cd.storageprod[1]));
+	set_text("uptab3coldwaterprodb2", round_to_2_decimals(cd.storageprod[2]));
+	set_text("uptab3coldwaterprodb3", round_to_2_decimals(cd.storageprod[3]));
 	
-	set_text("uptab3coldwaterproda0", sn2(cd.storageprod[0]*1.1));
-	set_text("uptab3coldwaterproda1", sn2(cd.storageprod[1]*1.1));
-	set_text("uptab3coldwaterproda2", sn2(cd.storageprod[2]*1.1));
-	set_text("uptab3coldwaterproda3", sn2(cd.storageprod[3]*1.1));
+	set_text("uptab3coldwaterproda0", round_to_2_decimals(cd.storageprod[0]*1.1));
+	set_text("uptab3coldwaterproda1", round_to_2_decimals(cd.storageprod[1]*1.1));
+	set_text("uptab3coldwaterproda2", round_to_2_decimals(cd.storageprod[2]*1.1));
+	set_text("uptab3coldwaterproda3", round_to_2_decimals(cd.storageprod[3]*1.1));
 	
-	set_text("uptab3coldwatercostb0", sn2(cd.storagecost[0]));
-	set_text("uptab3coldwatercostb1", sn2(cd.storagecost[1]));
-	set_text("uptab3coldwatercostb2", sn2(cd.storagecost[2]));
-	set_text("uptab3coldwatercostb3", sn2(cd.storagecost[3]));
+	set_text("uptab3coldwatercostb0", round_to_2_decimals(cd.storagecost[0]));
+	set_text("uptab3coldwatercostb1", round_to_2_decimals(cd.storagecost[1]));
+	set_text("uptab3coldwatercostb2", round_to_2_decimals(cd.storagecost[2]));
+	set_text("uptab3coldwatercostb3", round_to_2_decimals(cd.storagecost[3]));
 	
-	set_text("uptab3coldwatercosta0", sn2(cd.storagecost[0]*0.9));
-	set_text("uptab3coldwatercosta1", sn2(cd.storagecost[1]*0.9));
-	set_text("uptab3coldwatercosta2", sn2(cd.storagecost[2]*0.9));
-	set_text("uptab3coldwatercosta3", sn2(cd.storagecost[3]*0.9));
+	set_text("uptab3coldwatercosta0", round_to_2_decimals(cd.storagecost[0]*0.9));
+	set_text("uptab3coldwatercosta1", round_to_2_decimals(cd.storagecost[1]*0.9));
+	set_text("uptab3coldwatercosta2", round_to_2_decimals(cd.storagecost[2]*0.9));
+	set_text("uptab3coldwatercosta3", round_to_2_decimals(cd.storagecost[3]*0.9));
 	
-	set_text("uptab4coldwaterpipesbuyb", sn2(cd.pipeprice[0]));
-	set_text("uptab4coldwaterpipesbuya", sn2(cd.pipeprice[0]*0.975));
-	set_text("uptab4coldwaterpipesplaceb", sn2(cd.pipeprice[1]));
-	set_text("uptab4coldwaterpipesplacea", sn2(cd.pipeprice[1]*0.975));
+	set_text("uptab4coldwaterpipesbuyb", round_to_2_decimals(cd.pipeprice[0]));
+	set_text("uptab4coldwaterpipesbuya", round_to_2_decimals(cd.pipeprice[0]*0.975));
+	set_text("uptab4coldwaterpipesplaceb", round_to_2_decimals(cd.pipeprice[1]));
+	set_text("uptab4coldwaterpipesplacea", round_to_2_decimals(cd.pipeprice[1]*0.975));
 	//prices display
-	set_text("coldwaterpumpprod", sn2(up.increase.coldwaterpumpprod));
-	set_text("coldwaterpumpcost", sn2(up.decrease.coldwaterpumpcost));
-	set_text("coldwatertreatmentplantprod", sn2(up.increase.coldwatertreatmentplantprod));
-	set_text("coldwatertreatmentplantcost", sn2(up.decrease.coldwatertreatmentplantcost));
-	set_text("coldwaterstoragemax", sn2(up.increase.coldwaterstoragemax));
-	set_text("coldwaterstoragecost", sn2(up.decrease.coldwaterstoragecost));
-	set_text("coldwaterpipebuy", sn2(up.decrease.coldwaterpipebuy));
-	set_text("coldwaterpipeplace", sn2(up.decrease.coldwaterpipeplace));
+	set_text("coldwaterpumpprod", round_to_2_decimals(up.increase.coldwaterpumpprod));
+	set_text("coldwaterpumpcost", round_to_2_decimals(up.decrease.coldwaterpumpcost));
+	set_text("coldwatertreatmentplantprod", round_to_2_decimals(up.increase.coldwatertreatmentplantprod));
+	set_text("coldwatertreatmentplantcost", round_to_2_decimals(up.decrease.coldwatertreatmentplantcost));
+	set_text("coldwaterstoragemax", round_to_2_decimals(up.increase.coldwaterstoragemax));
+	set_text("coldwaterstoragecost", round_to_2_decimals(up.decrease.coldwaterstoragecost));
+	set_text("coldwaterpipebuy", round_to_2_decimals(up.decrease.coldwaterpipebuy));
+	set_text("coldwaterpipeplace", round_to_2_decimals(up.decrease.coldwaterpipeplace));
 	
 	//hot water pumps, heating plants operating costs and production display
-	set_text("uptab5hotwaterprodb0", sn2(hd.pumpprod[0]));
-	set_text("uptab5hotwaterprodb1", sn2(hd.pumpprod[1]));
-	set_text("uptab5hotwaterprodb2", sn2(hd.pumpprod[2]));
-	set_text("uptab5hotwaterprodb3", sn2(hd.pumpprod[3]));
-	set_text("uptab5hotwaterproda0", sn2(hd.pumpprod[0]*1.1));
-	set_text("uptab5hotwaterproda1", sn2(hd.pumpprod[1]*1.1));
-	set_text("uptab5hotwaterproda2", sn2(hd.pumpprod[2]*1.1));
-	set_text("uptab5hotwaterproda3", sn2(hd.pumpprod[3]*1.1));
-	set_text("uptab5hotwatercostb0", sn2(hd.pumpcost[0]));
-	set_text("uptab5hotwatercostb1", sn2(hd.pumpcost[1]));
-	set_text("uptab5hotwatercostb2", sn2(hd.pumpcost[2]));
-	set_text("uptab5hotwatercostb3", sn2(hd.pumpcost[3]));
-	set_text("uptab5hotwatercosta0", sn2(hd.pumpcost[0]*0.9));
-	set_text("uptab5hotwatercosta1", sn2(hd.pumpcost[1]*0.9));
-	set_text("uptab5hotwatercosta2", sn2(hd.pumpcost[2]*0.9));
-	set_text("uptab5hotwatercosta3", sn2(hd.pumpcost[3]*0.9));
-	set_text("uptab6hotwaterprodb0", sn2(hd.heatingplantprod[0]));
-	set_text("uptab6hotwaterprodb1", sn2(hd.heatingplantprod[1]));
-	set_text("uptab6hotwaterprodb2", sn2(hd.heatingplantprod[2]));
-	set_text("uptab6hotwaterprodb3", sn2(hd.heatingplantprod[3]));
-	set_text("uptab6hotwaterproda0", sn2(hd.heatingplantprod[0]*1.1));
-	set_text("uptab6hotwaterproda1", sn2(hd.heatingplantprod[1]*1.1));
-	set_text("uptab6hotwaterproda2", sn2(hd.heatingplantprod[2]*1.1));
-	set_text("uptab6hotwaterproda3", sn2(hd.heatingplantprod[3]*1.1));
-	set_text("uptab6hotwatercostb0", sn2(hd.heatingplantcost[0]));
-	set_text("uptab6hotwatercostb1", sn2(hd.heatingplantcost[1]));
-	set_text("uptab6hotwatercostb2", sn2(hd.heatingplantcost[2]));
-	set_text("uptab6hotwatercostb3", sn2(hd.heatingplantcost[3]));
-	set_text("uptab6hotwatercosta0", sn2(hd.heatingplantcost[0]*0.9));
-	set_text("uptab6hotwatercosta1", sn2(hd.heatingplantcost[1]*0.9));
-	set_text("uptab6hotwatercosta2", sn2(hd.heatingplantcost[2]*0.9));
-	set_text("uptab6hotwatercosta3", sn2(hd.heatingplantcost[3]*0.9));
-	set_text("uptab7hotwaterpricebuyb", sn2(hd.pipeprice[0]));
-	set_text("uptab7hotwaterpricebuya", sn2(hd.pipeprice[0]*0.95));
-	set_text("uptab7hotwaterpriceplaceb", sn2(hd.pipeprice[1]));
-	set_text("uptab7hotwaterpriceplacea", sn2(hd.pipeprice[1]*0.95));
+	set_text("uptab5hotwaterprodb0", round_to_2_decimals(hd.pumpprod[0]));
+	set_text("uptab5hotwaterprodb1", round_to_2_decimals(hd.pumpprod[1]));
+	set_text("uptab5hotwaterprodb2", round_to_2_decimals(hd.pumpprod[2]));
+	set_text("uptab5hotwaterprodb3", round_to_2_decimals(hd.pumpprod[3]));
+	set_text("uptab5hotwaterproda0", round_to_2_decimals(hd.pumpprod[0]*1.1));
+	set_text("uptab5hotwaterproda1", round_to_2_decimals(hd.pumpprod[1]*1.1));
+	set_text("uptab5hotwaterproda2", round_to_2_decimals(hd.pumpprod[2]*1.1));
+	set_text("uptab5hotwaterproda3", round_to_2_decimals(hd.pumpprod[3]*1.1));
+	set_text("uptab5hotwatercostb0", round_to_2_decimals(hd.pumpcost[0]));
+	set_text("uptab5hotwatercostb1", round_to_2_decimals(hd.pumpcost[1]));
+	set_text("uptab5hotwatercostb2", round_to_2_decimals(hd.pumpcost[2]));
+	set_text("uptab5hotwatercostb3", round_to_2_decimals(hd.pumpcost[3]));
+	set_text("uptab5hotwatercosta0", round_to_2_decimals(hd.pumpcost[0]*0.9));
+	set_text("uptab5hotwatercosta1", round_to_2_decimals(hd.pumpcost[1]*0.9));
+	set_text("uptab5hotwatercosta2", round_to_2_decimals(hd.pumpcost[2]*0.9));
+	set_text("uptab5hotwatercosta3", round_to_2_decimals(hd.pumpcost[3]*0.9));
+	set_text("uptab6hotwaterprodb0", round_to_2_decimals(hd.heatingplantprod[0]));
+	set_text("uptab6hotwaterprodb1", round_to_2_decimals(hd.heatingplantprod[1]));
+	set_text("uptab6hotwaterprodb2", round_to_2_decimals(hd.heatingplantprod[2]));
+	set_text("uptab6hotwaterprodb3", round_to_2_decimals(hd.heatingplantprod[3]));
+	set_text("uptab6hotwaterproda0", round_to_2_decimals(hd.heatingplantprod[0]*1.1));
+	set_text("uptab6hotwaterproda1", round_to_2_decimals(hd.heatingplantprod[1]*1.1));
+	set_text("uptab6hotwaterproda2", round_to_2_decimals(hd.heatingplantprod[2]*1.1));
+	set_text("uptab6hotwaterproda3", round_to_2_decimals(hd.heatingplantprod[3]*1.1));
+	set_text("uptab6hotwatercostb0", round_to_2_decimals(hd.heatingplantcost[0]));
+	set_text("uptab6hotwatercostb1", round_to_2_decimals(hd.heatingplantcost[1]));
+	set_text("uptab6hotwatercostb2", round_to_2_decimals(hd.heatingplantcost[2]));
+	set_text("uptab6hotwatercostb3", round_to_2_decimals(hd.heatingplantcost[3]));
+	set_text("uptab6hotwatercosta0", round_to_2_decimals(hd.heatingplantcost[0]*0.9));
+	set_text("uptab6hotwatercosta1", round_to_2_decimals(hd.heatingplantcost[1]*0.9));
+	set_text("uptab6hotwatercosta2", round_to_2_decimals(hd.heatingplantcost[2]*0.9));
+	set_text("uptab6hotwatercosta3", round_to_2_decimals(hd.heatingplantcost[3]*0.9));
+	set_text("uptab7hotwaterpricebuyb", round_to_2_decimals(hd.pipeprice[0]));
+	set_text("uptab7hotwaterpricebuya", round_to_2_decimals(hd.pipeprice[0]*0.95));
+	set_text("uptab7hotwaterpriceplaceb", round_to_2_decimals(hd.pipeprice[1]));
+	set_text("uptab7hotwaterpriceplacea", round_to_2_decimals(hd.pipeprice[1]*0.95));
 	
 	//houses
-	set_text("uptab8coldwaterpriceb", sn2(cd.waterprice));
-	set_text("uptab8coldwaterpricea", sn2(cd.waterprice*1.05));
-	set_text("uptab8hotwaterpriceb", sn2(hd.waterprice));
-	set_text("uptab8hotwaterpricea", sn2(hd.waterprice*1.05));
-	set_text("uptab8coldwaterusedb", sn2(cd.waterperhouse));
-	set_text("uptab8coldwateruseda", sn2(cd.waterperhouse*1.05));
-	set_text("uptab8hotwaterusedb", sn2(hd.waterperhouse));
-	set_text("uptab8hotwateruseda", sn2(hd.waterperhouse*1.05));
-	set_text("uptab8houserateb", sn2(game.city.rate));
-	set_text("uptab8houseratea", sn2(game.city.rate+0.1));
-	set_text("uptab9intb", sn2(game.bank.interest));
-	set_text("uptab9inta", sn2(game.bank.interest+0.5));
-	set_text("uptab9maxloanb", sn2(game.bank.maxloan));
-	set_text("uptab9maxloana", sn2(game.bank.maxloan*2));
+	set_text("uptab8coldwaterpriceb", round_to_2_decimals(cd.waterprice));
+	set_text("uptab8coldwaterpricea", round_to_2_decimals(cd.waterprice*1.05));
+	set_text("uptab8hotwaterpriceb", round_to_2_decimals(hd.waterprice));
+	set_text("uptab8hotwaterpricea", round_to_2_decimals(hd.waterprice*1.05));
+	set_text("uptab8coldwaterusedb", round_to_2_decimals(cd.waterperhouse));
+	set_text("uptab8coldwateruseda", round_to_2_decimals(cd.waterperhouse*1.05));
+	set_text("uptab8hotwaterusedb", round_to_2_decimals(hd.waterperhouse));
+	set_text("uptab8hotwateruseda", round_to_2_decimals(hd.waterperhouse*1.05));
+	set_text("uptab8houserateb", round_to_2_decimals(game.city.rate));
+	set_text("uptab8houseratea", round_to_2_decimals(game.city.rate+0.1));
+	set_text("uptab9intb", round_to_2_decimals(game.bank.interest));
+	set_text("uptab9inta", round_to_2_decimals(game.bank.interest+0.5));
+	set_text("uptab9maxloanb", round_to_2_decimals(game.bank.maxloan));
+	set_text("uptab9maxloana", round_to_2_decimals(game.bank.maxloan*2));
 	
-	set_text("hotwaterpumpprod", sn2(up.increase.hotwaterpumpprod));
-	set_text("hotwaterpumpcost", sn2(up.decrease.hotwaterpumpcost));
-	set_text("hotwaterheatingplantprod", sn2(up.increase.hotwaterheatingplantprod));
-	set_text("hotwaterheatingplantcost", sn2(up.decrease.hotwaterheatingplantcost));
-	set_text("hotwaterpipebuy", sn2(up.decrease.hotwaterpipebuy));
-	set_text("hotwaterpipeplace", sn2(up.decrease.hotwaterpipeplace));
+	set_text("hotwaterpumpprod", round_to_2_decimals(up.increase.hotwaterpumpprod));
+	set_text("hotwaterpumpcost", round_to_2_decimals(up.decrease.hotwaterpumpcost));
+	set_text("hotwaterheatingplantprod", round_to_2_decimals(up.increase.hotwaterheatingplantprod));
+	set_text("hotwaterheatingplantcost", round_to_2_decimals(up.decrease.hotwaterheatingplantcost));
+	set_text("hotwaterpipebuy", round_to_2_decimals(up.decrease.hotwaterpipebuy));
+	set_text("hotwaterpipeplace", round_to_2_decimals(up.decrease.hotwaterpipeplace));
 	
-	set_text("coldwaterprice", sn2(up.increase.coldwaterprice));
-	set_text("hotwaterprice", sn2(up.increase.hotwaterprice));
-	set_text("coldwaterperhouse", sn2(up.increase.coldwaterperhouse));
-	set_text("hotwaterperhouse", sn2(up.increase.hotwaterperhouse));
-	set_text("houserate", sn2(up.increase.houserate));
-	set_text("balanceinterestrate", sn2(up.increase.balanceinterestrate));
-	set_text("maxloan", sn2(up.increase.maxloan));
+	set_text("coldwaterprice", round_to_2_decimals(up.increase.coldwaterprice));
+	set_text("hotwaterprice", round_to_2_decimals(up.increase.hotwaterprice));
+	set_text("coldwaterperhouse", round_to_2_decimals(up.increase.coldwaterperhouse));
+	set_text("hotwaterperhouse", round_to_2_decimals(up.increase.hotwaterperhouse));
+	set_text("houserate", round_to_2_decimals(up.increase.houserate));
+	set_text("balanceinterestrate", round_to_2_decimals(up.increase.balanceinterestrate));
+	set_text("maxloan", round_to_2_decimals(up.increase.maxloan));
 }
 function refreshwater() {
 	var cd = game.coldwater;
@@ -552,15 +552,15 @@ function refreshwater() {
 	set_text("tab5hpowned2", round_count(hd.pump[2]));
 	set_text("tab5hpowned3", round_count(hd.pump[3]));
 	
-	set_text("tab5hpprodu0", sn2(hd.pumpprod[0]));
-	set_text("tab5hpprodu1", sn2(hd.pumpprod[1]));
-	set_text("tab5hpprodu2", sn2(hd.pumpprod[2]));
-	set_text("tab5hpprodu3", sn2(hd.pumpprod[3]));
+	set_text("tab5hpprodu0", round_to_2_decimals(hd.pumpprod[0]));
+	set_text("tab5hpprodu1", round_to_2_decimals(hd.pumpprod[1]));
+	set_text("tab5hpprodu2", round_to_2_decimals(hd.pumpprod[2]));
+	set_text("tab5hpprodu3", round_to_2_decimals(hd.pumpprod[3]));
 	
-	set_text("tab5hptprod0", sn2(hd.pumpprod[0]*hd.pump[0]));
-	set_text("tab5hptprod1", sn2(hd.pumpprod[1]*hd.pump[1]));
-	set_text("tab5hptprod2", sn2(hd.pumpprod[2]*hd.pump[2]));
-	set_text("tab5hptprod3", sn2(hd.pumpprod[3]*hd.pump[3]));
+	set_text("tab5hptprod0", round_to_2_decimals(hd.pumpprod[0]*hd.pump[0]));
+	set_text("tab5hptprod1", round_to_2_decimals(hd.pumpprod[1]*hd.pump[1]));
+	set_text("tab5hptprod2", round_to_2_decimals(hd.pumpprod[2]*hd.pump[2]));
+	set_text("tab5hptprod3", round_to_2_decimals(hd.pumpprod[3]*hd.pump[3]));
 	
 	set_text("tab5hpopeco0", format_money(hd.pumpcost[0]));
 	set_text("tab5hpopeco1", format_money(hd.pumpcost[1]));
@@ -612,17 +612,17 @@ function refreshbank() {
 }
 function refreshcity(){
 	set_text('tab1city', game.city.name);
-	set_text('tab1population', sn2(game.city.house));
-	set_text('tab1populationgrowth', sn2(game.city.rate) + "%");
-	set_text('tab1coldpipecoverage', sn2(((game['coldwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
-	set_text('tab1hotpipecoverage', sn2(((game['hotwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
+	set_text('tab1population', round_to_2_decimals(game.city.house));
+	set_text('tab1populationgrowth', round_to_2_decimals(game.city.rate) + "%");
+	set_text('tab1coldpipecoverage', round_to_2_decimals(((game['coldwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
+	set_text('tab1hotpipecoverage', round_to_2_decimals(((game['hotwater']['pipe'][1]*2)/(game.city.house))*100) + "%");
 	var cd = game['coldwater'];
 	var prodcoldwater = cd.pumpprod[0] * cd.pump[0] + cd.pumpprod[1] * cd.pump[1] + cd.pumpprod[2] * cd.pump[2] + cd.pumpprod[3] * cd.pump[3];
 	if((prodcoldwater/game.coldwater.pipe[1]*game.coldwater.waterperhouse)*100>100){
 		set_text('tab1coldwatercoverage', "100%");
 	}
 	else{
-		set_text('tab1coldwatercoverage', sn2((prodcoldwater/game.coldwater.pipe[1]*game.coldwater.waterperhouse)*100) + "%");
+		set_text('tab1coldwatercoverage', round_to_2_decimals((prodcoldwater/game.coldwater.pipe[1]*game.coldwater.waterperhouse)*100) + "%");
 	}
 	var hd = game['hotwater'];
 	var prodhotwater = hd.pumpprod[0] * hd.pump[0] + hd.pumpprod[1] * hd.pump[1] + hd.pumpprod[2] * hd.pump[2] + hd.pumpprod[3] * hd.pump[3];
@@ -630,12 +630,12 @@ function refreshcity(){
 		set_text('tab1hotwatercoverage', "100%");
 	}
 	else{
-		set_text('tab1hotwatercoverage', sn2((prodhotwater/game.hotwater.pipe[1]*game.hotwater.waterperhouse)*100) + "%");
+		set_text('tab1hotwatercoverage', round_to_2_decimals((prodhotwater/game.hotwater.pipe[1]*game.hotwater.waterperhouse)*100) + "%");
 	}
 	set_text('tab1coldwaterprice', format_money(game.coldwater.waterprice));
-	set_text('tab1coldwaterusage', sn2(game.coldwater.waterperhouse));
+	set_text('tab1coldwaterusage', round_to_2_decimals(game.coldwater.waterperhouse));
 	set_text('tab1hotwaterprice', format_money(game.hotwater.waterprice));
-	set_text('tab1hotwaterusage', sn2(game.hotwater.waterperhouse));
+	set_text('tab1hotwaterusage', round_to_2_decimals(game.hotwater.waterperhouse));
 }
 refreshupgrades();
 refreshwater();
@@ -644,22 +644,22 @@ refreshcity();
 
 function refnumber(id, number, name, total, where, price){
 	if(number>999){
-		set_text(id + "0", sn2(number));
-		set_text(id + "1", sn2(number));
-		set_text(id + "2", sn2(number));
-		set_text(id + "3", sn2(number));
+		set_text(id + "0", round_to_2_decimals(number));
+		set_text(id + "1", round_to_2_decimals(number));
+		set_text(id + "2", round_to_2_decimals(number));
+		set_text(id + "3", round_to_2_decimals(number));
 	}
 	else{
-		set_text(id + "0", sn(number, 0));
-		set_text(id + "1", sn(number, 0));
-		set_text(id + "2", sn(number, 0));
-		set_text(id + "3", sn(number, 0));
+		set_text(id + "0", round_number(number, 0));
+		set_text(id + "1", round_number(number, 0));
+		set_text(id + "2", round_number(number, 0));
+		set_text(id + "3", round_number(number, 0));
 	}
 	window[name] = number;
-	set_text(total + "0", sn2(window['game'][where][price][0]*number));
-	set_text(total + "1", sn2(window['game'][where][price][1]*number));
-	set_text(total + "2", sn2(window['game'][where][price][2]*number));
-	set_text(total + "3", sn2(window['game'][where][price][3]*number));
+	set_text(total + "0", round_to_2_decimals(window['game'][where][price][0]*number));
+	set_text(total + "1", round_to_2_decimals(window['game'][where][price][1]*number));
+	set_text(total + "2", round_to_2_decimals(window['game'][where][price][2]*number));
+	set_text(total + "3", round_to_2_decimals(window['game'][where][price][3]*number));
 }
 
 //buy
@@ -678,17 +678,17 @@ refnumber('watertab6numbersell', 1, 'watertab6numbersell', 'watertab6totalsell',
 
 
 function refpipes(){
-	set_text("watertab4owned", sn(game.coldwater.pipe[0], 0));
-	set_text("watertab4placed", sn(game.coldwater.pipe[1], 0));
-	set_text("watertab7owned", sn(game.hotwater.pipe[0], 0));
-	set_text("watertab7placed", sn(game.hotwater.pipe[1], 0));
+	set_text("watertab4owned", round_number(game.coldwater.pipe[0], 0));
+	set_text("watertab4placed", round_number(game.coldwater.pipe[1], 0));
+	set_text("watertab7owned", round_number(game.hotwater.pipe[0], 0));
+	set_text("watertab7placed", round_number(game.hotwater.pipe[1], 0));
 }
 refpipes();
 function refpipesnumber(id1, id2, water, price, number, vara){
-	set_text(id1, sn(number, 0));
+	set_text(id1, round_number(number, 0));
 	window[vara] = number;
 	var base = game;
-	set_text(id2, sn2(base[water]['pipeprice'][price]*number));
+	set_text(id2, round_to_2_decimals(base[water]['pipeprice'][price]*number));
 }
 refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 1, 'watertab4buynumber');
 refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 1, 'watertab4placenumber');
