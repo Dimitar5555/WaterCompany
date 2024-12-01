@@ -163,12 +163,12 @@ setInterval(function(){
 		var prodheathotwater = hd.heatingplantprod[0] * hd.heatingplant[0] + hd.heatingplantprod[1] * hd.heatingplant[1] + hd.heatingplantprod[2] * hd.heatingplant[2] + hd.heatingplantprod[3] * hd.heatingplant[3];
 		game.coldwater.stored = game.coldwater.stored + prodcoldwater;
 		
-		id2w('headercdused', sn2(usedcoldwater) + " m<sup>3</sup>");
-		id2w('headercdpumped', sn2(prodcoldwater) + " m<sup>3</sup>");
-		id2w('headercdtreated', sn2(treatcoldwater) + " m<sup>3</sup>");
-		id2w('headerhdused', sn2(usedhotwater) + " m<sup>3</sup>");
-		id2w('headerhdheated', sn2(prodheathotwater) + " m<sup>3</sup>");
-		id2w('headerhdpumped', sn2(prodhotwater) + " m<sup>3</sup>");
+		set_text('headercdused', round_to_2_decimals(usedcoldwater));
+		set_text('headercdpumped', round_to_2_decimals(prodcoldwater));
+		set_text('headercdtreated', round_to_2_decimals(treatcoldwater));
+		set_text('headerhdused', round_to_2_decimals(usedhotwater));
+		set_text('headerhdheated', round_to_2_decimals(prodheathotwater));
+		set_text('headerhdpumped', round_to_2_decimals(prodhotwater));
 		
 		
 		//determinite used water
@@ -218,13 +218,8 @@ setInterval(function(){
 		var hotwaterincome = hd.waterprice * usedhotwater;
 		var totincome = coldwaterincome + hotwaterincome;
 		game.bank.money += totincome - totexpense;
-		id2w("money", sn2(game.bank.money));
-		if(totincome - totexpense<0){
-			id2w("income", "-$" + sn2((totincome - totexpense)*(-1)));
-		}
-		else{
-			id2w("income", "+$" + sn2(totincome - totexpense));
-		}
+		set_text("money", format_money(game.bank.money));
+		set_text("income", format_money(totincome - totexpense, true));
 		game['stats']['totalearnedmoney'] = game['stats']['totalearnedmoney'] + totincome - totexpense;
 		if(game['stats']['totalearnedmoney']>=100000){
 			game['unlocked']['hotwater'] = 1;
@@ -254,7 +249,8 @@ setInterval(function(){
 		if(game.coldwater.stored>totcap){
 			game.coldwater.stored = totcap;
 		}
-		id2w('headercdstored', sn2(game['coldwater']['stored']) + " m<sup>3</sup>/" + sn2(totcap) + " m<sup>3</sup>");
+		id2w('headercdstoredcurr', round_to_2_decimals(game['coldwater']['stored']));
+		id2w('headercdstoredcap', round_to_2_decimals(totcap));
 	}
 	game.time.hour = game.time.hour + 1;
 	while(game.time.hour>=24){
