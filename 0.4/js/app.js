@@ -38,10 +38,6 @@ else{
 		},
 		city:{
 			house:1000,
-			day:1,
-			mounth:1,
-			year:1,
-			hour:0,
 			name:"",
 			rate:1.1,
 		},
