@@ -15,6 +15,13 @@ function format_money(number, include_sign=false) {
 	return `${include_sign?sign:''}$${round_number(number, 2)}`;
 }
 
+function round_count(number) {
+	if(number < 1000) {
+		return number;
+	}
+	return round_number(number, 2);
+}
+
 function round_to_2_decimals(number) {
 	return round_number(number, 2);
 }
@@ -24,18 +31,9 @@ function set_text(id, text) {
 }
 
 function sn2(a){return round_to_2_decimals(a);}
-var id2w_calls = 0;
-function id2w(a, b){id2w_calls++; return document.getElementById(a).innerHTML = b;}
 
-
-
-setInterval(() => {
-	console.log(`id2w called ${id2w_calls} times`);
-	id2w_calls = 0;
-}, 1000);
-function p(a){return a*a;}
 function goTab(tab){
-	for(i=1;i<10;i++){
+	for(i=1;i<=4;i++){
 		if(tab==i){
 			document.getElementById("upgradestabs" + i).classList.remove('hidden');
 		}
@@ -102,7 +100,7 @@ function upgrade(where, what, multiplier, price, pricemultiplier, number){
 		else{
 			window['game'][where][what] = window['game'][where][what] * multiplier;
 		}
-		id2w("money", format_money(game.bank.money));
+		set_text("money", format_money(game.bank.money));
 	}
 	else{
 		Error("Money printer broken", "Not enough money.");
@@ -116,7 +114,7 @@ function buy(water, thing, number, tier){
 	if(game[water][thing + 'price'][tier]*number<=game.bank.money){
 		game.bank.money = game.bank.money - game[water][thing + 'price'][tier]*number;
 		game[water][thing][tier] = game[water][thing][tier] + number;
-		id2w("money", format_money(game.bank.money));
+		set_text("money", format_money(game.bank.money));
 		refreshwater();
 		refreshcity();
 	}
@@ -131,7 +129,7 @@ function sell(water, thing, number, tier){
 		game.bank.money = game.bank.money + number * price;
 		refreshwater();
 		refreshcity();
-		id2w("money", format_money(game.bank.money));
+		set_text("money", format_money(game.bank.money));
 	}
 	else{
 		Error("IRS audit", "Not enough utilites to sell.");
