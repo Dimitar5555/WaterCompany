@@ -141,7 +141,7 @@ if(game['stats']['totalearnedmoney']>=1000){
 if(game['unlocked']['bank'] == 1){
 	document.getElementById('banktab').style.display = "inherit";
 }
-id2w("money", sn2(game.bank.money));
+id2w("money", format_money(game.bank.money));
 var timenow = Date.now();
 var timepassed = 0;
 var interestratetimer = 0;
@@ -238,15 +238,15 @@ setInterval(function(){
 		if(game['unlocked']['bank'] == 1){
 			document.getElementById('banktab').style.display = "inherit";
 		}
-		id2w("finsellcoldwater", "$" + sn2(24*coldwaterincome));
-		id2w("finsellhotwater", "$" + sn2(24*hotwaterincome));
-		id2w("fincoldwaterexp", "$" + sn2(24*coldexpense));
-		id2w("finhotwaterexp", "$" + sn2(24*heatexpense));
-		id2w("fintotwaterexp", "$" + sn2(24*totexpense));
-		id2w("fintotwaterinc", "$" + sn2(24*totincome+((game.bank.balance/100)*game.bank.interest)/384));
-		id2w("finintbank", "$" + sn2(((game.bank.balance/100)*game.bank.interest)/384));
-		id2w("finfines", "$" + sn2(fine*24));
-		id2w("profit", "$" + sn2(totincome*24 - totexpense*24+((game.bank.balance/100)*game.bank.interest)/384));
+		set_text("finsellcoldwater", format_money(24*coldwaterincome));
+		set_text("finsellhotwater", format_money(24*hotwaterincome));
+		set_text("fincoldwaterexp", format_money(24*coldexpense));
+		set_text("finhotwaterexp", format_money(24*heatexpense));
+		set_text("fintotwaterexp", format_money(24*totexpense));
+		set_text("fintotwaterinc", format_money(24*totincome+((game.bank.balance/100)*game.bank.interest)/384));
+		set_text("finintbank", format_money(((game.bank.balance/100)*game.bank.interest)/384));
+		set_text("finfines", format_money(fine*24));
+		set_text("profit", format_money(totincome*24 - totexpense*24+((game.bank.balance/100)*game.bank.interest)/384));
 		var totcap = 0;
 		for(i=0;i<cd.storage.length;i++){
 			var totcap = totcap + cd.storage[i] * cd.storageprod[i];
@@ -294,7 +294,7 @@ setInterval(function(){
 			}
 		}
 		localStorage.setItem("save", JSON.stringify(game));
-		id2w("money", sn2(game.bank.money));
+		id2w("money", format_money(game.bank.money));
 		game.city.house = game.city.house + ((game.city.house/100)*game.city.rate)/32;
 		refreshcity();
 	}
@@ -451,10 +451,10 @@ function refreshwater() {
 	var cd = game.coldwater;
 	var hd = game.hotwater;
 	//water pumping
-	id2w("tab3pprice0", "$" + sn2(cd.pumpprice[0]));
-	id2w("tab3pprice1", "$" + sn2(cd.pumpprice[1]));
-	id2w("tab3pprice2", "$" + sn2(cd.pumpprice[2]));
-	id2w("tab3pprice3", "$" + sn2(cd.pumpprice[3]));
+	set_text("tab3pprice0", format_money(cd.pumpprice[0]));
+	set_text("tab3pprice1", format_money(cd.pumpprice[1]));
+	set_text("tab3pprice2", format_money(cd.pumpprice[2]));
+	set_text("tab3pprice3", format_money(cd.pumpprice[3]));
 	
 	id2w("tab3powned0", sn(cd.pump[0], 0));
 	id2w("tab3powned1", sn(cd.pump[1], 0));
@@ -471,21 +471,21 @@ function refreshwater() {
 	id2w("tab3ptprod2", sn2(cd.pumpprod[2]*cd.pump[2]) + " m<sup>3</sup>");
 	id2w("tab3ptprod3", sn2(cd.pumpprod[3]*cd.pump[3]) + " m<sup>3</sup>");
 	
-	id2w("tab3popeco0", "$" + sn2(cd.pumpcost[0]));
-	id2w("tab3popeco1", "$" + sn2(cd.pumpcost[1]));
-	id2w("tab3popeco2", "$" + sn2(cd.pumpcost[2]));
-	id2w("tab3popeco3", "$" + sn2(cd.pumpcost[3]));
+	id2w("tab3popeco0", format_money(cd.pumpcost[0]));
+	id2w("tab3popeco1", format_money(cd.pumpcost[1]));
+	id2w("tab3popeco2", format_money(cd.pumpcost[2]));
+	id2w("tab3popeco3", format_money(cd.pumpcost[3]));
 	
-	id2w("tab3ptopec0", "$" + sn2(cd.pumpcost[0]*cd.pump[0]));
-	id2w("tab3ptopec1", "$" + sn2(cd.pumpcost[1]*cd.pump[1]));
-	id2w("tab3ptopec2", "$" + sn2(cd.pumpcost[2]*cd.pump[2]));
-	id2w("tab3ptopec3", "$" + sn2(cd.pumpcost[3]*cd.pump[3]));
+	id2w("tab3ptopec0", format_money(cd.pumpcost[0]*cd.pump[0]));
+	id2w("tab3ptopec1", format_money(cd.pumpcost[1]*cd.pump[1]));
+	id2w("tab3ptopec2", format_money(cd.pumpcost[2]*cd.pump[2]));
+	id2w("tab3ptopec3", format_money(cd.pumpcost[3]*cd.pump[3]));
 	
 	//watertreatment
-	id2w("tab3tprice0", "$" + sn2(cd.treatmentplantprice[0]));
-	id2w("tab3tprice1", "$" + sn2(cd.treatmentplantprice[1]));
-	id2w("tab3tprice2", "$" + sn2(cd.treatmentplantprice[2]));
-	id2w("tab3tprice3", "$" + sn2(cd.treatmentplantprice[3]));
+	id2w("tab3tprice0", format_money(cd.treatmentplantprice[0]));
+	id2w("tab3tprice1", format_money(cd.treatmentplantprice[1]));
+	id2w("tab3tprice2", format_money(cd.treatmentplantprice[2]));
+	id2w("tab3tprice3", format_money(cd.treatmentplantprice[3]));
 	
 	id2w("tab3towned0", sn(cd.treatmentplant[0],0));
 	id2w("tab3towned1", sn(cd.treatmentplant[1],0));
@@ -502,21 +502,21 @@ function refreshwater() {
 	id2w("tab3ttprod2", sn2(cd.treatmentplantprod[2]*cd.treatmentplant[2]) + " m<sup>3</sup>");
 	id2w("tab3ttprod3", sn2(cd.treatmentplantprod[3]*cd.treatmentplant[3]) + " m<sup>3</sup>");
 	
-	id2w("tab3topeco0", "$" + sn2(cd.treatmentplantcost[0]));
-	id2w("tab3topeco1", "$" + sn2(cd.treatmentplantcost[1]));
-	id2w("tab3topeco2", "$" + sn2(cd.treatmentplantcost[2]));
-	id2w("tab3topeco3", "$" + sn2(cd.treatmentplantcost[3]));
+	id2w("tab3topeco0", format_money(cd.treatmentplantcost[0]));
+	id2w("tab3topeco1", format_money(cd.treatmentplantcost[1]));
+	id2w("tab3topeco2", format_money(cd.treatmentplantcost[2]));
+	id2w("tab3topeco3", format_money(cd.treatmentplantcost[3]));
 	
-	id2w("tab3ttopec0", "$" + sn2(cd.treatmentplantcost[0]*cd.treatmentplant[0]));
-	id2w("tab3ttopec1", "$" + sn2(cd.treatmentplantcost[1]*cd.treatmentplant[1]));
-	id2w("tab3ttopec2", "$" + sn2(cd.treatmentplantcost[2]*cd.treatmentplant[2]));
-	id2w("tab3ttopec3", "$" + sn2(cd.treatmentplantcost[3]*cd.treatmentplant[3]));
+	id2w("tab3ttopec0", format_money(cd.treatmentplantcost[0]*cd.treatmentplant[0]));
+	id2w("tab3ttopec1", format_money(cd.treatmentplantcost[1]*cd.treatmentplant[1]));
+	id2w("tab3ttopec2", format_money(cd.treatmentplantcost[2]*cd.treatmentplant[2]));
+	id2w("tab3ttopec3", format_money(cd.treatmentplantcost[3]*cd.treatmentplant[3]));
 	
 	//storage
-	id2w("tab3sprice0", "$" + sn2(cd.storageprice[0]));
-	id2w("tab3sprice1", "$" + sn2(cd.storageprice[1]));
-	id2w("tab3sprice2", "$" + sn2(cd.storageprice[2]));
-	id2w("tab3sprice3", "$" + sn2(cd.storageprice[3]));
+	id2w("tab3sprice0", format_money(cd.storageprice[0]));
+	id2w("tab3sprice1", format_money(cd.storageprice[1]));
+	id2w("tab3sprice2", format_money(cd.storageprice[2]));
+	id2w("tab3sprice3", format_money(cd.storageprice[3]));
 	
 	id2w("tab3sowned0", sn(cd.storage[0], 0));
 	id2w("tab3sowned1", sn(cd.storage[1], 0));
@@ -533,23 +533,23 @@ function refreshwater() {
 	id2w("tab3stprod2", sn2(cd.storageprod[2]*cd.storage[2]) + " m<sup>3</sup>");
 	id2w("tab3stprod3", sn2(cd.storageprod[3]*cd.storage[3]) + " m<sup>3</sup>");
 	
-	id2w("tab3sopeco0", "$" + sn2(cd.storagecost[0]));
-	id2w("tab3sopeco1", "$" + sn2(cd.storagecost[1]));
-	id2w("tab3sopeco2", "$" + sn2(cd.storagecost[2]));
-	id2w("tab3sopeco3", "$" + sn2(cd.storagecost[3]));
+	id2w("tab3sopeco0", format_money(cd.storagecost[0]));
+	id2w("tab3sopeco1", format_money(cd.storagecost[1]));
+	id2w("tab3sopeco2", format_money(cd.storagecost[2]));
+	id2w("tab3sopeco3", format_money(cd.storagecost[3]));
 	
-	id2w("tab3stopec0", "$" + sn2(cd.storagecost[0]*cd.storage[0]));
-	id2w("tab3stopec1", "$" + sn2(cd.storagecost[1]*cd.storage[1]));
-	id2w("tab3stopec2", "$" + sn2(cd.storagecost[2]*cd.storage[2]));
-	id2w("tab3stopec3", "$" + sn2(cd.storagecost[3]*cd.storage[3]));
+	id2w("tab3stopec0", format_money(cd.storagecost[0]*cd.storage[0]));
+	id2w("tab3stopec1", format_money(cd.storagecost[1]*cd.storage[1]));
+	id2w("tab3stopec2", format_money(cd.storagecost[2]*cd.storage[2]));
+	id2w("tab3stopec3", format_money(cd.storagecost[3]*cd.storage[3]));
 	
 	//hot water
 	
 	//pumping
-	id2w("tab5hpprice0", "$" + sn2(hd.pumpprice[0]));
-	id2w("tab5hpprice1", "$" + sn2(hd.pumpprice[1]));
-	id2w("tab5hpprice2", "$" + sn2(hd.pumpprice[2]));
-	id2w("tab5hpprice3", "$" + sn2(hd.pumpprice[3]));
+	id2w("tab5hpprice0", format_money(hd.pumpprice[0]));
+	id2w("tab5hpprice1", format_money(hd.pumpprice[1]));
+	id2w("tab5hpprice2", format_money(hd.pumpprice[2]));
+	id2w("tab5hpprice3", format_money(hd.pumpprice[3]));
 	
 	id2w("tab5hpowned0", sn(hd.pump[0], 0));
 	id2w("tab5hpowned1", sn(hd.pump[1], 0));
@@ -566,21 +566,21 @@ function refreshwater() {
 	id2w("tab5hptprod2", sn2(hd.pumpprod[2]*hd.pump[2]) + " m<sup>3</sup>");
 	id2w("tab5hptprod3", sn2(hd.pumpprod[3]*hd.pump[3]) + " m<sup>3</sup>");
 	
-	id2w("tab5hpopeco0", "$" + sn2(hd.pumpcost[0]));
-	id2w("tab5hpopeco1", "$" + sn2(hd.pumpcost[1]));
-	id2w("tab5hpopeco2", "$" + sn2(hd.pumpcost[2]));
-	id2w("tab5hpopeco3", "$" + sn2(hd.pumpcost[3]));
+	id2w("tab5hpopeco0", format_money(hd.pumpcost[0]));
+	id2w("tab5hpopeco1", format_money(hd.pumpcost[1]));
+	id2w("tab5hpopeco2", format_money(hd.pumpcost[2]));
+	id2w("tab5hpopeco3", format_money(hd.pumpcost[3]));
 	
-	id2w("tab5hptopec0", "$" + sn2(hd.pumpcost[0]*hd.pump[0]));
-	id2w("tab5hptopec1", "$" + sn2(hd.pumpcost[1]*hd.pump[1]));
-	id2w("tab5hptopec2", "$" + sn2(hd.pumpcost[2]*hd.pump[2]));
-	id2w("tab5hptopec3", "$" + sn2(hd.pumpcost[3]*hd.pump[3]));
+	id2w("tab5hptopec0", format_money(hd.pumpcost[0]*hd.pump[0]));
+	id2w("tab5hptopec1", format_money(hd.pumpcost[1]*hd.pump[1]));
+	id2w("tab5hptopec2", format_money(hd.pumpcost[2]*hd.pump[2]));
+	id2w("tab5hptopec3", format_money(hd.pumpcost[3]*hd.pump[3]));
 	
 	//heating
-	id2w("tab6hpprice0", "$" + sn2(hd.heatingplantprice[0]));
-	id2w("tab6hpprice1", "$" + sn2(hd.heatingplantprice[1]));
-	id2w("tab6hpprice2", "$" + sn2(hd.heatingplantprice[2]));
-	id2w("tab6hpprice3", "$" + sn2(hd.heatingplantprice[3]));
+	id2w("tab6hpprice0", format_money(hd.heatingplantprice[0]));
+	id2w("tab6hpprice1", format_money(hd.heatingplantprice[1]));
+	id2w("tab6hpprice2", format_money(hd.heatingplantprice[2]));
+	id2w("tab6hpprice3", format_money(hd.heatingplantprice[3]));
 	
 	id2w("tab6hpowned0", sn(hd.heatingplant[0], 0));
 	id2w("tab6hpowned1", sn(hd.heatingplant[1], 0));
@@ -597,20 +597,20 @@ function refreshwater() {
 	id2w("tab6hptprod2", sn2(hd.heatingplantprod[2]*hd.heatingplant[2]) + " m<sup>3</sup>");
 	id2w("tab6hptprod3", sn2(hd.heatingplantprod[3]*hd.heatingplant[3]) + " m<sup>3</sup>");
 	
-	id2w("tab6hpopeco0", "$" + sn2(hd.heatingplantcost[0]));
-	id2w("tab6hpopeco1", "$" + sn2(hd.heatingplantcost[1]));
-	id2w("tab6hpopeco2", "$" + sn2(hd.heatingplantcost[2]));
-	id2w("tab6hpopeco3", "$" + sn2(hd.heatingplantcost[3]));
+	id2w("tab6hpopeco0", format_money(hd.heatingplantcost[0]));
+	id2w("tab6hpopeco1", format_money(hd.heatingplantcost[1]));
+	id2w("tab6hpopeco2", format_money(hd.heatingplantcost[2]));
+	id2w("tab6hpopeco3", format_money(hd.heatingplantcost[3]));
 	
-	id2w("tab6hptopec0", "$" + sn2(hd.heatingplantcost[0]*hd.heatingplant[0]));
-	id2w("tab6hptopec1", "$" + sn2(hd.heatingplantcost[1]*hd.heatingplant[1]));
-	id2w("tab6hptopec2", "$" + sn2(hd.heatingplantcost[2]*hd.heatingplant[2]));
-	id2w("tab6hptopec3", "$" + sn2(hd.heatingplantcost[3]*hd.heatingplant[3]));
+	id2w("tab6hptopec0", format_money(hd.heatingplantcost[0]*hd.heatingplant[0]));
+	id2w("tab6hptopec1", format_money(hd.heatingplantcost[1]*hd.heatingplant[1]));
+	id2w("tab6hptopec2", format_money(hd.heatingplantcost[2]*hd.heatingplant[2]));
+	id2w("tab6hptopec3", format_money(hd.heatingplantcost[3]*hd.heatingplant[3]));
 }
 function refreshbank() {
-	id2w('tab5loan', "$" + sn2(game.bank.loan));
-	id2w('tab5maxloan', "$" + sn2(game.bank.maxloan));
-	id2w('tab5balance', "$" + sn2(game.bank.balance));
+	id2w('tab5loan', format_money(game.bank.loan));
+	id2w('tab5maxloan', format_money(game.bank.maxloan));
+	id2w('tab5balance', format_money(game.bank.balance));
 	id2w('tab5loaninterest', sn2(game.bank.loaninterest) + "%");
 	id2w('tab5balanceinterest', sn2(game.bank.interest) + "%");
 }
@@ -636,10 +636,10 @@ function refreshcity(){
 	else{
 		id2w('tab1hotwatercoverage', sn2((prodhotwater/game.hotwater.pipe[1]*game.hotwater.waterperhouse)*100) + "%");
 	}
-	id2w('tab1coldwaterprice', "$" + sn2(game.coldwater.waterprice));
 	id2w('tab1coldwaterusage', sn2(game.coldwater.waterperhouse) + " m<sup>3</sup>");
-	id2w('tab1hotwaterprice', "$" + sn2(game.hotwater.waterprice));
 	id2w('tab1hotwaterusage', sn2(game.hotwater.waterperhouse) + " m<sup>3</sup>");
+	id2w('tab1coldwaterprice', format_money(game.coldwater.waterprice));
+	id2w('tab1hotwaterprice', format_money(game.hotwater.waterprice));
 }
 refreshupgrades();
 refreshwater();
@@ -760,6 +760,6 @@ function Bank(a, b, c){
 			Error("Don't cheat the bank!", "You don't have enough money in the bank balance.");
 		}
 	}
-	id2w("money", sn2(game.bank.money));
+	id2w("money", format_money(game.bank.money));
 	refreshbank();
 }

@@ -1,6 +1,38 @@
 function sn(number, decPlaces) {var iso = 0;if(number<0){var number = number*(-1);var iso = 1;}var number = parseFloat(number);var abbR = ["", "K","M","B","T","Qa","Qi","Sx","Sp","Oc","No","Dc","UDc","DDc","TDc","QaDc","QiDc","SxDc","SpDc","ODc","NDc","Vi","UVi","DVi","TVi","QaVi","QiVi","SxVi","SpVi","OVi","NVi","Tg","UTg","DTg","TTg","QaTg","QiTg","SxTg","SpTg","OTg","NTg","Qd","UQd","DQd","TQd","QaQd","QiQd","SxQd","SpQd","OQd","NQd","Qq","UQq","DQq","TQq","QaQq","QiQq","SxQq","SpQq","OQq","NQq","Sg","USg","DSg","TSg","QaSg","QiSg","SxSg","SpSg","OSg","NSg","St","USt","DSt","TSt","QaSt","QiSt","SxSt","SpSt","OSt","NSt","Og","UOg","DOg","TOg","QaOg","QiOg","SxOg","SpOg","OOg","NOg"];for(i=0;number>=999;i++){var number = number/1000;}if(iso==1){var number = number*(-1);var iso = 0;}var number = number.toFixed(decPlaces);var number = number + abbR[i];return number;}
-function sn2(a){var b = sn(a,2); return b;}
-function id2w(a, b){return document.getElementById(a).innerHTML = b;}
+
+function round_number(number, dec_places) {
+	const shortcuts = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "UDc", "DDc", "TDc", "QaDc", "QiDc", "SxDc", "SpDc", "ODc", "NDc", "Vi", "UVi", "DVi", "TVi", "QaVi", "QiVi", "SxVi", "SpVi", "OVi", "NVi", "Tg", "UTg", "DTg", "TTg", "QaTg", "QiTg", "SxTg", "SpTg", "OTg", "NTg", "Qd", "UQd", "DQd", "TQd", "QaQd", "QiQd", "SxQd", "SpQd", "OQd", "NQd", "Qq", "UQq", "DQq", "TQq", "QaQq", "QiQq", "SxQq", "SpQq", "OQq", "NQq", "Sg", "USg", "DSg", "TSg", "QaSg", "QiSg", "SxSg", "SpSg", "OSg", "NSg", "St", "USt", "DSt", "TSt", "QaSt", "QiSt", "SxSt", "SpSt", "OSt", "NSt", "Og", "UOg", "DOg", "TOg", "QaOg", "QiOg", "SxOg", "SpOg", "OOg", "NOg"];
+	let abbr_index = 0;
+	while(Math.abs(number) >= 1000 && abbr_index < shortcuts.length) {
+		number /= 1000;
+		abbr_index++;
+	}
+	return `${number.toFixed(dec_places)} ${shortcuts[abbr_index]}`;
+}
+
+function format_money(number, include_sign=false) {
+	const sign = number>0?'+':'-';
+	return `${include_sign?sign:''}$${round_number(number, 2)}`;
+}
+
+function round_to_2_decimals(number) {
+	return round_number(number, 2);
+}
+
+function set_text(id, text) {
+	document.querySelector(`#${id}`).innerText = text;
+}
+
+function sn2(a){return round_to_2_decimals(a);}
+var id2w_calls = 0;
+function id2w(a, b){id2w_calls++; return document.getElementById(a).innerHTML = b;}
+
+
+
+setInterval(() => {
+	console.log(`id2w called ${id2w_calls} times`);
+	id2w_calls = 0;
+}, 1000);
 function p(a){return a*a;}
 function goTab(tab){
 	for(i=1;i<10;i++){
@@ -70,7 +102,7 @@ function upgrade(where, what, multiplier, price, pricemultiplier, number){
 		else{
 			window['game'][where][what] = window['game'][where][what] * multiplier;
 		}
-		id2w("money", sn2(game.bank.money));
+		id2w("money", format_money(game.bank.money));
 	}
 	else{
 		Error("Money printer broken", "Not enough money.");
@@ -84,7 +116,7 @@ function buy(water, thing, number, tier){
 	if(game[water][thing + 'price'][tier]*number<=game.bank.money){
 		game.bank.money = game.bank.money - game[water][thing + 'price'][tier]*number;
 		game[water][thing][tier] = game[water][thing][tier] + number;
-		id2w("money", sn2(game.bank.money));
+		id2w("money", format_money(game.bank.money));
 		refreshwater();
 		refreshcity();
 	}
@@ -99,7 +131,7 @@ function sell(water, thing, number, tier){
 		game.bank.money = game.bank.money + number * price;
 		refreshwater();
 		refreshcity();
-		id2w("money", sn2(game.bank.money));
+		id2w("money", format_money(game.bank.money));
 	}
 	else{
 		Error("IRS audit", "Not enough utilites to sell.");
