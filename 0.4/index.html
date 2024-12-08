@@ -274,14 +274,14 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									Buying price $<span id="uptab4coldwaterpipesbuyb"></span>->$<span id="uptab4coldwaterpipesbuya"></span>
 								</td>
 								<td>
-									<button onclick="decpipeprice('coldwater', 'coldwaterpipebuy', 0)" class="btn btn-success">$<span id="coldwaterpipebuy"></span></button>
+									<button onclick="upgrade_decrease_pipe_price('coldwater', 'coldwaterpipebuy', 0)" class="btn btn-success">$<span id="coldwaterpipebuy"></span></button>
 								</td>
 								<td>
 									Decrease the price for placing pipes by 2.5%<br>
 									Placing pipes $<span id="uptab4coldwaterpipesplaceb"></span>->$<span id="uptab4coldwaterpipesplacea"></span>
 								</td>
 								<td>
-									<button onclick="decpipeprice('coldwater', 'coldwaterpipeplace', 1)" class="btn btn-success">$<span id="coldwaterpipeplace"></span></button>
+									<button onclick="upgrade_decrease_pipe_price('coldwater', 'coldwaterpipeplace', 1)" class="btn btn-success">$<span id="coldwaterpipeplace"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -348,14 +348,14 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									Buying hot water pipes $<span id="uptab7hotwaterpricebuyb"></span>->$<span id="uptab7hotwaterpricebuya"></span>
 								</td>
 								<td>
-									<button onclick="decpipeprice('hotwater', 'hotwaterpipebuy', 0)" class="btn btn-success">$<span id="hotwaterpipebuy"></span></button>
+									<button onclick="upgrade_decrease_pipe_price('hotwater', 'hotwaterpipebuy', 0)" class="btn btn-success">$<span id="hotwaterpipebuy"></span></button>
 								</td>
 								<td>
 									Decrease price for placing hot water pipes by 5%<br>
 									Placing hot water pipes $<span id="uptab7hotwaterpriceplaceb"></span>->$<span id="uptab7hotwaterpriceplacea"></span>
 								</td>
 								<td>
-									<button onclick="decpipeprice('hotwater', 'hotwaterpipeplace', 1)" class="btn btn-success">$<span id="hotwaterpipeplace"></span></button>
+									<button onclick="upgrade_decrease_pipe_price('hotwater', 'hotwaterpipeplace', 1)" class="btn btn-success">$<span id="hotwaterpipeplace"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -405,7 +405,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									Rate of building houses <span id="uptab8houserateb"></span>-><span id="uptab8houseratea"></span>
 								</td>
 								<td colspan="2">
-									<button onclick="increasepopincrease()" class="btn btn-success">$<span id="houserate"></span></button>
+									<button onclick="upgrade_population_growth()" class="btn btn-success">$<span id="houserate"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -419,14 +419,14 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									Interest rate <span id="uptab9intb"></span>%-><span id="uptab9inta"></span>%
 								</td>
 								<td>
-									<button onclick="increaseinterest();" class="btn btn-success">$<span id="balanceinterestrate"></span></button>
+									<button onclick="upgrade_bank_interest_rate();" class="btn btn-success">$<span id="balanceinterestrate"></span></button>
 								</td>
 								<td>
 									Increase maximum loan by 100%<br>
 									Maximum loan $<span id="uptab9maxloanb"></span>->$<span id="uptab9maxloana"></span>
 								</td>
 								<td>
-									<button onclick="increasemaxloan()" class="btn btn-success">$<span id="maxloan"></span></button>
+									<button onclick="upgrade_increase_max_loan()" class="btn btn-success">$<span id="maxloan"></span></button>
 								</td>
 							</tr>
 						</table>
@@ -1145,6 +1145,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 			</div>
 		</div>
 		<script src="js/universal.js"></script>
+		<script src="js/upgrades.js"></script>
 		<script src="js/app.js"></script>
 	</body>
 </html>

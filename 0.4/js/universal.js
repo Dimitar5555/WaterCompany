@@ -131,23 +131,6 @@ function sell(water, thing, number, tier){
 		Error("IRS audit", "Not enough utilites to sell.");
 	}
 }
-//water, price name, tier
-function decpipeprice(a, b, c){
-	var price = game['upgrades']['decrease'][b];
-	if(price<=game.bank.money){
-		game[a]['pipeprice'][c] = game[a]['pipeprice'][c] - (game[a]['pipeprice'][c]/100)*2.5;
-		game.bank.money = game.bank.money - price;
-		game['upgrades']['decrease'][b] = game['upgrades']['decrease'][b] * 1.5;
-		refreshupgrades();
-		refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, watertab4buynumber, 'watertab4buynumber');
-		refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, watertab4placenumber, 'watertab4placenumber');
-		refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, watertab7buynumber, 'watertab7buynumber');
-		refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, watertab7placenumber, 'watertab7placenumber');
-	}
-	else{
-		Error("Money printer broken", "Not enough money.");
-	}
-}
 
 function Error(title1, text1){
 	swal({
@@ -157,61 +140,11 @@ function Error(title1, text1){
 		confirmButtonText: "Okay"
 	})
 }
-function increaseinterest(){
-	if(game.bank.interest+0.5<=25){
-		if(game.bank.money>=game.upgrades.increase.balanceinterestrate){
-			game.bank.money = game.bank.money - game.upgrades.increase.balanceinterestrate;
-			game.bank.interest = game.bank.interest + 0.5;
-			game.upgrades.increase.balanceinterestrate = game.upgrades.increase.balanceinterestrate * 10;
-			refreshupgrades();
-			refreshwater();
-			refreshbank();
-			refreshcity();
-		}
-		else{
-			Error("Money printer broken", "Not enough money.");
-		}
+
+function has_enough_money(required_amount) {
+	if(game.bank.money >= required_amount) {
+		return true;
 	}
-	refreshupgrades();
-	refreshwater();
-	refreshbank();
-	refreshcity();
-}
-function increasepopincrease() {
-	if(game.bank.money>=game.upgrades.increase.houserate){
-		if(game.city.rate+0.1<=10){
-			game.bank.money = game.bank.money - game.upgrades.increase.houserate;
-			game.city.rate = game.city.rate + 0.1;
-			game.upgrades.increase.houserate = game.upgrades.increase.houserate * 2;
-			refreshupgrades();
-			refreshwater();
-			refreshbank();
-			refreshcity();
-		}
-		else{
-			Error("Green activists problems", "You can't upgrade more the population increase rate.");
-		}
-	}
-	else{
-		Error("Money printer broken", "Not enough money.");
-	}
-}
-function increasemaxloan(){
-	if(game.bank.loan>0){
-		Error('Cheat detected', 'You can not increase max loan size if you are in debt');
-	}
-	else{
-		if(game.bank.money>=game.upgrades.increase.maxloan){
-			game.bank.money = game.bank.money - game.upgrades.increase.maxloan;
-			game.upgrades.increase.maxloan = game.upgrades.increase.maxloan * 3;
-			game.bank.maxloan = game.bank.maxloan * 2;
-			refreshupgrades();
-			refreshwater();
-			refreshbank();
-			refreshcity();
-		}
-		else{
-			Error("Money printer broken", "Not enough money.");
-		}
-	}
+	Error("Money printer broken", "Not enough money.");
+	return false;
 }
