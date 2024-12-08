@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en" style="background: linear-gradient(to right, #459ABF, #4AA8C9); ">
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<title>Water Company: Recoded</title>
 		<script>
 			function msieversion(){
 				var ua = window.navigator.userAgent;
@@ -23,11 +25,9 @@
 			ga('create', 'UA-97511038-1', 'auto');
 			ga('send', 'pageview');
 		</script>
-		<meta charset="UTF-8">
-		<title>Water Company: Recoded</title>
 		<script src="js/lib/jQuery.js"></script>
 		<script src="js/lib/bootstrap.js"></script>
-		<link rel="stylesheet" href="css/lib/bootstrap-standart.css" />
+		<link rel="stylesheet" href="css/lib/bootstrap-standart.css">
 		<script src="js/lib/sweetalert.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/lib/sweetalert.css">
 		<style>
@@ -58,17 +58,18 @@
 		</style>
 	</head>
 	<body style="padding: 2.5px; max-width: 1150px; min-width: 975px;margin: 0 auto;padding: 10px 2px 10px 2px;">
-		<h2 style="color: #42a4f4;">Water Company: Recoded</h2> <span class="text-muted"> <h4>version 0.4</h4></span>
+		<h2 style="color: #42a4f4;">Water Company: Recoded</h2>
+		<h4 class="text-muted">version 0.4</h4>
 		<table class="table table-bordered" id="notfluid">
 			<tr>
 				<td>Money</td>
 				<td><span id="money"></span> <span id="income"></span></td>
-				<td colspan="10"></td>
+				<td colspan="8"></td>
 			</tr>
 			<tr>
 				<th class="xs-6" colspan="4">Cold water</th>
 				<th class="xs-5" colspan="4">Hot water</th>
-				<th class="xs-1" colspan="4">Time & Date</th>
+				<th class="xs-1" colspan="2">Time & Date</th>
 			</tr>
 			<tr>
 				<td>Water used</td>
@@ -194,20 +195,20 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td>
-									Increase production of cold water pumps by 10%<br />
-									Small cold water pump <span id="uptab1coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda0"></span> m<sup>3</sup><br />
-									Medium cold water pump <span id="uptab1coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda1"></span> m<sup>3</sup><br />
-									Big cold water pump <span id="uptab1coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda2"></span> m<sup>3</sup><br />
+									Increase production of cold water pumps by 10%<br>
+									Small cold water pump <span id="uptab1coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda0"></span> m<sup>3</sup><br>
+									Medium cold water pump <span id="uptab1coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda1"></span> m<sup>3</sup><br>
+									Big cold water pump <span id="uptab1coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda2"></span> m<sup>3</sup><br>
 									Very big cold water pump <span id="uptab1coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab1coldwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('coldwater', 'pumpprod', 1.1, 'coldwaterpumpprod', 1.2, 4)" class="btn btn-success">$<span id="coldwaterpumpprod"></span><br /></button>
 								</td>
 								<td>
-									Decrease operating cost of cold water pumps by 10%<br />
-									Small cold water pump $<span id="uptab1coldwatercostb0"></span>->$<span id="uptab1coldwatercosta0"></span><br />
-									Medium cold water pump $<span id="uptab1coldwatercostb1"></span>->$<span id="uptab1coldwatercosta1"></span><br />
-									Big cold water pump $<span id="uptab1coldwatercostb2"></span>->$<span id="uptab1coldwatercosta2"></span><br />
+									Decrease operating cost of cold water pumps by 10%<br>
+									Small cold water pump $<span id="uptab1coldwatercostb0"></span>->$<span id="uptab1coldwatercosta0"></span><br>
+									Medium cold water pump $<span id="uptab1coldwatercostb1"></span>->$<span id="uptab1coldwatercosta1"></span><br>
+									Big cold water pump $<span id="uptab1coldwatercostb2"></span>->$<span id="uptab1coldwatercosta2"></span><br>
 									Very big cold water pump $<span id="uptab1coldwatercostb3"></span>->$<span id="uptab1coldwatercosta3"></span>
 								</td>
 								<td>
@@ -219,19 +220,19 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td>
-									Increase production of treatment plants by 10%<br />
-									Small treatment plant <span id="uptab2coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda0"></span> m<sup>3</sup><br />
-									Medium treatment plant <span id="uptab2coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda1"></span> m<sup>3</sup><br />
-									Big treatment plant <span id="uptab2coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda2"></span> m<sup>3</sup><br />
+									Increase production of treatment plants by 10%<br>
+									Small treatment plant <span id="uptab2coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda0"></span> m<sup>3</sup><br>
+									Medium treatment plant <span id="uptab2coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda1"></span> m<sup>3</sup><br>
+									Big treatment plant <span id="uptab2coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda2"></span> m<sup>3</sup><br>
 									Very big treatment plant <span id="uptab2coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab2coldwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('coldwater', 'treatmentplantprod', 1.1, 'coldwatertreatmentplantprod', 1.2, 4)" class="btn btn-success">$<span id="coldwatertreatmentplantprod"></span></button>								</td>
 								<td>
-									Decrease operating cost of treatment plants by 10%<br />
-									Small treatment plant   $<span id="uptab2coldwatercostb0"></span>->$<span id="uptab2coldwatercosta0"></span><br />
-									Medium treatment plant  $<span id="uptab2coldwatercostb1"></span>->$<span id="uptab2coldwatercosta1"></span><br />
-									Big treatment plant     $<span id="uptab2coldwatercostb2"></span>->$<span id="uptab2coldwatercosta2"></span><br />
+									Decrease operating cost of treatment plants by 10%<br>
+									Small treatment plant   $<span id="uptab2coldwatercostb0"></span>->$<span id="uptab2coldwatercosta0"></span><br>
+									Medium treatment plant  $<span id="uptab2coldwatercostb1"></span>->$<span id="uptab2coldwatercosta1"></span><br>
+									Big treatment plant     $<span id="uptab2coldwatercostb2"></span>->$<span id="uptab2coldwatercosta2"></span><br>
 									Very big treatment plant $<span id="uptab2coldwatercostb3"></span>->$<span id="uptab2coldwatercosta3"></span>
 								</td>
 								<td>
@@ -243,20 +244,20 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td>
-									Increase maximum storage of storage units by 10%<br />
-									Small storage unit    <span id="uptab3coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda0"></span> m<sup>3</sup><br />
-									Medium storage unit   <span id="uptab3coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda1"></span> m<sup>3</sup><br />
-									Big storage unit      <span id="uptab3coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda2"></span> m<sup>3</sup><br />
+									Increase maximum storage of storage units by 10%<br>
+									Small storage unit    <span id="uptab3coldwaterprodb0"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda0"></span> m<sup>3</sup><br>
+									Medium storage unit   <span id="uptab3coldwaterprodb1"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda1"></span> m<sup>3</sup><br>
+									Big storage unit      <span id="uptab3coldwaterprodb2"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda2"></span> m<sup>3</sup><br>
 									Very big storage unit <span id="uptab3coldwaterprodb3"></span> m<sup>3</sup>-><span id="uptab3coldwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('coldwater', 'storageprod', 1.1, 'coldwaterstoragemax', 1.2, 4)" class="btn btn-success">$<span id="coldwaterstoragemax"></span></button>
 								</td>
 								<td>
-									Decrease operating cost of storage units by 10%<br />
-									Small storage unit    $<span id="uptab3coldwatercostb0"></span>->$<span id="uptab3coldwatercosta0"></span><br />
-									Medium storage unit   $<span id="uptab3coldwatercostb1"></span>->$<span id="uptab3coldwatercosta1"></span><br />
-									Big storage unit      $<span id="uptab3coldwatercostb2"></span>->$<span id="uptab3coldwatercosta2"></span><br />
+									Decrease operating cost of storage units by 10%<br>
+									Small storage unit    $<span id="uptab3coldwatercostb0"></span>->$<span id="uptab3coldwatercosta0"></span><br>
+									Medium storage unit   $<span id="uptab3coldwatercostb1"></span>->$<span id="uptab3coldwatercosta1"></span><br>
+									Big storage unit      $<span id="uptab3coldwatercostb2"></span>->$<span id="uptab3coldwatercosta2"></span><br>
 									Very big storage unit $<span id="uptab3coldwatercostb3"></span>->$<span id="uptab3coldwatercosta3"></span>
 								</td>
 								<td>
@@ -293,20 +294,20 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td>
-									Increase production of hot water pumps by 10%<br />
-									hot water pump <span id="uptab5hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda0"></span> m<sup>3</sup><br />
-									hot water pump <span id="uptab5hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda1"></span> m<sup>3</sup><br />
-									hot water pump <span id="uptab5hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda2"></span> m<sup>3</sup><br />
+									Increase production of hot water pumps by 10%<br>
+									hot water pump <span id="uptab5hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda0"></span> m<sup>3</sup><br>
+									hot water pump <span id="uptab5hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda1"></span> m<sup>3</sup><br>
+									hot water pump <span id="uptab5hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda2"></span> m<sup>3</sup><br>
 									hot water pump <span id="uptab5hotwaterprodb3"></span> m<sup>3</sup>-><span id="uptab5hotwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('hotwater', 'pumpprod', 1.1, 'hotwaterpumpprod', 1.2, 4)" class="btn btn-success">$<span id="hotwaterpumpprod"></span></button>
 								</td>
 								<td>
-									Decrease operating cost of hot water pumps by 10%<br />
-									hot water pump $<span id="uptab5hotwatercostb0"></span>->$<span id="uptab5hotwatercosta0"></span><br />
-									hot water pump $<span id="uptab5hotwatercostb1"></span>->$<span id="uptab5hotwatercosta1"></span><br />
-									hot water pump $<span id="uptab5hotwatercostb2"></span>->$<span id="uptab5hotwatercosta2"></span><br />
+									Decrease operating cost of hot water pumps by 10%<br>
+									hot water pump $<span id="uptab5hotwatercostb0"></span>->$<span id="uptab5hotwatercosta0"></span><br>
+									hot water pump $<span id="uptab5hotwatercostb1"></span>->$<span id="uptab5hotwatercosta1"></span><br>
+									hot water pump $<span id="uptab5hotwatercostb2"></span>->$<span id="uptab5hotwatercosta2"></span><br>
 									hot water pump $<span id="uptab5hotwatercostb3"></span>->$<span id="uptab5hotwatercosta3"></span>
 								</td>
 								<td>
@@ -318,20 +319,20 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							</tr>
 							<tr>
 								<td>
-									Increase production of water heating plants by 10%<br />
-									heating plant <span id="uptab6hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda0"></span> m<sup>3</sup><br />
-									heating plant <span id="uptab6hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda1"></span> m<sup>3</sup><br />
-									heating plant <span id="uptab6hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda2"></span> m<sup>3</sup><br />
+									Increase production of water heating plants by 10%<br>
+									heating plant <span id="uptab6hotwaterprodb0"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda0"></span> m<sup>3</sup><br>
+									heating plant <span id="uptab6hotwaterprodb1"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda1"></span> m<sup>3</sup><br>
+									heating plant <span id="uptab6hotwaterprodb2"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda2"></span> m<sup>3</sup><br>
 									heating plant <span id="uptab6hotwaterprodb3"></span> m<sup>3</sup>-><span id="uptab6hotwaterproda3"></span> m<sup>3</sup>
 								</td>
 								<td>
 									<button onclick="upgrade('hotwater', 'heatingplantprod', 1.1, 'hotwaterheatingplantprod', 1.2, 4)" class="btn btn-success">$<span id="hotwaterheatingplantprod"></span></button>
 								</td>
 								<td>
-									Decrease operating cost of water heating plants by 10%<br />
-									heating plant $<span id="uptab6hotwatercostb0"></span>->$<span id="uptab6hotwatercosta0"></span><br />
-									heating plant $<span id="uptab6hotwatercostb1"></span>->$<span id="uptab6hotwatercosta1"></span><br />
-									heating plant $<span id="uptab6hotwatercostb2"></span>->$<span id="uptab6hotwatercosta2"></span><br />
+									Decrease operating cost of water heating plants by 10%<br>
+									heating plant $<span id="uptab6hotwatercostb0"></span>->$<span id="uptab6hotwatercosta0"></span><br>
+									heating plant $<span id="uptab6hotwatercostb1"></span>->$<span id="uptab6hotwatercosta1"></span><br>
+									heating plant $<span id="uptab6hotwatercostb2"></span>->$<span id="uptab6hotwatercosta2"></span><br>
 									heating plant $<span id="uptab6hotwatercostb3"></span>->$<span id="uptab6hotwatercosta3"></span>
 								</td>
 								<td>
@@ -444,7 +445,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<div class="tab-content">
 					<div id="watertab1" class="tab-pane active">
 						<p>Without pumps you can't supply water to the homes and you won't get money. They are pretty expensive so think before you buy one.</p>
-						<br />
+						<br>
 						<table>
 							<tr>
 								<td>Buy</td>
@@ -537,7 +538,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					</div>
 					<div id="watertab2" class="tab-pane">
 						<p>Water storage is used to store water like water towers. When there is too much water, it is stored if possible. When there is a shortage of water, the water from the tower is used.</p>
-						<br />
+						<br>
 						<table>
 							<tr>
 								<td>Buy</td>
@@ -630,7 +631,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					</div>
 					<div id="watertab3" class="tab-pane">
 						<p>Thanks to the treatment plant you don't need to pay fines for dirty water being disposed. Be aware that for every 1000 m<sup>3</sup> you dispose in river you need to pay $100.</p>
-						<br />
+						<br>
 						<table>
 							<tr>
 								<td>Buy</td>
@@ -747,7 +748,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
-						<br />
+						<br>
 						<table class="table">
 							<tr>
 								<th colspan="4">Pipes</th>
@@ -983,7 +984,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								</td>
 							</tr>
 						</table>
-						<br />
+						<br>
 						<table class="table">
 							<tr>
 								<th colspan="4">Pipes</th>
@@ -1014,6 +1015,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					<tr>
 						<td>Max loan</td>
 						<td id="tab5maxloan"></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>Bank balance</td>
@@ -1049,7 +1051,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					
 					</tr>
 				</table>
-				<br />
+				<br>
 				<div class="clear"></div>
 			</div>
 			<div id="tab6" class="tab-pane">
@@ -1094,39 +1096,39 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<h3 class="text">Frequently Asked Questions</h3>
 				<h4>Why do I have one hot water pipe placed from the beginnings?</h4>
 				<p>If there weren't, that will cause a mess in the code because of an infinite loop and that is easier for me :P</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>I've found a bug. What should I do?</h4>
 				<p>You should report it in <a href="https://www.reddit.com/r/WaterCompany/comments/6cttcl/bugs_and_glitches/" target="_blank">this reddit post</a> or you can open a new issue in github on <a href="https://github.com/Dimitar5555/WaterCompany/issues" target="_blank">this</a> address.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>I've got a suggestion/feature for the game. Where can I share my idea?</h4>
 				<p>You can <a href="https://www.reddit.com/r/WaterCompany/comments/6cttiy/suggestions/" target="_blank">add your suggestion</a> to reddit.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>Why do I need treatment plant and what will happen if I don't have?</h4>
 				<p>The treatment plant cleans the water from sewage. If you let not treated water to the river, you will pay a fine of $1000 for every 10000m<sup>3</sup> not treated water.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>What will happen if I can't supply enough water?</h4>
 				<p>Simply people will pay for the water you supplied. If you supply 10m<sup>3</sup>, but they need 20m<sup>3</sup>, people will pay for 10m<sup>3</sup> only.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>How does the bank loan system work?</h4>
 				<p>On the next day at 00:00 the bank will take 1/100 of the loan from your money. If you don't have enough money, your loan will increase by the percentage of the loan interest.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>I want to get x money via loan, but I can't. Why?</h4>
 				<p>You can't have a loan bigger than 100k. It can go higher if you don't have enough money to pay the tax.</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>How does the bank balance work?</h4>
 				<p>You can put money in it. Every day at 00:00 you get interest for your money in your cash on hand(or back in the bank depends on the option selected).</p>
-				<br />
-				<hr />
+				<br>
+				<hr>
 				<h4>How are operating costs calculated?</h4>
 				<p>Everything has an operating cost(except pipes). Even if you don't use it or you use it very little, the operating cost won't change.</p>
-				<br />
+				<br>
 				<div class="clear"></div>
 			</div>
 			<div id="tab8" class="tab-pane">
