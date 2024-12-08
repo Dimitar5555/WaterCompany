@@ -1026,24 +1026,24 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				</table>
 				<table class="table table-bordered">
 					<tr>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalanceout').value; if(Number(a)>0){set_text('tab5bankbalanceoutnumber', round_to_2_decimals(a)); window['tab5bankbalanceoutnumber'] = a;}" id="tab5bankbalanceout"></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5bankbalanceoutnumber', round_to_2_decimals(a)); window['tab5bankbalanceoutnumber'] = a;}"></td>
 						<td class="btn-group">
 							<button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button>
 							<button onclick="Bank(1, 1, game.bank.balance)" class="btn btn-info">Withdraw max</button>
 						</td>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5bankbalancein').value; if(Number(a)>0){set_text('tab5bankbalanceinnumber', round_to_2_decimals(a)); window['tab5bankbalanceinnumber'] = a;}" id="tab5bankbalancein"></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5bankbalanceinnumber', round_to_2_decimals(a)); window['tab5bankbalanceinnumber'] = a;}"></td>
 						<td class="btn-group">
 							<button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button>
 							<button onclick="Bank(1, 0, game.bank.money)" class="btn btn-info">Invest max</button>
 						</td>
 					</tr>
 					<tr>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanout').value; if(Number(a)>0){set_text('tab5loanoutnumber', round_to_2_decimals(a)); window['tab5loanoutnumber'] = a;}" id="tab5loanout"></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5loanoutnumber', round_to_2_decimals(a)); window['tab5loanoutnumber'] = a;}"></td>
 						<td class="btn-group">
 							<button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button>
 							<button onclick="Bank(0, 1, game.bank.maxloan-game.bank.loan)" class="btn btn-info">Get max</button>
 						</td>
-						<td><input style="width: 80px;" class="form-control" onkeyup="var a=document.getElementById('tab5loanin').value; if(Number(a)>0){set_text('tab5loaninnumber', round_to_2_decimals(a)); window['tab5loaninnumber'] = a;}" id="tab5loanin"></td>
+						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5loaninnumber', round_to_2_decimals(a)); window['tab5loaninnumber'] = a;}"></td>
 						<td class="btn-group">
 							<button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button>
 							<button onclick="if(game.bank.loan>game.bank.money){Bank(0, 0, game.bank.money)}else{Bank(0, 0, game.bank.loan)}" class="btn btn-info">Return max</button>
