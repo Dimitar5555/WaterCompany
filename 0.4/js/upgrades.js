@@ -50,16 +50,44 @@ function upgrade_bank_interest_rate() {
 }
 
 //water, price name, tier
-function upgrade_decrease_pipe_price(water_type, price_name, tier){
-	var price = game['upgrades']['decrease'][price_name];
-	if(has_enough_money(price)){
-		game[water_type]['pipeprice'][tier] = game[water_type]['pipeprice'][tier] - (game[water_type]['pipeprice'][tier]/100)*2.5;
-		game.bank.money = game.bank.money - price;
-		game['upgrades']['decrease'][price_name] = game['upgrades']['decrease'][price_name] * 1.5;
-		refreshupgrades();
-		update_buy_sell_count('cold_pipe_buy', 1);
-		update_buy_sell_count('cold_pipe_place', 1);
-		update_buy_sell_count('hot_pipe_buy', 1);
-		update_buy_sell_count('hot_pipe_sell', 1);
+function upgrade_decrease_pipe_price(data_attr) {
+	// data_attr = "[hot/cold]_[buy/place]"
+	[water_type, price_type] = data_attr.split('_');
+	const price = game['upgrades']['decrease'][`${water_type}waterpipe${price_type}`];
+	if(!has_enough_money(price)) return;
+	
+	game.bank.money = game.bank.money - price;
+	game[`${water_type}water`]['pipeprice'][price_type == 'buy'?0:1] *= 0.95;
+	game['upgrades']['decrease'][`${water_type}waterpipe${price_type}`] *= 1.5;
+	refreshupgrades();
+	update_buy_sell_count('cold_pipe_buy', cold_pipe_buy_count);
+	update_buy_sell_count('cold_pipe_place', cold_pipe_place_count);
+	update_buy_sell_count('hot_pipe_buy', hot_pipe_buy_count);
+	update_buy_sell_count('hot_pipe_place', hot_pipe_place_count);
+}
+
+function upgrade_decrease_operating_costs(data_attr) {
+	// data_attr = "[hot/cold]_[pump/treatmentplant/heatingplant/storage]"
+	[main_type, sub_type] = data_attr.split('_');
+	const price = game['upgrades']['decrease'][`${main_type}water${sub_type}cost`];
+	if(!has_enough_money(price)) return;
+
+	game.bank.money -= price;
+	game['upgrades']['increase'][`${main_type}water${sub_type}cost`] *= 1.2;
+	for(let i=0;i<4;i++){
+		game[`${main_type}water`][`${sub_type}cost`][i] *= 0.9;
+	}
+}
+
+function upgrade_increase_production(data_attr) {
+	// data_attr = "[hot/cold]_[pump/treatmentplant/heatingplant/storage]"
+	[main_type, sub_type] = data_attr.split('_');
+	const price = game['upgrades']['increase'][`${main_type}water${sub_type}prod`];
+	if(!has_enough_money(price)) return;
+
+	game.bank.money -= price;
+	game['upgrades']['increase'][`${main_type}water${sub_type}prod`] *= 1.2;
+	for(let i=0;i<4;i++){
+		game[`${main_type}water`][`${sub_type}prod`][i] *= 1.1;
 	}
 }

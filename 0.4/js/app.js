@@ -340,14 +340,14 @@ function refreshupgrades(){
 	set_text("uptab4coldwaterpipesplacea", round_to_2_decimals(cd.pipeprice[1]*0.975));
 
 	//prices display
-	set_text("coldwaterpumpprod", round_to_2_decimals(up.increase.coldwaterpumpprod));
-	set_text("coldwaterpumpcost", round_to_2_decimals(up.decrease.coldwaterpumpcost));
-	set_text("coldwatertreatmentplantprod", round_to_2_decimals(up.increase.coldwatertreatmentplantprod));
-	set_text("coldwatertreatmentplantcost", round_to_2_decimals(up.decrease.coldwatertreatmentplantcost));
-	set_text("coldwaterstoragemax", round_to_2_decimals(up.increase.coldwaterstoragemax));
-	set_text("coldwaterstoragecost", round_to_2_decimals(up.decrease.coldwaterstoragecost));
-	set_text("coldwaterpipebuy", round_to_2_decimals(up.decrease.coldwaterpipebuy));
-	set_text("coldwaterpipeplace", round_to_2_decimals(up.decrease.coldwaterpipeplace));
+	set_text("coldwaterpumpprod", format_money(up.increase.coldwaterpumpprod));
+	set_text("coldwaterpumpcost", format_money(up.decrease.coldwaterpumpcost));
+	set_text("coldwatertreatmentplantprod", format_money(up.increase.coldwatertreatmentplantprod));
+	set_text("coldwatertreatmentplantcost", format_money(up.decrease.coldwatertreatmentplantcost));
+	set_text("coldwaterstoragemax", format_money(up.increase.coldwaterstoragemax));
+	set_text("coldwaterstoragecost", format_money(up.decrease.coldwaterstoragecost));
+	set_text("coldwaterpipebuy", format_money(up.decrease.coldwaterpipebuy));
+	set_text("coldwaterpipeplace", format_money(up.decrease.coldwaterpipeplace));
 	
 	// hot water pipes price
 	set_text("uptab7hotwaterpricebuyb", round_to_2_decimals(hd.pipeprice[0]));
@@ -371,20 +371,20 @@ function refreshupgrades(){
 	set_text("uptab9maxloanb", round_to_2_decimals(game.bank.maxloan));
 	set_text("uptab9maxloana", round_to_2_decimals(game.bank.maxloan*2));
 	
-	set_text("hotwaterpumpprod", round_to_2_decimals(up.increase.hotwaterpumpprod));
-	set_text("hotwaterpumpcost", round_to_2_decimals(up.decrease.hotwaterpumpcost));
-	set_text("hotwaterheatingplantprod", round_to_2_decimals(up.increase.hotwaterheatingplantprod));
-	set_text("hotwaterheatingplantcost", round_to_2_decimals(up.decrease.hotwaterheatingplantcost));
-	set_text("hotwaterpipebuy", round_to_2_decimals(up.decrease.hotwaterpipebuy));
-	set_text("hotwaterpipeplace", round_to_2_decimals(up.decrease.hotwaterpipeplace));
+	set_text("hotwaterpumpprod", format_money(up.increase.hotwaterpumpprod));
+	set_text("hotwaterpumpcost", format_money(up.decrease.hotwaterpumpcost));
+	set_text("hotwaterheatingplantprod", format_money(up.increase.hotwaterheatingplantprod));
+	set_text("hotwaterheatingplantcost", format_money(up.decrease.hotwaterheatingplantcost));
+	set_text("hotwaterpipebuy", format_money(up.decrease.hotwaterpipebuy));
+	set_text("hotwaterpipeplace", format_money(up.decrease.hotwaterpipeplace));
 	
-	set_text("coldwaterprice", round_to_2_decimals(up.increase.coldwaterprice));
-	set_text("hotwaterprice", round_to_2_decimals(up.increase.hotwaterprice));
-	set_text("coldwaterperhouse", round_to_2_decimals(up.increase.coldwaterperhouse));
-	set_text("hotwaterperhouse", round_to_2_decimals(up.increase.hotwaterperhouse));
-	set_text("houserate", round_to_2_decimals(up.increase.houserate));
-	set_text("balanceinterestrate", round_to_2_decimals(up.increase.balanceinterestrate));
-	set_text("maxloan", round_to_2_decimals(up.increase.maxloan));
+	set_text("coldwaterprice", format_money(up.increase.coldwaterprice));
+	set_text("hotwaterprice", format_money(up.increase.hotwaterprice));
+	set_text("coldwaterperhouse", format_money(up.increase.coldwaterperhouse));
+	set_text("hotwaterperhouse", format_money(up.increase.hotwaterperhouse));
+	set_text("houserate", format_money(up.increase.houserate));
+	set_text("balanceinterestrate", format_money(up.increase.balanceinterestrate));
+	set_text("maxloan", format_money(up.increase.maxloan));
 }
 function refreshwater() {
 	var cd = game.coldwater;
