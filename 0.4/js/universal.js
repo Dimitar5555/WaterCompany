@@ -38,41 +38,7 @@ function goTab(tab){
 		}
 	}
 }
-function buypipes(count, water, tier){
-	var price = game[water]['pipeprice'][tier];
-	if(tier==0){
-		if((game.city.house / 2) >= (count + game[water]['pipe'][1]+game[water]['pipe'][0])){
-			if(price*count<=game.bank.money){
-				game.bank.money = game.bank.money - price*count;
-				window['game'][water]['pipe'][tier] = game[water]['pipe'][tier] + count;
-				refpipes();
-			}
-			else{
-				Error("Money printer broken", "Not enough money.");
-			}
-		}
-		else{
-			Error("Cloning machine broken", "Not enough houses in the city.");
-		}
-	}
-	else{
-		if(price*count<=game.bank.money){
-			if(game[water]['pipe'][0]>=count){
-				game.bank.money = game.bank.money - price*count;
-				window['game'][water]['pipe'][1] = game[water]['pipe'][1] + count;
-				window['game'][water]['pipe'][0] = game[water]['pipe'][0] - count;
-				refpipes();
-			}
-			else{
-				Error("China plastic production shortage", "Not enough owned pipes.");
-			}
-		}
-		else{
-			Error("Money printer broken", "Not enough money.");
-		}
-	}	
-	refreshcity();
-}
+
 function upgrade(where, what, multiplier, price, pricemultiplier, number){
 	if(multiplier>1){
 		var pricea = window['game']['upgrades']['increase'][price];
@@ -96,7 +62,7 @@ function upgrade(where, what, multiplier, price, pricemultiplier, number){
 		else{
 			window['game'][where][what] = window['game'][where][what] * multiplier;
 		}
-		set_text("money", format_money(game.bank.money));
+		update_money();
 	}
 	else{
 		Error("Money printer broken", "Not enough money.");
@@ -106,30 +72,55 @@ function upgrade(where, what, multiplier, price, pricemultiplier, number){
 	refreshbank();
 	refreshcity();
 }
-function buy(water, thing, number, tier){
-	if(game[water][thing + 'price'][tier]*number<=game.bank.money){
-		game.bank.money = game.bank.money - game[water][thing + 'price'][tier]*number;
-		game[water][thing][tier] = game[water][thing][tier] + number;
-		set_text("money", format_money(game.bank.money));
-		refreshwater();
-		refreshcity();
+
+function buy_sell(data_attr, tier) {
+	// data_attr = "[hot/cold]_[pump/treatmentplant/heatingplant/storage]_[buy/sell]"
+	[main_type, sub_type, action] = data_attr.split('_');
+	const count = window[`${data_attr}_count`];
+	const price = game[`${main_type}water`][`${sub_type}price`][tier];
+	const total_price = price * count;
+
+	if(action === 'buy') {
+		if(has_enough_money(total_price)) {
+			game[`${main_type}water`][sub_type][tier] += count;
+			game.bank.money -= total_price;
+		}
 	}
-	else{
-		Error("Money printer broken", "Not enough money.");
+	else if(action === 'sell') {
+		if(game[`${main_type}water`][sub_type][tier] >= count) {
+			game[`${main_type}water`][sub_type][tier] -= count;
+			game.bank.money += total_price;
+		}
 	}
+	update_money();
+	refreshwater();
+	refreshcity();
 }
-function sell(water, thing, number, tier){
-	var price = game[water][thing + "price"][tier];
-	if(game[water][thing][tier]>=number){
-		game[water][thing][tier] = game[water][thing][tier] - number;
-		game.bank.money = game.bank.money + number * price;
-		refreshwater();
-		refreshcity();
-		set_text("money", format_money(game.bank.money));
+
+function buy_place_pipes(data_attr) {
+	// data_attr = "[hot/cold]_[buy/place]"
+	[main_type, _, action] = data_attr.split('_');
+	const count = window[`${data_attr}_count`];
+	const price = game[`${main_type}water`]['pipeprice'][action === 'buy' ? 0 : 1];
+	const total_price = price * count;
+
+	if(!has_enough_money(total_price)) {
+		return;
 	}
-	else{
-		Error("IRS audit", "Not enough utilites to sell.");
+
+	if(action === 'buy') {
+		game[`${main_type}water`]['pipe'][0] += count;
 	}
+	else if(action === 'place') {
+		if(game[`${main_type}water`]['pipe'][0] >= count) {
+			game[`${main_type}water`]['pipe'][0] -= count;
+			game[`${main_type}water`]['pipe'][1] += count;
+		}
+	}
+	game.bank.money -= total_price;
+	update_money();
+	refreshcity();
+	refpipes();	
 }
 
 function Error(title1, text1){
@@ -147,4 +138,35 @@ function has_enough_money(required_amount) {
 	}
 	Error("Money printer broken", "Not enough money.");
 	return false;
+}
+
+function update_buy_sell_count(data_attr, count) {
+	if(typeof count === 'string') {
+		count = Number(count);
+	}
+
+	if(count > 0) {
+		window[`${data_attr}_count`] = count;
+		
+		// data_attr = "[hot/cold]_[pump/treatmentplant/heatingplant/storage/pipe]_[buy/sell/place]"
+		[main_type, sub_type, action] = data_attr.split('_');
+
+		const els_to_update = Array.from(document.querySelectorAll(`[data-type="${data_attr}"]`));
+		const counters = els_to_update.filter(el => el.dataset.subType === 'counter');
+		const totals = els_to_update.filter(el => el.dataset.subType === 'total');
+
+		counters.forEach(el => el.textContent = count);
+		totals.forEach((el, i) => {
+			let price;
+			if(sub_type === 'pipe'){
+				price = game[`${main_type}water`][`pipeprice`][action === 'buy' ? 0 : 1];
+			}
+			else{
+				price = game[`${main_type}water`][`${sub_type}price`][i];
+			}
+			const total = price * count;
+			el.textContent = format_money(total)
+	});
+
+	}
 }

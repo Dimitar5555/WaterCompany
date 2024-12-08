@@ -141,7 +141,7 @@ if(game['stats']['totalearnedmoney']>=1000){
 if(game['unlocked']['bank'] == 1){
 	document.getElementById('banktab').style.display = "inherit";
 }
-set_text("money", format_money(game.bank.money));
+update_money();
 var timenow = Date.now();
 var timepassed = 0;
 var interestratetimer = 0;
@@ -218,7 +218,7 @@ setInterval(function(){
 		var hotwaterincome = hd.waterprice * usedhotwater;
 		var totincome = coldwaterincome + hotwaterincome;
 		game.bank.money += totincome - totexpense;
-		set_text("money", format_money(game.bank.money));
+		update_money();
 		set_text("income", format_money(totincome - totexpense, true));
 		game['stats']['totalearnedmoney'] = game['stats']['totalearnedmoney'] + totincome - totexpense;
 		if(game['stats']['totalearnedmoney']>=100000){
@@ -290,7 +290,7 @@ setInterval(function(){
 			}
 		}
 		localStorage.setItem("save", JSON.stringify(game));
-		set_text("money", format_money(game.bank.money));
+		update_money();
 		game.city.house = game.city.house + ((game.city.house/100)*game.city.rate)/32;
 		refreshcity();
 	}
@@ -642,39 +642,19 @@ refreshwater();
 refreshbank();
 refreshcity();
 
-function refnumber(id, number, name, total, where, price){
-	if(number>999){
-		set_text(id + "0", round_to_2_decimals(number));
-		set_text(id + "1", round_to_2_decimals(number));
-		set_text(id + "2", round_to_2_decimals(number));
-		set_text(id + "3", round_to_2_decimals(number));
-	}
-	else{
-		set_text(id + "0", round_number(number, 0));
-		set_text(id + "1", round_number(number, 0));
-		set_text(id + "2", round_number(number, 0));
-		set_text(id + "3", round_number(number, 0));
-	}
-	window[name] = number;
-	set_text(total + "0", round_to_2_decimals(window['game'][where][price][0]*number));
-	set_text(total + "1", round_to_2_decimals(window['game'][where][price][1]*number));
-	set_text(total + "2", round_to_2_decimals(window['game'][where][price][2]*number));
-	set_text(total + "3", round_to_2_decimals(window['game'][where][price][3]*number));
-}
-
 //buy
-refnumber('watertab1number', 1, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice');
-refnumber('watertab2number', 1, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice');
-refnumber('watertab3number', 1, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice');
-refnumber('watertab5number', 1, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');
-refnumber('watertab6number', 1, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice');
+update_buy_sell_count('cold_pump_buy', 1);
+update_buy_sell_count('cold_storage_buy', 1);
+update_buy_sell_count('cold_treatmentplant_buy', 1);
+update_buy_sell_count('hot_pump_buy', 1);
+update_buy_sell_count('hot_heatingplant_buy', 1);
 
 //sell
-refnumber('watertab1numbersell', 1, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice');
-refnumber('watertab2numbersell', 1, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice');
-refnumber('watertab3numbersell', 1, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice');
-refnumber('watertab5numbersell', 1, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice');
-refnumber('watertab6numbersell', 1, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice');
+update_buy_sell_count('cold_pump_sell', 1);
+update_buy_sell_count('cold_storage_sell', 1);
+update_buy_sell_count('cold_treatmentplant_sell', 1);
+update_buy_sell_count('hot_pump_sell', 1);
+update_buy_sell_count('hot_heatingplant_sell', 1);
 
 
 function refpipes(){
@@ -684,78 +664,80 @@ function refpipes(){
 	set_text("watertab7placed", round_number(game.hotwater.pipe[1], 0));
 }
 refpipes();
-function refpipesnumber(id1, id2, water, price, number, vara){
-	set_text(id1, round_number(number, 0));
-	window[vara] = number;
-	var base = game;
-	set_text(id2, round_to_2_decimals(base[water]['pipeprice'][price]*number));
-}
-refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 1, 'watertab4buynumber');
-refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 1, 'watertab4placenumber');
-refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 1, 'watertab7buynumber');
-refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 1, 'watertab7placenumber');
 
+update_buy_sell_count('cold_pipe_buy', 1);
+update_buy_sell_count('cold_pipe_place', 1);
+update_buy_sell_count('hot_pipe_buy', 1);
+update_buy_sell_count('hot_pipe_place', 1);
 
-function Bank(a, b, c){
-	/*
-	a=0 loan
-	a=1 balance
-	b=0 in
-	b=1 out
-	c amount of money
-	*/
-	var c = Number(c);
-	if(a==0 && b==0){
-		if(game.bank.loan-c>=0){
-			if(game.bank.money>=c){
-				game.bank.loan = game.bank.loan - c;
-				game.bank.money = game.bank.money - c;
-			}
-			else{
-				Error("Money printer broken", "Not enough money.");
-			}
-		}
-		else{
+/**
+ * Handles bank transactions for loan and balance.
+ *
+ * @param {"loan" | "balance"} main_type - The type of transaction. Allowed values: "loan", "balance".
+ * @param {"withdraw" | "deposit" | "take" | "return"} direction - The direction of the transaction. Allowed values: "in", "out".
+ * @param {number} amount - The amount of money to be transacted.
+ *
+ * @throws Will throw an error if there are insufficient funds, if the loan limit is exceeded, or if there is an outstanding loan.
+ */
+function handle_bank_transactions(type, direction, amount){
+	amount = Number(amount);
+	if(type == "loan" && direction == "return") {
+		// no loan to return
+		if(game.bank.loan == 0) {
 			Error("Your bank file is empty", "You don't have loan to return.");
+			return;
+		}
+
+		// if the player wants to return more than the loan, return the loan
+		if(game.bank.loan - amount < 0) {
+			amount = game.bank.loan;
+		}
+
+		if(game.bank.money >= amount) {
+			game.bank.loan -= amount;
+			game.bank.money -= amount;
+		}
+		else {
+			Error("Insufficient funds", "Not enough money.");
 		}
 	}
-	else if(a==0 && b==1){
-		if(game.bank.balance==0){
-			if(game.bank.loan+c<=game.bank.maxloan){
-				game.bank.loan = game.bank.loan + c;
-				game.bank.money = game.bank.money + c;
+	else if(type == "loan" && direction == "take") {
+		if(game.bank.balance == 0) {
+			if(game.bank.loan + amount <= game.bank.maxloan){
+				game.bank.loan += amount;
+				game.bank.money += amount;
 			}
-			else{
-				Error("IRS audit", "You will pass your loan limit of you get that much money. Try with smaller sum.");
+			else {
+				Error("Loan limit exceeded", "You will exceed your loan limit if you get that much money. Try a smaller amount.");
 			}
 		}
-		else{
-			Error("No money shortage detected", "You don't need a loan. You have money in the bank. Use them first, before making it into bancruptcy.");
+		else {
+			Error("Sufficient funds available", "You don't need a loan. You have money in the bank. Use them first, before making it into bankruptcy.");
 		}
 	}
-	else if(a==1 && b==0){
-		if(game.bank.loan==0){
-			if(game.bank.money>=c){
-				game.bank.balance= game.bank.balance + c;
-				game.bank.money = game.bank.money - c;
+	else if(type == "balance" && direction == "deposit") {
+		if(game.bank.loan == 0) {
+			if(game.bank.money >= amount) {
+				game.bank.balance += amount;
+				game.bank.money -= amount;
 			}
-			else{
-				Error("Money printer broken", "Not enough money.");
+			else {
+				Error("Insufficient funds", "Not enough money.");
 			}
 		}
-		else{
-			Error("You have loan", "You need to return all of your loan before investing");
+		else {
+			Error("Outstanding loan", "Outstanding loan must be repaid before investing");
 		}
 	}
-	else if(a==1 && b==1){
-		if(game.bank.balance>=c){
-			game.bank.balance = game.bank.balance - c;
-			game.bank.money = game.bank.money + c;
+	else if(type == "balance" && direction == "withdraw") {
+		if(game.bank.balance >= amount) {
+			game.bank.balance -= amount;
+			game.bank.money += amount;
 		}
-		else{
-			Error("Don't cheat the bank!", "You don't have enough money in the bank balance.");
+		else {
+			Error("Insufficient bank balance", "You don't have enough money in the bank balance.");
 		}
 	}
-	set_text("money", format_money(game.bank.money));
+	update_money();
 	refreshbank();
 }

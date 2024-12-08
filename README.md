@@ -3,8 +3,11 @@
 
 ### Version 0.4.1
 
-* Improved code for readabilty
-* 
+* Rearranged the header table
+* Renamed upgrade functions and moved them to separate file
+* Various HTML fixes
+* Refactor buy/sell methods
+* Refactor bank code
 
 #### [Version 0.4](https://dimitar5555.github.io/WaterCompany/0.4)
 

@@ -450,23 +450,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab1number', 1, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab1number', 10, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab1number', 100, 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_pump_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_pump_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_pump_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab1numberinput').value;if(Number(number)>0){refnumber('watertab1number', Number(number), 'watertab1number', 'watertab1total', 'coldwater', 'pumpprice');}" id="watertab1numberinput" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('cold_pump_buy', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 							<tr>
 								<td>Sell</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab1numbersell', 1, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab1numbersell', 10, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab1numbersell', 100, 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_pump_sell', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_pump_sell', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_pump_sell', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab1numberinputsell').value;if(Number(number)>0){refnumber('watertab1numbersell', Number(number), 'watertab1numbersell', 'watertab1totalsell', 'coldwater', 'pumpprice');}" id="watertab1numberinputsell" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('cold_pump_sell', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 						</table>
@@ -485,8 +485,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3pprice0"></td>
 								<td>
-									<button onclick="buy('coldwater', 'pump', watertab1number, 0)" class="btn btn-success">Buy <span id="watertab1number0"></span> - $<span id="watertab1total0"></span></button>
-									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 0)" class="btn btn-danger">Sell <span id="watertab1numbersell0"></span> - $<span id="watertab1totalsell0"></span></button>
+									<button onclick="buy_sell('cold_pump_buy', 0)" class="btn btn-success">Buy <span data-type="cold_pump_buy" data-sub-type="counter"></span> - <span data-type="cold_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_pump_sell', 0)" class="btn btn-danger">Sell <span data-type="cold_pump_sell" data-sub-type="counter"></span> - <span data-type="cold_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3powned0"></td>
 								<td><span id="tab3pprodu0"></span> m<sup>3</sup></td>
@@ -498,8 +498,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3pprice1"></td>
 								<td>
-									<button onclick="buy('coldwater', 'pump', watertab1number, 1)" class="btn btn-success">Buy <span id="watertab1number1"></span> - $<span id="watertab1total1"></span></button>
-									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 1)" class="btn btn-danger">Sell <span id="watertab1numbersell1"></span> - $<span id="watertab1totalsell1"></span></button>
+									<button onclick="buy_sell('cold_pump_buy', 1)" class="btn btn-success">Buy <span data-type="cold_pump_buy" data-sub-type="counter"></span> - <span data-type="cold_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_pump_sell', 1)" class="btn btn-danger">Sell <span data-type="cold_pump_sell" data-sub-type="counter"></span> - <span data-type="cold_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3powned1"></td>
 								<td><span id="tab3pprodu1"></span> m<sup>3</sup></td>
@@ -511,8 +511,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3pprice2"></td>
 								<td>
-									<button onclick="buy('coldwater', 'pump', watertab1number, 2)" class="btn btn-success">Buy <span id="watertab1number2"></span> - $<span id="watertab1total2"></span></button>
-									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 2)" class="btn btn-danger">Sell <span id="watertab1numbersell2"></span> - $<span id="watertab1totalsell2"></span></button>
+									<button onclick="buy_sell('cold_pump_buy', 2)" class="btn btn-success">Buy <span data-type="cold_pump_buy" data-sub-type="counter"></span> - <span data-type="cold_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_pump_sell', 2)" class="btn btn-danger">Sell <span data-type="cold_pump_sell" data-sub-type="counter"></span> - <span data-type="cold_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3powned2"></td>
 								<td><span id="tab3pprodu2"></span> m<sup>3</sup></td>
@@ -524,8 +524,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3pprice3"></td>
 								<td>
-									<button onclick="buy('coldwater', 'pump', watertab1number, 3)" class="btn btn-success">Buy <span id="watertab1number3"></span> - $<span id="watertab1total3"></span></button>
-									<button onclick="sell('coldwater', 'pump', watertab1numbersell, 3)" class="btn btn-danger">Sell <span id="watertab1numbersell3"></span> - $<span id="watertab1totalsell3"></span></button>
+									<button onclick="buy_sell('cold_pump_buy', 3)" class="btn btn-success">Buy <span data-type="cold_pump_buy" data-sub-type="counter"></span> - <span data-type="cold_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_pump_sell', 3)" class="btn btn-danger">Sell <span data-type="cold_pump_sell" data-sub-type="counter"></span> - <span data-type="cold_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3powned3"></td>
 								<td><span id="tab3pprodu3"></span> m<sup>3</sup></td>
@@ -543,23 +543,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab2number', 1, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab2number', 10, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab2number', 100, 'watertab2number', 'watertab2total', 'coldwater', 'storageprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_storage_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_storage_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_storage_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab2numberinput').value; if(Number(number)>0){refnumber('watertab2number', Number(number), 'watertab2number', 'watertab2total', 'coldwater', 'storageprice');}" id="watertab2numberinput" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_storage_buy', this.value)" class="form-control">
 								</td>
 							</tr>
 							<tr>
 								<td>Sell</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab2numbersell', 1, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab2numbersell', 10, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab2numbersell', 100, 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_storage_sell', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_storage_sell', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_storage_sell', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab2numberinputsell').value; if(Number(number)>0){refnumber('watertab2numbersell', Number(number), 'watertab2numbersell', 'watertab2totalsell', 'coldwater', 'storageprice');}" id="watertab2numberinputsell" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_storage_sell', this.value)" class="form-control">
 								</td>
 							</tr>
 						</table>
@@ -578,8 +578,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3sprice0"></td>
 								<td>
-									<button onclick="buy('coldwater', 'storage', watertab2number, 0)" class="btn btn-success">Buy <span id="watertab2number0"></span> - $<span id="watertab2total0"></span></button>
-									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 0)" class="btn btn-danger">Sell <span id="watertab2numbersell0"></span> - $<span id="watertab2totalsell0"></span></button>
+									<button onclick="buy_sell('cold_storage_buy', 0)" class="btn btn-success">Buy <span data-type="cold_storage_buy" data-sub-type="counter"></span> - <span data-type="cold_storage_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_storage_sell', 0)" class="btn btn-danger">Sell <span data-type="cold_storage_sell" data-sub-type="counter"></span> - <span data-type="cold_storage_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3sowned0"></td>
 								<td><span id="tab3sprodu0"></span> m<sup>3</sup></td>
@@ -591,8 +591,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3sprice1"></td>
 								<td>
-									<button onclick="buy('coldwater', 'storage', watertab2number, 1)" class="btn btn-success">Buy <span id="watertab2number1"></span> - $<span id="watertab2total1"></span></button>
-									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 1)" class="btn btn-danger">Sell <span id="watertab2numbersell1"></span> - $<span id="watertab2totalsell1"></span></button>
+									<button onclick="buy_sell('cold_storage_buy', 1)" class="btn btn-success">Buy <span data-type="cold_storage_buy" data-sub-type="counter"></span> - <span data-type="cold_storage_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_storage_sell', 1)" class="btn btn-danger">Sell <span data-type="cold_storage_sell" data-sub-type="counter"></span> - <span data-type="cold_storage_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3sowned1"></td>
 								<td><span id="tab3sprodu1"></span> m<sup>3</sup></td>
@@ -603,9 +603,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td></td>
 								<td id="tab3sprice2"></td>
-								<td>
-									<button onclick="buy('coldwater', 'storage', watertab2number, 2)" class="btn btn-success">Buy <span id="watertab2number2"></span> - $<span id="watertab2total2"></span></button>
-									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 2)" class="btn btn-danger">Sell <span id="watertab2numbersell2"></span> - $<span id="watertab2totalsell2"></span></button>
+								<td>	
+									<button onclick="buy_sell('cold_storage_buy', 2)" class="btn btn-success">Buy <span data-type="cold_storage_buy" data-sub-type="counter"></span> - <span data-type="cold_storage_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_storage_sell', 2)" class="btn btn-danger">Sell <span data-type="cold_storage_sell" data-sub-type="counter"></span> - <span data-type="cold_storage_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3sowned2"></td>
 								<td><span id="tab3sprodu2"></span> m<sup>3</sup></td>
@@ -617,8 +617,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3sprice3"></td>
 								<td>
-									<button onclick="buy('coldwater', 'storage', watertab2number, 3)" class="btn btn-success">Buy <span id="watertab2number3"></span> - $<span id="watertab2total3"></span></button>
-									<button onclick="sell('coldwater', 'storage', watertab2numbersell, 3)" class="btn btn-danger">Sell <span id="watertab2numbersell3"></span> - $<span id="watertab2totalsell3"></span></button>
+									<button onclick="buy_sell('cold_storage_buy', 3)" class="btn btn-success">Buy <span data-type="cold_storage_buy" data-sub-type="counter"></span> - <span data-type="cold_storage_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_storage_sell', 3)" class="btn btn-danger">Sell <span data-type="cold_storage_sell" data-sub-type="counter"></span> - <span data-type="cold_storage_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3sowned3"></td>
 								<td><span id="tab3sprodu3"></span> m<sup>3</sup></td>
@@ -636,23 +636,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab3number', 1, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab3number', 10, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab3number', 100, 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab3numberinput').value;if(Number(number)>0){refnumber('watertab3number', Number(number), 'watertab3number', 'watertab3total', 'coldwater', 'treatmentplantprice')}" id="watertab3numberinput" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_treatmentplant_buy', this.value)" class="form-control">
 								</td>
 							</tr>
 							<tr>
 								<td>Sell</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab3numbersell', 1, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab3numbersell', 10, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab3numbersell', 100, 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_sell', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_sell', 10,)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_treatmentplant_sell', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = document.getElementById('watertab3numberinputsell').value;if(Number(number)>0){refnumber('watertab3numbersell', Number(number), 'watertab3numbersell', 'watertab3totalsell', 'coldwater', 'treatmentplantprice')}" id="watertab3numberinputsell" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_treatmentplant_sell', this.value)" class="form-control">
 								</td>
 							</tr>
 						</table>
@@ -671,8 +671,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3tprice0"></td>
 								<td>
-									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 0)" class="btn btn-success">Buy <span id="watertab3number0"></span> - $<span id="watertab3total0"></span></button>
-									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 0)" class="btn btn-danger">Sell <span id="watertab3numbersell0"></span> - $<span id="watertab3totalsell0"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_buy', 0)" class="btn btn-success">Buy <span data-type="cold_treatmentplant_buy" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_sell', 0)" class="btn btn-danger">Sell <span data-type="cold_treatmentplant_sell" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3towned0"></td>
 								<td id="tab3tprodu0"></td>
@@ -684,8 +684,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3tprice1"></td>
 								<td>
-									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 1)" class="btn btn-success">Buy <span id="watertab3number1"></span> - $<span id="watertab3total1"></span></button>
-									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 1)" class="btn btn-danger">Sell <span id="watertab3numbersell1"></span> - $<span id="watertab3totalsell1"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_buy', 1)" class="btn btn-success">Buy <span data-type="cold_treatmentplant_buy" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_sell', 1)" class="btn btn-danger">Sell <span data-type="cold_treatmentplant_sell" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3towned1"></td>
 								<td id="tab3tprodu1"></td>
@@ -697,8 +697,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3tprice2"></td>
 								<td>
-									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 2)" class="btn btn-success">Buy <span id="watertab3number2"></span> - $<span id="watertab3total2"></span></button>
-									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 2)" class="btn btn-danger">Sell <span id="watertab3numbersell2"></span> - $<span id="watertab3totalsell2"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_buy', 2)" class="btn btn-success">Buy <span data-type="cold_treatmentplant_buy" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_sell', 2)" class="btn btn-danger">Sell <span data-type="cold_treatmentplant_sell" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3towned2"></td>
 								<td id="tab3tprodu2"></td>
@@ -710,8 +710,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab3tprice3"></td>
 								<td>
-									<button onclick="buy('coldwater', 'treatmentplant', watertab3number, 3)" class="btn btn-success">Buy <span id="watertab3number3"></span> - $<span id="watertab3total3"></span></button>
-									<button onclick="sell('coldwater', 'treatmentplant', watertab3numbersell, 3)" class="btn btn-danger">Sell <span id="watertab3numbersell3"></span> - $<span id="watertab3totalsell3"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_buy', 3)" class="btn btn-success">Buy <span data-type="cold_treatmentplant_buy" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('cold_treatmentplant_sell', 3)" class="btn btn-danger">Sell <span data-type="cold_treatmentplant_sell" data-sub-type="counter"></span> - <span data-type="cold_treatmentplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab3towned3"></td>
 								<td id="tab3tprodu3"></td>
@@ -728,23 +728,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 1, 'watertab4buynumber')" class="btn btn-info">1</button>
-									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 10, 'watertab4buynumber')" class="btn btn-info">10</button>
-									<button onclick="refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, 100, 'watertab4buynumber')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_pipe_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_pipe_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_pipe_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value); if(number>0){refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, number, 'watertab4buynumber');}" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_pipe_buy', this.value)" class="form-control">
 								</td>
 							</tr>
 							<tr>
 								<td>Place</td>
 								<td class="btn-group">
-									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 1, 'watertab4placenumber')" class="btn btn-info">1</button>
-									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 10, 'watertab4placenumber')" class="btn btn-info">10</button>
-									<button onclick="refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, 100, 'watertab4placenumber')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value); if(number>0){refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, number, 'watertab4placenumber');}" class="form-control">
+									<input onkeyup="update_buy_sell_count('cold_pipe_place', this.value)" class="form-control">
 								</td>
 							</tr>
 						</table>
@@ -760,8 +760,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="watertab4placed"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><button onclick="buypipes(watertab4buynumber, 'coldwater', 0)" class="btn btn-success">Buy <span id="watertab4buy"></span> for $<span id="watertab4buyprice"></span></button></td>
-								<td colspan="2"><button onclick="buypipes(watertab4placenumber, 'coldwater', 1)" class="btn btn-success">Place <span id="watertab4place"></span> for $<span id="watertab4placeprice"></span></button></td>
+								<td colspan="2"><button onclick="buy_place_pipes('cold_pipe_buy')" class="btn btn-success">Buy <span data-type="cold_pipe_buy" data-sub-type="counter"></span> for <span data-type="cold_pipe_buy" data-sub-type="total"></span></button></td>
+								<td colspan="2"><button onclick="buy_place_pipes('cold_pipe_place')" class="btn btn-success">Place <span data-type="cold_pipe_place" data-sub-type="counter"></span> for <span data-type="cold_pipe_place" data-sub-type="total"></span></button></td>
 							</tr>
 						</table>
 						<div class="clear"></div>
@@ -781,23 +781,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab5number', 1, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab5number', 10, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab5number', 100, 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_pump_buy', 1,)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_pump_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_pump_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value);if(number>0){refnumber('watertab5number', Number(number), 'watertab5number', 'watertab5total', 'hotwater', 'pumpprice');}" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('hot_pump_buy', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 							<tr>
 								<td>Sell</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab5numbersell', 1, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab5numbersell', 10, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab5numbersell', 100, 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_pump_sell', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_pump_sell', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_pump_sell', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value);if(number>0){refnumber('watertab5numbersell', Number(number), 'watertab5numbersell', 'watertab5totalsell', 'hotwater', 'pumpprice');}" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('hot_pump_sell', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 						</table>
@@ -816,8 +816,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab5hpprice0"></td>
 								<td>
-									<button onclick="buy('hotwater', 'pump', watertab5number, 0)" class="btn btn-success">Buy <span id="watertab5number0"></span> - $<span id="watertab5total0"></span></button>
-									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 0)" class="btn btn-danger">Sell <span id="watertab5numbersell0"></span> - $<span id="watertab5totalsell0"></span></button>
+									<button onclick="buy_sell('hot_pump_buy', 0)" class="btn btn-success">Buy <span data-type="hot_pump_buy" data-sub-type="counter"></span> - <span data-type="hot_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_pump_sell', 0)" class="btn btn-danger">Sell <span data-type="hot_pump_sell" data-sub-type="counter"></span> - <span data-type="hot_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab5hpowned0"></td>
 								<td><span id="tab5hpprodu0"></span> m<sup>3</sup></td>
@@ -829,8 +829,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab5hpprice1"></td>
 								<td>
-									<button onclick="buy('hotwater', 'pump', watertab5number, 1)" class="btn btn-success">Buy <span id="watertab5number1"></span> - $<span id="watertab5total1"></span></button>
-									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 1)" class="btn btn-danger">Sell <span id="watertab5numbersell1"></span> - $<span id="watertab5totalsell1"></span></button>
+									<button onclick="buy_sell('hot_pump_buy', 1)" class="btn btn-success">Buy <span data-type="hot_pump_buy" data-sub-type="counter"></span> - <span data-type="hot_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_pump_sell', 1)" class="btn btn-danger">Sell <span data-type="hot_pump_sell" data-sub-type="counter"></span> - <span data-type="hot_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab5hpowned1"></td>
 								<td><span id="tab5hpprodu1"></span> m<sup>3</sup></td>
@@ -842,8 +842,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab5hpprice2"></td>
 								<td>
-									<button onclick="buy('hotwater', 'pump', watertab5number, 2)" class="btn btn-success">Buy <span id="watertab5number2"></span> - $<span id="watertab5total2"></span></button>
-									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 2)" class="btn btn-danger">Sell <span id="watertab5numbersell2"></span> - $<span id="watertab5totalsell2"></span></button>
+									<button onclick="buy_sell('hot_pump_buy', 2)" class="btn btn-success">Buy <span data-type="hot_pump_buy" data-sub-type="counter"></span> - <span data-type="hot_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_pump_sell', 2)" class="btn btn-danger">Sell <span data-type="hot_pump_sell" data-sub-type="counter"></span> - <span data-type="hot_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab5hpowned2"></td>
 								<td><span id="tab5hpprodu2"></span> m<sup>3</sup></td>
@@ -855,8 +855,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab5hpprice3"></td>
 								<td>
-									<button onclick="buy('hotwater', 'pump', watertab5number, 3)" class="btn btn-success">Buy <span id="watertab5number3"></span> - $<span id="watertab5total3"></span></button>
-									<button onclick="sell('hotwater', 'pump', watertab5numbersell, 3)" class="btn btn-danger">Sell <span id="watertab5numbersell3"></span> - $<span id="watertab5totalsell3"></span></button>
+									<button onclick="buy_sell('hot_pump_buy', 3)" class="btn btn-success">Buy <span data-type="hot_pump_buy" data-sub-type="counter"></span> - <span data-type="hot_pump_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_pump_sell', 3)" class="btn btn-danger">Sell <span data-type="hot_pump_sell" data-sub-type="counter"></span> - <span data-type="hot_pump_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab5hpowned3"></td>
 								<td><span id="tab5hpprodu3"></span> m<sup>3</sup></td>
@@ -872,23 +872,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab6number', 1, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab6number', 10, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab6number', 100, 'watertab6number', 'watertab6total', 'hotwater', 'heatingplantprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value);if(number>0){refnumber('watertab6number', Number(number), 'watertab6number', 'watertab6total', 'hotwater', 'pumpprice');}" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('hot_heatingplant_buy', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 							<tr>
 								<td>Sell</td>
 								<td class="btn-group">
-									<button onclick="refnumber('watertab6numbersell', 1, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">1</button>
-									<button onclick="refnumber('watertab6numbersell', 10, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">10</button>
-									<button onclick="refnumber('watertab6numbersell', 100, 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_sell', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_sell', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_heatingplant_sell', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="var number = Number(this.value);if(number>0){refnumber('watertab6numbersell', Number(number), 'watertab6numbersell', 'watertab6totalsell', 'hotwater', 'heatingplantprice');}" class="form-control" style="width: auto;">
+									<input onkeyup="update_buy_sell_count('hot_heatingplant_sell', this.value)" class="form-control" style="width: auto;">
 								</td>
 							</tr>
 						</table>
@@ -907,8 +907,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab6hpprice0"></td>
 								<td>
-									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 0)" class="btn btn-success">Buy <span id="watertab6number0"></span> - $<span id="watertab6total0"></span></button>
-									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 0)" class="btn btn-danger">Sell <span id="watertab6numbersell0"></span> - $<span id="watertab6totalsell0"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_buy', 0)" class="btn btn-success">Buy <span data-type="hot_heatingplant_buy" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_sell', 0)" class="btn btn-danger">Sell <span data-type="hot_heatingplant_sell" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab6hpowned0"></td>
 								<td><span id="tab6hpprodu0"></span> m<sup>3</sup></td>
@@ -920,8 +920,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab6hpprice1"></td>
 								<td>
-									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 1)" class="btn btn-success">Buy <span id="watertab6number1"></span> - $<span id="watertab6total1"></span></button>
-									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 1)" class="btn btn-danger">Sell <span id="watertab6numbersell1"></span> - $<span id="watertab6totalsell1"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_buy', 1)" class="btn btn-success">Buy <span data-type="hot_geatingplant_buy" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_sell', 1)" class="btn btn-danger">Sell <span data-type="hot_heatingplant_sell" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab6hpowned1"></td>
 								<td><span id="tab6hpprodu1"></span> m<sup>3</sup></td>
@@ -933,8 +933,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab6hpprice2"></td>
 								<td>
-									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 2)" class="btn btn-success">Buy <span id="watertab6number2"></span> - $<span id="watertab6total2"></span></button>
-									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 2)" class="btn btn-danger">Sell <span id="watertab6numbersell2"></span> - $<span id="watertab6totalsell2"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_buy', 2)" class="btn btn-success">Buy <span data-type="hot_geatingplant_buy" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_sell', 2)" class="btn btn-danger">Sell <span data-type="hot_heatingplant_sell" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab6hpowned2"></td>
 								<td><span id="tab6hpprodu2"></span> m<sup>3</sup></td>
@@ -946,8 +946,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td></td>
 								<td id="tab6hpprice3"></td>
 								<td>
-									<button onclick="buy('hotwater', 'heatingplant', watertab6number, 3)" class="btn btn-success">Buy <span id="watertab6number3"></span> - $<span id="watertab6total3"></span></button>
-									<button onclick="sell('hotwater', 'heatingplant', watertab6numbersell, 3)" class="btn btn-danger">Sell <span id="watertab6numbersell3"></span> - $<span id="watertab6totalsell3"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_buy', 3)" class="btn btn-success">Buy <span data-type="hot_geatingplant_buy" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_buy" data-sub-type="total"></span></button>
+									<button onclick="buy_sell('hot_heatingplant_sell', 3)" class="btn btn-danger">Sell <span data-type="hot_heatingplant_sell" data-sub-type="counter"></span> - <span data-type="hot_heatingplant_sell" data-sub-type="total"></span></button>
 								</td>
 								<td id="tab6hpowned3"></td>
 								<td><span id="tab6hpprodu3"></span> m<sup>3</sup></td>
@@ -964,23 +964,23 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Buy</td>
 								<td class="btn-group">
-									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 1, 'watertab7buynumber')" class="btn btn-info">1</button>
-									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 10, 'watertab7buynumber')" class="btn btn-info">10</button>
-									<button onclick="refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, 100, 'watertab7buynumber')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_pipe_buy', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_pipe_buy', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_pipe_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input id="watertab7buynumberinput" onkeyup="var number = Number(document.getElementById('watertab7buynumberinput').value); if(number>0){refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, number, 'watertab7buynumber');}" class="form-control">
+									<input onkeyup="update_buy_sell_count('hot_pipe_buy',this.value)" class="form-control">
 								</td>
 							</tr>
 							<tr>
 								<td>Place</td>
 								<td class="btn-group">
-									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 1, 'watertab7placenumber')" class="btn btn-info">1</button>
-									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 10, 'watertab7placenumber')" class="btn btn-info">10</button>
-									<button onclick="refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, 100, 'watertab7placenumber')" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('hot_pipe_place', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('hot_pipe_place', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('hot_pipe_place', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input id="watertab7placenumberinput" onkeyup="var number = Number(document.getElementById('watertab7placenumberinput').value); if(number>0){refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, number, 'watertab7placenumber');}" class="form-control">
+									<input onkeyup="update_buy_sell_count('hot_pipe_place', this.value)" class="form-control">
 								</td>
 							</tr>
 						</table>
@@ -996,8 +996,8 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 								<td id="watertab7placed"></td>
 							</tr>
 							<tr>
-								<td colspan="2"><button onclick="buypipes(watertab7buynumber, 'hotwater', 0)" class="btn btn-success">Buy <span id="watertab7buy"></span> for $<span id="watertab7buyprice"></span></button></td>
-								<td colspan="2"><button onclick="buypipes(watertab7placenumber, 'hotwater', 1)" class="btn btn-success">Place <span id="watertab7place"></span> for $<span id="watertab7placeprice"></span></button></td>
+								<td colspan="2"><button onclick="buy_place_pipes('hot_pipe_buy')" class="btn btn-success">Buy <span data-type="hot_pipe_buy" data-sub-type="counter"></span> for <span data-type="hot_pipe_buy" data-sub-type="total"></span></button></td>
+								<td colspan="2"><button onclick="buy_place_pipes('hot_pipe_place')" class="btn btn-success">Place <span data-type="hot_pipe_place" data-sub-type="counter"></span> for <span data-type="hot_pipe_place" data-sub-type="total"></span></button></td>
 							</tr>
 						</table>
 					</div>
@@ -1028,25 +1028,25 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 					<tr>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5bankbalanceoutnumber', round_to_2_decimals(a)); window['tab5bankbalanceoutnumber'] = a;}"></td>
 						<td class="btn-group">
-							<button onclick="Bank(1, 1, tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button>
-							<button onclick="Bank(1, 1, game.bank.balance)" class="btn btn-info">Withdraw max</button>
+							<button onclick="handle_bank_transactions('balance', 'withdraw', tab5bankbalanceoutnumber)" class="btn btn-info">Withdraw $<span id="tab5bankbalanceoutnumber"></span></button>
+							<button onclick="handle_bank_transactions('balance', 'withdraw', game.bank.balance)" class="btn btn-info">Withdraw max</button>
 						</td>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5bankbalanceinnumber', round_to_2_decimals(a)); window['tab5bankbalanceinnumber'] = a;}"></td>
 						<td class="btn-group">
-							<button onclick="Bank(1, 0, tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button>
-							<button onclick="Bank(1, 0, game.bank.money)" class="btn btn-info">Invest max</button>
+							<button onclick="handle_bank_transactions('balance', 'deposit', tab5bankbalanceinnumber)" class="btn btn-info">Invest $<span id="tab5bankbalanceinnumber"></span></button>
+							<button onclick="handle_bank_transactions('balance', 'deposit', game.bank.money)" class="btn btn-info">Invest max</button>
 						</td>
 					</tr>
 					<tr>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5loanoutnumber', round_to_2_decimals(a)); window['tab5loanoutnumber'] = a;}"></td>
 						<td class="btn-group">
-							<button onclick="Bank(0, 1, tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button>
-							<button onclick="Bank(0, 1, game.bank.maxloan-game.bank.loan)" class="btn btn-info">Get max</button>
+							<button onclick="handle_bank_transactions('loan', 'take', tab5loanoutnumber)" class="btn btn-info">Get $<span id="tab5loanoutnumber"></span></button>
+							<button onclick="handle_bank_transactions('loan', 'take', game.bank.maxloan-game.bank.loan)" class="btn btn-info">Get max</button>
 						</td>
 						<td><input style="width: 80px;" class="form-control" onkeyup="var a=Number(this.value); if(a>0){set_text('tab5loaninnumber', round_to_2_decimals(a)); window['tab5loaninnumber'] = a;}"></td>
 						<td class="btn-group">
-							<button onclick="Bank(0, 0, tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button>
-							<button onclick="if(game.bank.loan>game.bank.money){Bank(0, 0, game.bank.money)}else{Bank(0, 0, game.bank.loan)}" class="btn btn-info">Return max</button>
+							<button onclick="handle_bank_transactions('loain', 'return', tab5loaninnumber)" class="btn btn-info">Return $<span id="tab5loaninnumber"></span></button>
+							<button onclick="if(game.bank.loan>game.bank.money){handle_bank_transactions('loan', 'return', game.bank.money)}else{handle_bank_transactions('loan', 'return', game.bank.loan)}" class="btn btn-info">Return max</button>
 						</td>
 					
 					</tr>
@@ -1144,6 +1144,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 				<div class="clear"></div>
 			</div>
 		</div>
+		<script src="js/refresh.js"></script>
 		<script src="js/universal.js"></script>
 		<script src="js/upgrades.js"></script>
 		<script src="js/app.js"></script>

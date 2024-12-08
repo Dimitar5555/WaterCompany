@@ -57,9 +57,9 @@ function upgrade_decrease_pipe_price(water_type, price_name, tier){
 		game.bank.money = game.bank.money - price;
 		game['upgrades']['decrease'][price_name] = game['upgrades']['decrease'][price_name] * 1.5;
 		refreshupgrades();
-		refpipesnumber('watertab4buy', 'watertab4buyprice', 'coldwater', 0, watertab4buynumber, 'watertab4buynumber');
-		refpipesnumber('watertab4place', 'watertab4placeprice', 'coldwater', 1, watertab4placenumber, 'watertab4placenumber');
-		refpipesnumber('watertab7buy', 'watertab7buyprice', 'hotwater', 0, watertab7buynumber, 'watertab7buynumber');
-		refpipesnumber('watertab7place', 'watertab7placeprice', 'hotwater', 1, watertab7placenumber, 'watertab7placenumber');
+		update_buy_sell_count('cold_pipe_buy', 1);
+		update_buy_sell_count('cold_pipe_place', 1);
+		update_buy_sell_count('hot_pipe_buy', 1);
+		update_buy_sell_count('hot_pipe_sell', 1);
 	}
 }
