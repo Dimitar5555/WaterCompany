@@ -739,9 +739,9 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 							<tr>
 								<td>Place</td>
 								<td class="btn-group">
-									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 1)" class="btn btn-info">1</button>
-									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 10)" class="btn btn-info">10</button>
-									<button onclick="update_buy_sell_count('cold_pipe_place', 1, 100)" class="btn btn-info">100</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 1)" class="btn btn-info">1</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 10)" class="btn btn-info">10</button>
+									<button onclick="update_buy_sell_count('cold_pipe_place', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
 									<input onkeyup="update_buy_sell_count('cold_pipe_place', this.value)" class="form-control">
@@ -969,7 +969,7 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 									<button onclick="update_buy_sell_count('hot_pipe_buy', 100)" class="btn btn-info">100</button>
 								</td>
 								<td>
-									<input onkeyup="update_buy_sell_count('hot_pipe_buy',this.value)" class="form-control">
+									<input onkeyup="update_buy_sell_count('hot_pipe_buy', this.value)" class="form-control">
 								</td>
 							</tr>
 							<tr>
@@ -1159,3 +1159,4 @@ swal('Nice!', 'You city is called: ' + inputValue + '.');game.city.name = inputV
 		<script src="js/app.js"></script>
 	</body>
 </html>
+
